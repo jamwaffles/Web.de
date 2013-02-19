@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<head>
+<title>XiniX [navigation]</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="./include/global.css" />
+<link rel="stylesheet" type="text/css" href="./include/navigation.css" />
+<style type="text/css">
+	/* UNLESS YOU KNOW WHAT YOU'RE DOING, DO NOT CHANGE THE FOLLOWING RULES */
+	.easy-accordion{display:block;position:relative;overflow:hidden;padding:0;margin:0}
+	.easy-accordion dt,.easy-accordion dd{margin:0;padding:0}
+	.easy-accordion dt,.easy-accordion dd{position:absolute}
+	.easy-accordion dt{margin-bottom:0;margin-left:0;z-index:5;/* Safari */ -webkit-transform: rotate(-90deg); /* Firefox */ -moz-transform: rotate(-90deg);-moz-transform-origin: 20px 0px;  /* Internet Explorer */ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);cursor:pointer;}
+	.easy-accordion dd{z-index:1;opacity:0;overflow:hidden}
+	.easy-accordion dd.active{opacity:1;}
+	.easy-accordion dd.no-more-active{z-index:2;opacity:1}
+	.easy-accordion dd.active{z-index:3}
+	.easy-accordion dd.plus{z-index:4}
+	.easy-accordion .slide-number{position:absolute;bottom:0;left:10px;font-weight:normal;font-size:1.1em;/* Safari */ -webkit-transform: rotate(90deg); /* Firefox */ -moz-transform: rotate(90deg);  /* Internet Explorer */ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
+</style>
+<script language="javascript" src="include/jQuery_1.7.2.js"></script>		<!-- this has to be above the _ajaxFileUpload since it relies on jQuery -->
+<script type="text/javascript" src="include/jquery.easyAccordion.js"></script>
+<script language="javascript" src="include/_listbox.js"></script>
+<script language="javascript" src="include/_ajaxForm.js"></script>
+<script language="javascript">
+<!--
+
+   var d,h,p=40;			// p = any padding that needs to be offset (which the default styling has a margin-top:10px)
+
+   function formLoad() {
+	$('#divAccordion').easyAccordion({ 
+	   autoStart: false, 
+	   //slideInterval: 3000,
+	   slideNum: false
+	});
+	//formLayout();
+   }
+
+   function formLayout() {
+   }
+
+   function adjScroll(strFormName) {
+   // called to adjust the scroll height - when switching categories [device,local,...] -AND- details [running,frequent,information,leave,...]
+	$('#dd'+strFormName).height($(window).height());					// set the height of the scroller to the height of the browser window (so it works correctly)
+	d=$('#ul'+strFormName).height() - $('#dd'+strFormName).height() + (p*2.5);		// store the difference in height between the div and the ul (for overage scrolling)
+	h=$('#dd'+strFormName).height() - p;
+   }
+
+   $(document).ready( function() {
+	adjScroll('Device');							// set the scroll for the "Device" category
+	$(".h1Nav").click(function() {						// toggles the options viewed
+	   $(".ulIcons").hide('slow');
+	   $(".ulOpts").hide('slow');
+	   if ($(this).parent().children(".ulOpts").length) {			// if we need to expand a sub-menu's options, then...
+		if ($(this).parent().children(".ulOpts").css('display') != 'none') {		//   if the "sub-menu" is already shown, hide it and quite
+		   $(".ulOpts").hide('slow');
+		   //$(this).parent().children(".h1Nav").css('borderBottomWidth', '3px');
+		   //$(this).parent().children(".h1Nav").css('borderBottomRightRadius', '0.2em');
+		} else {									//   otherwise, hide the one currently shown and show the one currently clicked
+		   //$(".h1Nav").css('borderBottomWidth', '3px');
+		   //$(".h1Nav").css('borderBottomRightRadius', '0.2em');
+		   //$(".ulOpts").hide('slow');
+		   //$(this).parent().children(".h1Nav").css('borderBottomWidth', 0);
+		   //$(this).parent().children(".h1Nav").css('borderBottomRightRadius', 0);
+		   $(this).parent().children(".ulOpts").slideToggle('slow');
+		}
+	   } else if ($(this).parent().children(".ulIcons").length) {		// else if we need to display a sub-menu's icon set, then...
+		if ($(this).parent().children(".ulIcons").css('display') != 'none') {
+		   $(".ulIcons").hide('slow');
+		} else {
+		   //$(".ulIcons").hide('slow');
+		   $(this).parent().children(".ulIcons").slideToggle('slow');
+		}
+	   }
+	});
+   });
+
+//-->
+</script>
+</head>
+<body onLoad="formLoad();" onResize="formLayout();">
+
+
+<!--
+DEV NOTE:
+
+	when the "home" button is hit and this screen is to be displayed, the parsing script with check for the
+	existence of a dashboard.? script/executable so that this can easily be tailored to a kiosk of some sort
+	(e.g. in a restuarante environment, an air plane terminal, bank/atm, etc)
+
+-->
+
+
+<div id="divBody">
+	<div id="divAccordion">
+	   <dl>
+		<dt id="dtDevice" onClick="$('#ulDevice').css('margin-top',0); setTimeout(function(){adjScroll('Device');},500);"><span>DEVICE</span></dt>
+		<!-- NOTE: onMouseMove 'if' exits if the ul isn't longer than the div OTHERWISE scroll accordingly; NOTE: the second 'if' is for the bottom 'padding' -->
+		<dd id="ddDevice" onMouseMove="if(d<0){return false;} if(event.pageY<h){$('#ulDevice').css('margin-top', (event.pageY/h*d*-1+p)+'px')}">
+			<ul id="ulDevice" class="ulNav">
+			   <li class="liNav" >
+				<img src="images/accounts.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Accounts</h1>
+<!-- two column setup - left col shows a list of current users with the right col showing parameters list; has search capabilities too while also separating computer accounts (Windows networking) from user accounts); DEV - perhaps use a jquery.filetree here? -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/firmware.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Firmware</h1>
+<!-- "software store" for addition/modification/removal of software currently installed in the firmware; can also transfer software to other devices from here too -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/hardware.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Hardware</h1>
+<!-- device manager to configure hardware settings -AND- the configuration of the hardware too; network properties, video settings, audio settings, etc -->
+				<ul id="ulHardwareProp" class="ulOpts">
+				   <li style="border: 1px solid blue;">
+					<div style="width: 30%; height: 300px; border: 1px solid #000; border-radius: 0.3em;">
+					   <img src="images/battery.png" style="float: left; width: 18px; height: 18px;" /><label>Batteries</label>
+					   <img src="images/monitor.png" style="float: left; width: 18px; height: 18px;" /><label>Monitors</label>
+					   <img src="images/printer.png" style="float: left; width: 18px; height: 18px;" /><label>Printers</label>
+					</div>
+				   </li>
+				   <li style="border: 1px solid red;">
+<!-- need a selector/tabs to switch between "Properties" (device manager properties) and "Configuration" (shown below) -->
+					<select name="cmbNetCats" id="cmbNetCats" size="1" class="combobox">
+					   <option selected label="Shows the protocols that allow this device membership as a client on a network">Usable Protocols</option>
+					   <option label="Shows the network types this device can interface with in order to access networked services">Client Membership</option>
+					   <option label="Shows currently installed network services allowing access to available, online resources">Network Services</option>
+					</select>
+					<select name="cmbNetCatList" id="cmbNetCatList" size="2" class="combobox">
+					   <option>Apple Talk</option>
+					   <option>IPX/SPX Internet Protocol</option>
+					   <option>Link-Layer Topology Discovery Mapper I/O Driver</option>	<!-- ? - Windows Server 2009 -->
+					   <option>Link-Layer Topology Discovery Responder</option>		<!-- ? - Windows Server 2009 -->
+					   <option selected>TCP/IP Internet Protocol</option>	<!-- consists of both v4 and v6 -->
+					   <option>XiniX Device Discovery</option>	<!-- allows XiniX devices to "pair" for secure communication -->
+					</select>
+					<div id="divNetCatListOpts">
+					   <ul>
+						<li><h3>TCP/IPv4 Settings</h3></li>
+						<li><select name="cmbNetTCPIPv4Adpt" id="cmbNetTCPIPv4Adpt" size="1" class="combobox"><option>Eth0</option><option>Eth0:1</option></select></li>
+						<li class="liSub"><label>Address provided by</label><select name="cmbNetCatList" id="cmbNetCatList" size="1" class="combobox"><option>Automatic via DHCP</option><option>Manual Entry</option></select></li>
+						<li class="liSub"><label>IP Address</label><input type="textbox" name="txtValue1" id="txtValue1" value="192.168.0.200" maxlength="" class="textbox" /></li>
+						<li class="liSub"><label>Subnet Mask</label><input type="textbox" name="txtValue1" id="txtValue1" value="255.255.255.0" maxlength="" class="textbox" /></li>
+						<li class="liSub"><label>Default Gateway</label><input type="textbox" name="txtValue1" id="txtValue1" value="192.168.0.1,192.168.0.2,... for multiple gateways" maxlength="" class="textbox" /></li>
+						<li>&nbsp;</li>
+						<li class="liSub"><label>DNS servers provided by</label><select name="cmbNetCatList" id="cmbNetCatList" size="1" class="combobox"><option>Automatic via DHCP</option><option>Manual Entry</option></select></li>
+						<li class="liSub"><label>Server IP(s)</label><input type="textbox" name="txtValue1" id="txtValue1" value="8.8.8.8,8.8.4.4,..." maxlength="" class="textbox" /></li>
+<!-- a [+] goes here to expose "Advanced Options" -->
+						<li>&nbsp;</li>
+						<li><h3>TCP/IPv6 Settings</h3></li>
+						<li><select name="cmbNetTCPIPv6Adpt" id="cmbNetTCPIPv6Adpt" size="1" class="combobox"><option>Eth0</option><option>Eth0:1</option></select></li>
+						<li class="liSub"><label>Address provided by</label><select name="cmbNetCatList" id="cmbNetCatList" size="1" class="combobox"><option>Automatic via DHCP</option><option>Manual Entry</option></select></li>
+						<li class="liSub"><label>IP Address</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+						<li class="liSub"><label>Subnet prefix length</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+						<li class="liSub"><label>Default Gateway</label><input type="textbox" name="txtValue1" id="txtValue1" value="192.168.0.1,192.168.0.2,... for multiple gateways" maxlength="" class="textbox" /></li>
+						<li>&nbsp;</li>
+						<li class="liSub"><label>DNS servers provided by</label><select name="cmbNetCatList" id="cmbNetCatList" size="1" class="combobox"><option>Automatic via DHCP</option><option>Manual Entry</option></select></li>
+						<li class="liSub"><label>Server IP(s)</label><input type="textbox" name="txtValue1" id="txtValue1" value="8.8.8.8,8.8.4.4,..." maxlength="" class="textbox" /></li>
+<!-- a [+] goes here to expose "Advanced Options" -->
+					   </ul>
+					</div>
+				   </li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/information.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Information</h1>
+<!-- health -AND- info (IP address, CPU, Ram, and HHD spec's and usage) -AND- help -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/running.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Running</h1>
+<!-- taskbar -AND- top; this NEEDS to be the default option for quickly changing apps using the mouse or touch-screen interfaces -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/scheduled.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Scheduled</h1>
+<!-- scheduled tasks -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/services.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Services</h1>
+<!-- dns, dhcp, wireless router/access point, printing, NAS, etc -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/settings.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Settings</h1>
+<!-- for things like: updates, epoch and timezone, power options, region settings, fonts, etc -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/leave.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Device');},500);">Leave</h1>
+				<ul class="ulIcons">
+				   <li><img src="images/lock.png" /></li>
+				   <li><img src="images/logout.png" /></li>
+				   <li><img src="images/restart.png" /></li>
+				   <li><img src="images/suspend.png" /></li>
+				   <li><img src="images/hibernate.png" /></li>
+				   <li><img src="images/shutdown.png" /></li>
+				</ul>
+			   </li>
+			</ul>
+		</dd>
+		<dt id="dtLocal" onClick="$('#ulLocal').css('margin-top',0); setTimeout(function(){adjScroll('Local');},500);"><span>LOCAL</span></dt>
+		<!-- NOTE: see the ddDevice 'note' for the explaination of onMouseMove below -->
+		<dd id="ddLocal" onMouseMove="if(d<0){return false;} if(event.pageY<h){$('#ulLocal').css('margin-top', (event.pageY/h*d*-1+p)+'px')}">
+			<ul id="ulLocal" class="ulNav">
+			   <li class="liNav" >
+				<img src="images/data.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Local');},500);">Data</h1>
+<!-- "Windows Explorer-esk" uses a jquery.filetree of the *** HOME DIRECTORY ONLY *** as this is simply an interface to get to your local personal data, not traverse the file system (which can be done using software under the 'Software' section below) -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/frequent.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Live');},500);">Frequent</h1>
+<!-- list containing the most accessible programs and files -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/software.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Local');},500);">Software</h1>
+<!-- "software store" for user-space software; can also transfer software to other contacts from here too -->
+<!-- this needs to be a quicksand jQuery layout to FILTER the apps by category (e.g. Games, Office, Network, etc, all) and sort by: All (home and personal folder), Local (home folder), public (public folder) -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/scheduled.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Local');},500);">Scheduled</h1>
+<!-- personal scheduled tasks -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/settings.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Local');},500);">Settings</h1>
+<!-- for things like: language settings, accessibility, etc PER user account -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			</ul>
+		</dd>
+		<dt id="dtNetwork" onClick="$('#ulNetwork').css('margin-top',0); setTimeout(function(){adjScroll('Network');},500);"><span>NETWORK</span></dt>
+		<!-- NOTE: see the ddDevice 'note' for the explaination of onMouseMove below -->
+		<dd id="ddNetwork" onMouseMove="if(d<0){return false;} if(event.pageY<h){$('#ulNetwork').css('margin-top', (event.pageY/h*d*-1+p)+'px')}">
+<!--
+ NOTE: this is NOT the area for configuring a server for any of these network types (that's in the 'services' section of 'device'); instead this is the user access interface to pared devices
+
+	clicking on things in here can also open configuration/operation interfaces (e.g. clicking on a XiniX OS router will open it's web-config; interface for controlling a XiniX OS DVR with a mobile phone, etc
+-->
+			<ul id="ulNetwork" class="ulNav">
+			   <li class="liNav" >
+				<img src="images/logo_apple.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Network');},500);">Apple</h1>
+<!-- Apple networks -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/logo_linux.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Network');},500);">Linux</h1>
+<!-- Linux, XiniX (using NFS), Unix networks -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/logo_xinix.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Network');},500);">XiniX</h1>
+<!-- XiniX only networks due to port knocking involved (for enhanced security) with certain network communication -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/logo_windows.jpg" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Network');},500);">Windows</h1>
+<!-- Windows networks -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			   <li class="liNav" >
+				<img src="images/other.png" class="imgNav" /><h1 class="h1Nav" onClick="setTimeout(function(){adjScroll('Network');},500);">Other</h1>
+<!-- web browser (to open a tabbed-instance with bookmarks accessible from within), Dial-up, VPN (e.g. Tampa office, Jax Office, etc), p2p via com/cat5/modem cable, ftp sites, ssh|ncat tunnels, etc -->
+				<ul class="ulOpts">
+				   <li><label>Some label 1</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 2</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				   <li><label>Some label 3</label><input type="textbox" name="txtValue1" id="txtValue1" value="" maxlength="" class="textbox" /></li>
+				</ul>
+			   </li>
+			</ul>
+		</dd>
+	   </dl>
+	</div>
+</div>
+
+
+</body>
+</html>
