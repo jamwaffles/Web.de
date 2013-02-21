@@ -1,0 +1,1 @@
+// $('#sidebar > div').width($('#sidebar > div').width()).affix();
