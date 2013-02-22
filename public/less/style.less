@@ -2,6 +2,105 @@
 @import 'bootstrap/responsive.less';
 
 html {
-	padding: 1%;
+	padding: 20px 0;
 }
 
+#header {
+	h1 {
+		display: inline;
+	}
+
+	form#filter {
+		margin: 0;
+		float: right;
+	}
+}
+
+#sections {
+	> div {
+		margin-top: 10px;
+	}
+}
+
+.actions {
+	margin: 0;
+	padding: 0;
+
+	dt, dd {
+		margin: 0;
+		padding: 0;
+		font-weight: normal;
+
+		.border-radius(@baseBorderRadius);
+		.transition(background-color 0.4s linear);
+	}
+
+	dt {
+		cursor: pointer;
+		margin-top: 20px;
+
+		&:hover {
+			background: #f6f6f6 !important;
+		}
+
+		&.open {
+			background: #eee;
+
+			.border-bottom-radius(0);
+
+			+ dd {
+				background: #eee;
+
+				.border-top-radius(0);
+			}
+		}
+
+		h2 {
+			margin: 0;
+		}
+
+		img {
+			float: left;
+			display: block;
+			margin-right: 10px;
+		}
+	}
+
+	dd {
+		padding: 10px 0 10px 50px;
+		display: none;
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* Landscape phone to portrait tablet */
+@media(max-width: 767px) {
+	#header {
+		form#filter {
+			display: block;
+			float: none;
+			margin-top: 10px;
+
+			input {
+				width: 100%;
+				height: 30px;
+
+				.box-sizing(border-box);
+			}
+		}
+	}
+}
+ 
+/* Landscape phones and down */
+@media(max-width: 480px) {
+	#header {
+		h1 {
+			small {
+				display: block;
+			}
+		}
+	}
+}
