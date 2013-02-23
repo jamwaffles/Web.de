@@ -1,8 +1,16 @@
 @import 'bootstrap/bootstrap.less';
 @import 'bootstrap/responsive.less';
 
-html {
-	padding: 20px 0;
+@deviceCol: @orange;
+@localCol: @purple;
+@networkCol: @green;
+
+@deviceColLight: lighten(@deviceCol,10%);
+@localColLight: lighten(@localCol,10%);
+@networkColLight: lighten(@networkCol,10%);
+
+body {
+	padding-top: 20px;
 }
 
 #header {
@@ -22,6 +30,54 @@ html {
 	}
 }
 
+#sidebar {
+	margin-top: 20px;
+
+	.well {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	ul.frequent {
+		li {
+			&:before {
+				text-transform: uppercase;
+				color: #999;
+				content: "";
+				font-weight: bold;
+				font-size: 11px;
+				line-height: 26px;
+				float: right;
+			}
+
+			&.section-device {
+				&:before {
+					color: @deviceCol;
+					content: "Device";
+				}
+			}
+			&.section-local {
+				&:before {
+					color: @localCol;
+					content: "Local";
+				}
+			}
+			&.section-network {
+				&:before {
+					color: @networkCol;
+					content: "Network";
+				}
+			}
+
+			&.active {
+				&:before {
+					color: #fff;
+				}
+			}
+		}
+	}
+}
+
 .actions {
 	margin: 0;
 	padding: 0;
@@ -32,7 +88,6 @@ html {
 		font-weight: normal;
 
 		.border-radius(@baseBorderRadius);
-		.transition(background-color 0.4s linear);
 	}
 
 	dt {
@@ -40,39 +95,82 @@ html {
 		margin-top: 20px;
 
 		&:hover {
-			background: #f6f6f6 !important;
+			background: #f6f6f6;
+			color: @textColor;
 		}
 
 		&.open {
 			background: #eee;
+			// color: #fff;
 
 			.border-bottom-radius(0);
 
 			+ dd {
-				background: #eee;
-
 				.border-top-radius(0);
 			}
+
+			// .icon-large {
+			// 	-webkit-filter: invert(100%);
+			// 	-moz-filter: invert(100%);
+			// }
+		}
+
+		+ dd {
+			background: #f6f6f6;
 		}
 
 		h2 {
 			margin: 0;
 		}
 
-		img {
+		.icon-large {
 			float: left;
-			display: block;
 			margin-right: 10px;
+			margin-left: 5px;
+			height: 40px;
+			width: 40px;
+			margin-top: 0px;
+
+			background: url('../img/icons/gear.png') transparent center center no-repeat;
+
+			&.accounts {
+				background-image: url('../img/icons/users.png');
+			}
+			&.firmware {
+				background-image: url('../img/icons/tools.png');
+			}
+			&.long-action {
+				background-image: url('../img/icons/clock.png');
+			}
 		}
 	}
 
 	dd {
-		padding: 10px 0 10px 50px;
+		padding: 10px 10px 10px 55px;
 		display: none;
+		text-align: justify;
 
 		> *:last-child {
 			margin-bottom: 0;
 		}
+	}
+
+	h3, h4, h5, h6 {
+		margin-top: 0;
+		margin-bottom: 10px
+	}
+}
+
+.form-block {
+	width: 100%;
+	display: block;
+	margin-bottom: 0;
+
+	input[type="text"], input[type="password"], textarea {
+		width: 100%;
+		height: 30px;
+
+		.box-sizing(border-box);
 	}
 }
 
@@ -90,6 +188,12 @@ html {
 
 				.box-sizing(border-box);
 			}
+		}
+	}
+
+	.actions {
+		h3, h4, h5, h6 {
+			margin-top: 10px;
 		}
 	}
 }

@@ -1,10 +1,12 @@
 $('.actions').on('click', 'dt', function() {
-	$(this).toggleClass('open');
+	var self = $(this);
+	var panel = self.next();
 
-	var dd = $(this).next().slideToggle();
+	self.toggleClass('open');
+	panel.stop(true, true).slideToggle();
 
-	$(this).siblings('dd').not(dd).slideUp();
-	$(this).siblings('dt').removeClass('open');
+	self.siblings('dd').not(panel).slideUp();
+	self.siblings('dt').removeClass('open');
 });
 
 $('#sections').on('click', 'a', function(e) {
