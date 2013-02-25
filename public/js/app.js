@@ -1,18 +1,61 @@
-$('.actions').on('click', 'dt', function() {
-	var self = $(this);
-	var panel = self.next();
+var container = $('#sections');
+var panel = container.children().not('.open').first();
 
-	self.toggleClass('open');
-	panel.stop(true, true).slideToggle();
+var sections = {
+	panelWidth: panel.width(),
+	panelPadding: panel.outerWidth(true) - panel.width(),
+	numPanels: container.children().length,
+	duration: 600,
+	easing: 'easeOutQuint'
+};
+sections.maxWidth = $(window).width() - (sections.panelWidth + sections.panelPadding) * (sections.numPanels) + sections.panelWidth;
 
-	self.siblings('dd').not(panel).slideUp();
-	self.siblings('dt').removeClass('open');
+// Set initial widths of panels
+container.find('dl').width(sections.maxWidth);
+container.children().width(sections.panelWidth);
+container.children('.open').first().width(sections.maxWidth);
+
+$(window).resize(function() {
+	sections.maxWidth = $(window).width() - (sections.panelWidth + sections.panelPadding) * (sections.numPanels) + sections.panelWidth;
+
+	// Set widths of panels
+	container.find('dl').width(sections.maxWidth - (sections.panelPadding * 2));
+	container.children().width(sections.panelWidth);
+	container.children('.open').first().width(sections.maxWidth);
 });
 
-$('#sections').on('click', 'a', function(e) {
+$('#sections').on('click', '.section-toggle', function(e) {
 	e.preventDefault();
 
-	$(this).closest('#sections').find('.btn-primary').removeClass('btn-primary');
+	var panels = $(this).closest('ul').children();
+	var thisPanel = $(this).closest('li');
+	var otherPanels = panels.not(thisPanel);
 
-	$(this).addClass('btn-primary');
+	if(!thisPanel.hasClass('open')) {
+		thisPanel.addClass('opening').animate({
+			width: sections.maxWidth
+		}, sections.duration, sections.easing, function() {
+			$(this).addClass('open').removeClass('opening');
+		});
+
+		otherPanels.removeClass('open opening').animate({ width: sections.panelWidth }, sections.duration, sections.easing);
+	}
 });
+
+// Actions
+$('.actions').on('click', 'dt', function() {
+	$(this).toggleClass('open');
+	var content = $(this).next('dd');
+
+	content.slideToggle();
+
+	$(this).siblings('dd').not(content).slideUp();
+	$(this).siblings('dt.open').removeClass('open');
+});
+
+// Time
+setInterval(function() {
+	var now = new Date();
+
+	$('#time').text(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
+}, 1000);

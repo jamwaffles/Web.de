@@ -9,201 +9,279 @@
 @localColLight: lighten(@localCol,10%);
 @networkColLight: lighten(@networkCol,10%);
 
+.animation(@animation) {
+  -webkit-animation: @animation;
+     -moz-animation: @animation;
+       -o-animation: @animation;
+          animation: @animation;
+}
+
+@-webkit-keyframes 'fade' {
+	0% { border-bottom-color: lighten(@blue, 10%); }
+	50% { border-bottom-color: darken(@blue, 20%); }
+	100% { border-bottom-color: lighten(@blue, 10%); }
+}
+@-moz-keyframes 'fade' {
+	0% { border-bottom-color: lighten(@blue, 10%); }
+	50% { border-bottom-color: darken(@blue, 20%); }
+	100% { border-bottom-color: lighten(@blue, 10%); }
+}
+@-ms-keyframes 'fade' {
+	0% { border-bottom-color: lighten(@blue, 10%); }
+	50% { border-bottom-color: darken(@blue, 20%); }
+	100% { border-bottom-color: lighten(@blue, 10%); }
+}
+@-o-keyframes 'fade' {
+	0% { border-bottom-color: lighten(@blue, 10%); }
+	50% { border-bottom-color: darken(@blue, 20%); }
+	100% { border-bottom-color: lighten(@blue, 10%); }
+}
+@keyframes 'fade' {
+	0% { border-bottom-color: lighten(@blue, 10%); }
+	50% { border-bottom-color: darken(@blue, 20%); }
+	100% { border-bottom-color: lighten(@blue, 10%); }
+}
+
 body {
-	padding-top: 20px;
+	// background: #000;
 }
 
-#header {
-	h1 {
-		display: inline;
-	}
-
-	form#filter {
-		margin: 0;
-		float: right;
-	}
-}
-
-#sections {
-	> div {
-		margin-top: 10px;
-	}
-}
-
-#sidebar {
-	margin-top: 20px;
-
-	.well {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-	ul.frequent {
-		li {
-			&:before {
-				text-transform: uppercase;
-				color: #999;
-				content: "";
-				font-weight: bold;
-				font-size: 11px;
-				line-height: 26px;
-				float: right;
-			}
-
-			&.section-device {
-				&:before {
-					color: @deviceCol;
-					content: "Device";
-				}
-			}
-			&.section-local {
-				&:before {
-					color: @localCol;
-					content: "Local";
-				}
-			}
-			&.section-network {
-				&:before {
-					color: @networkCol;
-					content: "Network";
-				}
-			}
-
-			&.active {
-				&:before {
-					color: #fff;
-				}
-			}
-		}
-	}
-}
-
-.actions {
+.icon-large {
+	background: center center no-repeat;
+	width: 40px;
+	height: 40px;
 	margin: 0;
 	padding: 0;
 
-	dt, dd {
-		margin: 0;
-		padding: 0;
-		font-weight: normal;
-
-		.border-radius(@baseBorderRadius);
-	}
-
-	dt {
-		cursor: pointer;
-		margin-top: 20px;
-
-		&:hover {
-			background: #f6f6f6;
-			color: @textColor;
-		}
-
-		&.open {
-			background: #eee;
-			// color: #fff;
-
-			.border-bottom-radius(0);
-
-			+ dd {
-				.border-top-radius(0);
-			}
-
-			// .icon-large {
-			// 	-webkit-filter: invert(100%);
-			// 	-moz-filter: invert(100%);
-			// }
-		}
-
-		+ dd {
-			background: #f6f6f6;
-		}
-
-		h2 {
-			margin: 0;
-		}
-
-		.icon-large {
-			float: left;
-			margin-right: 10px;
-			margin-left: 5px;
-			height: 40px;
-			width: 40px;
-			margin-top: 0px;
-
-			background: url('../img/icons/gear.png') transparent center center no-repeat;
-
-			&.accounts {
-				background-image: url('../img/icons/users.png');
-			}
-			&.firmware {
-				background-image: url('../img/icons/tools.png');
-			}
-			&.long-action {
-				background-image: url('../img/icons/clock.png');
-			}
-		}
-	}
-
-	dd {
-		padding: 10px 10px 10px 55px;
-		display: none;
-		text-align: justify;
-
-		> *:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	h3, h4, h5, h6 {
-		margin-top: 0;
-		margin-bottom: 10px
-	}
+	&.icon-users { background-image: url('../img/icons/users.png'); }
+	&.icon-tools { background-image: url('../img/icons/tools.png'); }
+	&.icon-clock { background-image: url('../img/icons/clock.png'); }
 }
 
 .form-block {
-	width: 100%;
 	display: block;
-	margin-bottom: 0;
+	margin: 0;
 
-	input[type="text"], input[type="password"], textarea {
+	input[type="text"], input[type="password"] {
 		width: 100%;
 		height: 30px;
 
 		.box-sizing(border-box);
 	}
 }
+input[type="file"] {
+	margin-bottom: 10px;
+}
 
-/* Landscape phone to portrait tablet */
-@media(max-width: 767px) {
-	#header {
-		form#filter {
-			display: block;
-			float: none;
-			margin-top: 10px;
+#statusbar {
+	position: relative;
+	z-index: 100;
 
-			input {
-				width: 100%;
-				height: 30px;
+	#gradient > .vertical(#222, #111);
+	.box-shadow(0px 0px 10px rgba(0, 0, 0, 0.8));
 
-				.box-sizing(border-box);
+	ul {
+		min-height: 40px;
+		list-style: none;
+		margin: 0 10px;
+		border-right: 1px solid #222;
+		border-left: 1px solid #111;
+
+		li {
+			min-height: inherit;
+			float: left;
+			border-left: 1px solid #222;
+			border-right: 1px solid #111;
+			position: relative;
+			overflow: hidden;
+
+			&:after {
+				position: absolute;
+				bottom: -4px;
+				left: 0;
+				right: 0;
+				content: "";
+				border-bottom: 4px solid @blue;
+				
+				.transition(all 0.2s ease-in-out);
+				.animation(2s fade infinite linear);
+			}
+			
+
+			&.pull-right {
+				float: right;
+			}
+			&.active, &.pinging {
+				> * {
+					background-color: #111;
+
+					.box-shadow(inset 0 3px 8px rgba(0,0,0,.125));
+				}
+			}
+			&.pinging {
+				> * {
+					color: #fff;
+				} 
+
+				&:after {
+					bottom: 0;
+				}
+			}
+
+			> a, > span {
+				display: block;
+				color: #999;
+				line-height: 40px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			> a {
+				&:hover {
+					color: #fff;
+					text-decoration: none;
+				}
 			}
 		}
 	}
-
-	.actions {
-		h3, h4, h5, h6 {
-			margin-top: 10px;
-		}
-	}
 }
- 
-/* Landscape phones and down */
-@media(max-width: 480px) {
-	#header {
-		h1 {
-			small {
-				display: block;
+
+#sections {
+	margin: 0;
+	list-style : none;
+	padding: 0;
+	position: fixed;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	overflow-x: visible;
+	width: 120%;		// Extra 20% caters for slight total width change during animation
+	font-size: 0;
+
+	> li {
+		min-width: 200px;
+		display: inline-block;
+		height: 100%;
+		vertical-align: top;
+		border-right: 10px solid @blue;
+		font-size: @baseFontSize;
+		overflow: hidden;
+
+		&.open, &.opening {
+			> a {
+				min-height: 40px;
+			}
+		}
+
+		> a {
+			text-decoration: none;
+			padding: 10px 10px 0 10px;
+			display: block;
+			position: relative;
+			z-index: 2;
+			min-height: 100%;
+
+			.transition(e('min-height 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000)'));
+
+			h2 {
+				margin-top: 0;
+			}
+		}
+
+		dl {
+			margin: 0;
+			padding: 0 10px 10px 10px;
+			list-style: none;
+
+			.box-sizing(border-box);
+
+			dt, dd {
+				margin: 0;
+				padding: 0;
+				font-weight: normal;
+				// border: 1px solid #aaa;
+			}
+
+			dt {
+				min-height: 40px;
+				cursor: pointer;
+				padding: 0 5px;
+				padding-right: 10px;
+				margin-top: 10px;
+
+				.border-radius(@baseBorderRadius);
+
+				&:first-child {
+					margin-top: 0;
+				}
+				&:hover {
+					background-color: #eee;
+				}
+
+				&.open {
+					background-color: #eee;
+					// border-bottom: none;
+
+					.border-bottom-radius(0);
+
+					+ dd {
+						// height: auto;
+						// border-top: none;
+
+						.border-top-radius(0);
+					}
+				}
+
+				.icon-large {
+					float: left;
+					margin-right: 10px;
+				}
+
+				h3 {
+					margin: 0;
+				}
+			}
+			dd {
+				padding-left: 55px;
+				padding-right: 10px;
+				background-color: #ddd;
+				// height: 0;
+				// overflow: visible;
+				display: none;
+				// position: relative;
+
+				// .transition(height 0.2s ease-in-out);
+				.border-bottom-radius(@baseBorderRadius);
+
+				// &:after {
+				// 	content: "";
+				// 	position: absolute;
+				// 	z-index: 0;
+				// 	top: -40px;
+				// 	bottom: 0;
+				// 	left: 0;
+				// 	right: 0;
+
+				// 	.box-shadow(0px 0px 10px #000);
+				// 	.border-radius(@baseBorderRadius);
+				// }
+
+				> div {
+					padding: 10px 0;
+
+					> *:last-child {
+						margin-bottom: 0;
+					}
+
+					p {
+						text-align: justify;
+					}
+
+					// Must be reinstated for mobile
+					h1, h2, h3, h4, h5, h6 {
+						margin-top: 0;
+					}
+				}
 			}
 		}
 	}

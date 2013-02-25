@@ -12,9 +12,137 @@
 	</head>
 
 	<body>
-		<p>Hello</p>
+		<div id="statusbar">
+			<ul>
+				<li class="pinging">
+					<a href="#notifs">Pinging notification</a>
+				</li>
+				<li>
+					<a href="#">Notification</a>
+				</li>
+
+				<li class="pull-right">
+					<span id="time"></span>
+				</li>
+			</ul>
+		</div>
+
+		<ul id="sections">
+			<li class="open">
+				<a href="#" class="section-toggle">
+					<h2>Device</h2>
+				</a>
+
+				<dl class="actions">
+					<dt>
+						<div class="icon-large icon-users"></div>
+						<h3>Accounts</h3>
+					</dt>
+					<dd>
+						<div class="row-fluid">
+							<div class="span3">
+								<h4>New User</h4>
+
+								<form class="form-block">
+									<input type="text" name="username" placeholder="Username">
+									<input type="text" name="username" placeholder="Username">
+									<input type="submit" value="Add User" class="btn btn-primary pull-right">
+								</form>
+							</div>
+							<div class="span3">
+								<h4>Other Columns</h4>
+							</div>
+							<div class="span3">
+								<h4>Other Columns</h4>
+							</div>
+						</div>
+					</dd>
+
+					<dt>
+						<div class="icon-large icon-tools"></div>
+						<h3>Firmware</h3>
+					</dt>
+					<dd>
+						<div class="row-fluid">
+							<div class="span3">
+								<h4>Upgrade</h4>
+
+								<form class="form-block">
+									<input type="file" name="file">
+									
+									<input type="submit" value="Upgrade" class="btn btn-warning pull-right">
+								</form>
+							</div>
+							<div class="span9">
+								<h4>Other Columns</h4>
+
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+									quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+									consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+									cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+									proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+								</p>
+							</div>
+						</div>
+					</dd>
+
+					<dt>
+						<div class="icon-large icon-clock"></div>
+						<h3>Long action</h3>
+					</dt>
+					<dd>
+						<div class="row-fluid">
+							<h1>HTML Ipsum Presents</h1>
+								       
+							<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+							<h2>Header Level 2</h2>
+								       
+							<ol>
+							   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+							   <li>Aliquam tincidunt mauris eu risus.</li>
+							</ol>
+
+							<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+
+							<h3>Header Level 3</h3>
+
+							<ul>
+							   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+							   <li>Aliquam tincidunt mauris eu risus.</li>
+							</ul>
+
+							<pre><code>
+							#header h1 a { 
+								display: block; 
+								width: 300px; 
+								height: 80px; 
+							}
+							</code></pre>
+						</div>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<a href="#" class="section-toggle">
+					<h2>Local</h2>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="section-toggle">
+					<h2>Network</h2>
+				</a>
+			</li>
+		</ul>
 
 		<script src="js/jquery-1.9.1.js"></script>
+
+		<!-- jQuery plugins -->
+		<script src="js/animate-enhanced-0.99.js"></script>
+
+		<!-- Libs -->
 		<script src="js/underscore-1.4.4.js"></script>
 		<script src="js/backbone-0.9.10.js"></script>
 
