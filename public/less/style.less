@@ -101,6 +101,19 @@ input[type="file"] {
 		left: 0;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 		content: "";
+		z-index: 100;
+	}
+
+	li.omnimenu-button {
+		#gradient > .vertical(lighten(@blue, 5%), darken(@blue, 10%));
+
+		&:hover {
+			#gradient > .vertical(lighten(@blue, 15%), @blue);
+		}
+
+		a {
+			padding: 0px 20px;
+		}
 	}
 
 	ul {
@@ -118,20 +131,6 @@ input[type="file"] {
 			position: relative;
 			overflow: hidden;
 
-			.ping-bar {
-				position: absolute;
-				display: block;
-				bottom: -4px;
-				left: 0;
-				right: 0;
-				content: "";
-				border-bottom: 4px solid @blue;
-				
-				.transition(all 0.2s ease-in-out);
-				.animation(2s fade infinite linear);
-			}
-			
-
 			&.pull-right {
 				float: right;
 			}
@@ -143,6 +142,37 @@ input[type="file"] {
 				.ping-bar {
 					bottom: 0;
 				}
+			}
+
+			&.icon {
+				border-left: none;
+
+				i {
+					opacity: 0.7;
+
+					.icon-white;
+				}
+
+				a {
+					&:hover {
+						i {
+							opacity: 1;
+						}
+					}
+				}
+			}
+
+			.ping-bar {
+				position: absolute;
+				display: block;
+				bottom: -4px;
+				left: 0;
+				right: 0;
+				content: "";
+				border-bottom: 4px solid @blue;
+				
+				.transition(all 0.2s ease-in-out);
+				.animation(2s fade infinite linear);
 			}
 
 			> a, > span {

@@ -1,5 +1,3 @@
-$('#sections > li > dl').mouseScroll();
-
 var container = $('#sections');
 var panel = container.children().not('.open').first();
 
@@ -56,10 +54,12 @@ $('.actions').on('click', 'dt', function() {
 });
 
 // Time
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 setInterval(function() {
 	var now = new Date();
 
-	$('#time').text(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
+	$('#time').text(now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear().toString().substr(-2) + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
 }, 1000);
 
 /* Mouse scroll */
