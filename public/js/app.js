@@ -1,8 +1,10 @@
+$('#sections > li > dl').mouseScroll();
+
 var container = $('#sections');
 var panel = container.children().not('.open').first();
 
 var sections = {
-	panelWidth: panel.width(),
+	panelWidth: panel.outerWidth(),
 	panelPadding: panel.outerWidth(true) - panel.width(),
 	numPanels: container.children().length,
 	duration: 600,
@@ -18,8 +20,8 @@ container.children('.open').first().width(sections.maxWidth);
 $(window).resize(function() {
 	sections.maxWidth = $(window).width() - (sections.panelWidth + sections.panelPadding) * (sections.numPanels) + sections.panelWidth;
 
-	// Set widths of panels
-	container.find('dl').width(sections.maxWidth - (sections.panelPadding * 2));
+	// Set initial widths of panels
+	container.find('dl').width(sections.maxWidth - sections.panelWidth - 20);
 	container.children().width(sections.panelWidth);
 	container.children('.open').first().width(sections.maxWidth);
 });
@@ -59,3 +61,42 @@ setInterval(function() {
 
 	$('#time').text(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
 }, 1000);
+
+/* Mouse scroll */
+/* TODO: Plugin-ify and optimise */
+var scrollTargets = $('#sections > li');
+
+$(document).on('mousemove', function(e) {
+	var target = $(e.target);
+	var scroller, container, containerHeight;
+	var mousePos, mouseRatio, scrollTop;
+
+	scrollTargets.each(function() {
+		if(target.closest($(this)).length && !target.hasClass('section-toggle')) {
+			container = $(this);
+			return;
+		}
+	});
+
+	if(!container) {
+		return;
+	}
+
+	containerHeight = container.height();
+	scroller = container.children('dl');
+
+	if(scroller.height() < container.height()) {
+		return;
+	}
+
+	var margin = 100;
+
+	var rangeTop = container.offset().top + margin;
+	var rangeBottom = rangeTop + container.height() - (margin * 2);
+	mousePos = e.pageY - rangeTop;
+	mouseRatio = Math.max(0, Math.min(mousePos / (rangeBottom - rangeTop), 1));
+
+	scrollTop = (scroller.outerHeight() - containerHeight) * mouseRatio;
+
+	container.scrollTop(scrollTop);
+});
