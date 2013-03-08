@@ -1,3 +1,9 @@
+$('#statusbar > ul').tooltip({
+	placement: 'bottom',
+	selector: '> li > a',
+	container: '#statusbar'
+});
+
 var container = $('#sections');
 var panel = container.children().not('.open').first();
 
@@ -43,7 +49,7 @@ $('#sections').on('click', '.section-toggle', function(e) {
 });
 
 // Actions
-$('.actions').on('click', 'dt', function() {
+$('.accordion').on('click', 'dt', function() {
 	$(this).toggleClass('open');
 	var content = $(this).next('dd');
 
@@ -52,15 +58,6 @@ $('.actions').on('click', 'dt', function() {
 	$(this).siblings('dd').not(content).slideUp();
 	$(this).siblings('dt.open').removeClass('open');
 });
-
-// Time
-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-setInterval(function() {
-	var now = new Date();
-
-	$('#time').text(now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear().toString().substr(-2) + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
-}, 1000);
 
 /* Mouse scroll */
 /* TODO: Plugin-ify and optimise */
@@ -99,4 +96,40 @@ $(document).on('mousemove', function(e) {
 	scrollTop = (scroller.outerHeight() - containerHeight) * mouseRatio;
 
 	container.scrollTop(scrollTop);
+});
+
+/* Calendar sidebar thingy */
+// Time
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+setInterval(function() {
+	var now = new Date();
+
+	$('.clock span').text(months[now.getMonth()] + ' ' + ('0' + now.getDate()).substr(-2) + ' ' + ('0' + now.getHours()).substr(-2) + ':' + ('0' + now.getMinutes()).substr(-2));
+}, 1000);
+
+$('#clock-popover').find('.calendar').datePicker({
+	footer: false
+});
+
+$('#time a.clock').on('click', function(e) {
+	e.preventDefault();
+
+	$('#clock-popover').toggleClass('open');
+});
+
+$('#clock-popover div.close a').on('click', function(e) {
+	e.preventDefault();
+
+	$(this).closest('#clock-popover').removeClass('open');
+});
+
+/* Omnimenu */
+$('#omnimenu > a').on('click', function(e) {
+	e.preventDefault();
+
+	// $(this).children().toggleClass('icon-chevron-down icon-chevron-up');
+	$(this).parent().toggleClass('open');
+
+	$(this).next('#omnimenu-popover').toggleClass('open');
 });
