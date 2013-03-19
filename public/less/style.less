@@ -326,14 +326,17 @@ fieldset[disabled] {
 
 	.panel {
 		background: #fff;
-		width: 100%;
 		height: 100%;
 		padding: 10px;
 		position: absolute;
 		z-index: 1;
+		opacity: 0;
 
-		&.current {
+		.transition(opacity 0.5s);
+
+		&.open {
 			z-index: 2;
+			opacity: 1;
 		}
 	}
 }

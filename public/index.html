@@ -18,20 +18,20 @@
 					<a href="#" title="Help"><i class="icon-question-sign"></i></a>
 				</li>
 
-				<li id="dln-menu">
+				<li id="dln-menu" class="open">
 					<a href="#dln-open" title="Access">
-						<i class="icon-chevron-up"></i>
+						<i class="icon-chevron-down"></i>
 					</a>
 				</li>
 
 				<li class="icon" id="info-menu">
-					<a href="#" title="Info"><i class="icon-info-sign"></i></a>
+					<a href="#info-menu" title="Info"><i class="icon-info-sign"></i></a>
 				</li>
 				<li class="icon" id="threads-menu">
-					<a href="#" title="Social"><i class="icon-comment"></i></a>
+					<a href="#threads-menu" title="Social"><i class="icon-comment"></i></a>
 				</li>
 				<li class="icon" id="recent-menu">
-					<a href="#" title="Recent"><i class="icon-time"></i></a>
+					<a href="#recent-menu" title="Recent"><i class="icon-time"></i></a>
 				</li>
 
 				<!-- Right-aligned icons -->
@@ -317,7 +317,7 @@
 										<option value="-3">GMT -03:00</option>
 										<option value="-2">GMT -02:00</option>
 										<option value="-1">GMT -01:00</option>
-										<option value="0">GMT 00:00</option>
+										<option value="0" selected="selected">GMT 00:00</option>
 										<option value="1">GMT +01:00</option>
 										<option value="2">GMT +02:00</option>
 										<option value="3">GMT +03:00</option>
@@ -374,7 +374,7 @@
 		</div>
 
 		<div id="main">
-			<div class="panel" id="threads">
+			<div class="panel" data-menu="threads">
 				// Threads
 
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -385,10 +385,10 @@
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			</div>
 
-			<div class="panel" id="recent">
+			<div class="panel" data-menu="recent">
 				<h2>Recent Items</h2>
 
-				<ul class="nav nav-list">
+				<ul class="nav nav-pills nav-stacked">
 					<li class="nav-header">Files</li>
 
 					<li><a href="#">George Washington term paper for Mr. Harrington.doc</a></li>
@@ -406,13 +406,14 @@
 				</ul>
 			</div>
 
-			<div class="panel" id="info">
+			<div class="panel" data-menu="info">
 				<h2>Notifications</h2>
 
-				<ul class="nav nav-list">
+				<ul class="nav nav-pills nav-stacked">
 					<li class="nav-header">Missed Calls</li>
 
-
+					<li><a href="#">Julie Riechmann</a></li>
+					<li><a href="#">07715 774 608</a></li>
 				</ul>
 			</div>
 

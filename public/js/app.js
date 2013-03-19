@@ -158,6 +158,22 @@ $('#dln-menu > a').on('click', function(e) {
 	$('#dln').toggleClass('closed');
 });
 
+/* Statusbar menus */
+$('a[href$="-menu"]').on('click', function(e) {
+	var id = $(this).prop('href').split('#').slice(-1)[0].replace('-menu', '');
+
+	var thisPanel = $('.panel').filter(function() {
+		return $(this).data('menu') === id;
+	}).addClass('open');
+
+	console.log(id, thisPanel);
+
+	$('.panel').not(thisPanel).removeClass('open');
+
+	$('#dln').addClass('closed');
+	$('#dln-menu').removeClass('open');
+});
+
 /* Generic slideout from left/right sidebar */
 $('a[href^="#slideout-"]').on('click', function(e) {
 	var id = '#' + $(this).prop('href').split('#').slice(-1);
