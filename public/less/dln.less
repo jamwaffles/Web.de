@@ -1,0 +1,131 @@
+#dln {
+	margin: 0;
+	list-style : none;
+	padding: 0;
+	position: fixed;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	overflow-x: visible;
+	width: 120%;		// Extra 20% caters for slight total width change during animation
+	font-size: 0;
+	opacity: 1;
+	background: #fff;
+	z-index: 10;
+
+	.transition(all 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000));
+
+	&.closed {
+		top: -100%;
+		bottom: 100%;
+		opacity: 0.5;
+	}
+
+	> li {
+		background: #fff;
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+
+		.transition(left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000));
+
+		&:first-child {
+			li {
+				border-left: 1px solid #fff;
+			}
+		}
+
+		> a {
+			text-decoration: none;
+			background: #ddd;
+			width: 40px;
+			padding: 10px;
+			position: absolute;
+			outline: 0 none;
+			border: 1px solid #fff;
+			border-style: solid solid solid none;
+			top: 1px;
+			bottom: 0;
+
+			h2 {
+				margin: 0;
+				padding: 0;
+				width: 330px;
+				left: -135px;
+				top: 0;
+				position: absolute;
+				letter-spacing: 2px;
+				font-size: 40px;
+
+				.rotate(-90deg);
+				.transform-origin(50% 50%);
+
+				// Inset text shadow effect
+				color: rgba(60, 60, 60, 0.8);
+				.text-shadow(e('1px 3px 4px #ddd, 0 0 0 #000, -1px 0px 0px #fff'));
+			}
+		}
+
+		.actions {
+			height: 100%;
+			overflow-y: hidden;
+
+			dl {
+				padding-left: 70px;
+				padding-right: 10px;
+				padding: 10px 10px 10px 70px;
+				margin: 0;
+
+				.box-sizing(border-box);
+
+				dt {
+					min-height: 40px;
+					cursor: pointer;
+					padding: 0;
+					padding-right: 10px;
+					padding-left: 5px;
+
+					.icon-large {
+						float: left;
+						margin-right: 10px;
+						opacity: 0.7;
+					}
+
+					h3 {
+						margin: 0;
+						letter-spacing: 1px;
+						color: rgba(30, 30, 30, 0.8);
+
+						.text-shadow(e('0px 1px 0px #fff, 0 0 0 #000, 0px -1px 0px #999'));
+					}
+				}
+				dd {
+					padding-left: 55px;
+					padding-right: 10px;
+					background-color: #ddd;
+					display: none;
+
+					.border-bottom-radius(@baseBorderRadius);
+
+					> div {
+						padding: 10px 0;
+
+						> *:last-child {
+							margin-bottom: 0;
+						}
+
+						p {
+							text-align: justify;
+						}
+
+						// Must be reinstated for mobile
+						h1, h2, h3, h4, h5, h6 {
+							margin-top: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

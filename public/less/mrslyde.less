@@ -1,0 +1,67 @@
+/* It is imperitive you put this in your CSS somewhere - it stops things being selected when a handle is being dragged */
+html.slyding {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+/* Container has to be inline */
+div.mrslyde {
+	display: inline-block;
+	position: relative;
+	zoom: 1;
+	*display: inline;
+}
+
+/* Track style */
+div.mrslyde div.track {
+	// border: 1px solid #76a7dc;
+	height: 10px;
+	margin: 3px 0px;
+	background: #fff;
+
+	.border-radius(@baseBorderRadius);
+	.box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.1));
+	#gradient > .vertical(#f5f5f5, #f9f9f9);
+}
+
+/* Handle style */
+div.mrslyde div.handle {
+	border: 1px solid #0480BE;
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	margin-top: -3px;
+	background: #fff;
+	cursor: pointer;
+
+	.border-radius(@baseBorderRadius);
+	#gradient > .vertical(#149bdf, #0480be);
+}
+
+/* Value displays */
+div.mrslyde div.values {
+	text-align: center;
+}
+
+/* Minimum value */
+div.mrslyde span.left {
+	float: left;
+	width: 33%;
+	text-align: left;
+}
+
+/* Maximum value */
+div.mrslyde span.right {
+	float: left;
+	width: 33%;
+	text-align: right;
+}
+
+div.mrslyde span.center {
+	float: left;
+	width: 33%;
+	text-align: center;
+}

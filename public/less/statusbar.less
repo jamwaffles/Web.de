@@ -1,0 +1,242 @@
+.colourButton(@col) {
+	border-left-color: @col;
+	border-right-color: darken(@col, 30%);
+
+	#gradient > .vertical(lighten(@col, 10%), darken(@col, 15%));
+	.transition(background 0.5s linear);
+
+	&:hover {
+		#gradient > .vertical(lighten(@col, 15%), darken(@col, 10%));
+	}
+
+	> a {
+		padding: 0px 15px;
+	}
+}
+
+#slideout-clock {
+	// .calendar-time {
+	// 	margin-bottom: 10px;
+	// 	font-size: 18px;
+	// 	text-align: center;
+	// }
+
+	.time-source {
+		label {
+			border-bottom: 1px solid #ddd;
+			padding-bottom: 7px;
+			margin-bottom: 10px;
+			font-weight: bold;
+
+			input[type="radio"] {
+				margin-right: 5px;
+			}
+		}
+
+		input[type="radio"] {
+			float: left;
+		}
+
+		fieldset {
+			+ fieldset {
+				margin-top: 10px;
+			}
+
+			button {
+				vertical-align: top;
+			}
+
+			> div {
+				margin-top: 10px;
+
+				input, select {
+					width: 30%;
+				}
+				select {
+					margin-left: 2%;
+				}
+			}
+		}
+
+		.form-block > div {
+			clear: both;
+		}
+	}
+}
+
+#slideout-levels {
+	input.slider {
+		width: 236px;
+	}
+
+	.progress {
+		height: 14px;
+	}
+}
+
+#statusbar {
+	@gradTopColour: #555;
+	@gradBotColour: #222;
+
+	position: relative;
+	z-index: 100;
+	border-bottom: 1px solid #000;
+
+	#gradient > .vertical(@gradTopColour, @gradBotColour);
+	// .box-shadow(0px 0px 10px rgba(0, 0, 0, 0.8));
+
+	&:before {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+		content: "";
+		z-index: 100;
+	}
+
+	#dln-menu {
+		.colourButton(@blue);
+
+		&.open {
+			i {
+				.rotate(-180deg);
+			}
+		}
+		
+		i {
+			.transition(all 0.5s ease-out);
+		}
+	}
+
+	#power {
+		.colourButton(@orange);
+	}
+
+	> ul {
+		min-height: 40px;
+		list-style: none;
+		margin: 0 10px;
+		border-right: 1px solid @gradTopColour;
+		border-left: 1px solid @gradBotColour;
+
+		> li {
+			min-height: inherit;
+			float: left;
+			border-left: 1px solid @gradTopColour;
+			border-right: 1px solid @gradBotColour;
+			position: relative;
+
+			&.pull-right {
+				float: right;
+
+				&:last-child {
+					position: relative;
+					overflow: visible;
+
+					&:before {
+						content: "";
+						border-left: 1px solid @gradBotColour;
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: -2px;
+					}
+				}
+			}
+
+			&.icon {
+				> a {
+					> i {
+						opacity: 0.7;
+
+						.icon-white;
+					}
+					&:hover {
+						i {
+							opacity: 1;
+						}
+					}
+				}
+			}
+
+			&.divider {
+				margin: 0;
+				padding: 0;
+				border-left: 1px solid @gradTopColour;
+				border-right: 1px solid @gradBotColour;
+				line-height: 40px;
+				color: #666;
+				text-align: center;
+				padding: 0 15px;
+
+				.text-shadow(0px -1px 0px #000);
+
+				&:before {
+					content: "\2022";
+				}
+			}
+
+			&.search {
+				display: block;
+				overflow: hidden;
+				padding: 0 10px;
+				float: none;
+
+				input[name="search"] {
+					background: #ddd;
+					color: #000;
+					border-color: #333;
+					width: 100%;
+					height: 30px;
+					margin: 5px 0 0;
+
+					.box-sizing(border-box);
+					.box-shadow(inset 0px 10px 15px rgba(0, 0, 0, 0.2));
+					.border-radius(@baseBorderRadius);
+
+					&::-webkit-input-placeholder { /* WebKit browsers */
+						color: #444;
+					}
+					&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+						color: #444;
+					}
+					&::-moz-placeholder { /* Mozilla Firefox 19+ */
+						color: #444;
+					}
+					&:-ms-input-placeholder { /* Internet Explorer 10+ */
+						color: #444;
+					}
+
+					&:active, &:focus {
+						.box-shadow(e('inset 0px 10px 15px rgba(0, 0, 0, 0.2), 0px 0px 10px rgba(255, 255, 255, 0.3)'));
+					}
+				}
+
+				a {
+					position: absolute;
+					right: 10px;
+					top: 4px;
+					padding: 0 10px;
+					line-height: 30px;
+					z-index: 100;
+				}
+			}
+
+			> a, > span {
+				display: block;
+				color: #ccc;
+				line-height: 40px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			> a {
+				&:hover {
+					color: #fff;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

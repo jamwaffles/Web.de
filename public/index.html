@@ -14,137 +14,781 @@
 	<body>
 		<div id="statusbar">
 			<ul>
-				<li class="pinging">
-					<a href="#notifs">Pinging notification</a>
-				</li>
-				<li>
-					<a href="#">Notification</a>
+				<li class="icon">
+					<a href="#" title="Help"><i class="icon-question-sign"></i></a>
 				</li>
 
-				<li class="pull-right">
-					<span id="time"></span>
+				<li id="dln-menu">
+					<a href="#dln-open" title="Access">
+						<i class="icon-chevron-up"></i>
+					</a>
+				</li>
+
+				<li class="icon" id="info-menu">
+					<a href="#" title="Info"><i class="icon-info-sign"></i></a>
+				</li>
+				<li class="icon" id="threads-menu">
+					<a href="#" title="Social"><i class="icon-comment"></i></a>
+				</li>
+				<li class="icon" id="recent-menu">
+					<a href="#" title="Recent"><i class="icon-time"></i></a>
+				</li>
+
+				<!-- Right-aligned icons -->
+
+				<!-- Pairing -->
+				<li class="pull-right icon">
+					<a href="#slideout-pairing" title="Pairing"><i class="icon-pear"></i></a>
+
+					<div id="slideout-pairing" class="slideout slideout-right">
+						<div class="slideout-close">
+							<a href="#"><i class="icon-remove"></i></a>
+
+							<div class="slideout-header">Device PIN: 1794</div>
+						</div>
+
+						<form class="form-block">
+							<input type="text" class="uri" placeholder="Public URI"><input type="text" class="port" placeholder="Port">
+
+							<input type="text" class="uri" placeholder="Private URI"><input type="text" class="port" placeholder="Port">
+
+							<input type="text" placeholder="Pairing PIN">
+
+							<select>
+								<option value="">Choose group...</option>
+								<option value="g1">Group 1</option>
+								<option value="g2">Group 2</option>
+								<option value="g3">Group 3</option>
+							</select>
+
+							<div class="align-right">
+								<button class="btn">Scan</button>
+								<button class="btn">OK</button>
+							</div>
+						</form>
+
+						<dl class="accordion">
+							<dt>Expensive Phones</dt>
+							<dd>
+								<ul class="nav nav-stacked nav-pills">
+									<li><a href="#">Lumia 820</a></li>
+									<li><a href="#">Nexus 4</a></li>
+								</ul>
+							</dd>
+
+							<dt>Music stuff</dt>
+							<dd>
+								<ul class="nav nav-stacked nav-pills">
+									<li><a href="#">Philips SBH9000</a></li>
+									<li><a href="#">Foxl Speakers</a></li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</li>
+
+				<!-- State -->
+				<li id="power" class="pull-right">
+					<a href="#slideout-state" title="State"><i class="icon-off"></i></a>
+
+					<div id="slideout-state" class="slideout slideout-right">
+						<div class="slideout-close">
+							<a href="#"><i class="icon-remove"></i></a>
+
+							<div class="slideout-header">Uptime: 4d 23h 15m</div>
+						</div>
+
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">Lock <i class="pull-right icon-lock"></i></a></li>
+							<li><a href="#">Logout <i class="pull-right icon-arrow-left"></i></a></li>
+							<li><a href="#">Transfer <i class="pull-right icon-random"></i></a></li>
+							<li><a href="#">Restart <i class="pull-right icon-refresh"></i></a></li>
+							<li><a href="#">Suspend <i class="pull-right icon-pause"></i></a></li>
+							<li><a href="#">Hibernate <i class="pull-right icon-time"></i></a></li>
+							<li><a href="#">Shutdown <i class="pull-right icon-off"></i></a></li>
+						</ul>
+					</div>
+				</li>
+
+				<!-- Connection -->
+				<li class="pull-right icon">
+					<a href="#slideout-network" title="Connections: WiffyAP (100%)"><i class="icon-signal"></i></a>
+
+					<div id="slideout-network" class="slideout slideout-right">
+						<div class="slideout-close">
+							<a href="#"><i class="icon-remove"></i></a>
+
+							<div class="slideout-header">webde.hostname.org</div>
+						</div>
+
+						<ul class="unstyled well">
+							<li>
+								<label class="checkbox"><input type="checkbox" checked> Enable networking</label>
+							</li>
+							<li>
+								<label class="checkbox"><input type="checkbox"> Enable wireless</label>
+							</li>
+							<li>
+								<label class="checkbox"><input type="checkbox"> Enable Bluetooth</label>
+							</li>
+						</ul>
+
+						<dl class="accordion accordion-small">
+							<dt>LAN <i class="icon-lan pull-right"></i></dt>
+							<dd>
+								<ul class="unstyled">
+									<li>
+										<strong>IP</strong> <span class="pull-right">192.168.1.1</span>
+									</li>
+									<li>
+										<strong>Subnet</strong> <span class="pull-right">255.255.255.0</span>
+									</li>
+									<li>
+										<strong>Gateway</strong> <span class="pull-right">192.168.1.255</span>
+									</li>
+
+									<li>
+										<a href="#">LAN settings &raquo;</a>
+									</li>
+								</ul>
+							</dd>
+
+							<dt>WiFi <i class="icon-wifi pull-right"></i></dt>
+							<dd>
+								<ul class="unstyled">
+									<li>
+										<strong>Access point</strong> <span class="pull-right">BTOpenZone</span>
+									</li>
+									<li>
+										<strong>IP</strong> <span class="pull-right">192.168.1.1</span>
+									</li>
+									<li>
+										<strong>Subnet</strong> <span class="pull-right">255.255.255.0</span>
+									</li>
+									<li>
+										<strong>Gateway</strong> <span class="pull-right">192.168.1.255</span>
+									</li>
+
+									<li>
+										<a href="#">WiFi settings &raquo;</a>
+									</li>
+								</ul>
+
+								<h5>Available networks</h5>
+
+								<ul class="nav nav-pills nav-stacked">
+									<li>
+										<a href="#">
+											BTHomeHub3-BA74 <i class="icon-lock pull-right"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											Widget <i class="icon-lock pull-right"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											Pretty Fly <i class="icon-lock-open pull-right"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											For a WiFi <i class="icon-lock pull-right"></i>
+										</a>
+									</li>
+								</ul>
+							</dd>
+
+							<dt>Cell <i class="icon-signal pull-right"></i></dt>
+							<dd>
+								<ul class="unstyled">
+									<li>
+										<strong>Network</strong> <span class="pull-right">EE (Orange) <i class="icon-signal"></i></span>
+									</li>
+									<li>
+										<strong>Mobile internet</strong> <a href="#" class="pull-right">On</a>
+									</li>
+									<li>
+										<strong>Connection type</strong> <a href="#" class="pull-right">HSDPA</a>
+									</li>
+
+									<li>
+										<a href="#">Cell network settings &raquo;</a>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</li>
+
+				<!-- Levels -->
+				<li class="pull-right icon">
+					<a href="#slideout-levels" class="levels" title="Levels">
+						<i class="icon-levels"></i>
+					</a>
+
+					<div id="slideout-levels" class="slideout slideout-right">
+						<div class="slideout-close">
+							<a href="#"><i class="icon-remove"></i></a>
+						</div>
+
+						<ul class="unstyled">
+							<li>
+								<h6>PCM</h6>
+								<input class="slider" type="text">
+							</li>
+							<li>
+								<h6>Headphones</h6>
+								<input class="slider" type="text">
+							</li>
+							<li>
+								<h6>Brightness</h6>
+								<input class="slider" type="text">
+							</li>
+							<li>
+								<h6>PS3 Controller Battery</h6>
+
+								<div class="progress">
+									<div class="bar" style="width: 60%;"></div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<!-- Clock -->
+				<li class="pull-right" id="time">
+					<a href="#slideout-clock" class="clock" title="Epoch">
+						<span></span>
+					</a>
+
+					<div id="slideout-clock" class="slideout slideout-right">
+						<div class="slideout-close">
+							<a href="#"><i class="icon-remove"></i></a>
+
+							<div class="slideout-header calendar-time"></div>
+						</div>
+
+						<div class="calendar"></div>
+
+						<dl class="accordion accordion-small">
+							<dt>Time and Date</dt>
+							<dd>
+								<form class="form-block time-source">
+									<label>
+										<input type="radio" name="time-source" value="manual">
+										Set time manually
+									</label>
+									<fieldset disabled="disabled">
+										<button class="btn btn-primary btn-block">Use Selected Date</button>
+
+										<div>
+											<input type="text" class="time" name="hour">:
+											<input type="text" class="time" name="minute">
+											<select name="ampm" class="ampm time">
+												<option value="am">AM</option>
+												<option value="pm">PM</option>
+											</select>
+										</div>
+									</fieldset>
+
+									<label>
+										<input checked="checked" type="radio" name="time-source" value="auto">
+										Use automatic time
+									</label>
+									<fieldset>
+										<input type="text" name="timeserver-uri" placeholder="time.windows.com">
+									</fieldset>
+
+									<select name="timezone">
+										<option value="-12">GMT -12:00</option>
+										<option value="-11">GMT -11:00</option>
+										<option value="-10">GMT -10:00</option>
+										<option value="-9">GMT -09:30</option>
+										<option value="-9">GMT -09:00</option>
+										<option value="-8">GMT -08:00</option>
+										<option value="-7">GMT -07:00</option>
+										<option value="-6">GMT -06:00</option>
+										<option value="-5">GMT -05:00</option>
+										<option value="-4">GMT -04:30</option>
+										<option value="-4">GMT -04:00</option>
+										<option value="-3">GMT -03:30</option>
+										<option value="-3">GMT -03:00</option>
+										<option value="-2">GMT -02:00</option>
+										<option value="-1">GMT -01:00</option>
+										<option value="0">GMT 00:00</option>
+										<option value="1">GMT +01:00</option>
+										<option value="2">GMT +02:00</option>
+										<option value="3">GMT +03:00</option>
+										<option value="3">GMT +03:30</option>
+										<option value="4">GMT +04:00</option>
+										<option value="4">GMT +04:30</option>
+										<option value="5">GMT +05:00</option>
+										<option value="5">GMT +05:30</option>
+										<option value="5">GMT +05:45</option>
+										<option value="6">GMT +06:00</option>
+										<option value="6">GMT +06:30</option>
+										<option value="7">GMT +07:00</option>
+										<option value="8">GMT +08:00</option>
+										<option value="8">GMT +08:45</option>
+										<option value="9">GMT +09:00</option>
+										<option value="9">GMT +09:30</option>
+										<option value="10">GMT +10:00</option>
+										<option value="10">GMT +10:30</option>
+										<option value="11">GMT +11:00</option>
+										<option value="11">GMT +11:30</option>
+										<option value="12">GMT +12:00</option>
+										<option value="12">GMT +12:45</option>
+										<option value="13">GMT +13:00</option>
+										<option value="14">GMT +14:00</option>
+									</select>
+								</form>
+							</dd>
+
+							<dt>Holidays and events</dt>
+							<dd>
+								<ul class="nav nav-pills nav-stacked">
+									<li><a href="#">Lincoln's Birthday</a></li>
+								</ul>
+							</dd>
+
+							<dt>Appointments</dt>
+							<dd>
+								<ul class="nav nav-pills nav-stacked">
+									<li><a href="#">Appt 1</a></li>
+									<li><a href="#">Appt 2</a></li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</li>
+				
+				<!-- Search box -->
+				<li class="search">
+					<input type="text" name="search" placeholder="What do you want to do?">
+
+					<a href="#mic"><i class="icon-microphone"></i></a>
 				</li>
 			</ul>
 		</div>
 
-		<ul id="sections">
-			<li class="open">
-				<a href="#" class="section-toggle">
-					<h2>Device</h2>
-				</a>
+		<div id="main">
+			<div class="panel" id="threads">
+				// Threads
 
-				<dl class="actions">
-					<dt>
-						<div class="icon-large icon-users"></div>
-						<h3>Accounts</h3>
-					</dt>
-					<dd>
-						<div class="row-fluid">
-							<div class="span3">
-								<h4>New User</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
 
-								<form class="form-block">
-									<input type="text" name="username" placeholder="Username">
-									<input type="text" name="username" placeholder="Username">
-									<input type="submit" value="Add User" class="btn btn-primary pull-right">
-								</form>
-							</div>
-							<div class="span3">
-								<h4>Other Columns</h4>
-							</div>
-							<div class="span3">
-								<h4>Other Columns</h4>
-							</div>
-						</div>
-					</dd>
+			<div class="panel" id="recent">
+				<h2>Recent Items</h2>
 
-					<dt>
-						<div class="icon-large icon-tools"></div>
-						<h3>Firmware</h3>
-					</dt>
-					<dd>
-						<div class="row-fluid">
-							<div class="span3">
-								<h4>Upgrade</h4>
+				<ul class="nav nav-list">
+					<li class="nav-header">Files</li>
 
-								<form class="form-block">
-									<input type="file" name="file">
-									
-									<input type="submit" value="Upgrade" class="btn btn-warning pull-right">
-								</form>
-							</div>
-							<div class="span9">
-								<h4>Other Columns</h4>
+					<li><a href="#">George Washington term paper for Mr. Harrington.doc</a></li>
+					<li><a href="#">Accounts receivables for DPI.xls</a></li>
 
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-									quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-									cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-							</div>
-						</div>
-					</dd>
+					<li class="nav-header">Favourites</li>
 
-					<dt>
-						<div class="icon-large icon-clock"></div>
-						<h3>Long action</h3>
-					</dt>
-					<dd>
-						<div class="row-fluid">
-							<h1>HTML Ipsum Presents</h1>
-								       
-							<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+					<li><a href="#">Google</a></li>
+					<li><a href="#">Fox News</a></li>
 
-							<h2>Header Level 2</h2>
-								       
-							<ol>
-							   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-							   <li>Aliquam tincidunt mauris eu risus.</li>
-							</ol>
+					<li class="nav-header">Access</li>
 
-							<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+					<li><a href="#">Home Router Interface</a></li>
+					<li><a href="#">NAS at home</a></li>
+				</ul>
+			</div>
 
-							<h3>Header Level 3</h3>
+			<div class="panel" id="info">
+				<h2>Notifications</h2>
 
-							<ul>
-							   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-							   <li>Aliquam tincidunt mauris eu risus.</li>
-							</ul>
+				<ul class="nav nav-list">
+					<li class="nav-header">Missed Calls</li>
 
-							<pre><code>
-							#header h1 a { 
-								display: block; 
-								width: 300px; 
-								height: 80px; 
-							}
-							</code></pre>
-						</div>
-					</dd>
-				</dl>
-			</li>
-			<li>
-				<a href="#" class="section-toggle">
-					<h2>Local</h2>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="section-toggle">
-					<h2>Network</h2>
-				</a>
-			</li>
-		</ul>
+
+				</ul>
+			</div>
+
+			<ul id="dln">
+				<li>
+					<a href="#" class="section-toggle">
+						<h2>Device</h2>
+					</a>
+
+					<div class="actions">
+						<dl class="accordion">
+							<dt>
+								<div class="icon-large icon-users"></div>
+								<h3>Accounts</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-qrcode"></div>
+								<h3>Firmware</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-tools"></div>
+								<h3>Hardware</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-play-button"></div>
+								<h3>Running</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-schedule"></div>
+								<h3>Scheduled</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-gears"></div>
+								<h3>Services</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-settings"></div>
+								<h3>Settings</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="section-toggle">
+						<h2>Local</h2>
+					</a>
+
+					<div class="actions">
+						<dl class="accordion">
+							<dt>
+								<div class="icon-large icon-usb"></div>
+								<h3>Attached</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-disk"></div>
+								<h3>Data</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-software"></div>
+								<h3>Software</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-schedule"></div>
+								<h3>Scheduled</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-settings"></div>
+								<h3>Settings</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="section-toggle">
+						<h2>Network</h2>
+					</a>
+
+					<div class="actions">
+						<dl class="accordion">
+							<dt>
+								<div class="icon-large icon-apple"></div>
+								<h3>Apple</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-linux"></div>
+								<h3>Linux</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-xinix"></div>
+								<h3>XiniX</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-windows"></div>
+								<h3>Windows</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+
+							<dt>
+								<div class="icon-large icon-globe"></div>
+								<h3>Other</h3>
+							</dt>
+							<dd>
+								<div class="row-fluid">
+									<div class="span3">
+										<h4>Small Form</h4>
+										<form class="form-block">
+											<input type="text" name="username" placeholder="Field 1">
+											<input type="text" name="" placeholder="Field 2">
+											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
+										</form>
+									</div>
+									<div class="span3"><h4>Other Columns</h4></div>
+									<div class="span3"><h4>Other Columns</h4></div>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</li>
+			</ul>
+
+			<!-- Apps/whatever -->
+			<ul id="apps">
+				
+			</ul>
+		</div>
 
 		<script src="js/jquery-1.9.1.js"></script>
 
 		<!-- jQuery plugins -->
 		<script src="js/animate-enhanced-0.99.js"></script>
+		<script src="js/datepicker.js"></script>
+		<script src="js/mrslyde-1.0.js"></script>
+
+		<!-- Bootstrap plugins -->
+		<script src="js/bootstrap/bootstrap-tooltip.js"></script>
 
 		<!-- Libs -->
 		<script src="js/underscore-1.4.4.js"></script>
 		<script src="js/backbone-0.9.10.js"></script>
+		<script src="js/moment-2.0.0.min.js"></script>
 
 		<script src="js/app.js"></script>
 	</body>
