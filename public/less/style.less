@@ -75,21 +75,6 @@
 
 		.box-sizing(border-box);
 	}
-	input {
-		&.uri {
-			width: 71%;
-			height: 30px;
-
-			.box-sizing(border-box);
-		}
-		&.port {
-			width: 25%;
-			margin-left: 4%;
-			height: 30px;
-
-			.box-sizing(border-box);
-		}
-	}
 	select {
 		width: 100%;
 	}
@@ -97,12 +82,30 @@
 input[type="file"] {
 	margin-bottom: 10px;
 }
+input.minimal {
+	border: 1px solid #ddd;
+	border-style: none none solid none;
+	background: #fff;
+	padding: 2px;
+	margin: 0;
+
+	.text-shadow(none);
+	.box-shadow(none);
+	.border-radius(0);
+
+	&:active, &:focus {
+		.text-shadow(none);
+		.box-shadow(none);
+		.border-radius(0);
+	}
+}
 fieldset[disabled] {
-	button {
+	button, .btn {
 		background: @blue;
 		border-color: @blue;
 
 		.text-shadow(none);
+		.box-shadow(none);
 
 		&:hover, &:active, &:focus {
 			background: @blue;
@@ -113,6 +116,9 @@ fieldset[disabled] {
 			.box-shadow(none);
 		}
 	}
+}
+.uneditable-input {
+	cursor: default;
 }
 
 .accordion {
@@ -142,7 +148,11 @@ fieldset[disabled] {
 			.border-bottom-radius(0);
 
 			+ dd {
+				border: 1px solid #eee;
+				border-top: none;
+
 				.border-top-radius(0);
+				.border-bottom-radius(@baseBorderRadius);
 			}
 		}
 	}
@@ -182,15 +192,15 @@ fieldset[disabled] {
 	}
 }
 
-.datepicker-container {
-	.header {
+.supercal {
+	.supercal-header {
 		text-align: center;
 
-		button.prev {
+		button.prev-month {
 			float: left;
 		}
 
-		button.next {
+		button.next-month {
 			float: right;
 		}
 
@@ -199,42 +209,51 @@ fieldset[disabled] {
 		}
 	}
 
-	table {
-		border: 1px solid #ddd;
-		margin-top: 10px;
-		width: 100%;
-		table-layout: fixed;
+	.supercal-month {
+		position: relative;
+		z-index: 0;
+		overflow: hidden;
 
-		th {
-			font-weight: bold;
-			padding: 2px 4px;
-			text-align: center;
-		}
+		table {
+			border: 1px solid #ddd;
+			margin-top: 10px;
+			margin-bottom: 0;
+			width: 100%;
+			table-layout: fixed;
 
-		td {
-			cursor: pointer;
-			padding: 2px 4px;
-			border-top: 1px solid #eee;
-			text-align: center;
+			.border-radius(@baseBorderRadius);
 
-			&:hover {
-				background: #eee;
+			th {
+				font-weight: bold;
+				padding: 2px 4px;
+				text-align: center;
+				font-size: 13px;
 			}
 
-			&.previous, &.next {
-				background: #f5f5f5;
-				color: #666;
+			td {
+				cursor: pointer;
+				padding: 2px 4px;
+				text-align: center;
 
 				&:hover {
 					background: #eee;
 				}
-			}
-			&.today {
-				color: @blue;
-			}
-			&.selected {
-				color: #fff;
-				background: @blue;
+
+				&.month-prev, &.month-next {
+					background: #f5f5f5;
+					color: #666;
+
+					&:hover {
+						background: #eee;
+					}
+				}
+				&.today {
+					color: @blue;
+				}
+				&.selected {
+					color: #fff;
+					background: @blue;
+				}
 			}
 		}
 	}
@@ -338,6 +357,32 @@ fieldset[disabled] {
 			z-index: 2;
 			opacity: 1;
 		}
+		&.iframe {
+			padding: 0;
+			width: 100%;
+		}
+
+		> h2 {
+			color: rgba(60, 60, 60, 0.8);
+			
+			.text-shadow(e('1px 3px 4px #fff, 0 0 0 #000, -1px 0px 0px #fff'));
+		}
+
+		iframe {
+			width: 100%;
+			height: 100%;
+			overflow-y: auto;
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+
+#widgets {
+	ul {
+		margin: 0;
+		padding: 0;
 	}
 }
 

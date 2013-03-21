@@ -15,7 +15,17 @@
 }
 
 #slideout-clock {
+	.calendar {
+		margin-bottom: 10px;
+	}
+
 	.time-source {
+		.timezone {
+			.set {
+				width: 100%;
+			}
+		}
+
 		label {
 			border-bottom: 1px solid #ddd;
 			padding-bottom: 7px;
@@ -32,8 +42,17 @@
 		}
 
 		fieldset {
+			margin-left: 18px;
+			
 			+ fieldset {
 				margin-top: 10px;
+			}
+
+			.uneditable-input {
+				width: 100%;
+				height: 30px;
+
+				.box-sizing(border-box);
 			}
 
 			button {
@@ -42,12 +61,11 @@
 
 			> div {
 				margin-top: 10px;
+			}
 
-				input, select {
-					width: 30%;
-				}
-				select {
-					margin-left: 2%;
+			.manual-date {
+				[class^="span"] > * {
+					margin-bottom: 0;
 				}
 			}
 		}
@@ -65,6 +83,22 @@
 
 	.progress {
 		height: 14px;
+	}
+}
+
+#slideout-pairing {
+	.slideout-header {
+		input {
+			width: 40px;
+			text-align: right;
+			margin-left: 5px;
+			display: inline-block;
+			padding: 0;
+		}
+	}
+
+	.actions {
+		margin-top: 10px;
 	}
 }
 
@@ -105,6 +139,14 @@
 
 	#power {
 		.colourButton(@orange);
+	}
+
+	#time {
+		> a {
+			> span {
+				font-weight: bold;
+			}
+		}
 	}
 
 	> ul {
@@ -230,6 +272,17 @@
 					color: #fff;
 					text-decoration: none;
 				}
+				&.open {
+					span {
+						color: #fff;
+					}
+					i {
+						opacity: 1;
+					}
+				}
+			}
+			> span {
+				font-weight: bold;
 			}
 		}
 	}

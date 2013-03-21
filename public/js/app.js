@@ -70,9 +70,12 @@ container.on('click', '.section-toggle', function(e) {
 	});
 });
 
-$('#dln > li:first > a.section-toggle').trigger('click');
+// Open the first .open panel by default
+$('#dln > li.default > a.section-toggle').first().trigger('click');
 
 // Accordions
+$('.accordion').children('dt.open').next('dd').show();
+
 $('.accordion').on('click', 'dt', function() {
 	$(this).toggleClass('open');
 	var content = $(this).next('dd');
@@ -133,12 +136,17 @@ setInterval(function() {
 
 	$('.clock span').text(months[now.getMonth()] + ' ' + ('0' + now.getDate()).substr(-2) + ' ' + ('0' + now.getHours()).substr(-2) + ':' + ('0' + now.getMinutes()).substr(-2));
 
-
 	$('#slideout-clock .calendar-time').text(moment().format('ddd MMM DD YYYY hh:mm A'));
 }, 1000);
 
-$('.calendar').datePicker({
+$('.calendar').supercal({
 	footer: false
+});
+
+$('#slideout-clock .supercal').on('click', 'td', function() {
+	var epoch = moment($(this).data('date'));
+console.log(epoch.format('MM/DD/YY'), $(this).data('date'), $(this).data());
+	$('#slideout-clock').find('.manual-date .date').html(epoch.format('MM/DD/YY'));
 });
 
 $('input[name="time-source"]').on('click', function() {
@@ -149,24 +157,35 @@ $('input[name="time-source"]').on('click', function() {
 	otherFieldsets.prop('disabled', true);
 });
 
-/* Omnimenu */
-$('#dln-menu > a').on('click', function(e) {
+/* Pairing slideout */
+$('#slideout-pairing select[name="mode"]').on('change', function() {
+	var inputs = $('#slideout-pairing').find('.sendonly');
+
+	inputs.prop('disabled', $(this).val() == 'receive');
+});
+
+$('#slideout-pairing button[name="gen-pin"]').on('click', function(e) {
 	e.preventDefault();
 
+	var input = $('#slideout-pairing').find('[name="device-pin"]');
+
+	input.val(parseInt(1000 + (Math.random() * 8999)));
+});
+
+/* Omnimenu */
+$('#dln-menu > a').on('click', function() {
 	$(this).parent().toggleClass('open');
 
 	$('#dln').toggleClass('closed');
 });
 
 /* Statusbar menus */
-$('a[href$="-menu"]').on('click', function(e) {
-	var id = $(this).prop('href').split('#').slice(-1)[0].replace('-menu', '');
+$('a[data-open]').on('click', function(e) {
+	var id = $(this).data('open');
 
 	var thisPanel = $('.panel').filter(function() {
 		return $(this).data('menu') === id;
 	}).addClass('open');
-
-	console.log(id, thisPanel);
 
 	$('.panel').not(thisPanel).removeClass('open');
 
@@ -175,22 +194,22 @@ $('a[href$="-menu"]').on('click', function(e) {
 });
 
 /* Generic slideout from left/right sidebar */
-$('a[href^="#slideout-"]').on('click', function(e) {
-	var id = '#' + $(this).prop('href').split('#').slice(-1);
+$('a[data-slideout]').on('click', function(e) {
+	var id = '#slideout-' + $(this).data('slideout');
 
 	$(id).toggleClass('open');
+	$(this).toggleClass('open');
 
+	$('#statusbar > ul > li > a.open').not($(this)).removeClass('open');
 	$('.slideout').not(id).removeClass('open');
 });
 
 $('.slideout div.slideout-close a').on('click', function(e) {
 	e.preventDefault();
 
-	$(this).closest('.slideout').removeClass('open');
-});
+	var id = $(this).closest('div.slideout').prop('id').replace('slideout-', '');
 
-// $(document).on('click', function(e) {
-// 	if($('.slideout.open').length && !$(e.target).closest('.slideout').length) {
-// 		$('.slideout.open').removeClass('open');
-// 	}
-// });
+	$('a[data-slideout="' + id + '"]').trigger('click');
+
+	window.location.hash = '';
+});
