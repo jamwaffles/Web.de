@@ -1,3 +1,4 @@
+$('[data-toggle="tooltip"]').tooltip();
 $('#statusbar > ul').tooltip({
 	placement: 'bottom',
 	selector: '> li > a',
@@ -145,7 +146,7 @@ $('.calendar').supercal({
 
 $('#slideout-clock .supercal').on('click', 'td', function() {
 	var epoch = moment($(this).data('date'));
-console.log(epoch.format('MM/DD/YY'), $(this).data('date'), $(this).data());
+
 	$('#slideout-clock').find('.manual-date .date').html(epoch.format('MM/DD/YY'));
 });
 
@@ -176,12 +177,17 @@ $('#slideout-pairing button[name="gen-pin"]').on('click', function(e) {
 $('#dln-menu > a').on('click', function() {
 	$(this).parent().toggleClass('open');
 
+	$('a[data-open]').removeClass('open');
+
 	$('#dln').toggleClass('closed');
 });
 
 /* Statusbar menus */
 $('a[data-open]').on('click', function(e) {
 	var id = $(this).data('open');
+
+	$(this).addClass('open');
+	$('a[data-open]').not($(this)).removeClass('open');
 
 	var thisPanel = $('.panel').filter(function() {
 		return $(this).data('menu') === id;
