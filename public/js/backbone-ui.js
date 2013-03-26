@@ -34,19 +34,30 @@ var Folder = Backbone.Model.extend({
 
 var FolderView = Backbone.View.extend({
 	tagName: 'ul',
+	className: 'tree',
+	initialize: function() {
+		if(!(this.model.get('children') instanceof Backbone.Collection)) {
+			this.model.set('children', new Backbone.Collection(this.model.get('children')));
+		}
+	},
 	render: function() {
-		// $('<li />')
-		// 	.text("Folder")
-		// 	.appendTo(this.$el);
-
 		this.model.get('children').each(function(item) {
 			if(item instanceof Folder) {
 				// Make a new list
+				$('<div />')
+					.html(item.get('title'))
+					.addClass('toggle')
+					.appendTo(this.$el);
+
 				this.$el.append(new FolderView({ model: item }).render().el);
 			} else {
 				// Render item
+				var link = $('<a />')
+					.prop('href', '#')
+					.html(item.title)
+
 				$('<li />')
-					.text(item.title)
+					.append(link)
 					.appendTo(this.$el);
 			}
 		}, this);
@@ -57,14 +68,17 @@ var FolderView = Backbone.View.extend({
 
 var TreeView = Backbone.View.extend({
 	tagName: 'ul',
+	className: 'tree tree-top',
 	initialize: function() {
 		// this.render();
 	},
 	render: function() {
 		this.model.get('children').each(function(item) {
 			if(item instanceof Folder) {
-				// Make a new list
-				this.$el.append(new FolderView({ model: item }).render().el);
+				// Make a new sub list
+				this.$el
+					.append($('<li />')
+					.html(new FolderView({ model: item }).render().el));
 			} else {
 				// Render item
 				$('<li />')
@@ -77,6 +91,7 @@ var TreeView = Backbone.View.extend({
 	}
 });
 
+/* SANDBOX */
 var simpler_data = {
 	"children": [
 		new Folder({
