@@ -14,7 +14,9 @@ var Tree = Backbone.Model.extend({
 		children: undefined
 	},
 	initialize: function() {
-
+		if(!(this.get('children') instanceof Backbone.Collection)) {
+			this.set('children', new Backbone.Collection(this.get('children')));
+		}
 	}
 });
 
@@ -24,16 +26,55 @@ var Folder = Backbone.Model.extend({
 		children: undefined
 	},
 	initialize: function() {
-		console.log(this.get('title'), this.get('children'));
-
-		if(!this.get('children') instanceof Backbone.Collection) {
-			this.set('children', new Backbone.Collection(this.get('childen')));
+		if(!(this.get('children') instanceof Backbone.Collection)) {
+			this.set('children', new Backbone.Collection(this.get('children')));
 		}
 	}
 });
 
-var TreeView = Backbone.View.extend({
+var FolderView = Backbone.View.extend({
+	tagName: 'ul',
+	render: function() {
+		// $('<li />')
+		// 	.text("Folder")
+		// 	.appendTo(this.$el);
 
+		this.model.get('children').each(function(item) {
+			if(item instanceof Folder) {
+				// Make a new list
+				this.$el.append(new FolderView({ model: item }).render().el);
+			} else {
+				// Render item
+				$('<li />')
+					.text(item.title)
+					.appendTo(this.$el);
+			}
+		}, this);
+
+		return this;
+	}
+});
+
+var TreeView = Backbone.View.extend({
+	tagName: 'ul',
+	initialize: function() {
+		// this.render();
+	},
+	render: function() {
+		this.model.get('children').each(function(item) {
+			if(item instanceof Folder) {
+				// Make a new list
+				this.$el.append(new FolderView({ model: item }).render().el);
+			} else {
+				// Render item
+				$('<li />')
+					.text(item.title)
+					.appendTo(this.$el);
+			}
+		}, this);
+
+		return this;
+	}
 });
 
 var simpler_data = {
@@ -57,8 +98,9 @@ var simpler_data = {
 };
 
 tree = new Tree(simpler_data);
+
 var view = new TreeView({
 	model: tree
 });
 
-$('#container').html(view.el);
+$('#container').html(view.render().el);
