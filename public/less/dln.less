@@ -7,8 +7,6 @@
 	bottom: 0;
 	left: 0;
 	overflow-x: visible;
-	width: 120%;		// Extra 20% caters for slight total width change during animation
-	font-size: 0;
 	opacity: 1;
 	background: #fff;
 	z-index: 10;
@@ -29,12 +27,6 @@
 		bottom: 0;
 
 		.transition(left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000));
-
-		&:first-child {
-			li {
-				border-left: 1px solid #fff;
-			}
-		}
 
 		> a {
 			text-decoration: none;
@@ -71,7 +63,7 @@
 			height: 100%;
 			overflow-y: hidden;
 
-			dl {
+			> dl {
 				padding-left: 70px;
 				padding-right: 10px;
 				padding: 10px 10px 10px 70px;
@@ -79,7 +71,7 @@
 
 				.box-sizing(border-box);
 
-				dt {
+				> dt {
 					min-height: 40px;
 					cursor: pointer;
 					padding: 0;
@@ -100,10 +92,10 @@
 						.text-shadow(e('0px 1px 0px #fff, 0 0 0 #000, 0px -1px 0px #999'));
 					}
 				}
-				dd {
+				> dd {
 					padding-left: 55px;
 					padding-right: 10px;
-					background-color: #ddd;
+					// background-color: #ddd;
 					display: none;
 
 					.border-bottom-radius(@baseBorderRadius);

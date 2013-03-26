@@ -29,6 +29,10 @@
 		  text-shadow: @shadow;
 }
 
+html {
+	cursor: default;
+}
+
 .align-right {
 	text-align: right;
 }
@@ -65,6 +69,24 @@
 	&.icon-windows { background-image: url('../img/icons/windows.png'); }
 }
 
+.form-2col {
+	width: 450px;
+	margin-bottom: 0;
+
+	> .span6 {
+		margin-left: 10px;
+		max-width: 220px;
+	}
+}
+.form-3col {
+	width: 670px;
+	margin-bottom: 0;
+
+	> .span6 {
+		margin-left: 10px;
+		max-width: 220px;
+	}
+}
 .form-block {
 	display: block;
 	margin: 0;
@@ -99,9 +121,17 @@ input.minimal {
 		.border-radius(0);
 	}
 
+	&[class*="minimal-"] {
+		display: inline-block;
+	}
+
+	&.minimal-50 { width: 50px; } 
+	&.minimal-100 { width: 100px; } 
+	&.minimal-120 { width: 120px; } 
+	&.minimal-150 { width: 150px; } 
+
 	&.inline {
 		display: inline-block;
-		width: 80px;
 	}
 }
 fieldset[disabled] {
@@ -125,16 +155,93 @@ fieldset[disabled] {
 .uneditable-input {
 	cursor: default;
 }
+.spacer {
+	line-height: 30px;
+	min-height: 30px;
+	margin-bottom: 10px;
 
-.accordion {
-	dt, dd {
+	> input[type="checkbox"] {
+		margin-left: 5px;
+	}
+}
+label {
+	&.inline {
+		display: inline-block;
+		margin-right: 10px;
+		margin-left: 5px;
+	}
+
+	input[type="checkbox"] {
+		vertical-align: middle;
+		margin: 0 3px 0 0;
+	}
+}
+.form-buttons {
+	text-align: right;
+	margin-top: 10px;
+}
+
+table {
+	&.block {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+	th.align-right {
+		text-align: right !important;
+	}
+
+	td, th {
+		&.col-50 {
+			width: 50px;
+		}
+		&.col-100 {
+			width: 100px;
+		}
+		&.col-200 {
+			width: 200px;
+		}
+		&.col-400 {
+			width: 400px;
+		}
+
+		&.align-right {
+			text-align: right !important;
+		}
+	}
+}
+
+ul {
+	li {
+		&.divider {
+			border-top: 1px solid #ddd;
+			margin: 15px 10px 12px 10px !important;
+			padding: 0 !important;
+			line-height: 0 !important;
+		}
+
+		> span.pull-right {
+			padding-bottom: 8px;
+		}
+	}
+}
+
+dl.accordion {
+	&.accordion-small {
+		dt {
+			margin-top: 3px;
+			// text-align: center;
+		}
+	}
+
+	> dt, > dd {
 		padding: 0;
 		margin: 0;
 		font-weight: normal;
 		padding: 5px;
 	}
 
-	dt {
+	> dt {
 		cursor: pointer;
 		margin-top: 10px;
 
@@ -153,39 +260,115 @@ fieldset[disabled] {
 			.border-bottom-radius(0);
 
 			+ dd {
-				border: 1px solid #eee;
+				border: 1px solid #ddd;
 				border-top: none;
 
 				.border-top-radius(0);
 				.border-bottom-radius(@baseBorderRadius);
 			}
 		}
+		&.href {
+			a {
+				text-decoration: none;
+			}
+		}
 	}
-	dd {
+	> dd {
 		display: none;
 
-		ul.unstyled {
+		> ul.unstyled {
 			li {
 				padding: 8px 12px;
-				margin-bottom: 3px;
+				margin-top: 3px;
 				line-height: 14px;
+				clear: both;
 
-				&:last-child {
-					margin-bottom: 0;
+				&:first-child {
+					margin-top: 0;
+				}
+				> .pull-right {
+					text-align: right;
 				}
 			}
 		}
 
-		ul.nav-stacked {
+		> ul.nav-stacked {
 			margin-bottom: 0;
 		}
 	}
+}
+table.accordion {
+	table-layout: auto;
 
-	&.accordion-small {
-		dt {
-			margin-top: 3px;
-			// text-align: center;
+	th, td {
+		&.toggle-icon {
+			width: 16px;
+			text-align: center;
 		}
+	}
+
+	tr.accordion-header {
+		&:hover {
+			td {
+				background: #eee;
+			}
+		}
+		~ tr:not(.accordion-header), ~ tr.accordion-header.sub {
+			display: none;
+		}
+
+		td {
+			cursor: pointer;
+		}
+	}
+}
+
+.tree {
+	list-style: none;
+	line-height: 20px;
+	margin-left: 17px;
+
+	div.toggle {
+		position: relative;
+		cursor: pointer;
+
+		&:before {
+			content: "";
+			position: absolute;
+			left: -17px;
+			top: 2px;
+			font-weight: bold;
+			width: 14px;
+			height: 14px;
+			background-image: url('../img/glyphicons-halflings.png');
+			background-position: -408px -96px;
+		}
+
+		&.expanded {
+			&:before {
+				background-position: -433px -96px;
+			}
+		}
+	}
+
+	li {
+		position: relative;
+
+		a, span {
+			&:before {
+				content: "";
+				position: absolute;
+				border-left: 2px solid @textColor;
+				left: -11px;
+				top: 0;
+				bottom: 0;
+			}
+		}
+	}
+}
+.tree-top {
+	.tree {
+		display: none;
 	}
 }
 
@@ -375,6 +558,14 @@ fieldset[disabled] {
 			font-size: 36px;
 			
 			.text-shadow(e('1px 3px 4px #fff, 0 0 0 #000, -1px 0px 0px #fff'));
+		}
+
+		> ul {
+			> li {
+				&.nav-header {
+					padding-left: 25px;
+				}
+			}
 		}
 
 		iframe {

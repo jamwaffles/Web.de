@@ -1,3 +1,7 @@
+_.templateSettings = {
+	interpolate : /\{\$(.+?)\}/g
+};
+
 $('[data-toggle="tooltip"]').tooltip();
 $('#statusbar > ul').tooltip({
 	placement: 'bottom',
@@ -7,6 +11,20 @@ $('#statusbar > ul').tooltip({
 $('input.slider').mrslyde({
 	snap: false
 });
+
+// var modals = {
+// 	confirmPackageAction: $('#confirm-package-action')
+// };
+// $('[name="package-actions"]').on('change', function() {
+// 	// var pkg = ;
+// 	var action = $(this).children(':selected').text();
+
+// 	modals.confirmPackageAction
+
+// 	modals.confirmPackageAction.modal({
+// 		show: true
+// 	});
+// });
 
 var container = $('#dln');
 var panels = container.children();
@@ -75,9 +93,9 @@ container.on('click', '.section-toggle', function(e) {
 $('#dln > li.default > a.section-toggle').first().trigger('click');
 
 // Accordions
-$('.accordion').children('dt.open').next('dd').show();
+$('dl.accordion').children('dt.open').next('dd').show();
 
-$('.accordion').on('click', 'dt', function() {
+$('dl.accordion').on('click', '> dt:not(.href)', function() {
 	$(this).toggleClass('open');
 	var content = $(this).next('dd');
 
@@ -87,10 +105,29 @@ $('.accordion').on('click', 'dt', function() {
 	$(this).siblings('dt.open').removeClass('open');
 });
 
+// Table "accordion"
+$('table.accordion').on('click', 'tr.accordion-header', function() {
+	$(this).find('i').first().toggleClass('icon-plus icon-minus');
+
+	if(!$(this).hasClass('sub')) {		// Top level
+		$(this).nextUntil('.accordion-header:not(.sub)').not('.sub-row').toggle();
+	} else {		// Sub level
+		$(this).nextUntil('.accordion-header').filter('.sub-row').toggle();
+	}
+});
+
+// Tree views
+$('.tree').find('.toggle.expanded').next('ul').show();
+
+$('.tree.tree-top').on('click', '.toggle', function() {
+	$(this).toggleClass('expanded');
+	$(this).next('ul').toggle();
+});
+
 /* Mouse scroll */
 /* TODO: Plugin-ify and optimise */
 // var scrollTargets = $('#dln > li > div > dl');
-var scrollTargets = $('#dln div.actions > dl');
+var scrollTargets = $('#dln div.actions > dl, .mouse-scroll-container > *');
 
 $(document).on('mousemove', function(e) {
 	var target = $(e.target);
@@ -206,7 +243,7 @@ $('a[data-slideout]').on('click', function(e) {
 	$(id).toggleClass('open');
 	$(this).toggleClass('open');
 
-	$('#statusbar > ul > li > a.open').not($(this)).removeClass('open');
+	$('#statusbar > ul > li > a[data-slideout]').not($(this)).removeClass('open');
 	$('.slideout').not(id).removeClass('open');
 });
 
