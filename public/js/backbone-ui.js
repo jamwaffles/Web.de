@@ -69,16 +69,22 @@ var TreeItemView = Backbone.View.extend({
 var TreeListView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
-	initialize: function() {
-		// this.render();
-	},
 	render: function() {
+		this.rendered = true;
+
 		this.model.get('children').each(function(item) {
 			if(item instanceof Folder) {
-				// Make a new sub list
-				this.$el
-					.append($('<li />')
-					.html(new TreeItemView({ model: item }).render().el));
+				var li = $('<li />');
+				
+				// Make a new list
+				$('<div />')
+					.html(item.get('title'))
+					.addClass('toggle')
+					.appendTo(li);
+
+				li.append(new TreeItemView({ model: item }).render().el);
+
+				this.$el.append(li);
 			} else {
 				// Render item
 				var link = $('<a />')
