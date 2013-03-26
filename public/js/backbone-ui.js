@@ -32,7 +32,7 @@ var Folder = Backbone.Model.extend({
 	}
 });
 
-var FolderView = Backbone.View.extend({
+var TreeItemView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree',
 	initialize: function() {
@@ -49,7 +49,7 @@ var FolderView = Backbone.View.extend({
 					.addClass('toggle')
 					.appendTo(this.$el);
 
-				this.$el.append(new FolderView({ model: item }).render().el);
+				this.$el.append(new TreeItemView({ model: item }).render().el);
 			} else {
 				// Render item
 				var link = $('<a />')
@@ -66,7 +66,7 @@ var FolderView = Backbone.View.extend({
 	}
 });
 
-var TreeView = Backbone.View.extend({
+var TreeListView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
 	initialize: function() {
@@ -78,11 +78,15 @@ var TreeView = Backbone.View.extend({
 				// Make a new sub list
 				this.$el
 					.append($('<li />')
-					.html(new FolderView({ model: item }).render().el));
+					.html(new TreeItemView({ model: item }).render().el));
 			} else {
 				// Render item
+				var link = $('<a />')
+					.prop('href', '#')
+					.html(item.title)
+
 				$('<li />')
-					.text(item.title)
+					.append(link)
 					.appendTo(this.$el);
 			}
 		}, this);
@@ -114,7 +118,7 @@ var simpler_data = {
 
 tree = new Tree(simpler_data);
 
-var view = new TreeView({
+var view = new TreeListView({
 	model: tree
 });
 
