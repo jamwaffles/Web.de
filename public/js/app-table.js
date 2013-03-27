@@ -88,4 +88,4 @@ var table = new PackageTable({
 	collection: packages
 });
 
-$('#container').html(table.render().el);
+// $('#container').html(table.render().el);
