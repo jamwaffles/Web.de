@@ -62,54 +62,16 @@ var TreeListItem = Backbone.View.extend({
 	}
 });
 
-var TreeListView = Backbone.View.extend({
-	tagName: 'ul',
-	className: 'tree tree-top',
-	events: {
-		'click div.toggle': 'toggle'
-	},
-	toggle: function(e) {
-		var self = $(e.target);
-
-		self.toggleClass('open');
-		self.next('ul').toggle();
-	},
-	render: function() {
-		this.rendered = true;
-
-		this.model.get('children').each(function(item) {
-			if(item instanceof Folder) {
-				var li = $('<li />');
-				
-				// Make a new list
-				$('<div />')
-					.html(item.get('title'))
-					.addClass('toggle')
-					.appendTo(li);
-
-				li.append(new TreeListItem({ model: item }).render().el);
-
-				this.$el.append(li);
-			} else {
-				// Render item
-				var link = $('<a />')
-					.prop('href', '#')
-					.html(item.title)
-
-				$('<li />')
-					.append(link)
-					.appendTo(this.$el);
-			}
-		}, this);
-
-		return this;
-	}
+var TableRow = Backbone.View.extend({
+	tagName: 'tr'
 });
 
-var TableRow = Backbone.View.extend({
-	tagName: 'tr',
+var TreeTableRow = TableRow.extend({
+	depth: 2,
 	render: function() {
-		this.$el.append('<td />').append('<td />');
+		for(var i = 0; i < this.depth; i++) {
+			this.$el.append('<td />');
+		}
 
 		$('<td />')
 			.html(this.model.get('fullname'))
@@ -123,7 +85,37 @@ var TableRow = Backbone.View.extend({
 	}
 });
 
-var TreeTableHeader = TableRow.extend({
+var TreeTableHeader = TreeTableRow.extend({
+	columns: {
+		'Column': 'fullname'
+	},
+	initialize: function(options) {
+		this.columns = options.columns;
+	},
+	render: function() {
+		for(var i = 0; i < this.depth; i++) {
+			this.$el.append('<th />');
+		}
+		console.log(this.columns);
+		_.each(this.columns, function(field, header) {
+			$('<th />')
+				.html(header)
+				.appendTo(this.$el);
+		}, this);
+
+		// $('<td />')
+		// 	.html(this.model.get('fullname'))
+		// 	.appendTo(this.$el);
+
+		// $('<td />')
+		// 	.html(this.model.get('name'))
+		// 	.appendTo(this.$el);
+
+		return this;
+	}
+});
+
+var TreeTableAccordionHeader = TreeTableRow.extend({
 	tagName: 'tr',
 	className: 'accordion-header top',
 	render: function() {
@@ -143,7 +135,7 @@ var TreeTableHeader = TableRow.extend({
 		return this;
 	}
 });
-var TreeTableSubHeader = TableRow.extend({
+var TreeTableAccordionSubHeader = TreeTableRow.extend({
 	tagName: 'tr',
 	className: 'accordion-header sub',
 	render: function() {
@@ -172,13 +164,11 @@ var TableView = Backbone.View.extend({
 var TreeTableView = TableView.extend({
 	tagName: 'table',
 	className: 'accordion',
-	rowView: TableRow,
-	columns: [
-		'', 
-		'',
-		'Package details',
-		'Package name'
-	],
+	rowView: TreeTableRow,
+	columns: {
+		'Package details': 'title',
+		'Package name': 'name'
+	},
 	events: {
 		'click .accordion-header.top': 'toggleTop',
 		'click .accordion-header.sub': 'toggleSub'
@@ -210,32 +200,21 @@ var TreeTableView = TableView.extend({
 		rows.toggle();
 	},
 	render: function() {
-		this.rendered = true;
-
-		// Header
-		var header = $('<tr />');
-
-		_.each(this.columns, function(column) {
-			$('<th />')
-				.html(column)
-				.appendTo(header);
-		}, this);
-
-		header.appendTo(this.$el);
+		var subChildren = false;
 
 		// Rows
 		this.model.get('children').each(function(item) {
 			if(item instanceof Folder) {
 				// Sub-row header
-				this.$el.append(new TreeTableHeader({ model: item }).render().el);
+				this.$el.append(new TreeTableAccordionHeader({ model: item }).render().el);
 
 				// Loop through sub-rows and append
 				item.get('children').each(function(subitem) {
 					if(subitem instanceof Folder){
-						this.$el.append(new TreeTableSubHeader({ model: subitem }).render().$el.hide());
+						this.$el.append(new TreeTableAccordionSubHeader({ model: subitem }).render().$el.hide());
 
 						subitem.get('children').each(function(subsubitem) {
-							this.$el.append(new this.rowView({ model: subsubitem, className: 'row sub' }).render().$el.hide());
+							this.$el.append(new this.rowView({ model: subsubitem, className: 'row sub', depth: 2 }).render().$el.hide());
 						}, this);
 					} else {
 						this.$el.append(new this.rowView({ model: subitem, className: 'row' }).render().$el.hide());
@@ -246,6 +225,11 @@ var TreeTableView = TableView.extend({
 				this.$el.append(new this.rowView({ model: item }).render().el);
 			}
 		}, this);
+
+		// Header
+		this.$el.prepend(new TreeTableHeader({ 
+			columns: this.columns
+		}).render().el);
 
 		return this;
 	}
