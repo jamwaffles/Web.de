@@ -1,15 +1,3 @@
-var Package = Backbone.Model.extend({
-	defaults: {
-		format: 'tar',
-		name: 'Package',
-		version: '0.1.2',
-		fullname: ''
-	},
-	initialize: function() {
-		this.set('fullname', this.get('format') + ' ' + this.get('name') + ' ' + this.get('version'));
-	}
-});
-
 var Tree = Backbone.Model.extend({
 	defaults: {
 		children: undefined
@@ -62,33 +50,39 @@ var TreeListItem = Backbone.View.extend({
 	}
 });
 
-var TableRow = Backbone.View.extend({
-	tagName: 'tr'
-});
-
 var TreeTableRow = TableRow.extend({
 	depth: 2,
+	columns: {
+		'Package details': 'title',
+		'Package name': 'name'
+	},
 	render: function() {
 		for(var i = 0; i < this.depth; i++) {
 			this.$el.append('<td />');
 		}
 
-		$('<td />')
-			.html(this.model.get('fullname'))
-			.appendTo(this.$el);
+		// $('<td />')
+		// 	.html(this.model.get('fullname'))
+		// 	.appendTo(this.$el);
 
-		$('<td />')
-			.html(this.model.get('name'))
-			.appendTo(this.$el);
+		// $('<td />')
+		// 	.html(this.model.get('name'))
+		// 	.appendTo(this.$el);
+
+		_.each(this.columns, function(title, field) {
+			$('<td />')
+				.html(this.model.get(field))
+				.appendTo(this.$el);
+		}, this);
 
 		return this;
 	}
 });
 
 var TreeTableHeader = TreeTableRow.extend({
-	columns: {
-		'Column': 'fullname'
-	},
+	// columns: {
+	// 	'Column': 'fullname'
+	// },
 	initialize: function(options) {
 		this.columns = options.columns;
 	},
@@ -103,20 +97,11 @@ var TreeTableHeader = TreeTableRow.extend({
 				.appendTo(this.$el);
 		}, this);
 
-		// $('<td />')
-		// 	.html(this.model.get('fullname'))
-		// 	.appendTo(this.$el);
-
-		// $('<td />')
-		// 	.html(this.model.get('name'))
-		// 	.appendTo(this.$el);
-
 		return this;
 	}
 });
 
 var TreeTableAccordionHeader = TreeTableRow.extend({
-	tagName: 'tr',
 	className: 'accordion-header top',
 	render: function() {
 		$('<td />')
@@ -136,7 +121,6 @@ var TreeTableAccordionHeader = TreeTableRow.extend({
 	}
 });
 var TreeTableAccordionSubHeader = TreeTableRow.extend({
-	tagName: 'tr',
 	className: 'accordion-header sub',
 	render: function() {
 		$('<td />')
@@ -156,19 +140,11 @@ var TreeTableAccordionSubHeader = TreeTableRow.extend({
 	}
 });
 
-var TableView = Backbone.View.extend({
-
-});
-
 // 2 level table display of tree data
 var TreeTableView = TableView.extend({
 	tagName: 'table',
 	className: 'accordion',
 	rowView: TreeTableRow,
-	columns: {
-		'Package details': 'title',
-		'Package name': 'name'
-	},
 	events: {
 		'click .accordion-header.top': 'toggleTop',
 		'click .accordion-header.sub': 'toggleSub'
