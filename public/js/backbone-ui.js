@@ -185,7 +185,7 @@ var TreeTableView = TableView.extend({
 	},
 	toggleTop: function(e) {
 		var self = $(e.currentTarget);
-		var rows = self.nextUntil('.accordion-header:not(.sub)').not('.root');
+		var rows = self.nextUntil('.accordion-header:not(.sub)').filter('.row, .accordion-header');
 
 		self.find('i').first().toggleClass('icon-plus icon-minus');
 		self.toggleClass('expanded');
@@ -194,6 +194,7 @@ var TreeTableView = TableView.extend({
 			rows.filter('.accordion-header.sub').show();
 			rows.filter('.row').not('.sub').show();
 
+			// Re-show open sub-accordion items
 			rows.filter('.accordion-header.expanded').nextUntil('.accordion-header, .row:not(.sub)').show();
 		} else {							// Hide
 			rows.hide();
@@ -201,7 +202,7 @@ var TreeTableView = TableView.extend({
 	},
 	toggleSub: function(e) {
 		var self = $(e.currentTarget);
-		var rows = self.nextUntil('.accordion-header, .row:not(.sub)').filter('.sub.row');
+		var rows = self.nextUntil(':not(.sub.row)');
 
 		self.find('i').first().toggleClass('icon-plus icon-minus');
 		self.toggleClass('expanded');
@@ -234,15 +235,15 @@ var TreeTableView = TableView.extend({
 						this.$el.append(new TreeTableSubHeader({ model: subitem }).render().$el.hide());
 
 						subitem.get('children').each(function(subsubitem) {
-							this.$el.append(new this.rowView({ model: subsubitem }).render().$el.addClass('row sub').hide());
+							this.$el.append(new this.rowView({ model: subsubitem, className: 'row sub' }).render().$el.hide());
 						}, this);
 					} else {
-						this.$el.append(new this.rowView({ model: subitem }).render().$el.addClass('row').hide());
+						this.$el.append(new this.rowView({ model: subitem, className: 'row' }).render().$el.hide());
 					}
 				}, this);
 			} else {
 				// Normal row
-				this.$el.append(new this.rowView({ model: item }).render().$el.addClass('root'));
+				this.$el.append(new this.rowView({ model: item }).render().el);
 			}
 		}, this);
 
