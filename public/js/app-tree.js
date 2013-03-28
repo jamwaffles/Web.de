@@ -39,6 +39,7 @@ var PackageTreeTable = TableTreeView.extend({
 	className: 'package tree',
 	tagName: 'table',
 	rowView: PackageRow,
+	depth: 0,
 	columns: {
 		'Package': function(model) {
 			return model.get('format') + ' ' + model.get('name');
@@ -66,6 +67,7 @@ var PackageTreeTable = TableTreeView.extend({
 		var self = $(e.currentTarget);
 
 		self.toggleClass('expanded');
+		self.find('i').first().toggleClass('icon-plus icon-minus');
 
 		if(self.hasClass('expanded')) {		// Show
 			var rows = self.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').show();
@@ -82,22 +84,12 @@ var PackageTreeTable = TableTreeView.extend({
 		var self = $(e.currentTarget);
 
 		self.toggleClass('expanded');
+		self.find('i').first().toggleClass('icon-plus icon-minus');
 
 		self.nextUntil(':not(.sub-collapse-row)').toggle();
 	},
 	render: function() {
-		var rows;
-
-		// Header
-		var header = $('<tr />');
-
-		_.each(this.columns, function(func, heading) {
-			$('<th />')
-				.html(heading)
-				.appendTo(header);
-		}, this);
-
-		this.$el.append(header);
+		var rows = [];
 
 		// Tree item depth counters
 		var levelCounts = {
@@ -109,30 +101,81 @@ var PackageTreeTable = TableTreeView.extend({
 		// Loop through top level model.children - non-collapsible items and top level headings
 		this.model.get('children').each(function(item) {
 			if(item instanceof Tree) {
+				this.depth = 1;
+
 				// Add top-level collapse headers
-				this.$el.append(new TopToggleRow({ model: item, columns: this.columns }).render().el);
+				rows.push(new TopToggleRow({ model: item, columns: this.columns }).render().$el);
 
 				// Loop through second level item.children - second-level items and sub-headings
 				item.get('children').each(function(subitem) {
 					if(subitem instanceof Tree) {
+						this.depth = 2;
+
 						// Add sub-level collapse headers
-						this.$el.append(new SubToggleRow({ model: subitem, columns: this.columns }).render().$el.hide());
+						rows.push(new SubToggleRow({ model: subitem, columns: this.columns }).render().$el.hide());
 
 						// Loop through third level - all third level items (i.e. those under sub headings)
 						subitem.get('children').each(function(subsubitem) {
 							// Append normal row
-							this.$el.append(new this.rowView({ model: subsubitem, columns: this.columns, className: 'sub-collapse-row' }).render().$el.hide());
+							rows.push(new this.rowView({ 
+									model: subsubitem, 
+									columns: this.columns, 
+									className: 'sub-collapse-row' 
+								}).render().$el.hide());
 						}, this);
 					} else {
 						// Append normal row
-						this.$el.append(new this.rowView({ model: subitem, columns: this.columns, className: 'collapse-row' }).render().$el.hide());
+						rows.push(new this.rowView({ 
+								model: subitem, 
+								columns: this.columns, 
+								className: 'collapse-row' 
+							}).render().$el.hide());
 					}
 				}, this);
 			} else {
 				// Append normal row
-				this.$el.append(new this.rowView({ model: item, columns: this.columns }).render().el);
+				rows.push(new this.rowView({ 
+						model: item, 
+						columns: this.columns 
+					}).render().$el);
 			}
 		}, this);
+
+		// Header
+		var header = $('<tr />');
+
+		for(var i = 0; i < this.depth; i++) {
+			$('<th />').appendTo(header);
+		}
+
+		_.each(this.columns, function(func, heading) {
+			$('<th />')
+				.html(heading)
+				.appendTo(header);
+		}, this);
+
+		this.$el.prepend(header);
+
+		// Add expand/contract (or empty filler) cells
+		_.each(rows, function(row) {
+			for(var i = 0; i < this.depth; i++) {
+				var cell = $('<td />');
+
+				if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
+					$('<i />')
+						.addClass('icon-plus')
+						.appendTo(cell);
+				} else if(row.hasClass('sub-collapse-header') && i == 0) {
+					$('<i />')
+						.addClass('icon-plus')
+						.appendTo(cell);
+				}
+
+				cell.prependTo(row);
+			}
+		}, this);
+
+		this.$el.append(rows);
 
 		return this;
 	}
