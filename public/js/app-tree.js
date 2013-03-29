@@ -1,10 +1,28 @@
 var Tree = Backbone.Model.extend({
 	title: undefined,
 	children: '',
-	initialize: function() {
-		if(!(this.get('children') instanceof Backbone.Collection)) {
+	initialize: function(options) {
+		if(options instanceof Array) {
+			this.set('children', new Backbone.Collection(options));
+		} else if(!(this.get('children') instanceof Backbone.Collection)) {
 			this.set('children', new Backbone.Collection(this.get('children')));
 		}
+	},
+	getNode: function(cid) {
+		return _.findWhere(this.flatten(), { cid: cid });
+	},
+	flatten: function() {
+		var flat = [];
+
+		this.get('children').each(function(item) {
+			if(item instanceof Tree) {
+				flat = flat.concat(item.flatten());
+			} else {
+				flat.push(item);
+			}
+		});
+
+		return flat;
 	}
 });
 
@@ -25,8 +43,9 @@ var TreeItem = Backbone.View.extend({
 
 		if(this.model.get('href')) {
 			$('<a />')
-				.prop('href', '#')
+				.prop('href', '#' + this.model.cid)
 				.html(this.model.get('title'))
+				.data('cid', this.model.cid)
 				.appendTo(li);
 		} else {
 			$('<span />')
@@ -66,13 +85,26 @@ var TreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
 	events: {
-		'click div.toggle': 'toggleTree'
+		'click div.toggle': 'toggleTree',
+		'click a': 'triggerAction'
+	},
+	initialize: function(options) {
+		this.nodeSelect = options.nodeSelect;
 	},
 	toggleTree: function(e) {
 		var self = $(e.currentTarget);
 
 		self.toggleClass('expanded');
 		self.next('ul').toggle();
+	},
+	triggerAction: function(e) {		// Triggered when any clickable item is... clicked
+		var node = e.currentTarget;
+		var cid = $(node).data('cid');
+		var model = this.model.getNode(cid);
+
+		if(model !== null && this.nodeSelect !== undefined && typeof this.nodeSelect === 'function') {
+			this.nodeSelect.call(node, model, this.$el);
+		}
 	},
 	render: function() {
 		this.model.get('children').each(function(item) {
@@ -126,7 +158,6 @@ var TableTreeView = TableView.extend({
 var PackageTreeTable = TableTreeView.extend({
 	className: 'package tree',
 	tagName: 'table',
-	rowView: PackageRow,
 	depth: 0,
 	columns: {
 		'Package': function(model) {
@@ -136,13 +167,18 @@ var PackageTreeTable = TableTreeView.extend({
 		'Actions': function(model) {
 			var form = $('<div />').addClass('form-inline');
 
-			$('<select />')
-				.append([
-					$('<option />').val('install').text('Install'),
-					$('<option />').val('uninstall').text('Uninstall'),
-					$('<option />').val('copy').text('Copy')
-				])
-				.appendTo(form);
+			var select = $('<select />').append([
+				$('<option />').val('').text('Choose action...'),
+				$('<option />').val('install').text('Install'),
+				$('<option />').val('remove').text('Uninstall'),
+				$('<option />').val('copy').text('Copy')
+			]);
+
+			select.children().filter(function() {
+				return this.value == model.get('state');
+			}).prop('disabled', true);
+
+			select.appendTo(form);
 
 			return form;
 		}

@@ -1,10 +1,16 @@
-var Package = Backbone.Model.extend({
+var BaseModel = Backbone.Model.extend({
+	
+});
+
+var Package = BaseModel.extend({
 	defaults: {
 		format: 'tar',
 		name: 'Package',
 		version: '0.1.2',
 		license: 'GPL v3',
-		fullname: ''
+		licenseURL: 'http://www.gnu.org/licenses/gpl.html',
+		fullname: '',
+		state: 'uninstall'
 	},
 	initialize: function() {
 		this.set('fullname', this.get('format') + ' ' + this.get('name') + ' ' + this.get('version'));
@@ -23,7 +29,7 @@ var Package = Backbone.Model.extend({
 	}
 });
 
-var User = Backbone.Model.extend({
+var User = BaseModel.extend({
 	defaults: {
 		first: 'Firsty',
 		middle: 'Middlen',
@@ -45,5 +51,22 @@ var User = Backbone.Model.extend({
 	initialize: function() {
 		this.set('title', this.get('suffix') + ' ' + this.get('first') + ' ' + this.get('middle') + ' ' + this.get('last'));
 		this.set('firstlast',  this.get('first') + ' ' + this.get('last'));
+	}
+});
+
+var Device = BaseModel.extend({
+	defaults: {
+		name: 'Generic 100',
+		manufacturer: 'ACME Labs',
+		href: '#',
+		properties: {
+			refresh: [ 'Refresh rate', '60Hz' ],
+			resolution: [ 'Resolution', '3840x1080' ],
+			depth: [ 'Color depth', '32 bit' ],
+			powersave: [ 'Powersaver', '15 minutes' ]
+		}
+	}, 
+	initialize: function() {
+		this.set('title', this.get('manufacturer') + ' ' + this.get('name'));
 	}
 });

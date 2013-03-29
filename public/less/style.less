@@ -29,6 +29,14 @@
 		  text-shadow: @shadow;
 }
 
+.user-select(@select) {
+  -webkit-user-select: @select;
+	 -moz-user-select: @select;
+	  -ms-user-select: @select;
+	   -o-user-select: @select;
+		  user-select: @select;
+}
+
 html {
 	cursor: default;
 }
@@ -357,6 +365,8 @@ ul.tree {
 		cursor: pointer;
 		font-weight: bold;
 
+		.user-select(none);
+
 		&:before {
 			content: "";
 			position: absolute;
@@ -366,6 +376,14 @@ ul.tree {
 			height: 14px;
 			background-image: url('../img/glyphicons-halflings.png');
 			background-position: -408px -96px;
+		}
+
+		&:hover {
+			color: @textColor + #222;
+
+			&:before {
+				opacity: 0.8;
+			}
 		}
 
 		&.expanded {
@@ -448,6 +466,7 @@ ul.tree {
 				cursor: pointer;
 				padding: 2px 4px;
 				text-align: center;
+				vertical-align: middle;
 
 				&:hover {
 					background: #eee;

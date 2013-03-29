@@ -614,33 +614,7 @@
 							</dt>
 							<dd>
 								<div class="row-fluid">
-									<div class="span4" id="users-list">
-										<!-- <ul class="tree tree-top">
-											<li>
-												<div class="toggle">User</div>
-												<ul class="tree">
-													<li><a href="#">James Waples</a></li>
-													<li>
-														<a href="#">Dave Henderson</a>
-													</li>
-													<li>
-														<div class="toggle">User</div>
-														<ul class="tree">
-															<li><a href="#">James Waples</a></li>
-															<li><a href="#">Dave Henderson</a></li>
-														</ul>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<div class="toggle">Computer</div>
-												<ul class="tree">
-													<li><span>Dan's PC</span></li>
-													<li><span>Ian's Laptop</span></li>
-												</ul>
-											</li>
-										</ul> -->
-									</div>
+									<div class="span4" id="users-list"><!-- Users tree --></div>
 									<div class="span8">
 										<h4>Properties</h4>
 
@@ -681,16 +655,6 @@
 											</div>
 										</form>
 									</div>
-									<!-- <div class="span3">
-										<h4>Small Form</h4>
-										<form class="form-block">
-											<input type="text" name="username" placeholder="Field 1">
-											<input type="text" name="" placeholder="Field 2">
-											<input type="submit" value="Add Something" class="btn btn-primary pull-right">
-										</form>
-									</div>
-									<div class="span3"><h4>Other Columns</h4></div>
-									<div class="span3"><h4>Other Columns</h4></div> -->
 								</div>
 							</dd>
 
@@ -698,8 +662,8 @@
 								<div class="icon-large icon-qrcode"></div>
 								<h3>Firmware</h3>
 							</dt>
-							<dd>
-								<table class="install block table table-striped table-hover">
+							<dd id="firmware-packages">
+								<!-- <table class="install block table table-striped table-hover">
 									<thead>
 										<tr>
 											<th>Name</th>
@@ -746,7 +710,7 @@
 											</td>
 										</tr>
 									</tbody>
-								</table>
+								</table> -->
 							</dd>
 
 							<dt>
@@ -757,8 +721,10 @@
 								<div class="row-fluid">
 									<div class="span4">
 										<h4>Device</h4>
+
+										<div id="hardware-device"></div>
 										
-										<ul class="tree tree-top">
+										<!-- <ul class="tree tree-top">
 											<li>
 												<div class="toggle">Dell Dimension 8100</div>
 												<ul class="tree">
@@ -796,7 +762,7 @@
 													</li>
 												</ul>
 											</li>
-										</ul>
+										</ul> -->
 									</div>
 									<div class="span8">
 										<h4>Properties</h4>
