@@ -117,12 +117,12 @@ $('table.accordion').on('click', 'tr.accordion-header', function() {
 });
 
 // Tree views
-$('.tree').find('.toggle.expanded').next('ul').show();
+// $('.tree').find('.toggle.expanded').next('ul').show();
 
-$('.tree.tree-top').on('click', '.toggle', function() {
-	$(this).toggleClass('expanded');
-	$(this).next('ul').toggle();
-});
+// $('.tree.tree-top').on('click', '.toggle', function() {
+// 	$(this).toggleClass('expanded');
+// 	$(this).next('ul').toggle();
+// });
 
 /* Mouse scroll */
 /* TODO: Plugin-ify and optimise */

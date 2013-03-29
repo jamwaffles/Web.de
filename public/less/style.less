@@ -355,13 +355,13 @@ ul.tree {
 	div.toggle {
 		position: relative;
 		cursor: pointer;
+		font-weight: bold;
 
 		&:before {
 			content: "";
 			position: absolute;
 			left: -17px;
 			top: 2px;
-			font-weight: bold;
 			width: 14px;
 			height: 14px;
 			background-image: url('../img/glyphicons-halflings.png');
@@ -375,17 +375,19 @@ ul.tree {
 		}
 	}
 
-	li {
-		position: relative;
+	.tree {
+		li {
+			position: relative;
 
-		a, span {
-			&:before {
-				content: "";
-				position: absolute;
-				border-left: 2px solid @textColor;
-				left: -11px;
-				top: 0;
-				bottom: 0;
+			a, span {
+				&:before {
+					content: "";
+					position: absolute;
+					border-left: 2px solid @textColor;
+					left: -11px;
+					top: 0;
+					bottom: 0;
+				}
 			}
 		}
 	}

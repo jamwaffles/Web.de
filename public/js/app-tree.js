@@ -8,6 +8,94 @@ var Tree = Backbone.Model.extend({
 	}
 });
 
+var TreeHeader = Backbone.View.extend({
+	tagName: 'div',
+	className: 'toggle',
+	render: function() {
+		this.$el.html(this.model.get('title'));
+
+		return this;
+	}
+});
+
+var TreeItem = Backbone.View.extend({
+	tagName: 'li',
+	render: function() {
+		var li = $('<li />');
+
+		if(this.model.get('href')) {
+			$('<a />')
+				.prop('href', '#')
+				.html(this.model.get('title'))
+				.appendTo(li);
+		} else {
+			$('<span />')
+				.html(this.model.get('title'))
+				.appendTo(li);
+		}
+
+		li.appendTo(this.$el);
+
+		return this;
+	}
+});
+
+var SubTreeView = Backbone.View.extend({
+	tagName: 'ul',
+	className: 'tree',
+	render: function() {
+		this.model.get('children').each(function(item) {
+			var li = $('<li />');
+
+			if(item instanceof Tree) {
+				li.html(new TreeHeader({ model: item }).render().el);
+
+				li.append(new SubTreeView({ model: item }).render().el);
+
+				this.$el.append(li);
+			} else {
+				this.$el.append(new TreeItem({ model: item }).render().el);
+			}
+		}, this);
+
+		return this;
+	}
+});
+
+var TreeView = Backbone.View.extend({
+	tagName: 'ul',
+	className: 'tree tree-top',
+	events: {
+		'click div.toggle': 'toggleTree'
+	},
+	toggleTree: function(e) {
+		var self = $(e.currentTarget);
+
+		self.toggleClass('expanded');
+		self.next('ul').toggle();
+	},
+	render: function() {
+		this.model.get('children').each(function(item) {
+			var li = $('<li />');
+
+			if(item instanceof Tree) {
+				li.html(new TreeHeader({ model: item }).render().el);
+
+				li.append(new SubTreeView({ model: item }).render().el);
+
+				this.$el.append(li);
+			} else {
+				this.$el.append(new TreeItem({ model: item }).render().el);
+			}
+		}, this);
+
+		return this;
+	}
+});
+
+/**************
+ * Table tree *
+ **************/
 var TopToggleRow = TableRow.extend({
 	className: 'collapse-header',
 	render: function() {
@@ -90,13 +178,6 @@ var PackageTreeTable = TableTreeView.extend({
 	},
 	render: function() {
 		var rows = [];
-
-		// Tree item depth counters
-		var levelCounts = {
-			first: 0,
-			second: 0,
-			third: 0
-		};
 
 		// Loop through top level model.children - non-collapsible items and top level headings
 		this.model.get('children').each(function(item) {
@@ -183,37 +264,40 @@ var PackageTreeTable = TableTreeView.extend({
 	}
 });
 
-var testData = new Tree({
-	children: [
-		new Package({ name: 'Uncollapsible package 1' }),
-		new Tree({
-			title: 'Top level item 1',
-			children: [
-				new Package({ name: 'Sub package 1' }),
-				new Tree({
-					title: 'Sub level 1',
-					children: [
-						new Package({ name: 'Sub sub package 1' }),
-						new Package({ name: 'Sub sub package 2' })
-					]
-				}),
-				new Tree({
-					title: 'Sub level 2',
-					children: [
-						new Package({ name: 'Sub sub package 3' }),
-						new Package({ name: 'Sub sub package 4' })
-					]
-				}),
-				new Package({ name: 'Sub package 2' })
-			]
-		}),
-		new Package({ name: 'Uncollapsible package 2' }),
-		new Package({ name: 'Uncollapsible package 3' })
-	]
-});
+/***********
+ * Sandbox *
+ ***********/
+// var testData = new Tree({
+// 	children: [
+// 		new Package({ name: 'Uncollapsible package 1' }),
+// 		new Tree({
+// 			title: 'Top level item 1',
+// 			children: [
+// 				new Package({ name: 'Sub package 1' }),
+// 				new Tree({
+// 					title: 'Sub level 1',
+// 					children: [
+// 						new Package({ name: 'Sub sub package 1' }),
+// 						new Package({ name: 'Sub sub package 2' })
+// 					]
+// 				}),
+// 				new Tree({
+// 					title: 'Sub level 2',
+// 					children: [
+// 						new Package({ name: 'Sub sub package 3' }),
+// 						new Package({ name: 'Sub sub package 4' })
+// 					]
+// 				}),
+// 				new Package({ name: 'Sub package 2' })
+// 			]
+// 		}),
+// 		new Package({ name: 'Uncollapsible package 2' }),
+// 		new Package({ name: 'Uncollapsible package 3' })
+// 	]
+// });
 
-var tree = new PackageTreeTable({
-	model: testData
-});
+// var tree = new PackageTreeTable({
+// 	model: testData
+// });
 
-$('#local-software').html(tree.render().el);
+// $('#local-software').html(tree.render().el);
