@@ -297,33 +297,57 @@ dl.accordion {
 		}
 	}
 }
-table.accordion {
-	table-layout: auto;
+table {
+	&.accordion {
+		table-layout: auto;
 
-	th, td {
-		&.toggle-icon {
-			width: 16px;
-			text-align: center;
+		th, td {
+			&.toggle-icon {
+				width: 16px;
+				text-align: center;
+			}
+		}
+
+		tr.accordion-header {
+			&:hover {
+				td {
+					background: #eee;
+				}
+			}
+			~ tr:not(.accordion-header), ~ tr.accordion-header.sub {
+				display: none;
+			}
+
+			td {
+				cursor: pointer;
+			}
 		}
 	}
 
-	tr.accordion-header {
-		&:hover {
-			td {
-				background: #eee;
-			}
-		}
-		~ tr:not(.accordion-header), ~ tr.accordion-header.sub {
-			display: none;
+	&.tree {
+		.table;
+		.table-hover;
+
+		&:last-child {
+			margin-bottom: 0;
 		}
 
-		td {
-			cursor: pointer;
+		th {
+			&.toggle-column {
+				width: 16px;
+			}
+		}
+
+		tr {
+			&.collapse-header, &.sub-collapse-header {
+				cursor: pointer;
+				font-weight: bold;
+			}
 		}
 	}
 }
 
-.tree {
+ul.tree {
 	list-style: none;
 	line-height: 20px;
 	margin-left: 17px;
