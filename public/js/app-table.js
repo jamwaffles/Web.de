@@ -114,6 +114,49 @@ var PackageTable = TableView.extend({
 	}
 });
 
+/* Scheduled tasks table */
+var ScheduledTasksTable = TableView.extend({
+	className: 'scheduled-tasks',
+	header: false,
+	showAddNew: true,
+	columns: {
+		'Date': function(model) {
+			return moment(model.get('time')).format('ddd MMMM Do');
+		},
+		'Time': function(model) {
+			return moment(model.get('time')).format('h:mm A');
+		},
+		'Description': 'description',
+		'Command': function(model) {
+			return $('<code />').html(model.get('command'));
+		},
+		'Status': function(model) {
+			switch(model.get('status')) {
+				case 'ran':
+					return 'Already run';
+				case 'runing':
+					return 'Running';
+				default:
+					return 'Not running';
+			}
+		}
+	},
+	initialize: function(options) {
+		TableView.prototype.initialize.call(this, options);
+
+		this.showAddNew = options.showAddNew || this.showAddNew;
+	},
+	render: function() {
+		TableView.prototype.render.call(this, arguments);
+
+		if(this.showAddNew) {
+			// Todo
+		}
+
+		return this;
+	}
+});
+
 /* Sandbox */
 // var packages = new Backbone.Collection([ 
 // 	new Package({ name: "Pkg 1" }),

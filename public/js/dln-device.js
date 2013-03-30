@@ -111,3 +111,18 @@ $('#hardware-device').html(new TreeView({
 		propertiesTable.replaceWith(newTable.render().el);
 	} 
 }).render().el);
+
+/*************
+ * Scheduled *
+ *************/
+var deviceTasks = new Backbone.Collection([
+	new ScheduledTask({ command: 'ruby_clear_cache.sh', description: 'Purge', status: 'ran', time: new Date(2013, 2, 1, 18, 15, 0) }),
+	new ScheduledTask({ command: 'firmware_update.sh', description: 'Update', status: 'running', time: new Date(2013, 3, 29, 14, 30, 0) }),
+	new ScheduledTask({ command: 'sync_bitcoin.sh', description: 'Sync', time: new Date(2013, 5, 14, 8, 30, 0) })
+]);
+
+var deviceScheduled = new ScheduledTasksTable({
+	collection: deviceTasks
+});
+
+$('#device-scheduled').html(deviceScheduled.render().el);

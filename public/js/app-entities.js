@@ -70,3 +70,12 @@ var Device = BaseModel.extend({
 		this.set('title', this.get('manufacturer') + ' ' + this.get('name'));
 	}
 });
+
+var ScheduledTask = BaseModel.extend({
+	defaults: { 
+		command: 'command.sh',
+		description: 'Scheduled task',
+		status: '',
+		time: new Date()
+	}
+})

@@ -195,6 +195,59 @@ table {
 		margin-bottom: 0;
 	}
 
+	&.accordion {
+		table-layout: auto;
+
+		th, td {
+			&.toggle-icon {
+				width: 16px;
+				text-align: center;
+			}
+		}
+
+		tr.accordion-header {
+			&:hover {
+				td {
+					background: #eee;
+				}
+			}
+			~ tr:not(.accordion-header), ~ tr.accordion-header.sub {
+				display: none;
+			}
+
+			td {
+				cursor: pointer;
+			}
+		}
+	}
+
+	&.tree {
+		.table;
+		.table-hover;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		th {
+			&.toggle-column {
+				width: 16px;
+			}
+		}
+
+		tr {
+			&.collapse-header, &.sub-collapse-header {
+				cursor: pointer;
+				font-weight: bold;
+			}
+		}
+	}
+
+	&.scheduled-tasks {
+		.table;
+		.table-striped;
+	}
+
 	th.align-right {
 		text-align: right !important;
 	}
@@ -217,6 +270,8 @@ table {
 			text-align: right !important;
 		}
 	}
+
+
 }
 
 ul {
@@ -302,55 +357,6 @@ dl.accordion {
 
 		> ul.nav-stacked {
 			margin-bottom: 0;
-		}
-	}
-}
-table {
-	&.accordion {
-		table-layout: auto;
-
-		th, td {
-			&.toggle-icon {
-				width: 16px;
-				text-align: center;
-			}
-		}
-
-		tr.accordion-header {
-			&:hover {
-				td {
-					background: #eee;
-				}
-			}
-			~ tr:not(.accordion-header), ~ tr.accordion-header.sub {
-				display: none;
-			}
-
-			td {
-				cursor: pointer;
-			}
-		}
-	}
-
-	&.tree {
-		.table;
-		.table-hover;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-
-		th {
-			&.toggle-column {
-				width: 16px;
-			}
-		}
-
-		tr {
-			&.collapse-header, &.sub-collapse-header {
-				cursor: pointer;
-				font-weight: bold;
-			}
 		}
 	}
 }
