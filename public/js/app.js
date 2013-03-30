@@ -12,6 +12,14 @@ $('input.slider').mrslyde({
 	snap: false
 });
 
+$('table .datepicker').supercal({
+	mode: 'popup'
+}).on('dateselect', function(e, date) {
+	var self = $(e.currentTarget);
+
+	self.val(moment(date).format('L'));
+});
+
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };

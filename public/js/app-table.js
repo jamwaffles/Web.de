@@ -150,7 +150,43 @@ var ScheduledTasksTable = TableView.extend({
 		TableView.prototype.render.call(this, arguments);
 
 		if(this.showAddNew) {
-			// Todo
+			var row = $('<tr />').addClass('add-new form-inline');
+
+			// Date
+			var date = $('<input />')
+				.prop('name', 'date')
+				.prop('type', 'text')
+				.addClass('datepicker');
+
+			$('<td />').html(date).appendTo(row);
+
+			// Time
+			var hour = $('<select />').addClass('input-mini').prop('name', 'time-hour');
+
+			for(var i = 0; i < 24; i++) {
+				var text = ('0' + i).substr(-2);
+
+				$('<option />').val(i).text(text).appendTo(hour);
+			}
+
+			var minute = $('<select />').addClass('input-mini').prop('name', 'time-minute');
+
+			for(var i = 0; i < 60; i += 10) {
+				var text = ('0' + i).substr(-2);
+
+				$('<option />').val(i).text(text).appendTo(minute);
+			}
+
+			$('<td />').html([ hour, ' : ', minute ]).appendTo(row);
+
+			// Description
+
+			// Command
+
+			// Add button
+
+			// Append to table
+			this.$el.append(row);
 		}
 
 		return this;
