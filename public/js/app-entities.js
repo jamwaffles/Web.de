@@ -59,6 +59,8 @@ var Device = BaseModel.extend({
 		name: 'Generic 100',
 		manufacturer: 'ACME Labs',
 		href: '#',
+		serial: '5UP3R-53R14L',
+		mount: '/dev/mnt0',
 		properties: {
 			refresh: [ 'Refresh rate', '60Hz', [ '60Hz', '70Hz', '75Hz' ]],
 			resolution: [ 'Resolution', '3840x1080' ],

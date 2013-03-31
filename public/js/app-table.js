@@ -5,6 +5,8 @@ var TableRow = Backbone.View.extend({
 	initialize: function(options) {
 		this.cellData = {};		// Really not sure why this has to be here
 
+		options.columns = _.filter(options.columns, function(column, key) { return key !== null });
+
 		_.each(options.columns, function(column, key) {
 			if(typeof column === 'function') {
 				this.cellData[column] = column.call(this.model, this.model);
@@ -227,17 +229,3 @@ var ScheduledTasksTable = TableView.extend({
 		return this;
 	}
 });
-
-/* Sandbox */
-// var packages = new Backbone.Collection([ 
-// 	new Package({ name: "Pkg 1" }),
-// 	new Package({ name: "Pockayche", version: "1.4.6" }),
-// 	new Package(),
-// 	new Package()
-// ]);
-
-// var table = new PackageTable({
-// 	collection: packages
-// });
-
-// $('#local-software').html(table.render().el);

@@ -233,26 +233,32 @@ var TableTreeView = TableView.extend({
 		}, this);
 
 		// Header
-		var header = $('<tr />');
+		if(this.header) {
+			var header = $('<tr />');
 
-		for(var i = 0; i < this.depth; i++) {
-			$('<th />')
-				.addClass('toggle-column')
-				.appendTo(header);
+			for(var i = 0; i < this.depth; i++) {
+				$('<th />')
+					.addClass('toggle-column')
+					.appendTo(header);
+			}
+
+			_.each(this.columns, function(func, heading) {
+				$('<th />')
+					.html(heading)
+					.appendTo(header);
+			}, this);
+
+			this.$el.html($('<thead />').html(header));
 		}
-
-		_.each(this.columns, function(func, heading) {
-			$('<th />')
-				.html(heading)
-				.appendTo(header);
-		}, this);
-
-		this.$el.html($('<thead />').html(header));
 
 		// Add expand/contract (or empty filler) cells
 		_.each(rows, function(row) {
 			for(var i = 0; i < this.depth; i++) {
 				var cell = $('<td />');
+
+				if(i == 0) {
+					cell.addClass('toggle-column');
+				}
 
 				if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
 					$('<i />')
@@ -284,6 +290,13 @@ var PackageTreeTable = TableTreeView.extend({
 			return model.get('format') + ' ' + model.get('name');
 		},
 		'Version': 'version',
+		'License': function(model) {
+			if(model.get('licenseURL')) {
+				return $('<a />').html(model.get('license')).prop('href', model.get('licenseURL')).prop('target', '_blank');
+			} else {
+				return model.get('license')
+			}
+		},
 		'Actions': function(model) {
 			var form = $('<div />').addClass('form-inline');
 
@@ -324,6 +337,23 @@ var SettingsTreeTable = TableTreeView.extend({
 					.prop('href', '#')
 					.html('Configure &raquo;');
 			}
+		}
+	}
+});
+
+/****************************
+ * Device (and group) tree  *
+ ****************************/
+var DeviceTreeTable = TableTreeView.extend({
+	header: false,
+	columns: {
+		'Device': 'title',
+		'Serial': 'serial',
+		'Mount point': function(model) {
+			return $('<code />').text(model.get('mount'));
+		},
+		'Actions': function(model) {
+			return $('<select />').html($('<option />').text("Actions go here"));
 		}
 	}
 });
