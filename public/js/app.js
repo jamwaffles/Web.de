@@ -204,10 +204,10 @@ $('input[name="time-source"]').on('click', function() {
 });
 
 /* Pairing slideout */
-$('#slideout-pairing select[name="mode"]').on('change', function() {
+$('#slideout-pairing select[name="method"]').on('change', function() {
 	var inputs = $('#slideout-pairing').find('.sendonly');
 
-	inputs.prop('disabled', $(this).val() == 'receive');
+	inputs.prop('disabled', $(this).val() != 'send');
 });
 
 $('#slideout-pairing button[name="gen-pin"]').on('click', function(e) {

@@ -77,6 +77,14 @@ html {
 	&.icon-windows { background-image: url('../img/icons/windows.png'); }
 }
 
+.mouse-scroll-container > *:after {
+	clear: both;
+	content: "";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
 .form-2col {
 	width: 450px;
 	margin-bottom: 0;
@@ -113,7 +121,7 @@ input[type="file"] {
 	margin-bottom: 10px;
 }
 input {
-	.minimal {
+	&.minimal {
 		border: 1px solid #ddd;
 		border-style: none none solid none;
 		background: #fff;
@@ -269,10 +277,6 @@ table {
 		.table;
 		.table-hover;
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-
 		th {
 			&.toggle-column {
 				width: 16px;
@@ -313,9 +317,18 @@ table {
 		&.align-right {
 			text-align: right !important;
 		}
+
+		> input, > select, > button, > textarea {
+			margin-bottom: 0 !important;
+		}
 	}
-
-
+}
+dd {
+	> table {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 }
 
 ul {
@@ -586,6 +599,18 @@ ul.tree {
 		}
 	}
 
+	&.slideout-static {
+		left: 0 !important;
+		opacity: 1 !important;
+
+		.box-shadow(0px 0px 25px rgba(0, 0, 0, 0.4));
+
+		&.slideout-right {
+			left: auto !important;
+			right: 0 !important;
+		}
+	}
+
 	.slideout-close {
 		margin-bottom: 10px;
 		float: none;
@@ -678,6 +703,37 @@ ul.tree {
 	ul {
 		margin: 0;
 		padding: 0;
+	}
+}
+
+/* Info panel */
+#info-sidebar {
+	h4 {
+		clear: both;
+		margin-top: 0;
+		padding-top: 10px;
+	}
+
+	li {
+		@padding: 2px;
+
+		clear: both;
+		padding: 0 @padding;
+
+		span, a {
+			.pull-right;
+			.align-right;
+
+			padding: 0 @padding;
+		}
+
+		ul {
+			margin-left: 5px;
+
+			& + ul {
+				margin-top: 10px;
+			}
+		}
 	}
 }
 

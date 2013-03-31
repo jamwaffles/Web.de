@@ -34,8 +34,8 @@ var TableView = Backbone.View.extend({
 	header: true,
 	rendered: false,
 	initialize: function(options) {
-		this.columns = options.columns || this.columns;
-		this.header = options.header || this.header;
+		this.columns = options.columns !== undefined ? options.columns : this.columns;
+		this.header = options.header !== undefined ? options.header : this.header;
 
 		if(!(options.collection instanceof Backbone.Collection)) {
 			var newCollection = [];
@@ -144,7 +144,7 @@ var ScheduledTasksTable = TableView.extend({
 	initialize: function(options) {
 		TableView.prototype.initialize.call(this, options);
 
-		this.showAddNew = options.showAddNew || this.showAddNew;
+		this.showAddNew = options.showAddNew !== undefined ? options.showAddNew : this.showAddNew;
 	},
 	render: function() {
 		TableView.prototype.render.call(this, arguments);
@@ -156,6 +156,7 @@ var ScheduledTasksTable = TableView.extend({
 			var date = $('<input />')
 				.prop('name', 'date')
 				.prop('type', 'text')
+				.prop('placeholder', 'Date to run task')
 				.addClass('datepicker');
 
 			$('<td />').html(date).appendTo(row);
@@ -163,7 +164,7 @@ var ScheduledTasksTable = TableView.extend({
 			// Time
 			var hour = $('<select />').addClass('input-mini').prop('name', 'time-hour');
 
-			for(var i = 0; i < 24; i++) {
+			for(var i = 0; i < 12; i++) {
 				var text = ('0' + i).substr(-2);
 
 				$('<option />').val(i).text(text).appendTo(hour);
@@ -177,13 +178,46 @@ var ScheduledTasksTable = TableView.extend({
 				$('<option />').val(i).text(text).appendTo(minute);
 			}
 
-			$('<td />').html([ hour, ' : ', minute ]).appendTo(row);
+			ampm = $('<select />')
+				.addClass('input-mini')
+				.prop('name', 'ampm')
+				.append([
+					$('<option />').val('am').text('AM'),
+					$('<option />').val('pm').text('PM')
+				]);
+
+			$('<td />').html([ hour, ' : ', minute, ' ', ampm ]).appendTo(row);
 
 			// Description
+			$('<td />')
+				.html($('<input />')
+					.prop('type', 'text')
+					.prop('name', 'description')
+					.prop('placeholder', 'Description')
+				)
+				.appendTo(row);
 
 			// Command
+			$('<td />')
+				// .html($('<textarea />')
+				// 	.prop('name', 'command')
+				// 	.prop('placeholder', 'Command(s) to run')
+				// )
+				.html($('<input />')
+					.prop('type', 'text')
+					.prop('name', 'command')
+					.prop('placeholder', 'Command')
+				)
+				.appendTo(row);
 
 			// Add button
+			$('<td />')
+				.html($('<button />')
+					.addClass('btn btn-primary')
+					.prop('name', 'save')
+					.html('Add new task')
+				)
+				.appendTo(row);
 
 			// Append to table
 			this.$el.append(row);

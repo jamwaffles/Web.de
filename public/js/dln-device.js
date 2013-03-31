@@ -101,7 +101,9 @@ $('#hardware-device').html(new TreeView({
 					return $('<strong />').html(model.get('value')[0]);
 				},
 				'Value': function(model) {
-					return model.get('value')[1];
+					return $('<input />')
+						.prop('type', 'text')
+						.val(model.get('value')[1]);
 				},
 			},
 			header: false,
