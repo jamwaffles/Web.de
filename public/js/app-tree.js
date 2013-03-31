@@ -130,6 +130,7 @@ var TreeView = Backbone.View.extend({
  **************/
 var TopToggleRow = TableRow.extend({
 	className: 'collapse-header',
+	initialize: function() { },
 	render: function() {
 		$('<td />')
 			.html(this.model.get('title'))
@@ -152,37 +153,10 @@ var SubToggleRow = TopToggleRow.extend({
 });
 
 var TableTreeView = TableView.extend({
-	className: 'tree'
-});
-
-var PackageTreeTable = TableTreeView.extend({
-	className: 'package tree',
+	className: 'tree',
 	tagName: 'table',
+	rowView: TableRow,
 	depth: 0,
-	columns: {
-		'Package': function(model) {
-			return model.get('format') + ' ' + model.get('name');
-		},
-		'Version': 'version',
-		'Actions': function(model) {
-			var form = $('<div />').addClass('form-inline');
-
-			var select = $('<select />').append([
-				$('<option />').val('').text('Choose action...'),
-				$('<option />').val('install').text('Install'),
-				$('<option />').val('remove').text('Uninstall'),
-				$('<option />').val('copy').text('Copy')
-			]);
-
-			select.children().filter(function() {
-				return this.value == model.get('state');
-			}).prop('disabled', true);
-
-			select.appendTo(form);
-
-			return form;
-		}
-	},
 	events: {
 		'click .sub-collapse-header': 'subToggle',
 		'click .collapse-header': 'toggle'
@@ -235,26 +209,26 @@ var PackageTreeTable = TableTreeView.extend({
 						subitem.get('children').each(function(subsubitem) {
 							// Append normal row
 							rows.push(new this.rowView({ 
-									model: subsubitem, 
-									columns: this.columns, 
-									className: 'sub-collapse-row' 
-								}).render().$el.hide());
+								model: subsubitem, 
+								columns: this.columns, 
+								className: 'sub-collapse-row' 
+							}).render().$el.hide());
 						}, this);
 					} else {
 						// Append normal row
 						rows.push(new this.rowView({ 
-								model: subitem, 
-								columns: this.columns, 
-								className: 'collapse-row' 
-							}).render().$el.hide());
+							model: subitem, 
+							columns: this.columns, 
+							className: 'collapse-row' 
+						}).render().$el.hide());
 					}
 				}, this);
 			} else {
 				// Append normal row
 				rows.push(new this.rowView({ 
-						model: item, 
-						columns: this.columns 
-					}).render().$el);
+					model: item,
+					columns: this.columns 
+				}).render().$el);
 			}
 		}, this);
 
@@ -297,6 +271,60 @@ var PackageTreeTable = TableTreeView.extend({
 		this.$el.append($('<tbody />').html(rows));
 
 		return this;
+	}
+});
+
+/****************
+ * Package tree *
+ ****************/
+var PackageTreeTable = TableTreeView.extend({
+	className: 'package tree',
+	columns: {
+		'Package': function(model) {
+			return model.get('format') + ' ' + model.get('name');
+		},
+		'Version': 'version',
+		'Actions': function(model) {
+			var form = $('<div />').addClass('form-inline');
+
+			var select = $('<select />').append([
+				$('<option />').val('').text('Choose action...'),
+				$('<option />').val('install').text('Install'),
+				$('<option />').val('remove').text('Uninstall'),
+				$('<option />').val('copy').text('Copy')
+			]);
+
+			select.children().filter(function() {
+				return this.value == model.get('state');
+			}).prop('disabled', true);
+
+			select.appendTo(form);
+
+			return form;
+		}
+	}
+});
+
+/******************************
+ * Settings table (tree view) *
+ ******************************/
+var SettingsTreeTable = TableTreeView.extend({
+	header: false,
+	columns: {
+		'Setting': function(model) {
+			return model.get('title');
+		},
+		'Value': function(model) {
+			if(model.get('value') !== undefined) {
+				return $('<a />')
+					.prop('href', '#')
+					.text(model.displayValue());
+			} else {
+				return $('<a />')
+					.prop('href', '#')
+					.html('Configure &raquo;');
+			}
+		}
 	}
 });
 

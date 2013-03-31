@@ -101,9 +101,26 @@ $('#hardware-device').html(new TreeView({
 					return $('<strong />').html(model.get('value')[0]);
 				},
 				'Value': function(model) {
-					return $('<input />')
-						.prop('type', 'text')
-						.val(model.get('value')[1]);
+					if(model.get('value')[2] !== undefined) {		// Array of values given. Show list box
+						var selectedValue = model.get('value')[1];
+						var select = $('<select />');
+
+						_.each(model.get('value')[2], function(value) {
+							var option = $('<option />').val(value).text(value);
+
+							if(value === selectedValue) {
+								option.prop('selected', true);
+							}
+
+							option.appendTo(select);
+						});
+
+						return select;
+					} else {
+						return $('<input />')
+							.prop('type', 'text')
+							.val(model.get('value')[1]);
+					}
 				},
 			},
 			header: false,
@@ -128,3 +145,52 @@ var deviceScheduled = new ScheduledTasksTable({
 });
 
 $('#device-scheduled').html(deviceScheduled.render().el);
+
+/************
+ * Services *
+ ************/
+var deviceServices = new Backbone.Collection([
+	new Package({ name: 'DHCP', version: '1.5', license: 'BSD' }),
+	new Package({ name: 'DNS', version: '3.5.22', license: 'GPL', state: 'install' }),
+	new Package({ name: 'FTP', version: '5.7', license: 'GPL v2' })
+]);
+
+var servicesTable = new PackageTable({
+	collection: deviceServices,
+	className: 'table block table-striped table-hover'
+});
+
+$('#device-services').html(servicesTable.render().el);
+
+/************
+ * Settings *
+ ************/
+var deviceSettings = new Tree([
+	new Tree({
+		title: 'Settings',
+		children: [
+			new Setting({ title: 'Updates', value: '13 available' }),
+			new Setting({ title: 'Child lock', value: false })
+		]
+	}),
+	new Tree({
+		title: 'Firmware',
+		children: [
+			new Package({ title: 'GNU' }),
+			new Package({ title: 'Busybox' }),
+			new Package({ title: 'Toolkit' })
+		]
+	}),
+	new Tree({
+		title: 'Services',
+		children: [
+			new Package({ title: 'DHCP' }),
+			new Package({ title: 'DNS' }),
+			new Package({ title: 'FTP' })
+		]
+	})
+]);
+
+$('#device-settings').html(new SettingsTreeTable({ 
+	model: deviceSettings
+}).render().el);

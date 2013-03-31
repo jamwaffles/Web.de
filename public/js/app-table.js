@@ -88,10 +88,11 @@ var PackageTable = TableView.extend({
 		},
 		'Version': 'version',
 		'License': function(model) {
-			return $('<a />')
-				.prop('href', model.get('licenseURL'))
-				.prop('target', '_blank')
-				.html(model.get('license'));
+			if(model.get('licenseURL')) {
+				return $('<a />').html(model.get('license')).prop('href', model.get('licenseURL')).prop('target', '_blank');
+			} else {
+				return model.get('license')
+			}
 		},
 		'Actions': function(model) {
 			var form = $('<div />').addClass('form-inline');

@@ -60,7 +60,7 @@ var Device = BaseModel.extend({
 		manufacturer: 'ACME Labs',
 		href: '#',
 		properties: {
-			refresh: [ 'Refresh rate', '60Hz' ],
+			refresh: [ 'Refresh rate', '60Hz', [ '60Hz', '70Hz', '75Hz' ]],
 			resolution: [ 'Resolution', '3840x1080' ],
 			depth: [ 'Color depth', '32 bit' ],
 			powersave: [ 'Powersaver', '15 minutes' ]
@@ -78,4 +78,25 @@ var ScheduledTask = BaseModel.extend({
 		status: '',
 		time: new Date()
 	}
-})
+});
+
+var Setting = BaseModel.extend({
+	defaults: {
+		'name': 'setting',
+		'title': 'Generic setting',
+		'value': undefined
+	},
+	displayValue: function() {
+		var value = this.get('value');
+
+		if(typeof value == 'boolean') {
+			value = value ? 'On' : 'Off'
+		}
+
+		return value;
+	}
+});
+
+// var SettingsGroup = Backbone.Collection.extend({
+// 	model: Setting
+// });
