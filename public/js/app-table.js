@@ -128,7 +128,7 @@ var SpanTableRow = Backbone.View.extend({
 	initialize: function(options) {
 		this.cellData = {};		// Really not sure why this has to be here
 
-		this.columns = _.keys(options.columns !== undefined ? options.columns : this.columns);
+		// this.columns = _.keys(options.columns !== undefined ? options.columns : this.columns);
 		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
 
 		_.each(options.columns, function(column, key) {
@@ -143,7 +143,8 @@ var SpanTableRow = Backbone.View.extend({
 		if(!this.rendered) {
 			var index = 0;
 
-			_.each(this.cellData, function(value) {
+			_.each(this.cellData, function(value, foo, bar) {
+				console.log(value, foo, bar);
 				$('<div />')
 					.addClass(this.columnClasses[index])
 					.html(value)

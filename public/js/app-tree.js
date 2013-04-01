@@ -280,11 +280,182 @@ var TableTreeView = TableView.extend({
 	}
 });
 
+/*************************
+ * Span-based table tree *
+ *************************/
+var SpanTreeTableToggle = SpanTableRow.extend({
+	className: 'row-fluid collapse-header',
+	render: function() {
+		$('<div />')
+			.addClass('span12')
+			.html(this.model.get('title'))
+			.appendTo(this.$el);
+
+		return this;
+	}
+});
+
+var SpanTreeTableSubToggle = SpanTableRow.extend({
+	className: 'row-fluid sub-collapse-header',
+	render: function() {
+		$('<div />')
+			.addClass('span12')
+			.html(this.model.get('title'))
+			.appendTo(this.$el);
+
+		return this;
+	}
+});
+
+var SpanTableTreeView = Backbone.View.extend({
+	className: 'container-fluid fluid-table tree-table hover',
+	tagName: 'div',
+	columns: {},
+	columnClasses: [],
+	header: true,
+	depth: 0,
+	events: {
+		'click .sub-collapse-header': 'subToggle',
+		'click .collapse-header': 'toggle'
+	},
+	initialize: function(options) {
+		this.columns = options.columns !== undefined ? options.columns : this.columns;
+		this.header = options.header !== undefined ? options.header : this.header;
+		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
+
+		if(this.columnClasses.length != this.columns.length) {
+			return false;
+		}
+	},
+	toggle: function(e) {
+		var self = $(e.currentTarget);
+
+		self.toggleClass('expanded');
+		self.find('i').first().toggleClass('icon-plus icon-minus');
+
+		if(self.hasClass('expanded')) {		// Show
+			var rows = self.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').show();
+
+			// Hide closed sub-items
+			rows.filter('.sub-collapse-header:not(.expanded)').each(function() {
+				$(this).nextUntil(':not(.sub-collapse-row)').hide();
+			});
+		} else {		// Hide
+			self.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').hide();
+		}
+	},
+	subToggle: function(e) {
+		var self = $(e.currentTarget);
+
+		self.toggleClass('expanded');
+		self.find('i').first().toggleClass('icon-plus icon-minus');
+
+		self.nextUntil(':not(.sub-collapse-row)').toggle();
+	},
+	render: function() {
+		var rows = [];
+
+		// Loop through top level model.children - non-collapsible items and top level headings
+		this.model.get('children').each(function(item) {
+			if(item instanceof Tree) {
+				this.depth = 1;
+
+				// Add top-level collapse headers
+				rows.push(new SpanTreeTableToggle({ model: item, columns: this.columns }).render().$el);
+
+				// Loop through second level item.children - second-level items and sub-headings
+				item.get('children').each(function(subitem) {
+					if(subitem instanceof Tree) {
+						this.depth = 2;
+
+						// Add sub-level collapse headers
+						rows.push(new SpanTreeTableSubToggle({ model: subitem, columns: this.columns }).render().$el.hide());
+
+						// Loop through third level - all third level items (i.e. those under sub headings)
+						subitem.get('children').each(function(subsubitem) {
+							// Append normal row
+							rows.push(new SpanTableRow({ 
+								model: subsubitem, 
+								columns: this.columns, 
+								columnClasses: this.columnClasses,
+								className: 'row-fluid sub-collapse-row' 
+							}).render().$el.hide());
+						}, this);
+					} else {
+						// Append normal row
+						rows.push(new SpanTableRow({ 
+							model: subitem, 
+							columns: this.columns, 
+							columnClasses: this.columnClasses,
+							className: 'row-fluid collapse-row' 
+						}).render().$el.hide());
+					}
+				}, this);
+			} else {
+				// Append normal row
+				rows.push(new SpanTableRow({ 
+					model: item,
+					columns: this.columns,
+					columnClasses: this.columnClasses,
+				}).render().$el);
+			}
+		}, this);
+
+		// Header
+		if(this.header) {
+			var header = new SpanTableHeader({ columns: this.columns, columnClasses: this.columnClasses });
+
+			// var header = $('<tr />');
+
+			// for(var i = 0; i < this.depth; i++) {
+			// 	$('<th />')
+			// 		.addClass('toggle-column')
+			// 		.appendTo(header);
+			// }
+
+			// _.each(this.columns, function(func, heading) {
+			// 	$('<th />')
+			// 		.html(heading)
+			// 		.appendTo(header);
+			// }, this);
+
+			// this.$el.html($('<thead />').html(header));
+		}
+
+		// Add expand/contract (or empty filler) cells
+		_.each(rows, function(row) {
+			// for(var i = 0; i < this.depth; i++) {
+			// 	var cell = $('<td />');
+
+			// 	if(i == 0) {
+			// 		cell.addClass('toggle-column');
+			// 	}
+
+			// 	if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
+			// 		$('<i />')
+			// 			.addClass('icon-plus')
+			// 			.appendTo(cell);
+			// 	} else if(row.hasClass('sub-collapse-header') && i == 0) {
+			// 		$('<i />')
+			// 			.addClass('icon-plus')
+			// 			.appendTo(cell);
+			// 	}
+
+			// 	cell.prependTo(row);
+			// }
+		}, this);
+
+		this.$el.html(rows);
+
+		return this;
+	}
+});
+
 /****************
  * Package tree *
  ****************/
-var PackageTreeTable = TableTreeView.extend({
-	className: 'package tree',
+var PackageTreeTable = SpanTableTreeView.extend({
+	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
 	columns: {
 		'Package': function(model) {
 			return model.get('format') + ' ' + model.get('name');

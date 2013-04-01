@@ -403,6 +403,20 @@ table {
 			font-weight: bold;
 		}
 	}
+
+	/* Table trees */
+	.collapse-header, .sub-collapse-header {
+		font-weight: bold;
+		cursor: pointer;
+
+		i {
+			width: 16px;
+
+			+ i {
+				margin-right: 10px;
+			}
+		}
+	}
 }
 
 dd {
