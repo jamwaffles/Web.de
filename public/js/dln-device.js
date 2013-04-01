@@ -152,8 +152,7 @@ var deviceServices = new Backbone.Collection([
 ]);
 
 var servicesTable = new PackageTable({
-	collection: deviceServices,
-	className: 'table block table-striped table-hover'
+	collection: deviceServices
 });
 
 $('#device-services').html(servicesTable.render().el);
