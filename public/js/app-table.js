@@ -16,7 +16,7 @@ var TableRow = Backbone.View.extend({
 		}, this);
 	},
 	render: function() {
-		if(!this.renderd) {
+		if(!this.rendered) {
 			_.each(this.cellData, function(value) {
 				$('<td />')
 					.html(value)
@@ -33,11 +33,13 @@ var TableRow = Backbone.View.extend({
 var TableView = Backbone.View.extend({
 	tagName: 'table',
 	columns: {},
+	columnClasses: [],
 	header: true,
 	rendered: false,
 	initialize: function(options) {
 		this.columns = options.columns !== undefined ? options.columns : this.columns;
 		this.header = options.header !== undefined ? options.header : this.header;
+		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
 
 		if(!(options.collection instanceof Backbone.Collection)) {
 			var newCollection = [];
@@ -60,11 +62,19 @@ var TableView = Backbone.View.extend({
 			if(this.header) {
 				var header = $('<thead />');
 				var headerRow = $('<tr />');
+				var index = 0;
 
 				_.each(this.columns, function(func, heading) {
-					$('<th />')
-						.html(heading)
-						.appendTo(headerRow);
+					var th = $('<th />')
+						.html(heading);
+
+					if(this.columnClasses[index] !== undefined) {
+						th.addClass(this.columnClasses[index]);
+					}
+
+					th.appendTo(headerRow);
+
+					index++;
 				}, this);
 				headerRow.appendTo(header);
 
@@ -81,14 +91,133 @@ var TableView = Backbone.View.extend({
 	}
 });
 
+var SpanTableHeader = Backbone.View.extend({
+	tagName: 'div',
+	className: 'thead row-fluid',
+	columns: [],
+	columnClasses: [],
+	rendered: false,
+	initialize: function(options) {
+		this.cellData = {};		// Really not sure why this has to be here
+
+		this.columns = _.keys(options.columns !== undefined ? options.columns : this.columns);
+		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
+	},
+	render: function() {
+		if(!this.rendered) {
+			_.each(this.columns, function(value, index) {
+				$('<div />')
+					.addClass(this.columnClasses[index])
+					.html(value)
+					.appendTo(this.$el);
+			}, this);
+
+			this.rendered = true;
+		}
+
+		return this;
+	}
+});
+
+var SpanTableRow = Backbone.View.extend({
+	tagName: 'div',
+	className: 'row-fluid',
+	cellData: {},
+	columnClasses: [],
+	rendered: false,
+	initialize: function(options) {
+		this.cellData = {};		// Really not sure why this has to be here
+
+		this.columns = _.keys(options.columns !== undefined ? options.columns : this.columns);
+		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
+
+		_.each(options.columns, function(column, key) {
+			if(typeof column === 'function') {
+				this.cellData[column] = column.call(this.model, this.model);
+			} else {
+				this.cellData[column] = this.model.get(column);
+			}
+		}, this);
+	},
+	render: function() {
+		if(!this.rendered) {
+			var index = 0;
+
+			_.each(this.cellData, function(value) {
+				$('<div />')
+					.addClass(this.columnClasses[index])
+					.html(value)
+					.appendTo(this.$el);
+
+				index++;
+			}, this);
+
+			this.rendered = true;
+		}
+
+		return this;
+	}
+});
+
+/* Table made out of Bootstrap columns (EUGH), required for headers in DLN Action headers */
+var SpanTable = Backbone.View.extend({
+	className: 'container-fluid fluid-table',
+	tagName: 'div',
+	columns: {},
+	columnClasses: [],
+	header: true,
+	initialize: function(options) {
+		this.columns = options.columns !== undefined ? options.columns : this.columns;
+		this.header = options.header !== undefined ? options.header : this.header;
+		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
+
+		if(this.columnClasses.length != this.columns.length) {
+			return false;
+		}
+
+		if(!(options.collection instanceof Backbone.Collection)) {
+			var newCollection = [];
+
+			_.each(options.collection, function(value, key) {
+				newCollection.push({
+					key: key,
+					value: value
+				});
+			});
+
+			this.collection = new Backbone.Collection(newCollection);
+		}
+	},
+	render: function() {
+		// Header
+		if(this.header) {
+			this.$el.append(new SpanTableHeader({ columns: this.columns, columnClasses: this.columnClasses }).render().el);
+		}
+
+		// Data
+		this.collection.each(function(item) {
+			this.$el.append(new SpanTableRow({ model: item, columns: this.columns, columnClasses: this.columnClasses }).render().el);
+		}, this);
+
+		return this;
+	}
+});
+
 /* Packages table */
-var PackageTable = TableView.extend({
-	className: 'package',
+var PackageTable = SpanTable.extend({
+	className: 'package container-fluid fluid-table striped hover',
+	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
+	header: false,
 	columns: {
 		'Name': function(model) {
 			return model.get('format') + ' ' + model.get('name');
 		},
-		'Version': 'version',
+		'Version': function(model) {
+			return $('<input />')
+				.prop('type', 'text')
+				.addClass('input-small')
+				.val(model.get('version'));
+		},
 		'License': function(model) {
 			if(model.get('licenseURL')) {
 				return $('<a />').html(model.get('license')).prop('href', model.get('licenseURL')).prop('target', '_blank');
@@ -118,8 +247,9 @@ var PackageTable = TableView.extend({
 });
 
 /* Scheduled tasks table */
-var ScheduledTasksTable = TableView.extend({
-	className: 'scheduled-tasks',
+var ScheduledTasksTable = SpanTable.extend({
+	className: 'scheduled-tasks container-fluid fluid-table striped',
+	columnClasses: [ 'span2', 'span3', 'span2', 'span3', 'span2' ],
 	header: false,
 	showAddNew: true,
 	columns: {
@@ -145,24 +275,24 @@ var ScheduledTasksTable = TableView.extend({
 		}
 	},
 	initialize: function(options) {
-		TableView.prototype.initialize.call(this, options);
+		SpanTable.prototype.initialize.call(this, options);
 
 		this.showAddNew = options.showAddNew !== undefined ? options.showAddNew : this.showAddNew;
 	},
 	render: function() {
-		TableView.prototype.render.call(this, arguments);
+		SpanTable.prototype.render.call(this, arguments);
 
 		if(this.showAddNew) {
-			var row = $('<tr />').addClass('add-new form-inline');
+			var row = $('<div />').addClass('add-new form-inline row-fluid');
 
 			// Date
 			var date = $('<input />')
 				.prop('name', 'date')
 				.prop('type', 'text')
 				.prop('placeholder', 'Date to run task')
-				.addClass('datepicker');
+				.addClass('datepicker input-medium');
 
-			$('<td />').html(date).appendTo(row);
+			$('<div />').addClass(this.columnClasses[0]).html(date).appendTo(row);
 
 			// Time
 			var hour = $('<select />').addClass('input-mini').prop('name', 'time-hour');
@@ -189,23 +319,22 @@ var ScheduledTasksTable = TableView.extend({
 					$('<option />').val('pm').text('PM')
 				]);
 
-			$('<td />').html([ hour, ' : ', minute, ' ', ampm ]).appendTo(row);
+			$('<div />').addClass(this.columnClasses[1]).html([ hour, ' : ', minute, ' ', ampm ]).appendTo(row);
 
 			// Description
-			$('<td />')
+			$('<div />')
+				.addClass(this.columnClasses[2])
 				.html($('<input />')
 					.prop('type', 'text')
 					.prop('name', 'description')
 					.prop('placeholder', 'Description')
+					.addClass('input-medium')
 				)
 				.appendTo(row);
 
 			// Command
-			$('<td />')
-				// .html($('<textarea />')
-				// 	.prop('name', 'command')
-				// 	.prop('placeholder', 'Command(s) to run')
-				// )
+			$('<div />')
+				.addClass(this.columnClasses[3])
 				.html($('<input />')
 					.prop('type', 'text')
 					.prop('name', 'command')
@@ -214,7 +343,8 @@ var ScheduledTasksTable = TableView.extend({
 				.appendTo(row);
 
 			// Add button
-			$('<td />')
+			$('<div />')
+				.addClass(this.columnClasses[4])
 				.html($('<button />')
 					.addClass('btn btn-primary')
 					.prop('name', 'save')

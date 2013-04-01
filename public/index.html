@@ -72,29 +72,16 @@
 							</div>
 
 							<div class="row-fluid">
-								<div class="span9"><input type="text" class="uri sendonly" placeholder="Device URI" disabled></div>
-								<div class="span3"><input type="text" class="port sendonly" placeholder="Port" disabled></div>
+								<div class="span9"><input type="text" class="sendonly" placeholder="Device URI" disabled></div>
+								<div class="span3"><input type="text" class="sendonly" placeholder="PIN" disabled></div>
 							</div>
 
-							<!-- <div class="row-fluid">
-								<div class="span9"><input type="text" class="uri sendonly" placeholder="Private URI"></div>
-								<div class="span3"><input type="text" class="port sendonly" placeholder="Port"></div>
-							</div> -->
-
-							<div class="row-fluid">
-								<div class="span9">
-									<select name="group">
-										<option value="">Choose group...</option>
-										<option value="g1">Group 1</option>
-										<option value="g2">Group 2</option>
-										<option value="g3">Group 3</option>
-									</select>
-								</div>
-
-								<div class="span3">
-									<input type="text" class="sendonly" placeholder="PIN">
-								</div>
-							</div>
+							<select name="group">
+								<option value="">Choose group...</option>
+								<option value="g1">Group 1</option>
+								<option value="g2">Group 2</option>
+								<option value="g3">Group 3</option>
+							</select>
 
 							<div class="align-right actions">
 								<button name="gen-pin" class="btn btn-inverse pull-left">Generate PIN</button>
@@ -108,16 +95,36 @@
 							<dt>Expensive Phones</dt>
 							<dd>
 								<ul class="nav nav-stacked nav-pills">
-									<li><a href="#">Lumia 820</a></li>
-									<li><a href="#">Nexus 4</a></li>
+									<li>
+										<span>Lumia 820 
+											<a href="#" class="pull-right"><i class="icon-remove"></i></a>
+											<a href="#" class="pull-right"><i class="icon-wrench"></i></a>
+										</span>
+									</li>
+									<li>
+										<span>Nexus 4 
+											<a href="#" class="pull-right"><i class="icon-remove"></i></a>
+											<a href="#" class="pull-right"><i class="icon-wrench"></i></a>
+										</span>
+									</li>
 								</ul>
 							</dd>
 
 							<dt>Music stuff</dt>
 							<dd>
 								<ul class="nav nav-stacked nav-pills">
-									<li><a href="#">Philips SBH9000</a></li>
-									<li><a href="#">Foxl G290 Speakers</a></li>
+									<li>
+										<span>Philips SBH9000 
+											<a href="#" class="pull-right"><i class="icon-remove"></i></a>
+											<a href="#" class="pull-right"><i class="icon-wrench"></i></a>
+										</span>
+									</li>
+									<li>
+										<span>Foxl G290 Speakers 
+											<a href="#" class="pull-right"><i class="icon-remove"></i></a>
+											<a href="#" class="pull-right"><i class="icon-wrench"></i></a>
+										</span>
+									</li>
 								</ul>
 							</dd>
 						</dl>
@@ -176,13 +183,32 @@
 								<dd>
 									<ul class="nav nav-pills nav-stacked">
 										<li>
-											<a href="#">LaCie 40XB</a>
+											<span>LaCie 40XB <a href="#" title="Remove device"><i class="icon-remove pull-right"></i></a></span>
 										</li>
 										<li>
-											<a href="#">Motorola TalkFree</a>
+											<span>Motorola TalkFree <a href="#" title="Remove device"><i class="icon-remove pull-right"></i></a></span>
 										</li>
 										<li>
-											<a href="#">Samsung LightDim 500</a>
+											<span>Samsung LightDim 500 <a href="#" title="Remove device"><i class="icon-remove pull-right"></i></a></span>
+										</li>
+									</ul>
+								</dd>
+
+								<dt>Cell <i class="icon-signal pull-right"></i></dt>
+								<dd>
+									<ul class="unstyled">
+										<li>
+											<strong>Network</strong> <span class="pull-right">EE (Orange) <i class="icon-signal"></i></span>
+										</li>
+										<li>
+											<strong>Mobile internet</strong> <a href="#" class="pull-right">On</a>
+										</li>
+										<li>
+											<strong>Connection type</strong> <a href="#" class="pull-right">HSDPA</a>
+										</li>
+
+										<li class="form-buttons">
+											<button class="btn btn-primary">Configure</button>
 										</li>
 									</ul>
 								</dd>
@@ -263,9 +289,6 @@
 
 										<li class="divider"></li>
 
-										<!-- <li>
-											<strong></strong> <span class="pull-right"></span>
-										</li> -->
 										<li>
 											<strong>Nameserver 1</strong> <span class="pull-right">192.168.0.254</span>
 										</li>
@@ -319,25 +342,6 @@
 										</li>
 										<li>
 											<a href="#">For a WiFi <i class="icon-lock pull-right"></i></a>
-										</li>
-									</ul>
-								</dd>
-
-								<dt>Cell <i class="icon-signal pull-right"></i></dt>
-								<dd>
-									<ul class="unstyled">
-										<li>
-											<strong>Network</strong> <span class="pull-right">EE (Orange) <i class="icon-signal"></i></span>
-										</li>
-										<li>
-											<strong>Mobile internet</strong> <a href="#" class="pull-right">On</a>
-										</li>
-										<li>
-											<strong>Connection type</strong> <a href="#" class="pull-right">HSDPA</a>
-										</li>
-
-										<li>
-											<a href="#">Cell network settings &raquo;</a>
 										</li>
 									</ul>
 								</dd>
@@ -687,7 +691,6 @@
 						<dl class="accordion">
 							<dt>
 								<div class="icon-large icon-users"></div>
-								<!-- <h3>Accounts</h3> -->
 								<div class="row-fluid">
 									<div class="span4"><h3>Accounts</h3></div>
 									<div class="span8"><h4>Properties</h4></div>
@@ -739,7 +742,12 @@
 
 							<dt>
 								<div class="icon-large icon-qrcode"></div>
-								<h3>Firmware</h3>
+								<div class="row-fluid">
+									<div class="span3"><h3>Firmware</h3></div>
+									<div class="span3"><h4>Version</h4></div>
+									<div class="span3"><h4>License</h4></div>
+									<div class="span3"><h4>Actions</h4></div>
+								</div>
 							</dt>
 							<dd id="firmware-packages"></dd>
 
@@ -747,7 +755,7 @@
 								<div class="icon-large icon-tools"></div>
 								<div class="row-fluid">
 									<div class="span4"><h3>Hardware</h3></div>
-									<div class="span8"><h4>Select a device</h4></div>
+									<div class="span8"><h4>Properties</h4></div>
 								</div>
 							</dt>
 							<dd>
@@ -807,7 +815,13 @@
 
 							<dt>
 								<div class="icon-large icon-schedule"></div>
-								<h3>Scheduled</h3>
+								<div class="row-fluid">
+									<div class="span2"><h3>Scheduled</h3></div>
+									<div class="span3"><h4>Time</h4></div>
+									<div class="span2"><h4>Description</h4></div>
+									<div class="span3"><h4>Command</h4></div>
+									<div class="span2"><h4>Status</h4></div>
+								</div>
 							</dt>
 							<dd id="device-scheduled"></dd>
 

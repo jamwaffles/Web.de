@@ -38,8 +38,7 @@ var firmwarePackages = new Backbone.Collection([
 ]);
 
 var firmwareTable = new PackageTable({
-	collection: firmwarePackages,
-	className: 'table block table-striped table-hover'
+	collection: firmwarePackages
 });
 
 $('#firmware-packages').html(firmwareTable.render().el);
@@ -90,9 +89,6 @@ $('#hardware-device').html(new TreeView({
 	model: devices,
 	nodeSelect: function(model, tree) {
 		var propertiesTable = $(tree).closest('.row-fluid').find('table');
-		var propertiesHeader = $(this).closest('dd').prev().find('h4');
-
-		propertiesHeader.html(model.get('title'));
 
 		var newTable = new TableView({
 			className: 'table table-striped',
