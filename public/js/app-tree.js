@@ -530,7 +530,7 @@ var SettingsTreeTable = SpanTableTreeView.extend({
  ****************************/
 var DeviceTreeTable = SpanTableTreeView.extend({
 	header: false,
-	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
+	columnClasses: [ 'span4', 'span2', 'span3', 'span3' ],
 	columns: {
 		'Device': 'title',
 		'Serial': 'serial',
