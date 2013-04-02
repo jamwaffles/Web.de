@@ -192,7 +192,9 @@ var TableTreeView = TableView.extend({
 		// Loop through top level model.children - non-collapsible items and top level headings
 		this.model.get('children').each(function(item) {
 			if(item instanceof Tree) {
-				this.depth = 1;
+				if(this.depth === 0) {
+					this.depth = 1;
+				}
 
 				// Add top-level collapse headers
 				rows.push(new TopToggleRow({ model: item, columns: this.columns }).render().$el);
@@ -356,7 +358,9 @@ var SpanTableTreeView = Backbone.View.extend({
 		// Loop through top level model.children - non-collapsible items and top level headings
 		this.model.get('children').each(function(item) {
 			if(item instanceof Tree) {
-				this.depth = 1;
+				if(this.depth === 0) {
+					this.depth = 1;
+				}
 
 				// Add top-level collapse headers
 				rows.push(new SpanTreeTableToggle({ model: item, columns: this.columns }).render().$el);
@@ -401,46 +405,26 @@ var SpanTableTreeView = Backbone.View.extend({
 
 		// Header
 		if(this.header) {
-			var header = new SpanTableHeader({ columns: this.columns, columnClasses: this.columnClasses });
-
-			// var header = $('<tr />');
-
-			// for(var i = 0; i < this.depth; i++) {
-			// 	$('<th />')
-			// 		.addClass('toggle-column')
-			// 		.appendTo(header);
-			// }
-
-			// _.each(this.columns, function(func, heading) {
-			// 	$('<th />')
-			// 		.html(heading)
-			// 		.appendTo(header);
-			// }, this);
-
-			// this.$el.html($('<thead />').html(header));
+			rows.unshift(new SpanTableHeader({ columns: this.columns, columnClasses: this.columnClasses }).render().$el);
 		}
 
 		// Add expand/contract (or empty filler) cells
 		_.each(rows, function(row) {
-			// for(var i = 0; i < this.depth; i++) {
-			// 	var cell = $('<td />');
+			for(var i = 0; i < this.depth; i++) {
+				var cell = $('<div />').addClass('toggle-column');
 
-			// 	if(i == 0) {
-			// 		cell.addClass('toggle-column');
-			// 	}
+				if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
+					$('<i />')
+						.addClass('icon-plus')
+						.appendTo(cell);
+				} else if(row.hasClass('sub-collapse-header') && i == 0) {
+					$('<i />')
+						.addClass('icon-plus')
+						.appendTo(cell);
+				}
 
-			// 	if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
-			// 		$('<i />')
-			// 			.addClass('icon-plus')
-			// 			.appendTo(cell);
-			// 	} else if(row.hasClass('sub-collapse-header') && i == 0) {
-			// 		$('<i />')
-			// 			.addClass('icon-plus')
-			// 			.appendTo(cell);
-			// 	}
-
-			// 	cell.prependTo(row);
-			// }
+				cell.prependTo(row.children().first());
+			}
 		}, this);
 
 		this.$el.html(rows);
@@ -458,7 +442,12 @@ var PackageTreeTable = SpanTableTreeView.extend({
 		'Package': function(model) {
 			return model.get('format') + ' ' + model.get('name');
 		},
-		'Version': 'version',
+		'Version': function(model) {
+			return $('<input />')
+				.prop('type', 'text')
+				.addClass('input-small')
+				.val(model.get('version'));
+		},
 		'License': function(model) {
 			if(model.get('licenseURL')) {
 				return $('<a />').html(model.get('license')).prop('href', model.get('licenseURL')).prop('target', '_blank');
@@ -490,22 +479,48 @@ var PackageTreeTable = SpanTableTreeView.extend({
 /******************************
  * Settings table (tree view) *
  ******************************/
-var SettingsTreeTable = TableTreeView.extend({
+var SettingsTreeTable = SpanTableTreeView.extend({
 	header: false,
+	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
 	columns: {
 		'Setting': function(model) {
 			return model.get('title');
 		},
 		'Value': function(model) {
-			if(model.get('value') !== undefined) {
-				return $('<a />')
-					.prop('href', '#')
-					.text(model.displayValue());
-			} else {
+			if(typeof model.get('values') == 'object') {		// Values - can be select box
+				var select = $('<select />').prop('name', model.get('name'));
+
+				_.each(model.get('values'), function(text, value) {
+					var opt = $('<option />')
+						.val(value)
+						.html(text)
+
+					if(value == model.get('value')) {
+						opt.prop('selected', true);
+					}
+
+					opt.appendTo(select);
+				});
+
+				return select;
+			} else if(typeof model.get('values') === 'string') {
+				switch(model.get('values')) {
+					case 'int':
+					case 'float':
+						return $('<input />')
+							.prop('type', 'text')
+							.val(model.get('value'));
+					break;
+					default:
+						return $('<a />')
+							.prop('href', '#')
+							.html('Configure &raquo;');
+				}
+			} else {		// Generic "Configure" link
 				return $('<a />')
 					.prop('href', '#')
 					.html('Configure &raquo;');
-			}
+			}	
 		}
 	}
 });
@@ -513,8 +528,9 @@ var SettingsTreeTable = TableTreeView.extend({
 /****************************
  * Device (and group) tree  *
  ****************************/
-var DeviceTreeTable = TableTreeView.extend({
+var DeviceTreeTable = SpanTableTreeView.extend({
 	header: false,
+	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
 	columns: {
 		'Device': 'title',
 		'Serial': 'serial',

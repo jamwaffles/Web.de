@@ -301,6 +301,7 @@ table {
 		th, td {
 			&.toggle-column {
 				width: 16px;
+				padding-right: 0;
 			}
 		}
 
@@ -315,25 +316,6 @@ table {
 	&.scheduled-tasks {
 		.table;
 		.table-striped;
-	}
-
-	&.table-fluid {
-		// .spanX (@index) when (@index > 0) {
-		// 	.span@{index} { .span(@index); }
-		// 	.spanX(@index - 1);
-		// }
-
-		// #grid > .fluid > .spanX(@gridColumns);
-
-		// td, th {
-		// 	#grid > .fluid(@fluidGridColumnWidth, @fluidGridGutterWidth);
-		// }
-		th[class*="span"] {
-			padding: 0;
-			width: (@fluidGridColumnWidth * 3) + (@fluidGridGutterWidth * (3 - 1));
-
-			.box-sizing(content-box);
-		}
 	}
 
 	th.align-right {
@@ -416,6 +398,13 @@ table {
 				margin-right: 10px;
 			}
 		}
+	}
+
+	.toggle-column {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		margin-right: 10px;
 	}
 }
 
