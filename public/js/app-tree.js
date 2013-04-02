@@ -319,9 +319,7 @@ var SpanTableTreeView = Backbone.View.extend({
 		'click .collapse-header': 'toggle'
 	},
 	initialize: function(options) {
-		this.columns = options.columns !== undefined ? options.columns : this.columns;
 		this.header = options.header !== undefined ? options.header : this.header;
-		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
 
 		if(this.columnClasses.length != this.columns.length) {
 			return false;
