@@ -7,7 +7,7 @@ var localDevices = new Tree({
 			title: 'Audio',
 			children: [
 				new Device({ name: 'Dave\'s iPod', serial: '1094820175', mount: '/dev/sda1' }),
-				new Device({ name: 'Zune', serial: '0197-CD46-8PQR', mount: '/dev/sdb1' })
+				new Device({ name: 'Zune', serial: '0197-CD46-8PQR', mount: '/dev/sdb1' }),
 			]
 		}),
 		new Tree({
@@ -64,6 +64,7 @@ var software = new Tree({
 });
 
 var softwareTable = new PackageTreeTable({
+	header: false,
 	columns: [ 'span3', 'span3', 'span3', 'span3' ],
 	model: software
 });
@@ -83,3 +84,39 @@ var localScheduled = new ScheduledTasksTable({
 });
 
 $('#local-scheduled').html(localScheduled.render().el);
+
+/************
+ * Settings *
+ ************/
+var settings = new Tree({
+	children: [
+		new Tree({
+			title: 'System',
+			children: [
+				new Setting({ title: 'Language', value: 'en_US', values: { 'en_GB': 'English', 'en_US': 'English (US)', 'de_DE': 'Deutsch' } }),
+				new Setting({ title: 'Keyboard', value: 'en_US', values: { 'en_GB': 'United Kingdom', 'en_US': 'United States', 'en_US_dvor': 'United States DVORAK' } }),
+				new Setting({ title: 'Number format', value: 'en_US', values: { 'en_GB': 'United Kingdom', 'en_US': 'United States' } }),
+				new Setting({ title: 'Currency', value: 'en_US', values: { 'en_US': '$ USD ($1234.56)', 'en_GB': '£ GBP (£1234.56)', 'de_DE': '€ GER (1234,56 €' } }),
+				new Setting({ title: 'Date & Time', value: 'en_US', values: { 'en_US': 'US (28/10/2013 9:18 AM)', 'en_GB': '18/04/2013 9:18 AM', 'de_DE': 'Deutsch (2013-08-26 19:15)' } }),
+				new Setting({ title: 'Sleep', value: '10', values: 'int' }),
+			]
+		}),
+		new Tree({
+			title: 'System',
+			children: [
+				new Setting({ title: 'Theme', value: 'redmond', values: { 'murrina_orange': 'Murrina Orange', 'gnome': 'GOME Classic', 'redmond': 'Redmond' } }),
+				new Setting({ title: 'Screensaver', value: 'bubbles', values: { 'pipes_1': 'Pipes', 'bubbles': 'Blubbles', 'patrick': 'Patric Star' } }),
+			]
+		}),
+		new Tree({
+			title: 'SSH'
+		}),
+		new Tree({
+			title: 'FileZilla'
+		})
+	]
+});
+
+$('#local-settings').html(new SettingsTreeTable({
+	model: settings
+}).render().el);

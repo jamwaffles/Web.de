@@ -86,7 +86,8 @@ var Setting = BaseModel.extend({
 	defaults: {
 		'name': 'setting',
 		'title': 'Generic setting',
-		'value': undefined
+		'value': undefined,
+		'values': undefined
 	},
 	displayValue: function() {
 		var value = this.get('value');
