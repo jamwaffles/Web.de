@@ -48,7 +48,7 @@ $('#firmware-packages').html(firmwareTable.render().el);
  ************/
 var devices = new Tree([
 	new Tree({
-		title: 'Dell Dimension 8100',
+		title: 'Device',
 		children: [
 			new Tree({
 				title: 'Video',
@@ -66,21 +66,12 @@ var devices = new Tree([
 		]
 	}),
 	new Tree({
-		title: 'Butterfly Labs Jalapeno',
+		title: 'Attached',
 		children: [
-			new Tree({
-				title: 'Connectivity',
-				children: [
-					new Device({ manufacturer: 'BFL', name: 'Backplane 101-C' })
-				]
-			}),
-			new Tree({
-				title: 'Hashing Engines',
-				children: [
-					new Device({ manufacturer: 'BFL', name: 'ASIC 101-A' }),
-					new Device({ manufacturer: 'BFL', name: 'ASIC 101-B' })
-				]
-			})
+			new Device({ manufacturer: 'SanDisk', name: '64GB LiteDrive' }),
+			new Device({ manufacturer: 'Nokia', name: 'Lumia 800' }),
+			new Device({ manufacturer: 'RandCorp', name: 'USB Soundcard' }),
+			new Device({ manufacturer: 'Intel', name: 'PCI100 NIC' })
 		]
 	})
 ]);

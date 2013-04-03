@@ -777,38 +777,38 @@
 								<table class="table block table-striped table-condensed">
 									<thead>
 										<tr>
-											<th>PID</th><th>USER</th><th>PR</th><th>NI</th><th>VIRT</th><th>RES</th><th>SHR</th><th>S</th><th>%CPU</th><th>%MEM</th><th class="col-200">TIME+ COMMAND</th>
+											<th>PID</th><th>USER</th><th>PR</th><th>NI</th><th>VIRT</th><th>RES</th><th>SHR</th><th>S</th><th>%CPU</th><th>%MEM</th><th class="col-200">TIME+ COMMAND</th><th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<!-- Phwoar! Hardcoding this was a nightmare... until Sublime Text came to the rescue ;) -->
-										<tr><td>32706</td><td>root</td><td>20</td><td>0</td><td>19460</td><td>4100</td><td>3260</td><td>S</td><td>102.5</td><td>0.2</td><td>5757:33 coin-miner</td></tr>
-										<tr><td>21313</td><td>root</td><td>20</td><td>0</td><td>5388</td><td>1464</td><td>972</td><td>R</td><td>6.4</td><td>0.1</td><td>0:00.01 top</td></tr>
-										<tr><td>1</td><td>root</td><td>20</td><td>0</td><td>3496</td><td>1860</td><td>1248</td><td>S</td><td>0.0</td><td>0.1</td><td>0:02.77 init</td></tr>
-										<tr><td>2</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.28 kthreadd</td></tr>
-										<tr><td>3</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:15.38 ksoftirqd/0</td></tr>
-										<tr><td>6</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.62 migration/0</td></tr>
-										<tr><td>7</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:11.29 watchdog/0</td></tr>
-										<tr><td>8</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.66 migration/1</td></tr>
-										<tr><td>10</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:15.92 ksoftirqd/1</td></tr>
-										<tr><td>11</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:11.53 watchdog/1</td></tr>
-										<tr><td>14</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kdevtmpfs</td></tr>
-										<tr><td>16</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kworker/u:1</td></tr>
-										<tr><td>17</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:03.98 sync_supers</td></tr>
-										<tr><td>18</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.10 bdi-default</td></tr>
-										<tr><td>22</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 khubd</td></tr>
-										<tr><td>24</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:35.59 kworker/0:1</td></tr>
-										<tr><td>26</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.86 khungtaskd</td></tr>
-										<tr><td>27</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kswapd0</td></tr>
-										<tr><td>28</td><td>root</td><td>25</td><td>5</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 ksmd</td></tr>
-										<tr><td>29</td><td>root</td><td>39</td><td>19</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 khugepaged</td></tr>
-										<tr><td>30</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.04 fsnotify_mark</td></tr>
-										<tr><td>31</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 ecryptfs-kthrea</td></tr>
-										<tr><td>43</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 scsi_eh_0</td></tr>
-										<tr><td>44</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 scsi_eh_1</td></tr>
-										<tr><td>46</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kworker/u:2</td></tr>
-										<tr><td>128</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kworker/0:2</td></tr>
-										<tr><td>232</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:50.48 jbd2/sda-8</td></tr>
+										<tr><td>32706</td><td>root</td><td>20</td><td>0</td><td>19460</td><td>4100</td><td>3260</td><td>S</td><td>102.5</td><td>0.2</td><td>5757:33 coin-miner</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>21313</td><td>root</td><td>20</td><td>0</td><td>5388</td><td>1464</td><td>972</td><td>R</td><td>6.4</td><td>0.1</td><td>0:00.01 top</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>1</td><td>root</td><td>20</td><td>0</td><td>3496</td><td>1860</td><td>1248</td><td>S</td><td>0.0</td><td>0.1</td><td>0:02.77 init</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>2</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.28 kthreadd</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>3</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:15.38 ksoftirqd/0</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>6</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.62 migration/0</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>7</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:11.29 watchdog/0</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>8</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.66 migration/1</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>10</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:15.92 ksoftirqd/1</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>11</td><td>root</td><td>rt</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:11.53 watchdog/1</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>14</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kdevtmpfs</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>16</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kworker/u:1</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>17</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:03.98 sync_supers</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>18</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.10 bdi-default</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>22</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 khubd</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>24</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:35.59 kworker/0:1</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>26</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.86 khungtaskd</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>27</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kswapd0</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>28</td><td>root</td><td>25</td><td>5</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 ksmd</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>29</td><td>root</td><td>39</td><td>19</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 khugepaged</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>30</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.04 fsnotify_mark</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>31</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 ecryptfs-kthrea</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>43</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 scsi_eh_0</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>44</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 scsi_eh_1</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>46</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kworker/u:2</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>128</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:00.00 kworker/0:2</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
+										<tr><td>232</td><td>root</td><td>20</td><td>0</td><td>0</td><td>0</td><td>0</td><td>S</td><td>0.0</td><td>0.0</td><td>0:50.48 jbd2/sda-8</td><td><a href="#" title="Kill process"><i class="icon-remove-sign"></i></a></td></tr>
 									</tbody>
 								</table>
 							</dd>
@@ -882,7 +882,13 @@
 
 							<dt>
 								<div class="icon-large icon-schedule"></div>
-								<h3>Scheduled</h3>
+								<div class="row-fluid">
+									<div class="span2"><h3>Scheduled</h3></div>
+									<div class="span3"><h4>Time</h4></div>
+									<div class="span2"><h4>Description</h4></div>
+									<div class="span3"><h4>Command</h4></div>
+									<div class="span2"><h4>Status</h4></div>
+								</div>
 							</dt>
 							<dd id="local-scheduled"></dd>
 
@@ -912,177 +918,42 @@
 
 							<dt>
 								<div class="icon-large icon-linux"></div>
-								<h3>Linux</h3>
+								<div class="row-fluid">
+									<div class="span4"><h3>Linux</h3></div>
+									<div class="span8"><h4>Comment</h4></div>
+								</div>
 							</dt>
-							<dd>
-								<table class="accordion install block table">
-									<thead>
-										<tr>
-											<th></th>
-											<th>Domain/Group</th>
-											<th>Comment</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">Direct</td>
-										</tr>
-										<tr>
-											<td></td><td>WD NAS</td><td>Home backup and media</td>
-										</tr>
-										<tr>
-											<td></td><td>Raseberry Pi</td><td></td>
-										</tr>
-
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">123company.com</td>
-										</tr>
-										<tr>
-											<td></td><td>rog_lap_01</td><td>Roger's new laptop</td>
-										</tr>
-										<tr>
-											<td></td><td>Sparc S7 server</td><td></td>
-										</tr>
-									</tbody>
-								</table>
+							<dd id="network-linux">
 							</dd>
 
 							<dt>
 								<div class="icon-large icon-xinix"></div>
-								<h3>XiniX</h3>
+								<div class="row-fluid">
+									<div class="span4"><h3>XiniX</h3></div>
+									<div class="span8"><h4>Comment</h4></div>
+								</div>
 							</dt>
-							<dd>
-								<table class="accordion install block table">
-									<thead>
-										<tr>
-											<th></th>
-											<th>Domain/Group</th>
-											<th>Comment</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">Expensive Phones</td>
-										</tr>
-										<tr>
-											<td></td><td>Lumia 820</td><td></td>
-										</tr>
-										<tr>
-											<td></td><td>Nexus 4</td><td></td>
-										</tr>
-
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">Music Stuff</td>
-										</tr>
-										<tr>
-											<td></td><td>Phillips SBH9000</td><td>Bluetooth headphones - awesome</td>
-										</tr>
-										<tr>
-											<td></td><td>Foxl Speakers</td><td></td>
-										</tr>
-									</tbody>
-								</table>
+							<dd id="network-xinix">
 							</dd>
 
 							<dt>
 								<div class="icon-large icon-windows"></div>
-								<h3>Windows</h3>
+								<div class="row-fluid">
+									<div class="span4"><h3>Windows</h3></div>
+									<div class="span8"><h4>Comment</h4></div>
+								</div>
 							</dt>
-							<dd>
-								<table id="windowsNetwork" class="accordion install block table">
-									<!-- <thead>
-										<tr>
-											<th class="toggle-icon"></th>
-											<th class="toggle-icon"></th>
-											<th>Domain/Group</th>
-											<th>Comment</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td></td><td>ABCcompany.local</td><td></td>
-										</tr>
-										<tr class="sub accordion-header">
-											<td></td><td><i class="icon-plus"></i></td><td>Dan's PC</td><td></td>
-										</tr>
-										<tr class="sub-row">
-											<td></td><td></td><td>Drive C</td><td></td>
-										</tr>
-										<tr class="sub-row">
-											<td></td><td></td><td>Software</td><td></td>
-										</tr>
-										<tr class="sub-row">
-											<td></td><td></td><td>HP 895Cse</td><td></td>
-										</tr>
-
-										<tr class="sub accordion-header">
-											<td></td><td><i class="icon-plus"></i></td><td>DB Server</td><td>Our database server</td>
-										</tr>
-										<tr class="sub-row">
-											<td></td><td></td><td>Shard 0</td><td></td>
-										</tr>
-										<tr class="sub-row">
-											<td></td><td></td><td>Shard 1</td><td></td>
-										</tr>
-
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td></td><td>Workgroup</td><td></td>
-										</tr>
-										<tr>
-											<td></td><td></td><td>Ian</td><td></td>
-										</tr>
-										<tr>
-											<td></td><td></td><td>Matt</td><td></td>
-										</tr>
-									</tbody> -->
-								</table>
+							<dd id="network-windows">
 							</dd>
 
 							<dt>
 								<div class="icon-large icon-globe"></div>
-								<h3>Other</h3>
+								<div class="row-fluid">
+									<div class="span4"><h3>Other</h3></div>
+									<div class="span8"><h4>Comment</h4></div>
+								</div>
 							</dt>
-							<dd>
-								<table class="accordion install block table">
-									<thead>
-										<tr>
-											<th></th>
-											<th>Domain/Group</th>
-											<th>Comment</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">Dialup</td>
-										</tr>
-										<tr>
-											<td></td><td>AOL</td><td></td>
-										</tr>
-										<tr>
-											<td></td><td>AT&amp;T</td><td></td>
-										</tr>
-
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">SSH Tunnels</td>
-										</tr>
-										<tr>
-											<td></td><td>Imgurian.org</td><td>My VPS</td>
-										</tr>
-										<tr>
-											<td></td><td>Home NAS</td><td>The WD NAS box under the telly</td>
-										</tr>
-
-										<tr class="accordion-header">
-											<td><i class="icon-plus"></i></td><td colspan="100">VPN</td>
-										</tr>
-										<tr>
-											<td></td><td>A magical place</td><td></td>
-										</tr>
-										<tr>
-											<td></td><td>The hills</td><td></td>
-										</tr>
-									</tbody>
-								</table>
+							<dd id="network-other">
 							</dd>
 						</dl>
 					</div>

@@ -26,6 +26,16 @@ var Tree = Backbone.Model.extend({
 	}
 });
 
+var FixedTreeHeader = Backbone.View.extend({
+	tagName: 'div',
+	className: 'fixed',
+	render: function() {
+		this.$el.html(this.model.get('title'));
+
+		return this;
+	}
+});
+
 var TreeHeader = Backbone.View.extend({
 	tagName: 'div',
 	className: 'toggle',
@@ -84,6 +94,7 @@ var SubTreeView = Backbone.View.extend({
 var TreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
+	top: true,
 	events: {
 		'click div.toggle': 'toggleTree',
 		'click a': 'triggerAction'
@@ -107,6 +118,10 @@ var TreeView = Backbone.View.extend({
 		}
 	},
 	render: function() {
+		if(this.top && this.model.get('title') !== undefined) {
+			this.$el.append(new FixedTreeHeader({ model: this.model }).render().el);
+		}
+
 		this.model.get('children').each(function(item) {
 			var li = $('<li />');
 
@@ -542,6 +557,23 @@ var DeviceTreeTable = SpanTableTreeView.extend({
 		}
 	}
 });
+
+/************************
+ * Network device tree  *
+ ************************/
+var NetworkTreeTable = SpanTableTreeView.extend({
+	header: false,
+	columnClasses: [ 'span4', 'span8' ],
+	columns: {
+		'Name': function(model) {
+			return model.get('name');
+		},
+		'Comment': function(model) {
+			return model.get('comment');
+		}
+	}
+});
+
 
 /***********
  * Sandbox *
