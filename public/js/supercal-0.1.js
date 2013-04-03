@@ -87,19 +87,22 @@
 			drawPopupCalendar: function(selectedDate, replace) {
 				selectedDate = selectedDate || now;
 
-				var div;
+				var container, div;
 
-				if($(this).next('.supercal-popup').length) {
-					div = $(this).next('.supercal-popup');
+				if($(this).parent('.supercal-popup-wrapper').length) {
+					container = $(this).parent();
+					div = $(this).parent().find('.supercal-popup');
 					div.empty();
 				} else {
-					div = $('<div />');
-					div
+					container = $('<div />').addClass('supercal-popup-wrapper');
+					div = $('<div />')
 						.addClass('supercal supercal-popup')
 						.width($(this).outerWidth(true));
 
-					$(this).after(div);
+					$(this).wrap(container);
 				}
+
+				$(this).after(div);
 
 				if(options.hidden) {
 					div.hide();
@@ -120,6 +123,8 @@
 				$(this).data('date', selectedDate);
 				div.data('element', this);
 
+				$(this).parent().wrap($('<div />').addClass('supercal-affix'));
+				
 				return this;
 			},
 			drawHeader: function(date) {
@@ -307,17 +312,14 @@
 					})
 					// Popups
 					.on('click.supercal', '.supercal-popup-trigger', function(e) {
-						$(this).addClass('supercal-open');
-
-						$(this).next('.supercal-popup').show();
+						var wrapper = $(this).parent('.supercal-popup-wrapper').addClass('supercal-open');
+						wrapper.find('.supercal-popup').show();
 					})
 					.on('click.supercal', function(e) {
 						var target = $(e.target);
 
-						if(!target.closest('.supercal').length) {
-							$('.supercal-popup-trigger.supercal-open')
-								.removeClass('supercal-open')
-								.next('.supercal-popup').hide();
+						if(!target.closest('.supercal-popup-wrapper').length) {
+							$('.supercal-popup-wrapper.supercal-open').removeClass('supercal-open').find('.supercal-popup').hide();
 						}
 					})
 					.on('click.supercal', '.supercal td', function() {

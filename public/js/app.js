@@ -12,8 +12,9 @@ $('input.slider').mrslyde({
 	snap: false
 });
 
-$('table .datepicker').supercal({
-	mode: 'popup'
+$('table, .fluid-table').find('.datepicker').supercal({
+	mode: 'popup',
+	dayHeader: false
 }).on('dateselect', function(e, date) {
 	var self = $(e.currentTarget);
 
