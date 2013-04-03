@@ -14,8 +14,7 @@ $('input.slider').mrslyde({
 
 $('table, .fluid-table').find('.datepicker').supercal({
 	mode: 'popup',
-	dayHeader: false,
-	shortMonths: true
+	dayHeader: false
 }).on('dateselect', function(e, date) {
 	var self = $(e.currentTarget);
 

@@ -577,9 +577,17 @@ ul.tree {
 	position: relative;
 
 	.supercal-popup-wrapper {
+		input {
+			.transition(min-width 0.4s ease-in-out);
+		}
+
 		&.supercal-open {
 			position: absolute;
 			z-index: 1;
+
+			input {
+				min-width: 206px;
+			}
 
 			&:before {
 				content: "";
@@ -603,6 +611,10 @@ ul.tree {
 
 			.supercal-header {
 				margin-top: 10px;
+			}
+
+			.supercal-popup {
+				min-width: 220px;
 			}
 		}
 	}
