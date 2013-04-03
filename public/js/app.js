@@ -114,24 +114,10 @@ $('dl.accordion').on('click', '> dt:not(.href)', function() {
 	$(this).siblings('dt.open').removeClass('open');
 });
 
-// Table "accordion"
-$('table.accordion').on('click', 'tr.accordion-header', function() {
-	$(this).find('i').first().toggleClass('icon-plus icon-minus');
-
-	if(!$(this).hasClass('sub')) {		// Top level
-		$(this).nextUntil('.accordion-header:not(.sub)').not('.sub-row').toggle();
-	} else {		// Sub level
-		$(this).nextUntil('.accordion-header').filter('.sub-row').toggle();
-	}
+// Stop Action title buttons toggling the action
+$('#dln dl.accordion').on('click', ' > dt button', function(e) {
+	e.stopPropagation();
 });
-
-// Tree views
-// $('.tree').find('.toggle.expanded').next('ul').show();
-
-// $('.tree.tree-top').on('click', '.toggle', function() {
-// 	$(this).toggleClass('expanded');
-// 	$(this).next('ul').toggle();
-// });
 
 /* Mouse scroll */
 /* TODO: Plugin-ify and optimise */

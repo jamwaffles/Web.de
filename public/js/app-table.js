@@ -125,11 +125,13 @@ var SpanTableRow = Backbone.View.extend({
 	cellData: {},
 	columnClasses: [],
 	rendered: false,
+	checkbox: false,
 	initialize: function(options) {
 		this.cellData = {};		// Really not sure why this has to be here
 
 		this.columns = _.keys(options.columns !== undefined ? options.columns : this.columns);
 		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
+		this.checkbox = options.checkbox !== undefined ? options.checkbox : this.checkbox;
 
 		_.each(options.columns, function(column, key) {
 			if(typeof column === 'function') {
@@ -143,11 +145,17 @@ var SpanTableRow = Backbone.View.extend({
 		if(!this.rendered) {
 			var index = 0;
 
-			_.each(this.cellData, function(value, foo, bar) {
-				$('<div />')
+			_.each(this.cellData, function(value) {
+				var cell = $('<div />')
 					.addClass(this.columnClasses[index])
 					.html(value)
 					.appendTo(this.$el);
+
+				if(this.checkbox && index == 0) {
+					$('<label />')
+						.html($('<input />').prop('type', 'checkbox'))
+						.prependTo(cell);
+				}
 
 				index++;
 			}, this);
@@ -165,11 +173,13 @@ var SpanTable = Backbone.View.extend({
 	tagName: 'div',
 	columns: {},
 	columnClasses: [],
+	checkboxes: false,
 	header: true,
 	initialize: function(options) {
 		this.columns = options.columns !== undefined ? options.columns : this.columns;
 		this.header = options.header !== undefined ? options.header : this.header;
 		this.columnClasses = options.columnClasses !== undefined ? options.columnClasses : this.columnClasses;
+		this.checkboxes = options.checkboxes !== undefined ? options.checkboxes : this.checkboxes;
 
 		if(this.columnClasses.length != this.columns.length) {
 			return false;
@@ -196,7 +206,7 @@ var SpanTable = Backbone.View.extend({
 
 		// Data
 		this.collection.each(function(item) {
-			this.$el.append(new SpanTableRow({ model: item, columns: this.columns, columnClasses: this.columnClasses }).render().el);
+			this.$el.append(new SpanTableRow({ model: item, checkbox: this.checkboxes, columns: this.columns, columnClasses: this.columnClasses }).render().el);
 		}, this);
 
 		return this;
@@ -206,8 +216,9 @@ var SpanTable = Backbone.View.extend({
 /* Packages table */
 var PackageTable = SpanTable.extend({
 	className: 'package container-fluid fluid-table striped hover',
-	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
+	columnClasses: [ 'span3', 'span2', 'span2', 'span5' ],
 	header: false,
+	checkboxes: true,
 	columns: {
 		'Name': function(model) {
 			return model.get('format') + ' ' + model.get('name');
@@ -248,6 +259,7 @@ var PackageTable = SpanTable.extend({
 
 /* Scheduled tasks table */
 var ScheduledTasksTable = SpanTable.extend({
+	checkboxes: true,
 	className: 'scheduled-tasks container-fluid fluid-table striped',
 	columnClasses: [ 'span2', 'span3', 'span2', 'span3', 'span2' ],
 	header: false,

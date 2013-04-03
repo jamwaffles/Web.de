@@ -1,32 +1,75 @@
 /************
  * Accounts *
  ************/
-var users = new Tree({
+var deviceUsers = new Tree({
+	title: 'Device',
+	children: [
+		new User(),
+		new User(),
+		new User(),
+		new User()
+	]
+});
+
+var persons = new Tree({
+	title: 'Person',
 	children: [
 		new Tree({
-			title: 'Users',
+			title: 'Administrators',
+			children: [
+				new User(),
+				new User()
+			]
+		}),
+		new Tree({
+			title: 'Guests',
+			children: [
+				new User(),
+				new User()
+			]
+		})
+	]
+});
+
+var users = new Tree({
+	open: true,
+	children: [
+		new Tree({
+			title: 'Device',
 			children: [
 				new User(),
 				new User(),
+				new User(),
+				new User()
+			]
+		}),
+		new Tree({
+			title: 'Person',
+			children: [
 				new Tree({
-					title: 'More users',
+					title: 'Administrators',
+					children: [
+						new User(),
+						new User()
+					]
+				}),
+				new Tree({
+					title: 'Guests',
 					children: [
 						new User(),
 						new User()
 					]
 				})
 			]
-		}),
-		new User(),
-		new User()
+		})
 	]
 });
 
-var treeView = new TreeView({
+var usersView = new TreeView({
 	model: users
 });
 
-$('#users-list').html(treeView.render().el);
+$('#users-list').html(usersView.render().el);
 
 /************
  * Firmware *

@@ -72,14 +72,21 @@ var TreeItem = Backbone.View.extend({
 var SubTreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree',
+	open: false,
 	render: function() {
 		this.model.get('children').each(function(item) {
 			var li = $('<li />');
 
 			if(item instanceof Tree) {
-				li.html(new TreeHeader({ model: item }).render().el);
+				var header = new TreeHeader({ model: item }).render().$el;
+				var subtree = new SubTreeView({ model: item }).render().$el;
 
-				li.append(new SubTreeView({ model: item }).render().el);
+				if(this.model.get('open')) {
+					header.addClass('expanded');
+					subtree.show();
+				}
+
+				li.html([ header, subtree ]);
 
 				this.$el.append(li);
 			} else {
@@ -94,13 +101,14 @@ var SubTreeView = Backbone.View.extend({
 var TreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
-	top: true,
+	open: false,
 	events: {
 		'click div.toggle': 'toggleTree',
 		'click a': 'triggerAction'
 	},
 	initialize: function(options) {
 		this.nodeSelect = options.nodeSelect;
+		this.open = options.open !== undefined ? options.open : this.open;
 	},
 	toggleTree: function(e) {
 		var self = $(e.currentTarget);
@@ -118,7 +126,7 @@ var TreeView = Backbone.View.extend({
 		}
 	},
 	render: function() {
-		if(this.top && this.model.get('title') !== undefined) {
+		if(this.model.get('title') !== undefined) {
 			this.$el.append(new FixedTreeHeader({ model: this.model }).render().el);
 		}
 
@@ -126,9 +134,15 @@ var TreeView = Backbone.View.extend({
 			var li = $('<li />');
 
 			if(item instanceof Tree) {
-				li.html(new TreeHeader({ model: item }).render().el);
+				var header = new TreeHeader({ model: item }).render().$el;
+				var subtree = new SubTreeView({ model: item }).render().$el;
 
-				li.append(new SubTreeView({ model: item }).render().el);
+				if(this.model.get('open')) {
+					header.addClass('expanded');
+					subtree.show();
+				}
+
+				li.html([ header, subtree ]);
 
 				this.$el.append(li);
 			} else {
@@ -330,6 +344,7 @@ var SpanTableTreeView = Backbone.View.extend({
 	columns: {},
 	columnClasses: [],
 	header: true,
+	checkboxes: false,
 	depth: 0,
 	events: {
 		'click .sub-collapse-header': 'subToggle',
@@ -337,6 +352,7 @@ var SpanTableTreeView = Backbone.View.extend({
 	},
 	initialize: function(options) {
 		this.header = options.header !== undefined ? options.header : this.header;
+		// this.checkboxes = options.checkboxes !== undefined ? options.checkboxes : this.checkboxes;
 
 		if(this.columnClasses.length != this.columns.length) {
 			return false;
@@ -423,7 +439,7 @@ var SpanTableTreeView = Backbone.View.extend({
 			rows.unshift(new SpanTableHeader({ columns: this.columns, columnClasses: this.columnClasses }).render().$el);
 		}
 
-		// Add expand/contract (or empty filler) cells
+		// Add expand/contract (or empty filler) cells, and checkboxes if enabled
 		_.each(rows, function(row) {
 			for(var i = 0; i < this.depth; i++) {
 				var cell = $('<div />').addClass('toggle-column');
@@ -435,6 +451,12 @@ var SpanTableTreeView = Backbone.View.extend({
 				} else if(row.hasClass('sub-collapse-header') && i == 0) {
 					$('<i />')
 						.addClass('icon-plus')
+						.appendTo(cell);
+				} else if(this.checkboxes) {
+					cell = $('<label />');
+
+					$('<input />')
+						.prop('type', 'checkbox')
 						.appendTo(cell);
 				}
 
@@ -452,7 +474,8 @@ var SpanTableTreeView = Backbone.View.extend({
  * Package tree *
  ****************/
 var PackageTreeTable = SpanTableTreeView.extend({
-	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
+	checkboxes: true,
+	columnClasses: [ 'span3', 'span2', 'span2', 'span5' ],
 	columns: {
 		'Package': function(model) {
 			return model.get('format') + ' ' + model.get('name');
