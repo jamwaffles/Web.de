@@ -476,6 +476,28 @@ var SpanTableTreeView = Backbone.View.extend({
 var PackageTreeTable = SpanTableTreeView.extend({
 	checkboxes: true,
 	columnClasses: [ 'span3', 'span2', 'span2', 'span5' ],
+	events: {
+		'change select': 'action',
+		'click .sub-collapse-header': 'subToggle',
+		'click .collapse-header': 'toggle'
+	},
+	action: function(e) {
+		var self = $(e.currentTarget);
+		var action = self.val();
+		var model = this.model.getNode(self.data('id'));
+
+		if(!action) {
+			return;
+		}
+
+		if(confirm('Really ' + action + ' ' + model.get('name') + '?')) {
+			if(model[action] !== undefined) {
+				model[action]();
+			}
+
+			self.next().html(new ActionProgressView({ value: 0.4 }).render().el);
+		}
+	},
 	columns: {
 		'Package': function(model) {
 			return model.get('format') + ' ' + model.get('name');
@@ -507,7 +529,12 @@ var PackageTreeTable = SpanTableTreeView.extend({
 				return this.value == model.get('state');
 			}).prop('disabled', true);
 
+			select.data('id', model.cid);
+
 			select.appendTo(form);
+
+			// Progress meter container
+			form.append($('<div />').addClass('progress-container'));
 
 			return form;
 		}

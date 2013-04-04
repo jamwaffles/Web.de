@@ -18,7 +18,7 @@ var Package = BaseModel.extend({
 	install: function() {
 		console.log('Install', this.get('name'));
 	},
-	uninstall: function() {
+	remove: function() {
 		console.log('Uninstall', this.get('name'));
 	},
 	copy: function() {
