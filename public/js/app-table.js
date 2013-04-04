@@ -252,6 +252,9 @@ var PackageTable = SpanTable.extend({
 
 			select.appendTo(form);
 
+			// Progress meter
+			form.append(new ActionProgressView({ value: 0.4 }).render().el);
+
 			return form;
 		}
 	}
