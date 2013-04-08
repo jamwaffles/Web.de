@@ -223,12 +223,7 @@ var deviceSettings = new Tree([
 		title: 'Settings',
 		children: [
 			new Setting({ title: 'Updates', value: '13 available' }),
-			new Setting({ title: 'Child lock', value: false })
-		]
-	}),
-	new Tree({
-		title: 'Firmware',
-		children: [
+			new Setting({ title: 'Child lock', value: false }),
 			new Package({ title: 'GNU' }),
 			new Package({ title: 'Busybox' }),
 			new Package({ title: 'Toolkit' })

@@ -91,7 +91,7 @@ $('#local-scheduled').html(localScheduled.render().el);
 var settings = new Tree({
 	children: [
 		new Tree({
-			title: 'System',
+			title: 'Account',
 			children: [
 				new Setting({ title: 'Language', value: 'en_US', values: { 'en_GB': 'English', 'en_US': 'English (US)', 'de_DE': 'Deutsch' } }),
 				new Setting({ title: 'Keyboard', value: 'en_US', values: { 'en_GB': 'United Kingdom', 'en_US': 'United States', 'en_US_dvor': 'United States DVORAK' } }),
@@ -99,20 +99,20 @@ var settings = new Tree({
 				new Setting({ title: 'Currency', value: 'en_US', values: { 'en_US': '$ USD ($1234.56)', 'en_GB': '£ GBP (£1234.56)', 'de_DE': '€ GER (1234,56 €' } }),
 				new Setting({ title: 'Date & Time', value: 'en_US', values: { 'en_US': 'US (28/10/2013 9:18 AM)', 'en_GB': '18/04/2013 9:18 AM', 'de_DE': 'Deutsch (2013-08-26 19:15)' } }),
 				new Setting({ title: 'Sleep', value: '10', values: 'int' }),
-			]
-		}),
-		new Tree({
-			title: 'System',
-			children: [
 				new Setting({ title: 'Theme', value: 'redmond', values: { 'murrina_orange': 'Murrina Orange', 'gnome': 'GOME Classic', 'redmond': 'Redmond' } }),
 				new Setting({ title: 'Screensaver', value: 'bubbles', values: { 'pipes_1': 'Pipes', 'bubbles': 'Blubbles', 'patrick': 'Patric Star' } }),
 			]
 		}),
 		new Tree({
-			title: 'SSH'
-		}),
-		new Tree({
-			title: 'FileZilla'
+			title: 'Software',
+			children: [
+				new Tree({
+					title: 'SSH'
+				}),
+				new Tree({
+					title: 'FileZilla'
+				})
+			]
 		})
 	]
 });
