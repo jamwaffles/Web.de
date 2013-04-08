@@ -89,34 +89,58 @@ $('#firmware-packages').html(firmwareTable.render().el);
 /************
  * Hardware *
  ************/
-var devices = new Tree([
-	new Tree({
-		title: 'Device',
-		children: [
-			new Tree({
-				title: 'Video',
-				children: [
-					new Device({ manufacturer: 'nVidia', name: 'nVidia GTX 560 OC' })
-				]
-			}),
-			new Tree({
-				title: 'Audio',
-				children: [
-					new Device({ manufacturer: 'Creative', name: 'Sound Blaster Audigy SE' }),
-					new Device({ manufacturer: 'Phillips', name: 'SBH 400 USB' })
-				]
-			})
-		]
-	}),
-	new Tree({
-		title: 'Attached',
-		children: [
-			new Device({ manufacturer: 'SanDisk', name: '64GB LiteDrive' }),
-			new Device({ manufacturer: 'Nokia', name: 'Lumia 800' }),
-			new Device({ manufacturer: 'RandCorp', name: 'USB Soundcard' }),
-			new Device({ manufacturer: 'Intel', name: 'PCI100 NIC' })
-		]
-	})
+ var devices = new Tree([
+ 	new Tree({
+ 		title: 'Device',
+ 		children: [
+ 		new Tree({
+ 			title: 'Video',
+ 			children: [
+ 			new Device({ manufacturer: 'nVidia', name: 'nVidia GTX 560 OC' })
+ 			]
+ 		}),
+ 		new Tree({
+ 			title: 'Audio',
+ 			children: [
+ 			new Device({ manufacturer: 'Creative', name: 'Sound Blaster Audigy SE' }),
+ 			new Device({ manufacturer: 'Phillips', name: 'SBH 400 USB' })
+ 			]
+ 		})
+ 		]
+ 	}),
+ 	new Tree({
+ 		title: 'Attached',
+ 		children: [
+	 		new Tree({
+	 			title: 'Audio',
+	 			children: [
+	 			new Device({ name: 'Dave\'s iPod', serial: '1094820175', mount: '/dev/sda1' }),
+	 			new Device({ name: 'Zune', serial: '0197-CD46-8PQR', mount: '/dev/sdb1' }),
+	 			]
+	 		}),
+	 		new Tree({
+	 			title: 'Printers &amp; Scanners',
+	 			children: [
+	 			new Device({ name: 'HP 895CSe', serial: '0sdf87shdf0', mount: '/dev/hp' }),
+	 			new Device({ name: 'Mustek Bearpaw 1200 Plus', serial: '89DF:864C', mount: '/dev/scanner' })
+	 			]
+	 		}),
+	 		new Tree({
+	 			title: 'Storage',
+	 			children: [
+	 			new Device({ name: 'Seagate Lifebook 1TB', serial: 'SEAG-LB1TB', mount: '/dev/sdb1' }),
+	 			new Device({ name: 'Kingston DataTraveller 16GB', serial: 'KGDT-16e9', mount: '/dev/sdc1' })
+	 			]
+	 		}),
+	 		new Tree({
+	 			title: 'Video',
+	 			children: [
+	 			new Device({ name: 'Nokia Lumia 820', serial: '8C4F673A', mount: '/dev/cam0' }),
+	 			new Device({ name: 'Microsoft Lifecam Cinema', serial: 'MSLC-47638', mount: '/dev/video0' })
+	 			]
+	 		})
+ 		]
+ 	})
 ]);
 
 $('#hardware-device').html(new TreeView({ 

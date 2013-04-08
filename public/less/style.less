@@ -573,12 +573,10 @@ ul.tree {
 
 .supercal-affix {
 	position: relative;
+	display: inline-block;
+	vertical-align: top;
 
-	.supercal-popup-wrapper {
-		input {
-			.transition(min-width 0.4s ease-in-out);
-		}
-
+	.supercal-popup-wrapper {		
 		&.supercal-open {
 			position: absolute;
 			z-index: 1;

@@ -9,7 +9,7 @@ var TableRow = Backbone.View.extend({
 
 		_.each(options.columns, function(column, key) {
 			if(typeof column === 'function') {
-				this.cellData[column] = column.call(this.model, this.model);
+				this.cellData[column] = column.call(this, this.model);
 			} else {
 				this.cellData[column] = this.model.get(column);
 			}
@@ -135,7 +135,7 @@ var SpanTableRow = Backbone.View.extend({
 
 		_.each(options.columns, function(column, key) {
 			if(typeof column === 'function') {
-				this.cellData[column] = column.call(this.model, this.model);
+				this.cellData[column] = column.call(this, this.model);
 			} else {
 				this.cellData[column] = this.model.get(column);
 			}

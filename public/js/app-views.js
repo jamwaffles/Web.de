@@ -144,25 +144,32 @@ var PackageTable = SpanTable.extend({
 var ScheduledTasksTable = SpanTable.extend({
 	checkboxes: true,
 	className: 'scheduled-tasks container-fluid fluid-table striped',
-	columnClasses: [ 'span2', 'span3', 'span2', 'span3', 'span2' ],
+	columnClasses: [ 'span3', 'span5', 'span2', 'span2' ],
 	header: false,
 	showAddNew: true,
 	columns: {
-		'Date': function(model) {
-			return moment(model.get('time')).format('ddd MMMM Do');
-		},
-		'Time': function(model) {
-			return moment(model.get('time')).format('h:mm A');
-		},
-		'Description': 'description',
 		'Command': function(model) {
-			return $('<code />').html(model.get('command'));
+			// return $('<code />').html(model.get('command'));
+
+			return $('<input />')
+				.prop('type', 'text')
+				.prop('name', 'command')
+				.prop('placeholder', 'Command');
+		},
+		'Epoch': function(model) {
+			return moment(model.get('time')).format('ddd MMMM Do h:mm A');
+		},
+		'Queue': function(model) {
+			return $('<input />')
+				.prop('type', 'text')
+				.addClass('input-mini')
+				.val('a');
 		},
 		'Status': function(model) {
 			switch(model.get('status')) {
 				case 'ran':
 					return 'Already run';
-				case 'runing':
+				case 'running':
 					return 'Running';
 				default:
 					return 'Not running';
@@ -180,14 +187,24 @@ var ScheduledTasksTable = SpanTable.extend({
 		if(this.showAddNew) {
 			var row = $('<div />').addClass('add-new form-inline row-fluid');
 
+			// Command
+			$('<div />')
+				.addClass(this.columnClasses[0])
+				.html($('<input />')
+					.prop('type', 'text')
+					.prop('name', 'command')
+					.prop('placeholder', 'Command')
+				)
+				.appendTo(row);
+
 			// Date
 			var date = $('<input />')
 				.prop('name', 'date')
 				.prop('type', 'text')
-				.prop('placeholder', 'Date to run task')
-				.addClass('datepicker input-medium');
+				.prop('placeholder', 'Date to run')
+				.addClass('datepicker-popup input-small');
 
-			$('<div />').addClass(this.columnClasses[0]).html(date).appendTo(row);
+			// $('<div />').addClass(this.columnClasses[0]).html(date).appendTo(row);
 
 			// Time
 			var hour = $('<select />').addClass('input-mini').prop('name', 'time-hour');
@@ -206,7 +223,13 @@ var ScheduledTasksTable = SpanTable.extend({
 				$('<option />').val(i).text(text).appendTo(minute);
 			}
 
-			ampm = $('<select />')
+			var second = $('<input />')
+				.prop('name', 'seconds')
+				.prop('type', 'text')
+				.val('00')
+				.addClass('input-mini');
+
+			var ampm = $('<select />')
 				.addClass('input-mini')
 				.prop('name', 'ampm')
 				.append([
@@ -214,32 +237,21 @@ var ScheduledTasksTable = SpanTable.extend({
 					$('<option />').val('pm').text('PM')
 				]);
 
-			$('<div />').addClass(this.columnClasses[1]).html([ hour, ' : ', minute, ' ', ampm ]).appendTo(row);
+			$('<div />').addClass(this.columnClasses[1]).html([ date, ' ', hour, ' : ', minute, ' : ', second, ' ', ampm ]).appendTo(row);
 
-			// Description
+			// Queue
 			$('<div />')
 				.addClass(this.columnClasses[2])
 				.html($('<input />')
 					.prop('type', 'text')
-					.prop('name', 'description')
-					.prop('placeholder', 'Description')
-					.addClass('input-medium')
-				)
-				.appendTo(row);
-
-			// Command
-			$('<div />')
-				.addClass(this.columnClasses[3])
-				.html($('<input />')
-					.prop('type', 'text')
-					.prop('name', 'command')
-					.prop('placeholder', 'Command')
+					.prop('name', 'queue')
+					.addClass('input-mini')
 				)
 				.appendTo(row);
 
 			// Add button
 			$('<div />')
-				.addClass(this.columnClasses[4])
+				.addClass(this.columnClasses[3])
 				.html($('<button />')
 					.addClass('btn btn-primary')
 					.prop('name', 'save')
