@@ -37,6 +37,10 @@
 		  user-select: @select;
 }
 
+.progress-inverse .bar {
+	#gradient > .vertical(@btnInverseBackground, @btnInverseBackgroundHighlight);
+}
+
 html {
 	cursor: default;
 }
@@ -414,6 +418,10 @@ ul {
 
 		> span.pull-right {
 			padding-bottom: 8px;
+
+			div + div {
+				margin-top: 14px;
+			}
 		}
 	}
 }

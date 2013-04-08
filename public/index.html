@@ -220,7 +220,11 @@
 											<strong>Public IP</strong> <span class="pull-right">192.168.1.1</span>
 										</li>
 										<li>
-											<strong>Private IP</strong> <span class="pull-right">192.168.1.1<br>192.168.2.41</span>
+											<strong>Private IP</strong>
+											<span class="pull-right">
+												<div>192.168.1.1</div>
+												<div>192.168.2.41</div>
+											</span>
 										</li>
 										<li>
 											<strong>Subnet</strong> <span class="pull-right">255.255.255.0</span>
@@ -250,7 +254,7 @@
 											<strong>Device MAC</strong> <span class="pull-right">90:2B:34:93:7C:E4</span>
 										</li>
 										<li class="form-inline">
-											<label><strong>IP Assignment</strong></label> 
+											<strong>IP Assignment</strong>
 											<span class="pull-right">
 												<!-- <select class="input-small">
 													<option value="">Auto</option>
@@ -278,7 +282,11 @@
 											<strong>Public IP</strong> <span class="pull-right">192.168.1.1</span>
 										</li>
 										<li>
-											<strong>Private IP</strong> <span class="pull-right">192.168.1.1<br>192.168.2.41</span>
+											<strong>Private IP</strong> 
+											<span class="pull-right">
+												<div>192.168.1.1</div>
+												<div>192.168.2.41</div>
+											</span>
 										</li>
 										<li>
 											<strong>Subnet</strong> <span class="pull-right">255.255.255.0</span>
@@ -305,7 +313,7 @@
 											<strong>Device MAC</strong> <span class="pull-right">80:2C:44:93:9C:B4</span>
 										</li>
 										<li class="form-inline">
-											<label><strong>IP Assignment</strong></label> 
+											<strong>IP Assignment</strong>
 											<span class="pull-right">
 												<!-- <select class="input-small">
 													<option value="">Auto</option>
@@ -360,10 +368,16 @@
 						<div class="slideout-close">
 							<a href="#"><i class="icon-remove"></i></a>
 
-							<div class="slideout-header">Battery power: 85%</div>
+							<div class="slideout-header">Battery Life: 1h 17m</div>
 						</div>
 
 						<ul class="unstyled">
+							<li>
+								<h6>Battery</h6>
+								<div title="40%, 1h 17m remaining" class="progress progress-striped">
+									<div class="bar" style="width: 40%;"></div>
+								</div>
+							</li>
 							<li>
 								<h6>PCM</h6>
 								<input class="slider" type="text">
@@ -381,6 +395,17 @@
 
 								<div class="progress">
 									<div class="bar" style="width: 60%;"></div>
+								</div>
+							</li>
+
+							<li>
+								<h6>Printer Ink</h6>
+
+								<div title="Black" class="progress progress-inverse">
+									<div class="bar" style="width: 85%;"></div>
+								</div>
+								<div title="Color" class="progress">
+									<div class="bar" style="width: 75%;"></div>
 								</div>
 							</li>
 						</ul>
