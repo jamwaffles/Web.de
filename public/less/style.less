@@ -728,11 +728,10 @@ ul.tree {
 		left: 0 !important;
 		opacity: 1 !important;
 
-		.box-shadow(0px 0px 25px rgba(0, 0, 0, 0.4));
-
 		&.slideout-right {
 			left: auto !important;
 			right: 0 !important;
+			border-left: 1px solid #ccc;
 		}
 	}
 
@@ -889,8 +888,13 @@ ul.tree {
 			padding: 0 @padding;
 		}
 
+		strong {
+			color: @grayLight;
+		}
+
 		ul {
 			margin-left: 5px;
+			padding-left: 5px;
 
 			& + ul {
 				margin-top: 10px;
