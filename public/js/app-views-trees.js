@@ -3,7 +3,7 @@
  ****************/
 var PackageTreeTable = SpanTableTreeView.extend({
 	checkboxes: true,
-	columnClasses: [ 'span3', 'span2', 'span2', 'span5' ],
+	columnClasses: [ 'span5', 'span2', 'span2', 'span3' ],
 	events: {
 		'change select': 'action',
 		'click .sub-collapse-header': 'subToggle',

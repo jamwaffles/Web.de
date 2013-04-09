@@ -65,7 +65,6 @@ var software = new Tree({
 
 var softwareTable = new PackageTreeTable({
 	header: false,
-	columns: [ 'span3', 'span3', 'span3', 'span3' ],
 	model: software
 });
 

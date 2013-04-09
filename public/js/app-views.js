@@ -74,7 +74,7 @@ var ActionProgressView = Backbone.View.extend({
 /* Packages table */
 var PackageTable = SpanTable.extend({
 	className: 'package container-fluid fluid-table striped hover',
-	columnClasses: [ 'span3', 'span2', 'span2', 'span5' ],
+	columnClasses: [ 'span5', 'span2', 'span2', 'span3' ],
 	header: false,
 	checkboxes: true,
 	events: {

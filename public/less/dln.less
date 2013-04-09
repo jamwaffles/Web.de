@@ -87,11 +87,9 @@
 							}
 						}
 
-						&.hide-buttons {
-							button {
-								top: -20px;
-								opacity: 0;
-							}
+						button {
+							top: 3px;
+							opacity: 1;
 						}
 					}
 
@@ -132,15 +130,10 @@
 					button {
 						vertical-align: text-bottom;
 						position: relative;
-						top: 3px;
-					}
+						top: -20px;
+						opacity: 0;
 
-					&.hide-buttons {
-						button {
-							opacity: 1;
-
-							.transition(e('opacity 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000), top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000)'));
-						}
+						.transition(e('opacity 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000), top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000)'));
 					}
 				}
 				> dd {
