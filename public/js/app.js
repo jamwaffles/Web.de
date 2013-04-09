@@ -21,6 +21,12 @@ $('.datepicker-popup').supercal({
 	self.val(moment(date).format('L'));
 });
 
+$(".gridster > ul").gridster({
+	widget_margins: [10, 10],
+	autogenerate_stylesheet: false/*,
+	widget_base_dimensions: [140, 140]*/
+});
+
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };
