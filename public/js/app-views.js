@@ -35,19 +35,6 @@ var ActionProgressView = Backbone.View.extend({
 		var self = this;
 
 		this.$el.find('.progress').toggleClass('active progress-striped progress-warning');
-
-		// Dummy fadeout effect
-		setTimeout(function() {
-			self.$el.fadeOut(function() {
-				$(this).empty().html('Cancelled').fadeIn(function() {
-					var msg = $(this);
-
-					setTimeout(function() {
-						msg.fadeOut();
-					}, 1000);
-				});
-			});
-		}, 500);
 	},
 	render: function() {
 		this.$el.hide();
@@ -78,13 +65,16 @@ var PackageTable = SpanTable.extend({
 	header: false,
 	checkboxes: true,
 	events: {
-		'change select': 'action'
+		'change select': 'action',
+		'click a.cancel': 'cancelAction'
 	},
 	action: function(e) {
 		var self = $(e.currentTarget);
 		var action = self.val();
-		var model = this.collection.get(self.data('id'));
-
+		var form = self.parent();
+		var progress = form.next();
+		var model = this.collection.get(form.find('select').data('id'));
+		
 		if(!action) {
 			return;
 		}
@@ -94,8 +84,19 @@ var PackageTable = SpanTable.extend({
 				model[action]();
 			}
 
-			self.next().html(new ActionProgressView({ value: 0.4 }).render().el);
+			form.hide();
+			progress.html(new ActionProgressView({ value: 0.4 }).render().el).show();
 		}
+	},
+	cancelAction: function(e) {
+		var self = $(e.currentTarget);
+		var progress = self.parent().parent();
+		var form = progress.prev();
+		var model = this.collection.get(form.find('select').data('id'));
+
+		progress.fadeOut(function() {
+			form.fadeIn();	
+		});
 	},
 	columns: {
 		'Name': function(model) {
@@ -115,7 +116,7 @@ var PackageTable = SpanTable.extend({
 			}
 		},
 		'Actions': function(model) {
-			var form = $('<div />').addClass('form-inline');
+			var form = $('<div />');
 
 			var select = $('<select />').append([
 				$('<option />').val('').text('Choose action...'),
@@ -133,9 +134,7 @@ var PackageTable = SpanTable.extend({
 			select.appendTo(form);
 
 			// Progress meter container
-			form.append($('<div />').addClass('progress-container'));
-
-			return form;
+			return $('<div />').addClass('form-inline').html([ form, $('<div />').addClass('progress-container').hide() ]);
 		}
 	}
 });

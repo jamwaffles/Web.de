@@ -7,11 +7,14 @@ var PackageTreeTable = SpanTableTreeView.extend({
 	events: {
 		'change select': 'action',
 		'click .sub-collapse-header': 'subToggle',
-		'click .collapse-header': 'toggle'
+		'click .collapse-header': 'toggle',
+		'click a.cancel': 'cancelAction'
 	},
 	action: function(e) {
 		var self = $(e.currentTarget);
 		var action = self.val();
+		var form = self.parent();
+		var progress = form.next();
 		var model = this.model.getNode(self.data('id'));
 
 		if(!action) {
@@ -23,8 +26,19 @@ var PackageTreeTable = SpanTableTreeView.extend({
 				model[action]();
 			}
 
-			self.next().html(new ActionProgressView({ value: 0.4 }).render().el);
+			form.hide();
+			progress.html(new ActionProgressView({ value: 0.4 }).render().el).show();
 		}
+	},
+	cancelAction: function(e) {
+		var self = $(e.currentTarget);
+		var progress = self.parent().parent();
+		var form = progress.prev();
+		var model = this.model.getNode(form.find('select').data('id'));
+
+		progress.fadeOut(function() {
+			form.fadeIn();	
+		});
 	},
 	columns: {
 		'Package': function(model) {
@@ -44,7 +58,7 @@ var PackageTreeTable = SpanTableTreeView.extend({
 			}
 		},
 		'Actions': function(model) {
-			var form = $('<div />').addClass('form-inline');
+			var form = $('<div />');
 
 			var select = $('<select />').append([
 				$('<option />').val('').text('Choose action...'),
@@ -62,9 +76,7 @@ var PackageTreeTable = SpanTableTreeView.extend({
 			select.appendTo(form);
 
 			// Progress meter container
-			form.append($('<div />').addClass('progress-container'));
-
-			return form;
+			return $('<div />').addClass('form-inline').html([ form, $('<div />').addClass('progress-container').hide() ]);
 		}
 	}
 });
