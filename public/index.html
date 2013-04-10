@@ -518,15 +518,30 @@
 				</li>
 				
 				<!-- Search box -->
-				<li class="search">
-					<input type="text" name="search" placeholder="What do you want to do?">
+				<li id="omnibox">
+					<div>
+						<div class="search">
+							<input type="text" name="search" placeholder="What do you want to do?">
 
-					<a href="#mic"><i class="icon-microphone"></i></a>
+							<a href="#mic"><i class="icon-microphone"></i></a>
+						</div>
+
+						<ul class="results">
+							<li><a class="Selected" href="#">Result</a></li>
+							<li><a href="#">Result</a></li>
+							<li><a href="#">Result</a></li>
+						</ul>								
+					</div>
 				</li>
 			</ul>
 		</div>
 
 		<div id="main">
+			<div class="panel terminal">
+				<div class="output"></div>
+				<div class="console"></div>
+			</div>
+
 			<div class="panel iframe" data-menu="help">
 				<iframe src="http://wiki.cliquesoft.org/index.php?title=XiniX"></iframe>
 			</div>
