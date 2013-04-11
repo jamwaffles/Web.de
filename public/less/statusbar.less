@@ -247,6 +247,19 @@
 	float: none !important;
 	border: none !important;
 
+	&.open {
+		.search:before {
+			content: "";
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: @gradBotColour;
+			position: absolute;
+			z-index: 2;
+		}
+	}
+
 	> div {
 		overflow-y: visible;
 
@@ -259,17 +272,6 @@
 			position: relative;
 
 			.box-sizing(border-box);
-
-			&:before {
-				content: "";
-				bottom: 0;
-				left: 0;
-				right: 0;
-				height: 1px;
-				background: @gradBotColour;
-				position: absolute;
-				z-index: 2;
-			}
 
 			input[name="search"] {
 				background: #ddd;
@@ -313,32 +315,38 @@
 
 		.results {
 			background: @gradBotColour;
-			margin: 0;
-			padding: 10px 0;
-			list-style: none;
+			display: none;
 
 			#gradient > .vertical(@gradBotColour, @gradTopColour);
 			.border-bottom-radius(@baseBorderRadius);
 
-			li {
-				+ li {
-					margin-top: 2px;
-				}
+			ul {
+				margin: 0;
+				padding: 10px 0;
+				list-style: none;
 
-				a {
-					padding: 4px 18px;
-					display: block;
-					color: #fff;
-					text-decoration: none;
-
-					&:hover {
-						background: #333;
-						background: rgba(255, 255, 255, 0.3);
-					}
+				li {
+					// + li {
+					// 	margin-top: 2px;
+					// }
 
 					&.selected {
-						background: #333;
-						background: rgba(255, 255, 255, 0.15);
+						a {
+							background: #333;
+							background: rgba(255, 255, 255, 0.3);
+						}
+					}
+
+					a {
+						padding: 4px 18px;
+						display: block;
+						color: #fff;
+						text-decoration: none;
+
+						&:hover {
+							background: #333;
+							background: rgba(255, 255, 255, 0.35);
+						}
 					}
 				}
 			}

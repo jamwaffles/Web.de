@@ -521,23 +521,25 @@
 				<li id="omnibox">
 					<div>
 						<div class="search">
-							<input type="text" name="search" placeholder="What do you want to do?">
+							<input autocomplete="off" type="text" name="search" placeholder="What do you want to do?">
 
 							<a href="#mic"><i class="icon-microphone"></i></a>
 						</div>
 
-						<ul class="results">
-							<li><a class="Selected" href="#">Result</a></li>
-							<li><a href="#">Result</a></li>
-							<li><a href="#">Result</a></li>
-						</ul>								
+						<div class="results">
+							<ul>
+								<li><a href="#">Result</a></li>
+								<li><a href="#">Result</a></li>
+								<li><a href="#">Result</a></li>
+							</ul>								
+						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
 
 		<div id="main">
-			<div class="panel terminal">
+			<div id="console" class="panel terminal">
 				<div class="output"></div>
 				<div class="console"></div>
 			</div>
@@ -1087,6 +1089,7 @@
 		<!-- Bootstrap plugins -->
 		<script src="js/bootstrap/bootstrap-tooltip.js"></script>
 		<script src="js/bootstrap/bootstrap-modal.js"></script>
+		<script src="js/bootstrap/bootstrap-typeahead.js"></script>
 
 		<!-- Libs -->
 		<script src="js/underscore-1.4.4.js"></script>

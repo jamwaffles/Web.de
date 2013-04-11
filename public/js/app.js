@@ -27,6 +27,58 @@ $(".gridster > ul").gridster({
 	widget_base_dimensions: [140, 140]*/
 });
 
+$('#omnibox input[name="search"]').on('keyup', function(e) {
+	var string = $(this).val();
+	var realm = '';
+	var omnibox = $('#omnibox');
+	var results = omnibox.find('.results');
+	var terminal = $('#console');
+	var items = results.find('li');
+	var selectedItem = items.filter('.selected');
+
+	if(!string.length || e.which == 27) {
+		omnibox.removeClass('open');
+		results.slideUp(200);
+		terminal.hide();
+
+		return;
+	}
+
+	switch(string[0]) {
+		case '$':
+			realm = 'console';
+		case '#':
+			realm = 'root';
+		default:
+			realm = 'search';
+	}
+
+	if(realm !== 'search') {
+		omnibox.removeClass('open');
+		results.slideUp(200);
+		terminal.show();
+	} else {
+		if(selectedItem.index() > (items.length - 1)) {
+			items.last().addClass('selected').siblings().removeClass('selected');
+		} else if(!selectedItem.length) {
+			items.first().addClass('selected');
+		}
+
+		omnibox.addClass('open');
+		results.slideDown(200);
+		terminal.hide();
+	}
+
+	// Arrow keys
+	if(selectedItem != items.first() && e.which === 38) {		// Up
+		console.log("Up");
+		selectedItem.prev().addClass('selected').siblings().removeClass('selected');
+	} else if(selectedItem != items.last() && e.which === 40) {		// Down
+		console.log("Down");
+		selectedItem.next().addClass('selected').siblings().removeClass('selected');
+	}
+});
+
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };
