@@ -1,7 +1,3 @@
-_.templateSettings = {
-	interpolate : /\{\$(.+?)\}/g
-};
-
 $('[data-toggle="tooltip"]').tooltip();
 $('#statusbar > ul').tooltip({
 	placement: 'bottom',

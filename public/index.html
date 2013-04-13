@@ -519,7 +519,7 @@
 				
 				<!-- Search box -->
 				<li id="omnibox">
-					<div>
+					<!-- <div>
 						<div class="search">
 							<input autocomplete="off" type="text" name="search" placeholder="What do you want to do?">
 
@@ -533,7 +533,7 @@
 								<li><a href="#">Result</a></li>
 							</ul>								
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 		</div>
@@ -1047,6 +1047,21 @@
 				
 			</ul>
 		</div>
+
+		<!-- Backbone templates -->
+		<script type="text/template" id="template-omnibox">
+			<div>
+				<div class="search">
+					<input autocomplete="off" type="text" name="search" placeholder="What do you want to do?">
+
+					<a href="#mic"><i class="icon-microphone"></i></a>
+				</div>
+
+				<div class="results">
+					{$list}								
+				</div>
+			</div>
+		</script>
 
 		<script src="js/jquery-1.9.1.js"></script>
 

@@ -1,3 +1,7 @@
+_.templateSettings = {
+	interpolate : /\{\$(.+?)\}/g
+};
+
 var BaseModel = Backbone.Model.extend({
 	
 });
