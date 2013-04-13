@@ -19,7 +19,7 @@ var tempResponse = {
 
 function demoMatch(searchTerm) {
 	return _.filter(tempResponse.matches, function(item) {
-		return item.toLowerCase().indexOf(searchTerm.toLowerCase()) !== false;
+		return item.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
 	});
 }
 
@@ -73,7 +73,20 @@ $('#omnibox input[name="search"]').on('keyup', function(e) {
 		}
 
 		// Fill box with results
-		
+		var list = $('<ul />');
+
+		_.each(matches, function(item) {
+			var li = $('<li />');
+
+			$('<a />')
+				.prop('href', '#')
+				.text(item)
+				.appendTo(li);
+
+			li.appendTo(this);
+		}, list);
+
+		results.children('ul').replaceWith(list);
 	}
 
 	// Arrow keys
