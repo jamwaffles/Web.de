@@ -19,11 +19,12 @@ var tempResponse = {
 
 function demoMatch(searchTerm) {
 	return _.filter(tempResponse.matches, function(item) {
-		return item.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+		return item.match(new RegExp('.*' + searchTerm + '.*', 'i'));
 	});
 }
 
-$('#omnibox input[name="search"]').on('keyup', function(e) {
+$('#omnibox input[name="search"]')
+.on('keyup', function(e) {
 	var string = $(this).val();
 	var realm = '';
 	var omnibox = $('#omnibox');
@@ -32,9 +33,9 @@ $('#omnibox input[name="search"]').on('keyup', function(e) {
 	var items = results.find('li');
 	var selectedItem = items.filter('.selected');
 
-	if(!string.length || e.which == 27) {
+	if(!string.length || e.which == 27 || string.length < 3) {
 		omnibox.removeClass('open');
-		results.slideUp(200);
+		results.hide();
 		terminal.hide();
 
 		return;
@@ -51,9 +52,9 @@ $('#omnibox input[name="search"]').on('keyup', function(e) {
 
 	if(realm !== 'search') {
 		omnibox.removeClass('open');
-		results.slideUp(200);
+		results.hide();
 		terminal.show();
-	} else {
+	} else if(e.which !== 38 && e.which !== 40) {
 		if(selectedItem.index() > (items.length - 1)) {
 			items.last().addClass('selected').siblings().removeClass('selected');
 		} else if(!selectedItem.length) {
@@ -61,7 +62,7 @@ $('#omnibox input[name="search"]').on('keyup', function(e) {
 		}
 
 		omnibox.addClass('open');
-		results.slideDown(200);
+		results.show();
 		terminal.hide();
 
 		// Show matches
@@ -90,9 +91,34 @@ $('#omnibox input[name="search"]').on('keyup', function(e) {
 	}
 
 	// Arrow keys
-	if(selectedItem != items.first() && e.which === 38) {		// Up
-		selectedItem.prev().addClass('selected').siblings().removeClass('selected');
-	} else if(selectedItem != items.last() && e.which === 40) {		// Down
-		selectedItem.next().addClass('selected').siblings().removeClass('selected');
+	if(selectedItem.length) {
+		if(selectedItem != items.first() && e.which === 38) {		// Up
+			selectedItem.prev().addClass('selected').siblings().removeClass('selected');
+		} else if(selectedItem != items.last() && e.which === 40) {		// Down
+			selectedItem.next().addClass('selected').siblings().removeClass('selected');
+		}
+	} else {
+		switch(e.which) {
+			case 38:
+				items.last().addClass('selected');
+			break;
+			case 40:
+				items.first().addClass('selected');
+			break;
+		}
 	}
+
+	// Handle enter key
+	if(selectedItem.length && e.which === 13) {
+		// Break actual do-stuff functionality out into separate function. This has to be called on mouse click as well
+		alert("Chosen " + selectedItem.text());
+		results.hide();
+		$(this).val('');
+	}
+});
+
+$('#omnibox').on('click', 'li > a', function() {
+	alert("Chosen " + $(this).text());
+	$(this).closest('div').hide();
+	$('#omnibox').find('input').val('');
 });
