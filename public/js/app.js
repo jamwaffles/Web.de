@@ -23,6 +23,12 @@ $(".gridster > ul").gridster({
 	widget_base_dimensions: [140, 140]*/
 });
 
+$('#open-filebrowser').on('click', function() {
+	new FileBrowser({
+		el: $('#filebrowser')
+	});
+});
+
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };

@@ -1,0 +1,34 @@
+.file-tree {
+	font-size: 12px;
+
+	i {
+		padding-right: 5px;
+		vertical-align: text-bottom;
+	}
+	a {
+		text-decoration: none;
+		color: @textColor;
+		display: block;
+		padding: 2px;
+
+		&:hover {
+			background: #eee;
+
+			.border-radius(2px);
+		}
+	}
+	input[type="checkbox"] {
+		margin: 0;
+		margin-bottom: 1px;
+		margin-right: 5px;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		padding-left: 16px;
+
+		.transition(all 0.5s ease-in-out);
+	}
+}
