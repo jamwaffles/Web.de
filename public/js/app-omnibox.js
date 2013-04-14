@@ -140,7 +140,7 @@ var Omnibox = Backbone.View.extend({
 		this.onSelect();
 	},
 	onSelect: function() {
-		console.log(this.resultsView.getSelected().get('name'));
+		this.setValue(this.resultsView.getSelected().get('name'));
 
 		this.hideResults();
 	},
@@ -155,7 +155,12 @@ var Omnibox = Backbone.View.extend({
 
 		return this;
 	},
+	setValue: function(value) {
+		this.$el.find('input').val(value);
+	},
 	getMatches: function(searchTerm) {
+		// Note: This should probably move to the collection's fetch() method when the API is used
+
 		var numMatches = 0;
 		var resultsList = [
 			'foo',
