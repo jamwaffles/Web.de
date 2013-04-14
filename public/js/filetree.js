@@ -11,13 +11,32 @@ var File = Backbone.Model.extend({
 		created: new Date,
 		modified: new Date,
 		size: 1234,
-		path: ''
+		path: '',
+		permissions: 755,
+		permissionsString: '-rwxr-xr-x'
+	},
+	details: function() {
+		return {
+			'MIME': this.get('mime'),
+			'Permissions': this.get('permissionsString'),
+			'Modified': this.get('modified'),
+			'Created': this.get('created'),
+		};
 	}
 });
 var Symlink = Backbone.Model.extend({
 	defaults: {
 		source: '/path/to/symlink',
-		name: 'Symlink'
+		name: 'Symlink',
+		permissions: 755,
+		permissionsString: '-rwxr-xr-x'
+	},
+	details: function() {
+		return {
+			'Permissions': this.get('permissionsString'),
+			'Modified': this.get('modified'),
+			'Created': this.get('created'),
+		};
 	}
 });
 var Folder = Backbone.Model.extend({
@@ -25,18 +44,30 @@ var Folder = Backbone.Model.extend({
 		children: [],
 		mime: null,
 		size: 4096,
-		path: '/'
+		path: '/',
+		created: new Date,
+		modified: new Date,
+		permissions: 755,
+		permissionsString: 'drwxr-xr-x'
 	},
 	initialize: function(options) {
 		if(!(options.children instanceof Folder)) {
 			this.set('children', new Backbone.Collection(options.children));
 		}
+	},
+	details: function() {
+		return {
+			'Permissions': this.get('permissionsString'),
+			'Modified': this.get('modified'),
+			'Created': this.get('created'),
+		};
 	}
 });
 
 var FileView = Backbone.View.extend({
 	icon: null,
 	checkboxes: true,
+	details: true,
 	tagName: 'li',
 	initialize: function() {
 		this.icon = 'fam fam-' + iconMap[this.model.get('mime')];
@@ -72,6 +103,43 @@ var SymlinkView = FileView.extend({
 	icon: 'link',
 	initialize: function() { }
 });
+var FolderTitle = Backbone.View.extend({
+	checkboxes: true,
+	details: true,
+	rendered: false,
+	title: 'Root',
+	tagName: 'div',
+	className: 'toggle',
+	initialize: function() {
+		this.render();
+
+		return this;
+	},
+	render: function() {
+		if(!this.rendered) {
+			var title = $('<a />')
+				.prop('href', '#')
+				.text(this.title);
+
+			$('<i />')
+				.addClass('fam ' + (this.title === 'Root' ? 'fam-folder_open' : 'fam-folder'))
+				.prependTo(title);
+
+			if(this.checkboxes) {
+				$('<input />')
+					.prop('type', 'checkbox')
+					.val('todo')
+					.prependTo(title);
+			}
+
+			this.$el.html(title);
+		}
+
+		this.rendered = true;
+
+		return this;
+	}
+});
 
 // File tree view
 var FileTree = Backbone.View.extend({
@@ -79,6 +147,7 @@ var FileTree = Backbone.View.extend({
 	className: 'file-tree',
 	rendered: false,
 	checkboxes: true,
+	details: true,
 	events: {
 		'click .toggle': 'toggleTree',
 		'click input[type="checkbox"]': 'toggleCheckbox'
@@ -102,32 +171,13 @@ var FileTree = Backbone.View.extend({
 
 		self.closest('.toggle').next('ul').find('input[type="checkbox"]').prop('checked', self.prop('checked'));
 	},
-	renderTitle: function() {
-		var title = $('<a />')
-			.prop('href', '#')
-			.text('Root')
-			.addClass('toggle');
-
-		$('<i />')
-			.addClass('fam fam-folder_open')
-			.prependTo(title);
-
-		if(this.checkboxes) {
-			$('<input />')
-				.prop('type', 'checkbox')
-				.val('todo')
-				.prependTo(title);
-		}
-
-		return title;
-	},
 	render: function() {
 		if(this.rendered) {
 			return this;
 		}
 
 		// Title
-		this.renderTitle().appendTo(this.$el);
+		this.$el.append(new FolderTitle().el);
 
 		// Children
 		var ul = $('<ul />');
@@ -153,34 +203,16 @@ var FileSubTree = Backbone.View.extend({
 	tagName: 'li',
 	title: 'Folder',
 	checkboxes: true,
+	details: true,
 	parentPath: '/',
 	initialize: function() {
 		this.render();
 
 		return this;
 	},
-	renderTitle: function(text) {
-		var title = $('<a />')
-			.prop('href', '#')
-			.text(this.title)
-			.addClass('toggle');
-
-		$('<i />')
-			.addClass('fam fam-folder')
-			.prependTo(title);
-
-		if(this.checkboxes) {
-			$('<input />')
-				.prop('type', 'checkbox')
-				.val('todo')
-				.prependTo(title);
-		}
-
-		return title;
-	},
 	render: function() {
 		// Title
-		this.renderTitle().appendTo(this.$el);
+		this.$el.append(new FolderTitle().el);
 
 		var ul = $('<ul />').hide();
 
