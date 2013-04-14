@@ -42,9 +42,10 @@ var Symlink = Backbone.Model.extend({
 var Folder = Backbone.Model.extend({
 	defaults: {
 		children: [],
+		title: '',
 		mime: null,
 		size: 4096,
-		path: '/',
+		path: '',
 		created: new Date,
 		modified: new Date,
 		permissions: 755,
@@ -110,7 +111,9 @@ var FolderTitle = Backbone.View.extend({
 	title: 'Root',
 	tagName: 'div',
 	className: 'toggle',
-	initialize: function() {
+	initialize: function(options) {
+		this.title = options.title !== undefined ? options.title : this.title;
+
 		this.render();
 
 		return this;
@@ -162,7 +165,7 @@ var FileTree = Backbone.View.extend({
 
 		self.next('ul').toggle();
 		self.toggleClass('expanded');
-		self.children('i').toggleClass('fam-folder fam-folder_open');
+		self.find('i').toggleClass('fam-folder fam-folder_open');
 	},
 	toggleCheckbox: function(e) {
 		e.stopPropagation();
@@ -177,7 +180,7 @@ var FileTree = Backbone.View.extend({
 		}
 
 		// Title
-		this.$el.append(new FolderTitle().el);
+		this.$el.append(new FolderTitle({ title: 'Root' }).el);
 
 		// Children
 		var ul = $('<ul />');
@@ -201,10 +204,8 @@ var FileTree = Backbone.View.extend({
 // Sub-trees of a file tree
 var FileSubTree = Backbone.View.extend({
 	tagName: 'li',
-	title: 'Folder',
 	checkboxes: true,
 	details: true,
-	parentPath: '/',
 	initialize: function() {
 		this.render();
 
@@ -212,7 +213,7 @@ var FileSubTree = Backbone.View.extend({
 	},
 	render: function() {
 		// Title
-		this.$el.append(new FolderTitle().el);
+		this.$el.append(new FolderTitle({ title: this.model.get('title') }).el);
 
 		var ul = $('<ul />').hide();
 
@@ -238,7 +239,7 @@ var BrowserPane = Backbone.View.extend({
 
 // Logic
 var testFiles = new Folder({
-	name: '',
+	title: '',
 	children: [
 		new Folder({
 			title: 'Device',
