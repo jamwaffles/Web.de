@@ -196,8 +196,23 @@ var FileTree = Backbone.View.extend({
 		e.stopPropagation();
 
 		var self = $(e.currentTarget);
+		var li = self.closest('li');
+		var state = self.prop('checked');
+		var thisIndex = li.index();
+		var that = li.siblings('.last-selected')
+		var thatIndex = that.index();
 
-		self.closest('.toggle').next('ul').find('input[type="checkbox"]').prop('checked', self.prop('checked'));
+		li.addClass('last-selected').siblings('.last-selected').removeClass('last-selected');
+
+		self.closest('.toggle').next('ul').find('input[type="checkbox"]').prop('checked', state);
+
+		if(e.shiftKey && thatIndex !== -1) {
+			var rangeStart = Math.min(thisIndex, thatIndex);
+			var rangeEnd = Math.max(thisIndex, thatIndex);
+			var items = li.closest('ul').children();
+
+			items.slice(rangeStart, rangeEnd).find('input[type="checkbox"]').prop('checked', state);
+		}
 	},
 	render: function() {
 		if(this.rendered) {
@@ -264,7 +279,7 @@ var BrowserPane = Backbone.View.extend({
 
 // Logic
 var testFiles = new Folder({
-	title: '',
+	title: 'Root',
 	children: [
 		new Folder({
 			title: 'Device',
@@ -272,6 +287,29 @@ var testFiles = new Folder({
 				new Folder({
 					title: 'dev',
 					children: [
+						new File({ name: 'ttyUSB0' }),
+						new File({ name: 'tty0' }),
+						new File({ name: 'ttyUSB0' }),
+						new File({ name: 'tty0' })
+					]
+				})
+			]
+		}),
+		new Folder({
+			title: 'usr',
+			children: [
+				new File({ name: 'Test file 3' }),
+				new File({ name: 'Test file 4' })
+			]
+		}),
+		new Folder({
+			title: 'Device',
+			children: [
+				new Folder({
+					title: 'dev',
+					children: [
+						new File({ name: 'ttyUSB0' }),
+						new File({ name: 'tty0' }),
 						new File({ name: 'ttyUSB0' }),
 						new File({ name: 'tty0' })
 					]
