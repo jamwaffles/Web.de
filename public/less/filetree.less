@@ -9,18 +9,33 @@
 		text-decoration: none;
 		color: @textColor;
 		display: block;
-		padding: 2px 4px;
+		padding: 2px 4px 2px 24px;
+		position: relative;
 
 		&:hover {
 			background: #eee;
 
 			.border-radius(2px);
 		}
+		&:after {
+			content: "";
+			clear: both;
+			display: block;
+		}
 	}
 	input[type="checkbox"] {
 		margin: 0;
-		margin-bottom: 1px;
-		margin-right: 5px;
+		position: absolute;
+		top: 5px;
+		left: 5px;
+	}
+
+	.name {
+		display: inline-block;
+		width: 200px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
 
 	.details {
@@ -35,7 +50,7 @@
 				font-family: monospace;
 			}
 			&[title="Created"], &[title="Modified"] {
-				width: 130px;
+				width: 65px;
 			}
 		}
 	}
@@ -46,6 +61,8 @@
 		list-style: none;
 		padding-left: 20px;
 
-		.transition(all 0.5s ease-in-out);
+		li {
+			clear: both;
+		}
 	}
 }

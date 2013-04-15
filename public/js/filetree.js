@@ -19,8 +19,8 @@ var File = Backbone.Model.extend({
 		return {
 			'MIME': this.get('mime'),
 			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L HH:mm:ss'),
-			'Created': moment(this.get('created')).format('L HH:mm:ss'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L'),
 		};
 	}
 });
@@ -34,8 +34,8 @@ var Symlink = Backbone.Model.extend({
 	details: function() {
 		return {
 			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L HH:mm:ss'),
-			'Created': moment(this.get('created')).format('L HH:mm:ss'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L'),
 		};
 	}
 });
@@ -75,8 +75,8 @@ var Folder = Backbone.Model.extend({
 	details: function() {
 		return {
 			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L HH:mm:ss'),
-			'Created': moment(this.get('created')).format('L HH:mm:ss'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L'),
 		};
 	}
 });
@@ -109,7 +109,9 @@ var FileView = Backbone.View.extend({
 
 		// Name
 		$('<span />')
+			.addClass('name')
 			.text(this.model.get('name'))
+			.prop('title', this.model.get('name'))
 			.appendTo(link);
 
 		// Details
@@ -305,7 +307,7 @@ var testFiles = new Folder({
 					children: [
 						new File({ name: 'ttyUSB0' }),
 						new File({ name: 'tty0' }),
-						new File({ name: 'ttyUSB0' }),
+						new File({ name: 'ttyUSB0 gdfgsfdhdfhjdfhdfhgdfghdfhgdfghdfghdfghfdgfgh' }),
 						new File({ name: 'tty0' })
 					]
 				})
@@ -326,7 +328,7 @@ var testFiles = new Folder({
 					children: [
 						new File({ name: 'ttyUSB0' }),
 						new File({ name: 'tty0' }),
-						new File({ name: 'ttyUSB0' }),
+						new File({ name: 'ttyUSB0 gdfgsfdhdfhjdfhdfhgdfghdfhgdfghdfghdfghfdgfgh' }),
 						new File({ name: 'tty0' })
 					]
 				})
