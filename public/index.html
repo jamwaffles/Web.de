@@ -1069,6 +1069,29 @@
 			</div>
 		</script>
 
+		<script type="text/template" id="template-filetree-file">
+			<a href="#"><input type="checkbox" value="todo">
+				<i class="fam fam-{$icon}"></i><span class="name" title="{$filename}">{$filename}</span>
+				<span class="details">{$details}</span>
+
+				<div class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><span>
+							<strong>Created</strong><span>{$created}</span>
+							<strong>Modified</strong><span>{$modified}</span>
+							<strong>Size</strong><span>{$size}</span>
+							<strong>Owner</strong><span>{$owner}</span>
+						</span></li>
+						<li class="divider"></li>
+						<li><a href="#">Run</a></li>
+						<li><a href="#">Edit</a></li>
+						<li><a href="#">Copy</a></li>
+					</ul>
+				</div>
+			</a>
+		</script>
+
 		<script src="js/jquery-1.9.1.js"></script>
 
 		<!-- jQuery plugins -->
@@ -1080,6 +1103,7 @@
 		<script src="js/bootstrap/bootstrap-tooltip.js"></script>
 		<script src="js/bootstrap/bootstrap-modal.js"></script>
 		<script src="js/bootstrap/bootstrap-typeahead.js"></script>
+		<script src="js/bootstrap/bootstrap-dropdown.js"></script>
 
 		<!-- Libs -->
 		<script src="js/underscore-1.4.4.js"></script>

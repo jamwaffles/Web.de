@@ -1,28 +1,6 @@
 .file-tree {
 	font-size: 12px;
 
-	i {
-		padding-right: 5px;
-		vertical-align: text-bottom;
-	}
-	a {
-		text-decoration: none;
-		color: @textColor;
-		display: block;
-		padding: 2px 4px 2px 24px;
-		position: relative;
-
-		&:hover {
-			background: #eee;
-
-			.border-radius(2px);
-		}
-		&:after {
-			content: "";
-			clear: both;
-			display: block;
-		}
-	}
 	input[type="checkbox"] {
 		margin: 0;
 		position: absolute;
@@ -32,27 +10,29 @@
 
 	.name {
 		display: inline-block;
-		max-width: 200px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
 	}
 
 	.details {
-		float: right;
+		display: block;
 
 		span {
 			display: inline-block;
-			text-align: right;
 			margin-right: 15px;
-
-			&[title="Permissions"] {
-				font-family: monospace;
-			}
-			&[title="Created"], &[title="Modified"] {
-				width: 65px;
-			}
+			width: 65px;
+			color: @grayLight;
+			font-size: 12px;
 		}
+	}
+
+	.dropdown {
+		z-index: 2;
+		position: absolute;
+		right: 5px;
+		top: 50%;
+		margin-top: -8px;
 	}
 
 	ul {
@@ -63,6 +43,31 @@
 
 		li {
 			clear: both;
+			position: relative;
+
+			> a {
+				text-decoration: none;
+				color: @textColor;
+				display: block;
+				padding: 2px 4px 2px 24px;
+				position: relative;
+
+				&:hover {
+					background: #eee;
+
+					.border-radius(2px);
+				}
+				&:after {
+					content: "";
+					clear: both;
+					display: block;
+				}
+
+				> i {
+					padding-right: 5px;
+					vertical-align: text-bottom;
+				}
+			}
 		}
 	}
 }

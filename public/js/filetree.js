@@ -1,3 +1,13 @@
+Number.prototype.toHuman = function() {
+	if(this > 1000) {
+		return this + ' KB';
+	} else if(this > 1000000) {
+		return this + ' MB';
+	} else {
+		return this + ' B';
+	}
+}
+
 var iconMap = {
 	'text/plain': 'page_white_text',
 	'text/html': 'page_white_code',
@@ -13,7 +23,8 @@ var File = Backbone.Model.extend({
 		size: 1234,
 		path: '',
 		permissions: 755,
-		permissionsString: '-rwxr-xr-x'
+		permissionsString: '-rwxr-xr-x',
+		owner: 'James'
 	},
 	details: function() {
 		return {
@@ -83,52 +94,35 @@ var Folder = Backbone.Model.extend({
 
 var FileView = Backbone.View.extend({
 	icon: null,
+	template: _.template($('#template-filetree-file').html()),
 	checkboxes: true,
 	details: true,
 	tagName: 'li',
 	initialize: function() {
-		this.icon = 'fam fam-' + iconMap[this.model.get('mime')];
-
 		this.render();
 	},
 	render: function() {
-		var link = $('<a />').prop('href', '#');
-
-		// Checkbox
-		if(this.checkboxes) {
-			$('<input />')
-				.prop('type', 'checkbox')
-				.val('todo')
-				.appendTo(link);
-		}
-
-		// Icon
-		$('<i />')
-			.addClass(this.icon)
-			.appendTo(link);
-
-		// Name
-		$('<span />')
-			.addClass('name')
-			.text(this.model.get('name'))
-			.prop('title', this.model.get('name'))
-			.appendTo(link);
-
 		// Details
-		if(this.details) {
-			var details = $('<span />').addClass('details');
+		var detailsList = $('<span />').addClass('details');
 
+		if(this.details) {
 			_.each(this.model.details(), function(value, title) {
 				$('<span />')
 					.text(value)
 					.prop('title', title)
-					.appendTo(details);
+					.appendTo(detailsList);
 			});
-
-			details.appendTo(link);
 		}
 
-		this.$el.html(link);
+		this.$el.html(this.template({
+			icon: iconMap[this.model.get('mime')],
+			filename: this.model.get('name'),
+			details: detailsList.html(),
+			created: this.model.get('created'),
+			modified: this.model.get('modified'),
+			size: this.model.get('size'),
+			owner: this.model.get('owner')
+		}));
 
 		return this;
 	}
