@@ -55,6 +55,22 @@ var Folder = Backbone.Model.extend({
 		if(!(options.children instanceof Folder)) {
 			this.set('children', new Backbone.Collection(options.children));
 		}
+
+		// Set paths of all children _only_ if this is the parent node (with no title)
+		if(!this.get('title')) {
+			this.setChildPaths();
+		}
+	},
+	setChildPaths: function() {
+		this.get('children').each(function(item) {
+			if(item instanceof Folder) {
+				item.set('path', this.get('path') + '/' + item.get('title'));
+
+				item.setChildPaths();
+			} else {
+				item.set('path', this.get('path'));
+			}
+		}, this);
 	},
 	details: function() {
 		return {
@@ -91,6 +107,7 @@ var FileView = Backbone.View.extend({
 			.addClass(this.icon)
 			.appendTo(link);
 
+		// Name
 		$('<span />')
 			.text(this.model.get('name'))
 			.appendTo(link);
@@ -279,7 +296,6 @@ var BrowserPane = Backbone.View.extend({
 
 // Logic
 var testFiles = new Folder({
-	title: 'Root',
 	children: [
 		new Folder({
 			title: 'Device',
