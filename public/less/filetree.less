@@ -23,6 +23,23 @@
 		margin-right: 5px;
 	}
 
+	.details {
+		float: right;
+
+		span {
+			display: inline-block;
+			text-align: right;
+			margin-right: 10px;
+
+			&[title="Permissions"] {
+				font-family: monospace;
+			}
+			&[title="Created"], &[title="Modified"] {
+				width: 130px;
+			}
+		}
+	}
+
 	ul {
 		margin: 0;
 		padding: 0;

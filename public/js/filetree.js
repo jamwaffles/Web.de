@@ -19,8 +19,8 @@ var File = Backbone.Model.extend({
 		return {
 			'MIME': this.get('mime'),
 			'Permissions': this.get('permissionsString'),
-			'Modified': this.get('modified'),
-			'Created': this.get('created'),
+			'Modified': moment(this.get('modified')).format('L HH:mm:ss'),
+			'Created': moment(this.get('created')).format('L HH:mm:ss'),
 		};
 	}
 });
@@ -34,8 +34,8 @@ var Symlink = Backbone.Model.extend({
 	details: function() {
 		return {
 			'Permissions': this.get('permissionsString'),
-			'Modified': this.get('modified'),
-			'Created': this.get('created'),
+			'Modified': moment(this.get('modified')).format('L HH:mm:ss'),
+			'Created': moment(this.get('created')).format('L HH:mm:ss'),
 		};
 	}
 });
@@ -59,8 +59,8 @@ var Folder = Backbone.Model.extend({
 	details: function() {
 		return {
 			'Permissions': this.get('permissionsString'),
-			'Modified': this.get('modified'),
-			'Created': this.get('created'),
+			'Modified': moment(this.get('modified')).format('L HH:mm:ss'),
+			'Created': moment(this.get('created')).format('L HH:mm:ss'),
 		};
 	}
 });
@@ -95,6 +95,20 @@ var FileView = Backbone.View.extend({
 			.text(this.model.get('name'))
 			.appendTo(link);
 
+		// Details
+		if(this.details) {
+			var details = $('<span />').addClass('details');
+
+			_.each(this.model.details(), function(value, title) {
+				$('<span />')
+					.text(value)
+					.prop('title', title)
+					.appendTo(details);
+			});
+
+			details.appendTo(link);
+		}
+
 		this.$el.html(link);
 
 		return this;
@@ -108,12 +122,9 @@ var FolderTitle = Backbone.View.extend({
 	checkboxes: true,
 	details: true,
 	rendered: false,
-	title: 'Root',
 	tagName: 'div',
 	className: 'toggle',
 	initialize: function(options) {
-		this.title = options.title !== undefined ? options.title : this.title;
-
 		this.render();
 
 		return this;
@@ -122,10 +133,10 @@ var FolderTitle = Backbone.View.extend({
 		if(!this.rendered) {
 			var title = $('<a />')
 				.prop('href', '#')
-				.text(this.title);
+				.text(this.model.get('title'));
 
 			$('<i />')
-				.addClass('fam ' + (this.title === 'Root' ? 'fam-folder_open' : 'fam-folder'))
+				.addClass('fam ' + (this.model.get('title') === 'Root' ? 'fam-folder_open' : 'fam-folder'))
 				.prependTo(title);
 
 			if(this.checkboxes) {
@@ -133,6 +144,20 @@ var FolderTitle = Backbone.View.extend({
 					.prop('type', 'checkbox')
 					.val('todo')
 					.prependTo(title);
+			}
+
+			// Details
+			if(this.details) {
+				var details = $('<span />').addClass('details');
+
+				_.each(this.model.details(), function(value, title) {
+					$('<span />')
+						.text(value)
+						.prop('title', title)
+						.appendTo(details);
+				});
+
+				details.appendTo(title);
 			}
 
 			this.$el.html(title);
@@ -180,7 +205,7 @@ var FileTree = Backbone.View.extend({
 		}
 
 		// Title
-		this.$el.append(new FolderTitle({ title: 'Root' }).el);
+		this.$el.append(new FolderTitle({ model: this.model }).el);
 
 		// Children
 		var ul = $('<ul />');
@@ -213,7 +238,7 @@ var FileSubTree = Backbone.View.extend({
 	},
 	render: function() {
 		// Title
-		this.$el.append(new FolderTitle({ title: this.model.get('title') }).el);
+		this.$el.append(new FolderTitle({ model: this.model }).el);
 
 		var ul = $('<ul />').hide();
 
