@@ -293,7 +293,7 @@
 				var options = $.extend({}, defaults, settings);
 
 				// Events
-				$(document).off('.supercal');		// Turn them all off
+				$(document).off('click.supercal');		// Turn them all off
 
 				// Bind events
 				$(document).on('click.supercal', '.supercal .change-month', function(e) {
