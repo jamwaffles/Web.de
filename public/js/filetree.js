@@ -155,7 +155,7 @@ var FolderTitle = Backbone.View.extend({
 				.text(this.model.get('title'));
 
 			$('<i />')
-				.addClass('fam ' + (this.model.get('title') === 'Root' ? 'fam-folder_open' : 'fam-folder'))
+				.addClass('fam ' + (this.model.get('title') === '' ? 'fam-folder_open' : 'fam-folder'))
 				.prependTo(title);
 
 			if(this.checkboxes) {
