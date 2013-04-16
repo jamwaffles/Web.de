@@ -1117,6 +1117,25 @@
 			</span>
 		</script>
 
+		<script type="text/template" id="template-filebrowser-header">
+			<button class="left btn"><i class="icon-chevron-left"></i></button>
+			<button class="right btn"><i class="icon-chevron-right"></i></button>
+			<div class="pull-right right btn-group input-prepend input-append">
+				<button class="btn dropdown-toggle" data-toggle="dropdown">
+					Action
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Cut</a></li>
+					<li><a href="#">Copy</a></li>
+					<li><a href="#">Delete</a></li>
+					<li><a href="#">Edit</a></li>
+					<li><a href="#">Rename</a></li>
+				</ul>
+			</div>
+			<div class="search"><input class="span2" type="text" placeholder="Search"></div>
+		</script>
+
 		<script src="js/jquery-1.9.1.js"></script>
 
 		<!-- jQuery plugins -->
@@ -1140,7 +1159,9 @@
 		<script src="js/app-tree.js"></script>
 		<script src="js/app-views.js"></script>
 		<script src="js/app-views-trees.js"></script>
+
 		<script src="js/filetree.js"></script>
+		<script src="js/filebrowser.js"></script>
 
 		<script src="js/dln-device.js"></script>
 		<script src="js/dln-local.js"></script>

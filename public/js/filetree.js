@@ -31,7 +31,7 @@ var File = Backbone.Model.extend({
 			// 'MIME': this.get('mime'),
 			'Permissions': this.get('permissionsString'),
 			'Modified': moment(this.get('modified')).format('L'),
-			'Created': moment(this.get('created')).format('L'),
+			'Created': moment(this.get('created')).format('L')
 		};
 	}
 });
@@ -46,7 +46,7 @@ var Symlink = Backbone.Model.extend({
 		return {
 			'Permissions': this.get('permissionsString'),
 			'Modified': moment(this.get('modified')).format('L'),
-			'Created': moment(this.get('created')).format('L'),
+			'Created': moment(this.get('created')).format('L')
 		};
 	}
 });
@@ -145,37 +145,6 @@ var FolderTitle = Backbone.View.extend({
 	},
 	render: function() {
 		if(!this.rendered) {
-			// var title = $('<a />')
-			// 	.prop('href', '#')
-			// 	.text(this.model.get('title'));
-
-			// $('<i />')
-			// 	.addClass('fam ' + (this.model.get('title') === '' ? 'fam-folder_open' : 'fam-folder'))
-			// 	.prependTo(title);
-
-			// if(this.checkboxes) {
-			// 	$('<input />')
-			// 		.prop('type', 'checkbox')
-			// 		.val('todo')
-			// 		.prependTo(title);
-			// }
-
-			// // Details
-			// if(this.details) {
-			// 	var details = $('<span />').addClass('details');
-
-			// 	_.each(this.model.details(), function(value, title) {
-			// 		$('<span />')
-			// 			.text(value)
-			// 			.prop('title', title)
-			// 			.appendTo(details);
-			// 	});
-
-			// 	details.appendTo(title);
-			// }
-
-			// this.$el.html(title);
-
 			// Details
 			var detailsList = $('<span />').addClass('details');
 
@@ -221,8 +190,6 @@ var FileTree = Backbone.View.extend({
 	},
 	initialize: function() {
 		this.render();
-
-		return this;
 	},
 	toggleTree: function(e) {
 		var self = $(e.currentTarget);
@@ -316,11 +283,6 @@ var FileSubTree = Backbone.View.extend({
 	}
 });
 
-// Wrapping view for the whole lot
-var BrowserPane = Backbone.View.extend({
-
-});
-
 // Logic
 var testFiles = new Folder({
 	children: [
@@ -369,6 +331,6 @@ var testFiles = new Folder({
 	]
 });
 
-$('body').html(new FileTree({
-	model: testFiles
-}).render().el);
+// $('body').html(new FileTree({
+// 	model: testFiles
+// }).render().el);
