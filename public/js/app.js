@@ -207,6 +207,11 @@ $('#slideout-pairing button[name="gen-pin"]').on('click', function(e) {
 	input.val(parseInt(1000 + (Math.random() * 8999)));
 });
 
+new FileBrowser({
+	el: '#filebrowser',
+	model: testFiles
+});
+
 /* DLN menu */
 function showDLN(show) {
 	if(show == 'toggle') {

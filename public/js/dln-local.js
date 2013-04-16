@@ -44,11 +44,6 @@ $('#local-attached').html(localDeviceTable.render().el);
  * Data *
  ********/
 $('#open-filebrowser').on('click', function() {
-	new FileBrowser({
-		el: '#filebrowser',
-		model: testFiles
-	});
-
 	$('.panel')
 		.removeClass('open')
 		.filter(function() {
