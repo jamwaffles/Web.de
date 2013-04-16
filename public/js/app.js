@@ -23,12 +23,6 @@ $(".gridster > ul").gridster({
 	widget_base_dimensions: [140, 140]*/
 });
 
-$('#open-filebrowser').on('click', function() {
-	new FileBrowser({
-		el: $('#filebrowser')
-	});
-});
-
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };
@@ -213,13 +207,25 @@ $('#slideout-pairing button[name="gen-pin"]').on('click', function(e) {
 	input.val(parseInt(1000 + (Math.random() * 8999)));
 });
 
-/* Omnimenu */
+/* DLN menu */
+function showDLN(show) {
+	if(show == 'toggle') {
+		$('#dln-menu > a').parent().toggleClass('open');
+		$('a[data-open]').removeClass('open');
+		$('#dln').toggleClass('closed');
+	} else if(show == true) {
+		$('#dln-menu > a').parent().addClass('open');
+		$('a[data-open]').removeClass('open');
+		$('#dln').removeClass('closed');
+	} else {
+		$('#dln-menu > a').parent().removeClass('open');
+		$('a[data-open]').removeClass('open');
+		$('#dln').addClass('closed');
+	}
+}
+
 $('#dln-menu > a').on('click', function() {
-	$(this).parent().toggleClass('open');
-
-	$('a[data-open]').removeClass('open');
-
-	$('#dln').toggleClass('closed');
+	showDLN('toggle');
 });
 
 /* Statusbar menus */

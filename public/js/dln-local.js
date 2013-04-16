@@ -43,7 +43,21 @@ $('#local-attached').html(localDeviceTable.render().el);
 /********
  * Data *
  ********/
-// Nothing to do here yet
+$('#open-filebrowser').on('click', function() {
+	new FileBrowser({
+		el: '#filebrowser',
+		model: testFiles
+	});
+
+	$('.panel')
+		.removeClass('open')
+		.filter(function() {
+			return $(this).data('menu') == 'files';
+		})
+		.addClass('open');
+
+	showDLN(false);
+});
 
 /************
  * Software *
