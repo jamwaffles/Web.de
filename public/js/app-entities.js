@@ -14,7 +14,8 @@ var Package = BaseModel.extend({
 		license: 'GPL v3',
 		licenseURL: 'http://www.gnu.org/licenses/gpl.html',
 		fullname: '',
-		state: 'uninstall'
+		state: 'uninstall',
+		icon: ''
 	},
 	initialize: function() {
 		this.set('fullname', this.get('format') + ' ' + this.get('name') + ' ' + this.get('version'));
@@ -45,6 +46,7 @@ var User = BaseModel.extend({
 		extension: '123',
 		username: 'username123',
 		href: '#',
+		icon: 'user',
 		flags: {
 			sms: true,
 			email: true,
@@ -65,6 +67,7 @@ var Device = BaseModel.extend({
 		href: '#',
 		serial: '5UP3R-53R14L',
 		mount: '/dev/mnt0',
+		icon: 'hdd',
 		properties: {
 			refresh: [ 'Refresh rate', '60Hz', [ '60Hz', '70Hz', '75Hz' ]],
 			resolution: [ 'Resolution', '3840x1080' ],
