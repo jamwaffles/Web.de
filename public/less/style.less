@@ -797,6 +797,19 @@ ul.tree {
 		.box-sizing(border-box);
 		.transition(opacity 0.5s);
 
+		&.recent, &.information {
+			h2 {
+				float: right;
+				padding-right: 20px;
+			}
+		}
+
+		&.information {
+			h2 {
+				margin-right: 290px;
+			}
+		}
+
 		&.open {
 			z-index: 2;
 			opacity: 1;
