@@ -143,7 +143,7 @@ var DeviceTreeTable = SpanTableTreeView.extend({
 			if(typeof model.get('mount') === 'string') {
 				var div = $('<div />');
 
-				div.append([ $('<span />').text('/dev/'), ' ' ]);
+				// div.append([ $('<span />').text('/dev/'), ' ' ]);
 				div.append($('<input />')
 					.attr('value', model.get('mount').replace('/dev/', ''))
 					.addClass('input-medium')
