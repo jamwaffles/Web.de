@@ -43,6 +43,21 @@ var FilePane = Backbone.View.extend({
 	}
 });
 
+var FileBrowserTopBar = Backbone.View.extend({
+	rendered: false,
+	tagName: 'div',
+	className: 'filebrowser-topbar',
+	template: _.template($('#template-filebrowser-topbar').html()),
+	initialize: function() {
+		this.render();
+	},
+	render: function() {
+		this.$el.html(this.template());
+
+		return this;
+	}
+})
+
 var FileBrowser = Backbone.View.extend({
 	className: 'filebrowser',
 	numPanes: 1,
@@ -87,6 +102,9 @@ var FileBrowser = Backbone.View.extend({
 		this.render();
 	},
 	render: function() {
+		// Topbar
+		this.$el.html(new FileBrowserTopBar().el);
+
 		if(!this.rendered) {
 			_.each(this.panes, function(pane) {
 				this.$el.append(pane.setWidth(100 / this.numPanes).render().el);
