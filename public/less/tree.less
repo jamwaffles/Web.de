@@ -1,0 +1,44 @@
+ul.tree {
+	list-style: none;
+	line-height: 20px;
+	margin-left: 20px;
+
+	li {
+		line-height: 22px;
+	}
+
+	i {
+		padding-right: 5px;
+	}
+
+	div.toggle, div.fixed {
+		position: relative;
+		cursor: pointer;
+		font-weight: bold;
+
+		.user-select(none);
+
+		&:hover {
+			color: @textColor + #222;
+
+			i {
+				opacity: 0.8;
+			}
+		}
+
+		&.expanded {
+			&:before {
+				background-position: -432px -96px;
+			}
+		}
+	}
+
+	div.fixed {
+		
+	}
+}
+.tree-top {
+	.tree {
+		display: none;
+	}
+}

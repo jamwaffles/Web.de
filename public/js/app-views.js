@@ -61,7 +61,7 @@ var ActionProgressView = Backbone.View.extend({
 /* Packages table */
 var PackageTable = SpanTable.extend({
 	className: 'package container-fluid fluid-table striped hover',
-	columnClasses: [ 'span5', 'span2', 'span2', 'span3' ],
+	columnClasses: [ 'span4', 'span2', 'span2', 'span4' ],
 	header: false,
 	checkboxes: true,
 	events: {
@@ -183,84 +183,84 @@ var ScheduledTasksTable = SpanTable.extend({
 	render: function() {
 		SpanTable.prototype.render.call(this, arguments);
 
-		if(this.showAddNew) {
-			var row = $('<div />').addClass('add-new form-inline row-fluid');
+		// if(this.showAddNew) {
+		// 	var row = $('<div />').addClass('add-new form-inline row-fluid');
 
-			// Command
-			$('<div />')
-				.addClass(this.columnClasses[0])
-				.html($('<input />')
-					.prop('type', 'text')
-					.prop('name', 'command')
-					.prop('placeholder', 'Command')
-				)
-				.appendTo(row);
+		// 	// Command
+		// 	$('<div />')
+		// 		.addClass(this.columnClasses[0])
+		// 		.html($('<input />')
+		// 			.prop('type', 'text')
+		// 			.prop('name', 'command')
+		// 			.prop('placeholder', 'Command')
+		// 		)
+		// 		.appendTo(row);
 
-			// Date
-			var date = $('<input />')
-				.prop('name', 'date')
-				.prop('type', 'text')
-				.prop('placeholder', 'Date to run')
-				.addClass('datepicker-popup input-small');
+		// 	// Date
+		// 	var date = $('<input />')
+		// 		.prop('name', 'date')
+		// 		.prop('type', 'text')
+		// 		.prop('placeholder', 'Date to run')
+		// 		.addClass('datepicker-popup input-small');
 
-			// $('<div />').addClass(this.columnClasses[0]).html(date).appendTo(row);
+		// 	// $('<div />').addClass(this.columnClasses[0]).html(date).appendTo(row);
 
-			// Time
-			var hour = $('<select />').addClass('input-mini').prop('name', 'time-hour');
+		// 	// Time
+		// 	var hour = $('<select />').addClass('input-mini').prop('name', 'time-hour');
 
-			for(var i = 0; i < 12; i++) {
-				var text = ('0' + i).substr(-2);
+		// 	for(var i = 0; i < 12; i++) {
+		// 		var text = ('0' + i).substr(-2);
 
-				$('<option />').val(i).text(text).appendTo(hour);
-			}
+		// 		$('<option />').val(i).text(text).appendTo(hour);
+		// 	}
 
-			var minute = $('<select />').addClass('input-mini').prop('name', 'time-minute');
+		// 	var minute = $('<select />').addClass('input-mini').prop('name', 'time-minute');
 
-			for(var i = 0; i < 60; i += 10) {
-				var text = ('0' + i).substr(-2);
+		// 	for(var i = 0; i < 60; i += 10) {
+		// 		var text = ('0' + i).substr(-2);
 
-				$('<option />').val(i).text(text).appendTo(minute);
-			}
+		// 		$('<option />').val(i).text(text).appendTo(minute);
+		// 	}
 
-			var second = $('<input />')
-				.prop('name', 'seconds')
-				.prop('type', 'text')
-				.val('00')
-				.addClass('input-mini');
+		// 	var second = $('<input />')
+		// 		.prop('name', 'seconds')
+		// 		.prop('type', 'text')
+		// 		.val('00')
+		// 		.addClass('input-mini');
 
-			var ampm = $('<select />')
-				.addClass('input-mini')
-				.prop('name', 'ampm')
-				.append([
-					$('<option />').val('am').text('AM'),
-					$('<option />').val('pm').text('PM')
-				]);
+		// 	var ampm = $('<select />')
+		// 		.addClass('input-mini')
+		// 		.prop('name', 'ampm')
+		// 		.append([
+		// 			$('<option />').val('am').text('AM'),
+		// 			$('<option />').val('pm').text('PM')
+		// 		]);
 
-			$('<div />').addClass(this.columnClasses[1]).html([ date, ' ', hour, ' : ', minute, ' : ', second, ' ', ampm ]).appendTo(row);
+		// 	$('<div />').addClass(this.columnClasses[1]).html([ date, ' ', hour, ' : ', minute, ' : ', second, ' ', ampm ]).appendTo(row);
 
-			// Queue
-			$('<div />')
-				.addClass(this.columnClasses[2])
-				.html($('<input />')
-					.prop('type', 'text')
-					.prop('name', 'queue')
-					.addClass('input-mini')
-				)
-				.appendTo(row);
+		// 	// Queue
+		// 	$('<div />')
+		// 		.addClass(this.columnClasses[2])
+		// 		.html($('<input />')
+		// 			.prop('type', 'text')
+		// 			.prop('name', 'queue')
+		// 			.addClass('input-mini')
+		// 		)
+		// 		.appendTo(row);
 
-			// Add button
-			$('<div />')
-				.addClass(this.columnClasses[3])
-				.html($('<button />')
-					.addClass('btn btn-primary')
-					.prop('name', 'save')
-					.html('Add new task')
-				)
-				.appendTo(row);
+		// 	// Add button
+		// 	$('<div />')
+		// 		.addClass(this.columnClasses[3])
+		// 		.html($('<button />')
+		// 			.addClass('btn btn-primary')
+		// 			.prop('name', 'save')
+		// 			.html('Add new task')
+		// 		)
+		// 		.appendTo(row);
 
-			// Append to table
-			this.$el.append(row);
-		}
+		// 	// Append to table
+		// 	this.$el.append(row);
+		// }
 
 		return this;
 	}

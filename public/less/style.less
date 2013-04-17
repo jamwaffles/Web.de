@@ -500,71 +500,6 @@ dl.accordion {
 	}
 }
 
-ul.tree {
-	list-style: none;
-	line-height: 20px;
-	margin-left: 17px;
-
-	div.toggle, div.fixed {
-		position: relative;
-		cursor: pointer;
-		font-weight: bold;
-
-		.user-select(none);
-
-		&:before {
-			content: "";
-			position: absolute;
-			left: -17px;
-			top: 2px;
-			width: 14px;
-			height: 14px;
-			background-image: url('../img/glyphicons-halflings.png');
-			background-position: -408px -96px;
-		}
-
-		&:hover {
-			color: @textColor + #222;
-
-			&:before {
-				opacity: 0.8;
-			}
-		}
-
-		&.expanded {
-			&:before {
-				background-position: -433px -96px;
-			}
-		}
-	}
-
-	div.fixed {
-		
-	}
-
-	.tree {
-		li {
-			position: relative;
-
-			a, span {
-				&:before {
-					content: "";
-					position: absolute;
-					border-left: 2px solid @textColor;
-					left: -11px;
-					top: 0;
-					bottom: 0;
-				}
-			}
-		}
-	}
-}
-.tree-top {
-	.tree {
-		display: none;
-	}
-}
-
 .well {
 	label {
 		&:last-child {
@@ -883,6 +818,7 @@ ul.tree {
 }
 
 @import 'statusbar';
+@import 'tree';
 @import 'dln';
 @import 'filetree';
 

@@ -40,7 +40,9 @@ var TreeHeader = Backbone.View.extend({
 	tagName: 'div',
 	className: 'toggle',
 	render: function() {
-		this.$el.html(this.model.get('title'));
+		this.$el.html($('<i />').addClass('icon-plus'));
+
+		this.$el.append(this.model.get('title'));
 
 		return this;
 	}
@@ -50,6 +52,11 @@ var TreeItem = Backbone.View.extend({
 	tagName: 'li',
 	render: function() {
 		var li = $('<li />');
+
+		// Icon
+		$('<i />')
+			.addClass('icon-' + this.model.get('icon'))
+			.prependTo(li);
 
 		if(this.model.get('href')) {
 			$('<a />')
@@ -114,7 +121,8 @@ var TreeView = Backbone.View.extend({
 		var self = $(e.currentTarget);
 
 		self.toggleClass('expanded');
-		self.next('ul').toggle();
+		self.children('i').toggleClass('icon-plus icon-minus');
+		self.next('ul').slideToggle();
 	},
 	triggerAction: function(e) {		// Triggered when any clickable item is... clicked
 		var node = e.currentTarget;
@@ -139,6 +147,7 @@ var TreeView = Backbone.View.extend({
 
 				if(this.model.get('open')) {
 					header.addClass('expanded');
+					header.children('i').toggleClass('icon-plus icon-minus');
 					subtree.show();
 				}
 
