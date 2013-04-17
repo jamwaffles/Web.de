@@ -65,7 +65,8 @@ var FileBrowser = Backbone.View.extend({
 	rendered: false,
 	panes: [],
 	events: {
-		'click .add': 'addPane'
+		'click .add': 'addPane',
+		'click .removePane': 'removePane'
 	},
 	addPane: function(e) {
 		// Only add if fewer than 5 panes
@@ -90,6 +91,21 @@ var FileBrowser = Backbone.View.extend({
 
 		this.panes.splice(paneIndex, 0, newPane);
 		this.numPanes++;
+		this.setPaneWidths();
+	},
+	removePane: function(e) {
+		var self = $(e.currentTarget);
+		var pane = self.closest('.filepane');
+		var paneIndex = pane.index();
+
+		if(this.numPanes == 1) {
+			return;
+		}
+
+		pane.remove();
+
+		this.panes.splice(paneIndex, 1);
+		this.numPanes--;
 		this.setPaneWidths();
 	},
 	initialize: function(options) {

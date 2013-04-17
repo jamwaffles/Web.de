@@ -144,6 +144,16 @@
 		background-color: fadeout(@blueDark, 90%);
 	}
 
+	.removePane {
+		display: none;
+	}
+
+	+ .filepane {
+		.removePane {
+			display: inline-block;
+		}
+	}
+
 	&:last-child {
 		border-right: none;
 		padding-right: 10px;
