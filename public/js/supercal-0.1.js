@@ -293,46 +293,47 @@
 				var options = $.extend({}, defaults, settings);
 
 				// Events
-				$(document).off('click.supercal');		// Turn them all off
+				if(!$(document).data('supercal-events')) {
+					$(document).on('click.supercal', '.supercal .change-month', function(e) {
+							e.preventDefault();
+							e.stopPropagation();
 
-				// Bind events
-				$(document).on('click.supercal', '.supercal .change-month', function(e) {
-						e.preventDefault();
-						e.stopPropagation();
+							methods.changeMonth.apply($(this).closest('.supercal'), [ $(this).hasClass('next-month') ? 1 : -1, $(this).closest('.supercal').data('options') ]);
+						})
+						.on('click.supercal', '.supercal-today', function() {
+							methods.changeMonth.apply($(this).closest('.supercal'), [ now, $(this).closest('.supercal').data('options') ]);
+						})
+						.on('click.supercal', '.supercal table.current td', function() {
+							var container = $(this).closest('.supercal');
+							var table = $(this).closest('table');
 
-						methods.changeMonth.apply($(this).closest('.supercal'), [ $(this).hasClass('next-month') ? 1 : -1, $(this).closest('.supercal').data('options') ]);
-					})
-					.on('click.supercal', '.supercal-today', function() {
-						methods.changeMonth.apply($(this).closest('.supercal'), [ now, $(this).closest('.supercal').data('options') ]);
-					})
-					.on('click.supercal', '.supercal table.current td', function() {
-						var container = $(this).closest('.supercal');
-						var table = $(this).closest('table');
+							table.find('.selected').removeClass('selected');
 
-						table.find('.selected').removeClass('selected');
+							$(this).addClass('selected');
 
-						$(this).addClass('selected');
+							container.find('.supercal-footer').replaceWith(pMethods.drawFooter($(this).data('date'), $(this).closest('.supercal').data('options')));
+							container.data('date', $(this).data('date'));
+						})
+						// Popups
+						.on('click.supercal', '.supercal-popup-trigger', function(e) {
+							$(this).parent('.supercal-popup-wrapper').addClass('supercal-open').find('.supercal-popup').show();
+						})
+						.on('click.supercal', function(e) {
+							var target = $(e.target);
 
-						container.find('.supercal-footer').replaceWith(pMethods.drawFooter($(this).data('date'), $(this).closest('.supercal').data('options')));
-						container.data('date', $(this).data('date'));
-					})
-					// Popups
-					.on('click.supercal', '.supercal-popup-trigger', function(e) {
-						$(this).parent('.supercal-popup-wrapper').addClass('supercal-open').find('.supercal-popup').show();
-					})
-					.on('click.supercal', function(e) {
-						var target = $(e.target);
+							if(!target.closest('.supercal-popup-wrapper').length) {
+								$('.supercal-popup-wrapper.supercal-open').removeClass('supercal-open').find('.supercal-popup').hide();
+							}
+						})
+						.on('click.supercal', '.supercal td', function() {
+							var thisDate = $(this).data('date');
+							var originalElement = $(this).closest('.supercal').data('element');
 
-						if(!target.closest('.supercal-popup-wrapper').length) {
-							$('.supercal-popup-wrapper.supercal-open').removeClass('supercal-open').find('.supercal-popup').hide();
-						}
-					})
-					.on('click.supercal', '.supercal td', function() {
-						var thisDate = $(this).data('date');
-						var originalElement = $(this).closest('.supercal').data('element');
+							$(originalElement).trigger('dateselect', [ thisDate ]);
+						});
 
-						$(originalElement).trigger('dateselect', [ thisDate ]);
-					});
+					$(document).data('supercal-evens', true);
+				}
 
 				return this.each(function() {
 					$(this).addClass('supercal ' + options.transition);
