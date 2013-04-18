@@ -132,9 +132,10 @@
 
 .filepane {
 	float: left;
-	padding: 10px 9px 10px 10px;
+	padding: 0px 9px 10px 10px;
 	border-right: 1px solid #ddd;
 	height: 100%;
+	margin-top: 10px;
 	background-color: #fff;
 
 	.box-sizing(border-box);
@@ -161,6 +162,11 @@
 
 	.header {
 		width: 100%;
+		margin-bottom: 10px;
+
+		.input-prepend, .input-append {
+			margin-bottom: 0;
+		}
 
 		.left {
 			float: left;
@@ -201,15 +207,18 @@
 		display: block;
 		clear: both;
 	}
-	
+
 	.filebrowser-topbar {
 		line-height: 30px;
 		text-align: center;
 		padding: 10px 10px 0 10px;
 
-		.btn-group.pull-right {
-			margin-left: 5px;
+		.btn-group {
 			text-align: left;
+
+			&.pull-right {
+				margin-left: 5px;
+			}
 		}
 	}
 }

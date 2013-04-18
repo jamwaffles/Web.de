@@ -104,7 +104,7 @@ var FileBrowser = Backbone.View.extend({
 
 		pane.remove();
 
-		this.panes.splice(paneIndex, 1);
+		this.panes.splice(paneIndex - 1, 1);
 		this.numPanes--;
 		this.setPaneWidths();
 	},
