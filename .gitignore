@@ -3,8 +3,7 @@
 #################
 
 sftp-config.json
-style.css
-style.min.css
+*.css
 *.sublime-*
 Notes
 
