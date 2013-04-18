@@ -100,7 +100,15 @@ var PackageTable = SpanTable.extend({
 	},
 	columns: {
 		'Name': function(model) {
-			return model.get('format') + ' ' + model.get('name');
+			var str = '';
+
+			if(model.get('format').length) {
+				str += model.get('format') + ' ';
+			}
+
+			str += model.get('name');
+
+			return str;
 		},
 		'Version': function(model) {
 			return $('<input />')
@@ -141,9 +149,9 @@ var PackageTable = SpanTable.extend({
 
 /* Scheduled tasks table */
 var ScheduledTasksTable = SpanTable.extend({
-	checkboxes: true,
+	checkboxes: false,
 	className: 'scheduled-tasks container-fluid fluid-table striped',
-	columnClasses: [ 'span3', 'span5', 'span2', 'span2' ],
+	columnClasses: [ 'span3', 'span4', 'span2', 'span3' ],
 	header: false,
 	showAddNew: true,
 	columns: {
@@ -164,15 +172,36 @@ var ScheduledTasksTable = SpanTable.extend({
 				.addClass('input-mini')
 				.val('a');
 		},
+		// 'Status': function(model) {
+		// 	switch(model.get('status')) {
+		// 		case 'ran':
+		// 			return 'Already run';
+		// 		case 'running':
+		// 			return 'Running';
+		// 		default:
+		// 			return 'Not running';
+		// 	}
+		// }
 		'Status': function(model) {
-			switch(model.get('status')) {
-				case 'ran':
-					return 'Already run';
-				case 'running':
-					return 'Running';
-				default:
-					return 'Not running';
-			}
+			var form = $('<div />');
+
+			var select = $('<select />').append([
+				$('<option />').val('').text('Not running'),
+				$('<option />').val('run').text('Running'),
+				$('<option />').val('cancel').text('Cancel'),
+				$('<option />').val('delete').text('Delete')
+			]);
+
+			select.children().filter(function() {
+				return this.value == model.get('state');
+			}).prop('disabled', true);
+
+			select.data('id', model.cid);
+
+			select.appendTo(form);
+
+			// Progress meter container
+			return $('<div />').addClass('form-inline').html([ form, $('<div />').addClass('progress-container').hide() ]);
 		}
 	},
 	initialize: function(options) {

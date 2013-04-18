@@ -204,9 +204,9 @@ $('#device-scheduled').html(deviceScheduled.render().el);
  * Services *
  ************/
 var deviceServices = new Backbone.Collection([
-	new Package({ name: 'DHCP', version: '1.5', license: 'BSD' }),
-	new Package({ name: 'DNS', version: '3.5.22', license: 'GPL', state: 'install' }),
-	new Package({ name: 'FTP', version: '5.7', license: 'GPL v2' })
+	new Package({ format: '', name: 'DHCP', version: '1.5', license: 'BSD' }),
+	new Package({ format: '', name: 'DNS', version: '3.5.22', license: 'GPL', state: 'install' }),
+	new Package({ format: '', name: 'FTP', version: '5.7', license: 'GPL v2' })
 ]);
 
 var servicesTable = new PackageTable({
