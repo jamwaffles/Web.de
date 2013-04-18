@@ -1,0 +1,24 @@
+@gradTopColour: #555;
+@gradBotColour: #222;
+
+#footerbar {
+	height: 40px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+
+	#gradient > .vertical(@gradTopColour, @gradBotColour);
+
+	ul {
+		margin: 0 10px;
+		padding: 0;
+		list-style: none;
+
+		a {
+			line-height: 40px;
+			padding: 15px;
+		}
+	}
+}
