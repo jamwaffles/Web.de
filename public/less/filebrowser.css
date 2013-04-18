@@ -10438,9 +10438,10 @@ a.badge:focus {
 }
 .filepane {
   float: left;
-  padding: 10px 9px 10px 10px;
+  padding: 0px 9px 10px 10px;
   border-right: 1px solid #ddd;
   height: 100%;
+  margin-top: 10px;
   background-color: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -10465,6 +10466,11 @@ a.badge:focus {
 }
 .filepane .header {
   width: 100%;
+  margin-bottom: 10px;
+}
+.filepane .header .input-prepend,
+.filepane .header .input-append {
+  margin-bottom: 0;
 }
 .filepane .header .left {
   float: left;
@@ -10503,7 +10509,19 @@ a.badge:focus {
   text-align: center;
   padding: 10px 10px 0 10px;
 }
+.filebrowser .filebrowser-topbar .btn-group {
+  text-align: left;
+}
 .filebrowser .filebrowser-topbar .btn-group.pull-right {
   margin-left: 5px;
-  text-align: left;
+}
+#files-main {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#files-main .filebrowser {
+  height: 100%;
 }
