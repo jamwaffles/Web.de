@@ -105,12 +105,8 @@ var settings = new Tree({
 		new Tree({
 			title: 'Software',
 			children: [
-				new Tree({
-					title: 'SSH'
-				}),
-				new Tree({
-					title: 'FileZilla'
-				})
+				new Package({ title: 'Filezilla' }),
+				new Package({ title: 'SSH' })
 			]
 		})
 	]
