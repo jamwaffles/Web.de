@@ -4,6 +4,7 @@
 
 sftp-config.json
 *.css
+public/less/*.css
 *.sublime-*
 Notes
 
