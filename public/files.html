@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Web.de Filebrowser</title>
+
+		<link rel="stylesheet" type="text/css" href="less/filebrowser.css" />
+	</head>
+
+	<body>
+		<div id="files-main"></div>
+
+		<!-- Backbone templates -->
+		<script type="text/template" id="template-filetree-file">
+			<div>
+				<input type="checkbox" value="todo">
+				<i class="fam fam-{$icon}"></i><span class="name" title="{$filename}">{$filename}</span>
+				<span class="details">{$details}</span>
+
+				<span class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<span>
+								<div><strong>Created</strong><span>{$created}</span></div>
+								<div><strong>Modified</strong><span>{$modified}</span></div>
+								<div><strong>Size</strong><span>{$size}</span></div>
+								<div><strong>Owner</strong><span>{$owner}</span></div>
+							</span>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#">Run</a></li>
+						<li><a href="#">Edit</a></li>
+						<li><a href="#">Copy</a></li>
+					</ul>
+				</span>
+			</div>
+		</script>
+
+		<script type="text/template" id="template-filetree-folder">
+			<input type="checkbox" value="todo">
+			<i class="fam fam-{$icon}"></i><span class="name" title="{$title}">{$title}</span>
+			<span class="details">{$details}</span>
+
+			<span class="dropdown pull-right">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
+				<ul class="dropdown-menu" role="menu">
+					<li>
+						<span>
+							<div><strong>Created</strong><span>{$created}</span></div>
+							<div><strong>Modified</strong><span>{$modified}</span></div>
+							<div><strong>Items</strong><span>{$children}</span></div>
+							<div><strong>Owner</strong><span>{$owner}</span></div>
+						</span>
+					</li>
+					<li class="divider"></li>
+					<li><a href="#">Delete</a></li>
+				</ul>
+			</span>
+		</script>
+
+		<script type="text/template" id="template-filebrowser-header">
+			<button title="Open another browser pane to the left" class="add left btn"><i class="icon-chevron-left"></i></button>
+			<button title="Close the current pane" class="removePane left btn"><i class="icon-remove"></i></button>
+			<button title="Open another browser pane to the right" class="add right btn"><i class="icon-chevron-right"></i></button>
+			<div class="pull-right right btn-group input-prepend input-append">
+				<button class="btn dropdown-toggle" data-toggle="dropdown">
+					Action
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Cut</a></li>
+					<li><a href="#">Copy</a></li>
+					<li><a href="#">Delete</a></li>
+					<li><a href="#">Edit</a></li>
+					<li><a href="#">Rename</a></li>
+				</ul>
+			</div>
+			<div class="search"><input class="span2" type="text" placeholder="Search"></div>
+		</script>
+
+		<script type="text/template" id="template-filebrowser-topbar">
+			<div class="btn-group pull-left">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					View
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Details</a></li>
+					<li><a href="#">Icons</a></li>
+				</ul>
+			</div>
+			<div class="btn-group pull-left">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					New
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Folder</a></li>
+					<li><a href="#">Symlink</a></li>
+					<li><a href="#">File</a></li>
+				</ul>
+			</div>
+
+			<strong>/var/www</strong>
+
+			<div class="btn-group pull-right">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					Order
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Ascending</a></li>
+					<li><a href="#">Descending</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group pull-right">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					Sort
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Name</a></li>
+					<li><a href="#">Date</a></li>
+					<li><a href="#">Size</a></li>
+				</ul>
+			</div>
+		</script>
+
+		<script src="js/jquery-1.9.1.js"></script>
+
+		<!-- jQuery plugins -->
+		<script src="js/animate-enhanced-0.99.js"></script>
+		<script src="js/supercal-0.1.js"></script>
+		<script src="js/mrslyde-1.0.js"></script>
+
+		<!-- Bootstrap plugins -->
+		<script src="js/bootstrap/bootstrap-tooltip.js"></script>
+		<script src="js/bootstrap/bootstrap-modal.js"></script>
+		<script src="js/bootstrap/bootstrap-dropdown.js"></script>
+
+		<!-- Libs -->
+		<script src="js/underscore-1.4.4.js"></script>
+		<script src="js/backbone-1.0.0.js"></script>
+		<script src="js/moment-2.0.0.min.js"></script>
+
+		<script src="js/app-entities.js"></script>
+
+		<script src="js/filetree.js"></script>
+		<script src="js/filebrowser.js"></script>
+		<script src="js/app-filebrowser.js"></script>
+	</body>
+</html>
