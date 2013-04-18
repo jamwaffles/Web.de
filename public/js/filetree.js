@@ -1,8 +1,8 @@
 Number.prototype.toHuman = function() {
 	if(this > 1000) {
-		return this + ' KB';
+		return (this / 1000).toFixed(2) + ' KB';
 	} else if(this > 1000000) {
-		return this + ' MB';
+		return (this / 1000000).toFixed(2) + ' MB';
 	} else {
 		return this + ' B';
 	}
@@ -13,84 +13,6 @@ var iconMap = {
 	'text/html': 'page_white_code',
 	'text/javascript': 'script_code'
 };
-
-var File = Backbone.Model.extend({
-	defaults: {
-		name: 'File',
-		mime: 'text/plain',
-		created: new Date,
-		modified: new Date,
-		size: 1234,
-		path: '',
-		permissions: 755,
-		permissionsString: '-rwxr-xr-x',
-		owner: 'James'
-	},
-	details: function() {
-		return {
-			// 'MIME': this.get('mime'),
-			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L'),
-			'Created': moment(this.get('created')).format('L')
-		};
-	}
-});
-var Symlink = Backbone.Model.extend({
-	defaults: {
-		source: '/path/to/symlink',
-		name: 'Symlink',
-		permissions: 755,
-		permissionsString: '-rwxr-xr-x'
-	},
-	details: function() {
-		return {
-			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L'),
-			'Created': moment(this.get('created')).format('L')
-		};
-	}
-});
-var Folder = Backbone.Model.extend({
-	defaults: {
-		children: [],
-		title: '',
-		mime: null,
-		size: 4096,
-		path: '',
-		created: new Date,
-		modified: new Date,
-		permissions: 755,
-		permissionsString: 'drwxr-xr-x'
-	},
-	initialize: function(options) {
-		if(!(options.children instanceof Folder)) {
-			this.set('children', new Backbone.Collection(options.children));
-		}
-
-		// Set paths of all children _only_ if this is the parent node (with no title)
-		if(!this.get('title')) {
-			this.setChildPaths();
-		}
-	},
-	setChildPaths: function() {
-		this.get('children').each(function(item) {
-			if(item instanceof Folder) {
-				item.set('path', this.get('path') + '/' + item.get('title'));
-
-				item.setChildPaths();
-			} else {
-				item.set('path', this.get('path'));
-			}
-		}, this);
-	},
-	details: function() {
-		return {
-			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L'),
-			'Created': moment(this.get('created')).format('L'),
-		};
-	}
-});
 
 var FileView = Backbone.View.extend({
 	icon: null,
@@ -120,7 +42,7 @@ var FileView = Backbone.View.extend({
 			details: detailsList.html(),
 			created: moment(this.model.get('created')).format('L HH:mm:ss'),
 			modified: moment(this.model.get('modified')).format('L HH:mm:ss'),
-			size: this.model.get('size'),
+			size: this.model.get('size').toHuman(),
 			owner: this.model.get('owner')
 		}));
 
@@ -184,6 +106,7 @@ var FileTree = Backbone.View.extend({
 	rendered: false,
 	checkboxes: true,
 	details: true,
+	animate: true,
 	events: {
 		'click .toggle': 'toggleTree',
 		'click input[type="checkbox"]': 'toggleCheckbox'
@@ -199,7 +122,12 @@ var FileTree = Backbone.View.extend({
 			return;
 		}
 
-		self.next('ul').toggle();
+		if(this.animate) {
+			self.next('ul').slideToggle(200);
+		} else {
+			self.next('ul').toggle();
+		}
+
 		self.toggleClass('expanded');
 		self.find('i').first().toggleClass('fam-folder fam-folder_open');
 	},

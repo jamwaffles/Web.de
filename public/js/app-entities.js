@@ -116,6 +116,83 @@ var Setting = BaseModel.extend({
 	}
 });
 
-// var SettingsGroup = Backbone.Collection.extend({
-// 	model: Setting
-// });
+var File = Backbone.Model.extend({
+	defaults: {
+		name: 'File',
+		mime: 'text/plain',
+		created: new Date,
+		modified: new Date,
+		size: 1234,
+		path: '',
+		permissions: 755,
+		permissionsString: '-rwxr-xr-x',
+		owner: 'James'
+	},
+	details: function() {
+		return {
+			// 'MIME': this.get('mime'),
+			'Permissions': this.get('permissionsString'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L')
+		};
+	}
+});
+var Symlink = Backbone.Model.extend({
+	defaults: {
+		source: '/path/to/symlink',
+		name: 'Symlink',
+		permissions: 755,
+		permissionsString: '-rwxr-xr-x',
+		owner: 'James'
+	},
+	details: function() {
+		return {
+			'Permissions': this.get('permissionsString'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L')
+		};
+	}
+});
+var Folder = Backbone.Model.extend({
+	defaults: {
+		children: [],
+		title: '',
+		mime: null,
+		size: 4096,
+		path: '',
+		created: new Date,
+		modified: new Date,
+		permissions: 755,
+		permissionsString: 'drwxr-xr-x',
+		owner: 'James'
+	},
+	initialize: function(options) {
+		if(!(options.children instanceof Folder)) {
+			this.set('children', new Backbone.Collection(options.children));
+		}
+
+		// Set paths of all children _only_ if this is the parent node (with no title)
+		if(!this.get('title')) {
+			this.setChildPaths();
+		}
+	},
+	setChildPaths: function() {
+		this.get('children').each(function(item) {
+			if(item instanceof Folder) {
+				item.set('path', this.get('path') + '/' + item.get('title'));
+
+				item.setChildPaths();
+			} else {
+				item.set('path', this.get('path'));
+			}
+		}, this);
+	},
+	details: function() {
+		return {
+			'Permissions': this.get('permissionsString'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L'),
+			'Owner': this.get('owner'),
+		};
+	}
+});

@@ -43,16 +43,7 @@ $('#local-attached').html(localDeviceTable.render().el);
 /********
  * Data *
  ********/
-$('#open-filebrowser').on('click', function() {
-	$('.panel')
-		.removeClass('open')
-		.filter(function() {
-			return $(this).data('menu') == 'files';
-		})
-		.addClass('open');
-
-	showDLN(false);
-});
+// Nothing - file browser opens in new window
 
 /************
  * Software *
