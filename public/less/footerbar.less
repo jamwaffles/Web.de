@@ -15,10 +15,47 @@
 		margin: 0 10px;
 		padding: 0;
 		list-style: none;
+		border-right: 1px solid @gradTopColour;
+		border-left: 1px solid @gradBotColour;
+		font-size: 0;
+		display: inline-block;
 
-		a {
-			line-height: 40px;
-			padding: 15px;
+		li {
+			display: inline-block;
+			font-size: 14px;
+			border-left: 1px solid @gradTopColour;
+			border-right: 1px solid @gradBotColour;
+
+			a {
+				line-height: 40px;
+				padding: 0 15px;
+
+				&:hover {
+					i {
+						opacity: 1;
+					}
+				}
+
+				i {
+					opacity: 0.8;
+
+					.icon-white;
+				}
+			}
+		}
+	}
+
+	.progress-container {
+		float: right;
+		width: 230px;
+		padding: 0 15px;
+		line-height: 40px;
+
+		.progress {
+			display: inline-block;
+			width: 100%;
+			margin: 0;
+			vertical-align: middle;
 		}
 	}
 }
