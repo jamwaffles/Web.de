@@ -83,10 +83,14 @@ var ResultsView = Backbone.View.extend({
 // Wrapping search box view
 var Omnibox = Backbone.View.extend({
 	rendered: false,
+	searchesRendered: false,
+	consoleRendered: false,
 	resultsView: null,
 	hidden: false,
 	results: new Backbone.Collection,
 	template: _.template($('#template-omnibox').html()),
+	console: $('#console'),
+	inputString: '',
 	events: {
 		'keyup input': 'searchChange',
 		'click ul > li': 'searchClick'
@@ -98,15 +102,18 @@ var Omnibox = Backbone.View.extend({
 		var self = $(e.currentTarget);
 		var searchTerm = self.val();
 		
-		if(e.which == 27 || (e.ctrlKey || e.altKey || e.shiftKey)) {
+		if(e.which == 27) {
 			if(!this.hidden) {
 				this.hideResults();
 			} else {
 				self.val('');
+				this.inputString = '';
 			}
 
 			return false;
 		}
+
+		this.inputString = self.val();
 
 		if(searchTerm.length < 3) {
 			this.hideResults();
@@ -114,7 +121,16 @@ var Omnibox = Backbone.View.extend({
 			return false;
 		}
 
-		this.resultsView.collection = this.getMatches(searchTerm).results;
+		if(searchTerm.match(/^[^$]/)) {		// Search a string
+			this.resultsView.collection = this.getMatches(searchTerm).results;
+			this.renderSearches();
+			this.hideConsole();
+			this.showResults();
+		} else {	// Execute a command
+			this.renderConsole();
+			this.showConsole();
+			this.hideResults();
+		}
 
 		switch(e.which) {
 			case 40:		// Down
@@ -129,13 +145,10 @@ var Omnibox = Backbone.View.extend({
 				return true;
 			break;
 		}
-
-		this.render();
-		this.showResults();
 	},
 	searchClick: function(e) {
 		this.resultsView.setSelected($(e.currentTarget).index(), false);
-		this.render();
+		this.renderSearches();
 
 		this.onSelect();
 	},
@@ -145,13 +158,27 @@ var Omnibox = Backbone.View.extend({
 		this.hideResults();
 	},
 	render: function() {
-		if(!this.rendered) {
-			this.$el.html(this.template({ list: '' }));
-		} else {
-			this.$el.find('.results').html(this.resultsView.render().el);
-		}
+		this.$el.html(this.template({ list: '' }));
 
 		this.rendered = true;
+
+		return this;
+	},
+	renderSearches: function() {
+		this.$el.find('.results').html(this.resultsView.render().el);
+
+		this.searchesRendered = true;
+
+		return this;
+	},
+	renderConsole: function() {
+		if(!this.consoleRendered) {
+
+		} else {
+			
+		}
+
+		this.consoleRendered = true;
 
 		return this;
 	},
@@ -207,10 +234,24 @@ var Omnibox = Backbone.View.extend({
 		} else {
 			this.hideResults();
 		}
+	},
+	hideConsole: function() {
+		this.console.removeClass('open');
+	},
+	showConsole: function() {
+		this.console.addClass('open');
+
+		this.console.find('.input input').focus().val(this.inputString.replace(/^\$/, ''));
 	}
 });
 
 /* Logic */
-new Omnibox({
+var omnibox = new Omnibox({
 	el: '#omnibox'
 }).render();
+
+$('#console').on('click', 'a.close', function(e) {
+	e.preventDefault();
+
+	omnibox.hideConsole();
+});
