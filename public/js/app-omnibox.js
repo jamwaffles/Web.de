@@ -110,6 +110,8 @@ var Omnibox = Backbone.View.extend({
 				this.inputString = '';
 			}
 
+			this.hideConsole();
+
 			return false;
 		}
 
@@ -121,28 +123,30 @@ var Omnibox = Backbone.View.extend({
 			return false;
 		}
 
-		if(searchTerm.match(/^[^$]/)) {		// Search a string
+		if(searchTerm.match(/^[^$#]/)) {		// Search a string
 			this.resultsView.collection = this.getMatches(searchTerm).results;
 			this.renderSearches();
 			this.hideConsole();
 			this.showResults();
-		} else {	// Execute a command
+
+			if(e.which === 13) {
+				this.onSelect();
+			}
+		} else if(searchTerm.match(/^[$#]/) && e.which === 13) {	// Execute a command (only if enter pressed)
 			this.renderConsole();
 			this.showConsole();
 			this.hideResults();
+
+			self.val(self.val().slice(0, 1) + ' ');
 		}
 
+		// Arrow keys
 		switch(e.which) {
 			case 40:		// Down
 				this.resultsView.setSelected(1, true);
 			break;
 			case 38:		// Up
 				this.resultsView.setSelected(-1, true);
-			break;
-			case 13:
-				this.onSelect();
-
-				return true;
 			break;
 		}
 	},
@@ -239,9 +243,28 @@ var Omnibox = Backbone.View.extend({
 		this.console.removeClass('open');
 	},
 	showConsole: function() {
+		var output = this.console.children();
+
 		this.console.addClass('open');
 
-		this.console.find('.input input').focus().val(this.inputString.replace(/^\$/, ''));
+		// Add newline if there wasn't one
+		if(output.text().length && output.text().slice(-1) !== "\n") {
+			output.append('\n');
+		}
+
+		// Show command
+		output.append($('<div />').addClass('command').text(this.inputString.replace(/^[$#]\s*/, '')));
+
+		// TODO: Send off request to execute command, add output to `output`
+		output.append('total 44 \n\
+drwxrwxr-x+ 1 James None     0 Apr 21 10:56 . \n\
+drwxrwxrwt+ 1 James None     0 Jan 21 23:45 .. \n\
+-rw-rw----  1 James None 10627 Apr 22 17:58 .bash_history \n\
+-rwxrwxr-x  1 James None  1494 Jan 21 19:16 .bash_profile');
+
+		// Scroll to bottom of div
+		output.height(this.console.height());
+		output.scrollTop(output[0].scrollHeight);
 	}
 });
 
