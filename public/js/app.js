@@ -23,6 +23,13 @@ $(".gridster > ul").gridster({
 	widget_base_dimensions: [140, 140]*/
 });
 
+// Pairing new group button
+$('#slideout-pairing .new-group').on('click', function(e) {
+	e.preventDefault();
+	
+	$(this).closest('.row-fluid').next('input').toggle();
+});
+
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };

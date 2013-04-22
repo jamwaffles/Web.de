@@ -122,7 +122,7 @@ var TreeView = Backbone.View.extend({
 
 		self.toggleClass('expanded');
 		self.children('i').toggleClass('icon-plus icon-minus');
-		self.next('ul').slideToggle();
+		self.next('ul').slideToggle(200);
 	},
 	triggerAction: function(e) {		// Triggered when any clickable item is... clicked
 		var node = e.currentTarget;
