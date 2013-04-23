@@ -3,7 +3,7 @@
  ****************/
 var PackageTreeTable = SpanTableTreeView.extend({
 	checkboxes: true,
-	columnClasses: [ 'span5', 'span2', 'span2', 'span3' ],
+	columnClasses: [ 'span4', 'span3', 'span2', 'span3' ],
 	events: {
 		'change select': 'action',
 		'click .sub-collapse-header': 'subToggle',
@@ -135,18 +135,18 @@ var SettingsTreeTable = SpanTableTreeView.extend({
  ****************************/
 var DeviceTreeTable = SpanTableTreeView.extend({
 	header: false,
-	columnClasses: [ 'span4', 'span2', 'span3', 'span3' ],
+	columnClasses: [ 'span4', 'span3', 'span2', 'span3' ],
 	columns: {
 		'Device': 'title',
 		'Serial': 'serial',
-		'Mount point': function(model) {
+		'Device file': function(model) {
 			if(typeof model.get('mount') === 'string') {
 				var div = $('<div />');
 
 				// div.append([ $('<span />').text('/dev/'), ' ' ]);
 				div.append($('<input />')
 					.attr('value', model.get('mount').replace('/dev/', ''))
-					.addClass('input-medium')
+					.addClass('input-small')
 					.prop('type', 'text'));
 
 				return div.html();

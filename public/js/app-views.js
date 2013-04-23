@@ -61,7 +61,7 @@ var ActionProgressView = Backbone.View.extend({
 /* Packages table */
 var PackageTable = SpanTable.extend({
 	className: 'package container-fluid fluid-table striped hover',
-	columnClasses: [ 'span4', 'span2', 'span2', 'span4' ],
+	columnClasses: [ 'span4', 'span3', 'span2', 'span3' ],
 	header: false,
 	checkboxes: true,
 	events: {
@@ -176,7 +176,7 @@ var ScheduledTasksTable = SpanTable.extend({
 		'Status': function(model) {
 			var form = $('<div />');
 
-			var select = $('<select />').addClass('input-medium').append([
+			var select = $('<select />').append([
 				$('<option />').val('').text('Not running'),
 				$('<option />').val('run').text('Running'),
 				$('<option />').val('cancel').text('Cancel'),
