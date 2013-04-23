@@ -66,7 +66,21 @@ var FileBrowser = Backbone.View.extend({
 	panes: [],
 	events: {
 		'click .add': 'addPane',
-		'click .removePane': 'removePane'
+		'click .removePane': 'removePane',
+		'click .filepane': 'focusPane'
+	},
+	focusPane: function(e) {
+		var self = $(e.currentTarget);
+
+		if($(e.target).hasClass('add')) {
+			e.preventDefault();
+
+			return false;
+		}
+
+		this.$el.find('.filepane.focused').removeClass('focused');
+
+		self.addClass('focused');
 	},
 	addPane: function(e) {
 		// Only add if fewer than 5 panes
@@ -84,6 +98,9 @@ var FileBrowser = Backbone.View.extend({
 		} else if(self.hasClass('right')) {
 			pane.after(newPane.render().el);
 		}
+
+		this.$el.find('.filepane.focused').removeClass('focused');
+		newPane.$el.addClass('focused');
 
 		setTimeout(function() {
 			newPane.$el.removeClass('new');
@@ -114,6 +131,8 @@ var FileBrowser = Backbone.View.extend({
 		for(var i = 0; i < this.numPanes; i++) {
 			this.panes.push(new FilePane({ model: this.model }));
 		}
+
+		// this.panes[0].$el.addClass('focused');
 
 		this.render();
 	},

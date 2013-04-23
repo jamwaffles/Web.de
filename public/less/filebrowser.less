@@ -11,5 +11,41 @@
 
 	.filebrowser {
 		height: 100%;
+		padding: 0 !important;
+
+		&:after {
+			content: "";
+			height: 0;
+			display: block;
+			clear: both;
+		}
+
+		.filebrowser-topbar {
+			.well;
+			.well-small;
+
+			line-height: 30px;
+			text-align: center;
+			margin-bottom: 0;
+
+			.btn-group {
+				text-align: left;
+
+				&.pull-right {
+					margin-left: 5px;
+				}
+			}
+
+			input[name="path"] {
+				width: 70%;
+				margin-bottom: 0;
+			}
+		}
+
+		.filepane {
+			&.focused {
+				background: #efefef;
+			}
+		}
 	}
 }
