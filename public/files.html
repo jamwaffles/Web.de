@@ -15,28 +15,41 @@
 
 		<!-- Backbone templates -->
 		<script type="text/template" id="template-filetree-file">
-			<div>
-				<input type="checkbox" value="todo">
+			<div class="file">
 				<i class="fam fam-{$icon}"></i><span class="name" title="{$filename}">{$filename}</span>
-				<span class="details">{$details}</span>
 
-				<span class="dropdown pull-right">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
-					<ul class="dropdown-menu" role="menu">
-						<li>
-							<span>
-								<div><strong>Created</strong><span>{$created}</span></div>
-								<div><strong>Modified</strong><span>{$modified}</span></div>
-								<div><strong>Size</strong><span>{$size}</span></div>
-								<div><strong>Owner</strong><span>{$owner}</span></div>
-							</span>
-						</li>
-						<li class="divider"></li>
-						<li><a href="#">Run</a></li>
-						<li><a href="#">Edit</a></li>
-						<li><a href="#">Copy</a></li>
-					</ul>
-				</span>
+				<div class="pull-right">
+					<span class="details"><span>{$size}</span></span>
+
+					<span class="dropdown pull-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<span>
+									<div><strong>Created</strong><span>{$created}</span></div>
+									<div><strong>Modified</strong><span>{$modified}</span></div>
+									<div><strong>Size</strong><span>{$size}</span></div>
+									<div><strong>Owner</strong><span>{$owner}</span></div>
+								</span>
+							</li>
+							<li class="divider"></li>
+							<li><a href="#">Run</a></li>
+							<li><a href="#">Edit</a></li>
+							<li><a href="#">Copy</a></li>
+						</ul>
+					</span>
+
+					<input type="checkbox" value="todo">
+				</div>
+
+				<div class="extras">
+					<span>{$owner} ({$group})</span>
+
+					<div class="pull-right">
+						<span>{$shortCreated}</span>
+						<span>{$permissions}</span>
+					</div>
+				</div>
 			</div>
 		</script>
 

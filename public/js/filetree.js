@@ -41,12 +41,22 @@ var FileView = Backbone.View.extend({
 			filename: this.model.get('name'),
 			details: detailsList.html(),
 			created: moment(this.model.get('created')).format('L HH:mm:ss'),
+			shortCreated: moment(this.model.get('created')).format('L'),
 			modified: moment(this.model.get('modified')).format('L HH:mm:ss'),
 			size: this.model.get('size').toHuman(),
-			owner: this.model.get('owner')
+			owner: this.model.get('owner'),
+			group: this.model.get('group'),
+			permissions: this.model.get('permissionsString')
 		}));
 
 		return this;
+	},
+	showExtras: function(show) {
+		if(show) {
+			this.$el.find('.extras').show();
+		} else {
+			this.$el.find('.extras').hide();
+		}
 	}
 });
 var SymlinkView = FileView.extend({
@@ -88,6 +98,11 @@ var FolderTitle = Backbone.View.extend({
 				children: this.model.get('numChildren'),
 				owner: this.model.get('owner')
 			}));
+
+			// If tree is pre-open, change folder icon to folder open icon
+			if(this.model.get('open')) {
+				this.$el.find('i').first().toggleClass('fam-folder fam-folder_open');
+			}
 
 			return this;
 		}
@@ -146,12 +161,23 @@ var FileTree = Backbone.View.extend({
 
 		self.closest('.toggle').next('ul').find('input[type="checkbox"]').prop('checked', state);
 
+		var items;
+
 		if(e.shiftKey && thatIndex !== -1) {
 			var rangeStart = Math.min(thisIndex, thatIndex);
 			var rangeEnd = Math.max(thisIndex, thatIndex);
-			var items = li.closest('ul').children();
 
-			items.slice(rangeStart, rangeEnd).find('input[type="checkbox"]').prop('checked', state);
+			items = li.closest('ul').children().slice(rangeStart, rangeEnd);
+
+			items.find('input[type="checkbox"]').prop('checked', state);
+		} else if(!self.closest('.file').length) {
+			items = self.closest('div.toggle').next('ul').find('.extras');
+
+			state ? items.show() : items.hide();
+		} else {
+			var extras = self.closest('.file').find('.extras');
+
+			state ? extras.show() : extras.hide();
 		}
 	},
 	render: function() {

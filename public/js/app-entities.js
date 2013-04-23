@@ -126,7 +126,8 @@ var File = Backbone.Model.extend({
 		path: '',
 		permissions: 755,
 		permissionsString: '-rwxr-xr-x',
-		owner: 'James'
+		owner: 'James',
+		group: 'administrators'
 	},
 	details: function() {
 		return {
@@ -143,7 +144,8 @@ var Symlink = Backbone.Model.extend({
 		name: 'Symlink',
 		permissions: 755,
 		permissionsString: '-rwxr-xr-x',
-		owner: 'James'
+		owner: 'James',
+		group: 'administrators'
 	},
 	details: function() {
 		return {
@@ -165,6 +167,7 @@ var Folder = Backbone.Model.extend({
 		permissions: 755,
 		permissionsString: 'drwxr-xr-x',
 		owner: 'James',
+		group: 'administrators',
 		open: false,
 		numChildren: 0
 	},

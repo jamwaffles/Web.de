@@ -23,10 +23,25 @@
 		span {
 			display: inline-block;
 			text-align: right;
-			margin-right: 15px;
+			margin-right: 10px;
 			width: 65px;
 			color: @grayLight;
 			font-size: 12px;
+		}
+	}
+
+	.extras {
+		padding-left: 20px;
+		font-size: 11px;
+		color: @linkColor;
+		display: none;
+
+		span {
+			display: inline-block;
+
+			+ span {
+				margin-left: 10px;
+			}
 		}
 	}
 
