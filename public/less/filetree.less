@@ -1,5 +1,11 @@
 .file-tree {
 	font-size: 12px;
+	position: absolute;
+	top: 50px;
+	bottom: 70px;
+	right: 10px;
+	left: 10px;
+	overflow-y: auto;
 
 	input[type="checkbox"] {
 		margin: 0;
@@ -31,6 +37,7 @@
 		padding: 2px 4px 2px 24px;
 		position: relative;
 		cursor: pointer;
+		margin-right: 10px;
 
 		&:hover {
 			background: #eee;
@@ -132,14 +139,22 @@
 
 .filepane {
 	float: left;
-	padding: 10px 9px 10px 10px;
+	padding: 9px 9px 70px 10px;
 	border-right: 1px solid #ddd;
 	height: 100%;
 	margin-top: 10px;
 	background-color: #fff;
+	border-top: 1px solid #ddd;
+	position: relative;
 
+	.border-top-radius(@baseBorderRadius);
 	.box-sizing(border-box);
 	.transition(background-color 0.5s ease-in-out);
+
+	&:last-child {
+		border-right: none;
+		padding-right: 10px;
+	}
 
 	&.new {
 		background-color: fadeout(@blueDark, 90%);
@@ -153,11 +168,6 @@
 		.removePane {
 			display: inline-block;
 		}
-	}
-
-	&:last-child {
-		border-right: none;
-		padding-right: 10px;
 	}
 
 	.header {

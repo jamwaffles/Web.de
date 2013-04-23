@@ -112,6 +112,8 @@ var FileTree = Backbone.View.extend({
 		'click input[type="checkbox"]': 'toggleCheckbox'
 	},
 	initialize: function() {
+		this.model.set('open', true);
+
 		this.render();
 	},
 	toggleTree: function(e) {
@@ -164,6 +166,10 @@ var FileTree = Backbone.View.extend({
 		// Children
 		var ul = $('<ul />').addClass('sub');
 
+		if(!this.model.get('open')) {
+			ul.hide();
+		}
+
 		this.model.get('children').each(function(item) {
 			if(item instanceof Folder) {
 				ul.append(new FileSubTree({ model: item, checkboxes: this.checkboxes }).el);
@@ -194,7 +200,11 @@ var FileSubTree = Backbone.View.extend({
 		// Title
 		this.$el.append(new FolderTitle({ model: this.model }).el);
 
-		var ul = $('<ul />').addClass('sub').hide();
+		var ul = $('<ul />').addClass('sub');
+
+		if(!this.model.get('open')) {
+			ul.hide();
+		}
 
 		// Children
 		this.model.get('children').each(function(item) {

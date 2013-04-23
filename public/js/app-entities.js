@@ -164,7 +164,8 @@ var Folder = Backbone.Model.extend({
 		modified: new Date,
 		permissions: 755,
 		permissionsString: 'drwxr-xr-x',
-		owner: 'James'
+		owner: 'James',
+		open: false
 	},
 	initialize: function(options) {
 		if(!(options.children instanceof Folder)) {

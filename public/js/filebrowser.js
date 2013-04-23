@@ -74,7 +74,6 @@ var FileBrowser = Backbone.View.extend({
 
 		// If add button, don't add focused class - the new pane needs to have that class instead
 		if($(e.target).is('button.add') || $(e.target).closest('button.add').length) {
-			console.log("Add");
 			e.preventDefault();
 
 			return false;
