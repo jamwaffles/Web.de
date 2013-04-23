@@ -165,15 +165,18 @@ var Folder = Backbone.Model.extend({
 		permissions: 755,
 		permissionsString: 'drwxr-xr-x',
 		owner: 'James',
-		open: false
+		open: false,
+		numChildren: 0
 	},
 	initialize: function(options) {
 		if(!(options.children instanceof Folder)) {
 			this.set('children', new Backbone.Collection(options.children));
 		}
 
+		this.set('numChildren', this.get('children').length);
+
 		// Set paths of all children _only_ if this is the parent node (with no title)
-		if(!this.get('title')) {
+		if(!this.get('title') || this.get('title') == '/') {
 			this.setChildPaths();
 		}
 	},
@@ -183,6 +186,8 @@ var Folder = Backbone.Model.extend({
 				item.set('path', this.get('path') + '/' + item.get('title'));
 
 				item.setChildPaths();
+
+				this.set('numChildren', this.get('numChildren') + item.get('numChildren'));
 			} else {
 				item.set('path', this.get('path'));
 			}
@@ -190,10 +195,7 @@ var Folder = Backbone.Model.extend({
 	},
 	details: function() {
 		return {
-			'Permissions': this.get('permissionsString'),
-			'Modified': moment(this.get('modified')).format('L'),
-			'Created': moment(this.get('created')).format('L'),
-			'Owner': this.get('owner'),
+			'Items': this.get('numChildren')
 		};
 	}
 });
