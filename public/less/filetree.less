@@ -9,9 +9,7 @@
 
 	input[type="checkbox"] {
 		margin: 0;
-		position: absolute;
-		top: 5px;
-		left: 5px;
+		margin-left: 10px;
 	}
 
 	.name {
@@ -22,10 +20,9 @@
 	}
 
 	.details {
-		display: block;
-
 		span {
 			display: inline-block;
+			text-align: right;
 			margin-right: 15px;
 			width: 65px;
 			color: @grayLight;
@@ -34,7 +31,7 @@
 	}
 
 	.toggle {
-		padding: 2px 4px 2px 24px;
+		padding: 2px 5px;
 		position: relative;
 		cursor: pointer;
 		margin-right: 10px;
@@ -74,13 +71,10 @@
 	}
 
 	.dropdown {
-		position: absolute;
-		right: 10px;
-		top: 7px;
-		padding: 5px;
-		width: 14px;
 		cursor: default;
 		opacity: 0.25;
+		float: none !important;
+		padding: 5px 2px;
 
 		&.open {
 			opacity: 1 !important;

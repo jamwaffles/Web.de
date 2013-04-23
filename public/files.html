@@ -41,25 +41,28 @@
 		</script>
 
 		<script type="text/template" id="template-filetree-folder">
-			<input type="checkbox" value="todo">
 			<i class="fam fam-{$icon}"></i><span class="name" title="{$title}">{$title}</span>
-			<span class="details">{$details}</span>
 
-			<span class="dropdown pull-right">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
-				<ul class="dropdown-menu" role="menu">
-					<li>
-						<span>
-							<div><strong>Created</strong><span>{$created}</span></div>
-							<div><strong>Modified</strong><span>{$modified}</span></div>
-							<div><strong>Items</strong><span>{$children}</span></div>
-							<div><strong>Owner</strong><span>{$owner}</span></div>
-						</span>
-					</li>
-					<li class="divider"></li>
-					<li><a href="#">Delete</a></li>
-				</ul>
-			</span>
+			<div class="pull-right">
+				<span class="details"><span>{$children} items</span></span>
+				<span class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-align-justify"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<span>
+								<div><strong>Created</strong><span>{$created}</span></div>
+								<div><strong>Modified</strong><span>{$modified}</span></div>
+								<div><strong>Items</strong><span>{$children}</span></div>
+								<div><strong>Owner</strong><span>{$owner}</span></div>
+							</span>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#">Delete</a></li>
+					</ul>
+				</span>
+
+				<input type="checkbox" value="todo">
+			</div>
 		</script>
 
 		<script type="text/template" id="template-filebrowser-header">

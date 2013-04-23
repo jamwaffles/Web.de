@@ -83,10 +83,9 @@ var FolderTitle = Backbone.View.extend({
 				title: this.model.get('title'),
 				icon: this.model.get('title') ? 'folder' : 'folder_open',
 				filename: this.model.get('name'),
-				details: detailsList.html(),
 				created: moment(this.model.get('created')).format('L HH:mm:ss'),
 				modified: moment(this.model.get('modified')).format('L HH:mm:ss'),
-				children: 150,
+				children: this.model.get('numChildren'),
 				owner: this.model.get('owner')
 			}));
 

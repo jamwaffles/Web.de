@@ -195,7 +195,11 @@ var Folder = Backbone.Model.extend({
 	},
 	details: function() {
 		return {
-			'Items': this.get('numChildren')
+			'Items': this.get('numChildren'),
+			'Permissions': this.get('permissionsString'),
+			'Modified': moment(this.get('modified')).format('L'),
+			'Created': moment(this.get('created')).format('L'),
+			'Owner': this.get('owner')
 		};
 	}
 });
