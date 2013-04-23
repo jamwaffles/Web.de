@@ -151,7 +151,7 @@ var PackageTable = SpanTable.extend({
 var ScheduledTasksTable = SpanTable.extend({
 	checkboxes: false,
 	className: 'scheduled-tasks container-fluid fluid-table striped',
-	columnClasses: [ 'span3', 'span4', 'span2', 'span3' ],
+	columnClasses: [ 'span4', 'span3', 'span2', 'span3' ],
 	header: false,
 	showAddNew: true,
 	columns: {
@@ -161,7 +161,8 @@ var ScheduledTasksTable = SpanTable.extend({
 			return $('<input />')
 				.prop('type', 'text')
 				.prop('name', 'command')
-				.prop('placeholder', 'Command');
+				.prop('placeholder', 'Command')
+				.val(model.get('command'));
 		},
 		'Epoch': function(model) {
 			return moment(model.get('time')).format('ddd MMMM Do h:mm A');
@@ -175,7 +176,7 @@ var ScheduledTasksTable = SpanTable.extend({
 		'Status': function(model) {
 			var form = $('<div />');
 
-			var select = $('<select />').append([
+			var select = $('<select />').addClass('input-medium').append([
 				$('<option />').val('').text('Not running'),
 				$('<option />').val('run').text('Running'),
 				$('<option />').val('cancel').text('Cancel'),
