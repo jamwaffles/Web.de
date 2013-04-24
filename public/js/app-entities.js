@@ -158,7 +158,7 @@ var Symlink = Backbone.Model.extend({
 var Folder = Backbone.Model.extend({
 	defaults: {
 		children: [],
-		title: '',
+		title: '/',
 		mime: null,
 		size: 4096,
 		path: '',
@@ -178,8 +178,8 @@ var Folder = Backbone.Model.extend({
 
 		this.set('numChildren', this.get('children').length);
 
-		// Set paths of all children _only_ if this is the parent node (with no title)
-		if(!this.get('title') || this.get('title') == '/') {
+		// Set paths of all children _only_ if this is the root node
+		if(this.get('root')) {
 			this.setChildPaths();
 		}
 	},

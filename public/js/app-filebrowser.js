@@ -1,5 +1,6 @@
 var testFiles = new Folder({
 	title: '/',
+	root: true,
 	children: [
 		new Folder({
 			title: 'Device',
