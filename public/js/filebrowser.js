@@ -92,7 +92,7 @@ var FileBrowser = Backbone.View.extend({
 		var self = $(e.currentTarget);
 		var pane = self.closest('.filepane');
 		var paneIndex = pane.index();
-		var newPane = new FilePane({ model: this.model, className: 'filepane new' });
+		var newPane = new FilePane({ model: this.model, className: 'filepane new removed' });
 
 		if(self.hasClass('left')) {
 			pane.before(newPane.render().el);
@@ -104,7 +104,7 @@ var FileBrowser = Backbone.View.extend({
 		newPane.$el.addClass('focused');
 
 		setTimeout(function() {
-			newPane.$el.removeClass('new');
+			newPane.$el.removeClass('new removed');
 		}, 100);
 
 		this.panes.splice(paneIndex, 0, newPane);
@@ -115,6 +115,7 @@ var FileBrowser = Backbone.View.extend({
 		var self = $(e.currentTarget);
 		var pane = self.closest('.filepane');
 		var paneIndex = pane.index();
+		var view = this;
 
 		if(this.numPanes == 1) {
 			return;
@@ -122,9 +123,9 @@ var FileBrowser = Backbone.View.extend({
 
 		pane.remove();
 
-		this.panes.splice(paneIndex - 1, 1);
-		this.numPanes--;
-		this.setPaneWidths();
+		view.panes.splice(paneIndex - 1, 1);
+		view.numPanes--;
+		view.setPaneWidths();
 	},
 	initialize: function(options) {
 		_.extend(this, options);
