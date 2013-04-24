@@ -87,6 +87,15 @@ var PackageTreeTable = SpanTableTreeView.extend({
 var SettingsTreeTable = SpanTableTreeView.extend({
 	header: false,
 	columnClasses: [ 'span3', 'span3', 'span3', 'span3' ],
+	className: 'settings-tree container-fluid fluid-table tree-table hover',
+	initialize: function() {
+		this.events['click .btn-primary'] = 'configure';
+
+		SettingsTreeTable.__super__.initialize.call(this, arguments);
+	},
+	configure: function() {
+		$('#modal-dummy-configure').modal('show');
+	},
 	columns: {
 		'Setting': function(model) {
 			return model.get('title');
