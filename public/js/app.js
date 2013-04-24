@@ -30,6 +30,15 @@ $('#slideout-pairing .new-group').on('click', function(e) {
 	$(this).closest('.row-fluid').next('input').toggle();
 });
 
+/* Footer bar */
+$('#toggle-progress-menu').on('click', function(e) {
+	e.preventDefault();
+
+	$(this).children().toggleClass('icon-chevron-down icon-chevron-up');
+
+	$(this).next('ul').slideToggle();
+});
+
 // var modals = {
 // 	confirmPackageAction: $('#confirm-package-action')
 // };

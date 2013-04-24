@@ -238,6 +238,45 @@
 	}
 }
 
+.panel.information {
+	#info-sidebar {
+		position: absolute;
+		overflow: hidden;
+		border: 1px solid #ddd;
+		right: 10px;
+		top: 10px;
+		bottom: 10px;
+		width: 300px;
+
+		.border-radius(@baseBorderRadius);
+		.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+
+		h3 {
+			border-bottom: 1px solid #eee;
+			padding: 10px;
+			margin: 0;
+			font-size: 24px;
+			line-height: 30px;
+		}
+
+		.mouse-scroll-container {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			top: 51px;
+			overflow: hidden;
+
+			> div {
+				padding: 10px;
+
+				h4:first-child {
+					padding-top: 0;
+				}
+			}
+		}
+	}
+}
+
 #omnibox {
 	min-height: inherit;
 	position: relative;
