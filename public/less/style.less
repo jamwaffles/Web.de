@@ -356,7 +356,6 @@ table {
 	/* Table trees */
 	.collapse-header, .sub-collapse-header {
 		font-weight: bold;
-		cursor: pointer;
 
 		i {
 			width: 16px;
@@ -377,6 +376,14 @@ table {
 			border: 1px solid #000;
 			width: 15px;
 			height: 15px;
+			cursor: pointer;
+
+			&:hover {
+				border-color: @linkColor;
+				background-color: #fff;
+
+				.box-shadow(0 0 3px @linkColor);
+			}
 
 			&.icon-plus {
 				background-position: -407px -96px;

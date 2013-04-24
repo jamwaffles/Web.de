@@ -83,7 +83,7 @@ var Device = BaseModel.extend({
 var NetworkDevice = BaseModel.extend({
 	defaults: {
 		ip: '192.168.0.1',
-		uri: 'http://192.168.0.1:80',
+		uri: null,
 		name: 'Network device',
 		comment: 'Attached to the core router'
 	}

@@ -175,7 +175,21 @@ var NetworkTreeTable = SpanTableTreeView.extend({
 	columnClasses: [ 'span4', 'span8' ],
 	columns: {
 		'Name': function(model) {
-			return model.get('name');
+			var html;
+
+			if(model.get('uri')) {
+				html = $('<a />')
+					.text(model.get('name'))
+					.prop('href', model.get('uri'));
+
+				if(model.get('newWindow')) {
+					html.prop('target', 'new');
+				}
+			} else {
+				html = model.get('name');
+			}
+
+			return html;
 		},
 		'Comment': function(model) {
 			return model.get('comment');

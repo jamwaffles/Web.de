@@ -11,17 +11,43 @@ var linuxNetwork = new Tree({
 		new Tree({
 			title: 'Direct',
 			children: [
-				new NetworkDevice({ name: 'WD NAS', comment: 'Plugged in under the telly' }),
-				new NetworkDevice({ name: 'Raspberry Pi', comment: '' }),
-				new NetworkDevice({ name: 'Flingbox XY', comment: '500GB disk' }),
+				new Tree({
+					title: 'WD Nas',
+					children: [
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Toms share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Nancys share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Public', comment: '500GB' })
+					]
+				}),
+				new Tree({
+					title: 'WD Nas Backup',
+					children: [
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Toms share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Nancys share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Public', comment: '500GB' })
+					]
+				})
 			]
 		}),
 		new Tree({
 			title: '123company.com',
 			children: [
-				new NetworkDevice({ name: 'rog_lap_01', comment: 'Roger\'s new laptop' }),
-				new NetworkDevice({ name: 'Sparc S7 server', comment: '' }),
-				new NetworkDevice({ name: 'Netgear ProSafe X100', comment: '' }),
+				new Tree({
+					title: 'WD Nas',
+					children: [
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Toms share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Nancys share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Public', comment: '500GB' })
+					]
+				}),
+				new Tree({
+					title: 'WD Nas Backup',
+					children: [
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Toms share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Nancys share', comment: '500GB' }),
+						new NetworkDevice({ newWindow: true, uri: 'files.html', name: 'Public', comment: '500GB' })
+					]
+				})
 			]
 		})
 	]
@@ -41,15 +67,38 @@ var xinixNetwork = new Tree({
 		new Tree({
 			title: 'Expensive phones',
 			children: [
-				new NetworkDevice({ name: 'Lumia 820', comment: '' }),
-				new NetworkDevice({ name: 'Nexus 4', comment: 'Company phone' }),
+				new Tree({
+					title: 'Nokia',
+					children: [
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Lumia 820', comment: '' }),
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Lumia 900', comment: 'Company phone' })
+					]
+				}),
+				new Tree({
+					title: 'Android',
+					children: [
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Nexus 4', comment: '' })
+					]
+				})
 			]
 		}),
 		new Tree({
 			title: 'Music stuff',
 			children: [
-				new NetworkDevice({ name: 'Philips SBH9000', comment: 'Bluetooth headphones - awesome' }),
-				new NetworkDevice({ name: 'Foxl speakers', comment: '' }),
+				new Tree({
+					title: 'Headphones',
+					children: [
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Sony USB', comment: '' }),
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Philips Bluetooth', comment: '' })
+					]
+				}),
+				new Tree({
+					title: 'Speakers',
+					children: [
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Foxl USB', comment: '' }),
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Digimax USB soundcard', comment: '' })
+					]
+				})
 			]
 		})
 	]
@@ -81,13 +130,8 @@ var windowsNetwork = new Tree({
 				new Tree({
 					title: 'Database server',
 					children: [
-						new Tree({
-							title: 'Dan\'s PC',
-							children: [
-								new NetworkDevice({ name: 'Shard 0', comment: '' }),
-								new NetworkDevice({ name: 'Shard 1', comment: 'Down for maintenance' })
-							]
-						})
+						new NetworkDevice({ name: 'Shard 0', comment: '' }),
+						new NetworkDevice({ name: 'Shard 1', comment: 'Down for maintenance' })
 					]
 				})
 			]
