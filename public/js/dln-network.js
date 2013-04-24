@@ -87,6 +87,8 @@ var xinixNetwork = new Tree({
 			children: [
 				new Tree({
 					title: 'Headphones',
+					uri: 'files.html',
+					newWindow: true,
 					children: [
 						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Sony USB', comment: '' }),
 						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Philips Bluetooth', comment: '' })
@@ -94,6 +96,8 @@ var xinixNetwork = new Tree({
 				}),
 				new Tree({
 					title: 'Speakers',
+					uri: 'files.html',
+					newWindow: true,
 					children: [
 						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Foxl USB', comment: '' }),
 						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Digimax USB soundcard', comment: '' })
