@@ -64,10 +64,142 @@ var FileBrowser = Backbone.View.extend({
 	maxPanes: 5,
 	rendered: false,
 	panes: [],
+	mousedownTimer: null,
+	dragging: false,
+	drag: {
+		source: null,
+		dest: null,
+		clone: null,
+		over: null,
+		offset: { }
+	},
 	events: {
 		'click .add': 'addPane',
 		'click .removePane': 'removePane',
-		'click .filepane': 'focusPane'
+		'click .filepane': 'focusPane',
+		'click .toggle, .file': 'stopDrag',
+		'mouseup': 'stopDrag',
+		'mousedown .file': 'startDrag',
+		'mousemove': 'moveDrag',
+		'mouseenter .toggle': 'dragEnter',
+		'mouseleave .toggle': 'dragLeave'
+	},
+	startDrag: function(e) {
+		if(e.button !== 0 || $(e.target).is('.dragging')) {
+			return false;
+		}
+
+		this.drag.source = $(e.currentTarget);
+
+		this.drag.clone = this.drag.source.clone();
+		this.drag.clone.children().removeClass('drag-source');
+
+		var self = this;
+
+		e.preventDefault();
+
+		this.mousedownTimer = setTimeout(function() {
+			if(!self.dragging) {
+				self.drag.source.addClass('drag-source');
+				self.drag.clone
+					.css({
+						position: 'fixed',
+						width: 500
+					})
+					.addClass('dragging')
+					.appendTo(self.drag.source.closest('.file-tree'));
+
+				self.dragging = true;
+
+				self.drag.offset = {
+					x: Math.min(e.pageX - self.drag.source.offset().left, 400),
+					y: e.pageY - self.drag.source.offset().top
+				}
+
+				// Set initial position to be under the mouse
+				self.drag.clone.css({
+					left: e.pageX - self.drag.offset.x,
+					top: e.pageY - self.drag.offset.y
+				});
+			}
+		}, 150);
+	},
+	stopDrag: function(e) {
+		clearTimeout(this.mousedownTimer);
+			
+		this.dragging = false;
+		this.drag.source.removeClass('drag-source');
+		this.drag.clone.remove();
+		
+		var drops = this.$el.find('.drop-wrapper');
+
+		if(drops.length) {
+			drops.removeClass('drop-wrapper').children().removeClass('drag-source drag-drop-hover');
+
+			this.$el.find('.was-hidden').removeClass('was-hidden').show();
+
+			this.drag.source.remove();
+		} else {
+			this.$el.find('.was-hidden').removeClass('was-hidden').hide();
+		}
+	},
+	moveDrag: function(e) {
+		if(this.dragging) {
+			// Set position
+			this.drag.clone.css({
+				left: e.pageX - this.drag.offset.x,
+				top: e.pageY - this.drag.offset.y
+			});
+
+			// Get target under mouse
+			this.drag.over = $(document.elementFromPoint(e.pageX, e.pageY)).closest('.toggle, .file');
+		}
+	},
+	dragEnter: function(e) {
+		if(this.dragging) {
+			var self = $(e.currentTarget);
+
+			// self.addClass('drag-target-hover');
+			self.addClass('drag-focus');
+
+			var ul = self.next('ul');
+			var drop = $('<li />')
+				.addClass('drop-wrapper')
+				.html(this.drag.source
+					.clone()
+					.addClass('drag-drop-hover'));
+
+			if(ul.children('.folder-wrapper').length) {
+				ul.children('.folder-wrapper')
+					.last()
+					.after(drop);
+			}  else if(ul.children('.file-wrapper').length) {
+				ul.children('.file-wrapper')
+					.last()
+					.after(drop);
+			} else {
+				ul.prepend(drop);
+			}
+
+			if(!ul.is(':visible')) {
+				ul.addClass('was-hidden').show();
+			}
+		}
+	},
+	dragLeave: function(e) {
+		if(this.dragging) {
+			var self = $(e.currentTarget);
+
+			self.removeClass('drag-focus');
+
+			var ul = self.next('ul');
+
+			ul.children('.drop-wrapper').remove();
+
+			if(ul.hasClass('was-hidden')) {
+				ul.removeClass('was-hidden').hide();
+			}
+		}
 	},
 	focusPane: function(e) {
 		var self = $(e.currentTarget);

@@ -20,6 +20,7 @@ var FileView = Backbone.View.extend({
 	checkboxes: true,
 	details: true,
 	tagName: 'li',
+	className: 'file-wrapper',
 	initialize: function() {
 		this.render();
 	},
@@ -123,7 +124,7 @@ var FileTree = Backbone.View.extend({
 	animate: true,
 	events: {
 		'click .toggle': 'toggleTree',
-		'click input[type="checkbox"]': 'toggleCheckbox'
+		'click input[type="checkbox"]': 'toggleCheckbox',
 	},
 	initialize: function() {
 		this.model.set('open', true);
@@ -180,6 +181,9 @@ var FileTree = Backbone.View.extend({
 			state ? extras.show() : extras.hide();
 		}
 	},
+	clearMousedown: function(e) {
+		clearTimeout(this.mousedownTimer);
+	},
 	render: function() {
 		if(this.rendered) {
 			return this;
@@ -216,6 +220,7 @@ var FileSubTree = Backbone.View.extend({
 	tagName: 'li',
 	checkboxes: true,
 	details: true,
+	className: 'folder-wrapper',
 	initialize: function() {
 		this.render();
 
