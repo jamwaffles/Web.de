@@ -78,11 +78,18 @@ var FileBrowser = Backbone.View.extend({
 		'click .removePane': 'removePane',
 		'click .filepane': 'focusPane',
 		'click .toggle, .file': 'stopDrag',
+		'click .dropdown-toggle': 'dropdown',
 		'mouseup': 'stopDrag',
 		'mousedown .file': 'startDrag',
 		'mousemove': 'moveDrag',
 		'mouseenter .toggle': 'dragEnter',
 		'mouseleave .toggle': 'dragLeave'
+	},
+	dropdown: function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log("Drop");
+		$(e.currentTarget).dropdown('toggle');
 	},
 	startDrag: function(e) {
 		if(e.button !== 0 || $(e.target).is('.dragging')) {
@@ -126,27 +133,29 @@ var FileBrowser = Backbone.View.extend({
 	},
 	stopDrag: function(e) {
 		clearTimeout(this.mousedownTimer);
-			
-		this.dragging = false;
-		this.drag.source.removeClass('drag-source');
-		this.drag.clone.remove();
 		
-		var drops = this.$el.find('.drop-wrapper');
+		if(this.dragging) {
+			this.dragging = false;
+			this.drag.source.removeClass('drag-source');
+			this.drag.clone.remove();
+			
+			var drops = this.$el.find('.drop-wrapper');
 
-		if(drops.length) {
-			drops.removeClass('drop-wrapper').children().removeClass('drag-source drag-drop-hover');
+			if(drops.length) {
+				drops.removeClass('drop-wrapper').children().removeClass('drag-source drag-drop-hover');
 
-			this.$el.find('.was-hidden')
-				.removeClass('was-hidden')
-				.slideDown(100)
+				this.$el.find('.was-hidden')
+					.removeClass('was-hidden')
+					.slideDown(100)
 
-				.prev('.toggle')
-				.children('i')
-				.toggleClass('fam-folder_open fam-folder');
+					.prev('.toggle')
+					.children('i')
+					.toggleClass('fam-folder_open fam-folder');
 
-			this.drag.source.remove();
-		} else {
-			this.$el.find('.was-hidden').removeClass('was-hidden').slideUp(100);
+				this.drag.source.remove();
+			} else {
+				this.$el.find('.was-hidden').removeClass('was-hidden').slideUp(100);
+			}
 		}
 	},
 	moveDrag: function(e) {

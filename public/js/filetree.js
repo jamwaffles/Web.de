@@ -181,9 +181,6 @@ var FileTree = Backbone.View.extend({
 			state ? extras.show() : extras.hide();
 		}
 	},
-	clearMousedown: function(e) {
-		clearTimeout(this.mousedownTimer);
-	},
 	render: function() {
 		if(this.rendered) {
 			return this;
