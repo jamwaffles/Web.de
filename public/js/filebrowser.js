@@ -78,18 +78,11 @@ var FileBrowser = Backbone.View.extend({
 		'click .removePane': 'removePane',
 		'click .filepane': 'focusPane',
 		'click .toggle, .file': 'stopDrag',
-		'click .dropdown-toggle': 'dropdown',
 		'mouseup': 'stopDrag',
 		'mousedown .file': 'startDrag',
 		'mousemove': 'moveDrag',
 		'mouseenter .toggle': 'dragEnter',
 		'mouseleave .toggle': 'dragLeave'
-	},
-	dropdown: function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		console.log("Drop");
-		$(e.currentTarget).dropdown('toggle');
 	},
 	startDrag: function(e) {
 		if(e.button !== 0 || $(e.target).is('.dragging')) {

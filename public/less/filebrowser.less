@@ -2,6 +2,14 @@
 @import 'fam';
 @import 'filetree';
 
+.pointer-events(@events) {
+  -webkit-pointer-events: @events;
+	 -moz-pointer-events: @events;
+	  -ms-pointer-events: @events;
+	   -o-pointer-events: @events;
+		  pointer-events: @events;
+}
+
 #files-main {
 	position: fixed;
 	top: 0;

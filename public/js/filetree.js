@@ -125,11 +125,18 @@ var FileTree = Backbone.View.extend({
 	events: {
 		'click .toggle': 'toggleTree',
 		'click input[type="checkbox"]': 'toggleCheckbox',
+		'click .dropdown-toggle': 'toggleMenu',
 	},
 	initialize: function() {
 		this.model.set('open', true);
 
 		this.render();
+	},
+	toggleMenu: function(e) {
+		// e.preventDefault();
+		// e.stopPropagation();
+		console.log("Click");
+		$(e.currentTarget).dropdown('toggle');
 	},
 	toggleTree: function(e) {
 		var self = $(e.currentTarget);

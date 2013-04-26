@@ -39,6 +39,14 @@
 		  user-select: @select;
 }
 
+.pointer-events(@events) {
+  -webkit-pointer-events: @events;
+	 -moz-pointer-events: @events;
+	  -ms-pointer-events: @events;
+	   -o-pointer-events: @events;
+		  pointer-events: @events;
+}
+
 .progress-inverse .bar {
 	#gradient > .vertical(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
