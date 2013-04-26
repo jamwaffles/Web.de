@@ -136,11 +136,17 @@ var FileBrowser = Backbone.View.extend({
 		if(drops.length) {
 			drops.removeClass('drop-wrapper').children().removeClass('drag-source drag-drop-hover');
 
-			this.$el.find('.was-hidden').removeClass('was-hidden').show();
+			this.$el.find('.was-hidden')
+				.removeClass('was-hidden')
+				.slideDown(100)
+
+				.prev('.toggle')
+				.children('i')
+				.toggleClass('fam-folder_open fam-folder');
 
 			this.drag.source.remove();
 		} else {
-			this.$el.find('.was-hidden').removeClass('was-hidden').hide();
+			this.$el.find('.was-hidden').removeClass('was-hidden').slideUp(100);
 		}
 	},
 	moveDrag: function(e) {
@@ -182,7 +188,7 @@ var FileBrowser = Backbone.View.extend({
 			}
 
 			if(!ul.is(':visible')) {
-				ul.addClass('was-hidden').show();
+				ul.addClass('was-hidden').slideDown(100);
 			}
 		}
 	},
