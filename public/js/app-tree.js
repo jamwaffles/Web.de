@@ -80,13 +80,17 @@ var SubTreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree',
 	open: false,
+	itemTemplate: TreeItem,
+	initialize: function(options) {
+		this.itemTemplate = options.itemTemplate || this.itemTemplate;
+	},
 	render: function() {
 		this.model.get('children').each(function(item) {
 			var li = $('<li />');
 
 			if(item instanceof Tree) {
 				var header = new TreeHeader({ model: item }).render().$el;
-				var subtree = new SubTreeView({ model: item }).render().$el;
+				var subtree = new SubTreeView({ model: item, itemTemplate: this.itemTemplate }).render().$el;
 
 				if(this.model.get('open')) {
 					header.addClass('expanded');
@@ -97,7 +101,7 @@ var SubTreeView = Backbone.View.extend({
 
 				this.$el.append(li);
 			} else {
-				this.$el.append(new TreeItem({ model: item }).render().el);
+				this.$el.append(new this.itemTemplate({ model: item }).render().el);
 			}
 		}, this);
 
@@ -109,6 +113,7 @@ var TreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
 	open: false,
+	itemTemplate: TreeItem,
 	events: {
 		'click div.toggle': 'toggleTree',
 		'click a': 'triggerAction'
@@ -143,7 +148,7 @@ var TreeView = Backbone.View.extend({
 
 			if(item instanceof Tree) {
 				var header = new TreeHeader({ model: item }).render().$el;
-				var subtree = new SubTreeView({ model: item }).render().$el;
+				var subtree = new SubTreeView({ model: item, itemTemplate: this.itemTemplate }).render().$el;
 
 				if(this.model.get('open')) {
 					header.addClass('expanded');
@@ -155,7 +160,7 @@ var TreeView = Backbone.View.extend({
 
 				this.$el.append(li);
 			} else {
-				this.$el.append(new TreeItem({ model: item }).render().el);
+				this.$el.append(new this.itemTemplate({ model: item }).render().el);
 			}
 		}, this);
 
