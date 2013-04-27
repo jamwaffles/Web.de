@@ -206,3 +206,14 @@ var Folder = Backbone.Model.extend({
 		};
 	}
 });
+
+var Process = Backbone.Model.extend({
+	defaults: {
+		comm: 'nginx',
+		pid: '316',
+		user: 'root',
+		ram: '1.2',
+		cpu: '0.6',
+		time: '00:00:01'
+	}
+});

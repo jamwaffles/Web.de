@@ -122,7 +122,11 @@ $('#dln > li.default > a.section-toggle').first().trigger('click');
 // Accordions
 $('dl.accordion').children('dt.open').next('dd').show();
 
-$('dl.accordion').on('click', '> dt:not(.href)', function() {
+$('dl.accordion').on('click', '> dt:not(.href)', function(e) {
+	if($(e.target).is('button, a, .btn')) {
+		return;
+	}
+
 	$(this).toggleClass('open');
 	var content = $(this).next('dd');
 

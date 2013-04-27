@@ -825,7 +825,7 @@
 			</div>
 
 			<ul id="dln">
-				<li>
+				<li id="dln-device">
 					<a href="#" class="section-toggle">
 						<h2>Device</h2>
 					</a>
@@ -920,9 +920,18 @@
 							<dt>
 								<div class="icon-large icon-play-button"></div>
 								<h3>Running</h3>
-								<button class="action-add btn btn-primary">New Process</button>
+								<a data-toggle="modal"  href="#modal-dummy-configure" class="action-add btn btn-primary">New Process</a>
+
+								<div class="process-details header">
+									<span>PID</span>
+									<span>User</span>
+									<span>% RAM</span>
+									<span>% CPU</span>
+									<span>Time</span>
+									<span class="actions">Kill</span>
+								</div>
 							</dt>
-							<dd>
+							<dd id="device-processes">
 								<table class="table block table-striped table-condensed">
 									<thead>
 										<tr>
@@ -995,7 +1004,7 @@
 						</dl>
 					</div>
 				</li>
-				<li class="default">
+				<li class="default" id="dln-local">
 					<a href="#" class="section-toggle">
 						<h2>Local</h2>
 					</a>
@@ -1054,7 +1063,7 @@
 						</dl>
 					</div>
 				</li>
-				<li>
+				<li id="dln-network">
 					<a href="#" class="section-toggle">
 						<h2>Network</h2>
 					</a>
@@ -1189,6 +1198,20 @@
 				<div class="results">
 					{$list}								
 				</div>
+			</div>
+		</script>
+
+		<script type="text/template" id="template-process">
+			<span>{$comm}</span>
+
+			<div class="process-details">
+				<span>{$pid}</span>
+				<span>{$user}</span>
+				<span>{$ram}</span>
+				<span>{$cpu}</span>
+				<span>{$time}</span>
+
+				<span class="actions"><a href="#"><i class="icon-remove-sign"></i></a></span>
 			</div>
 		</script>
 

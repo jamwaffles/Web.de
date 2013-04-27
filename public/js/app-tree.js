@@ -56,21 +56,39 @@ var TreeItem = Backbone.View.extend({
 		// Icon
 		$('<i />')
 			.addClass('icon-' + this.model.get('icon'))
-			.prependTo(li);
+			.prependTo(this.$el);
 
 		if(this.model.get('href')) {
 			$('<a />')
 				.prop('href', '#' + this.model.cid)
 				.html(this.model.get('title'))
 				.data('cid', this.model.cid)
-				.appendTo(li);
+				.appendTo(this.$el);
 		} else {
 			$('<span />')
 				.html(this.model.get('title'))
-				.appendTo(li);
+				.appendTo(this.$el);
 		}
 
-		li.appendTo(this.$el);
+		return this;
+	}
+});
+
+/* Item specific to process list */
+var TreeHeaderProcess = TreeHeader.extend({
+	template: _.template($('#template-process').html()),
+	render: function() {
+		this.$el.prepend($('<i />').addClass('icon-plus'));
+
+		this.$el.append(this.template(this.model.toJSON()));
+
+		return this;
+	}
+});
+var TreeItemProcess = TreeItem.extend({
+	template: _.template($('#template-process').html()),
+	render: function() {
+		this.$el.html(this.template(this.model.toJSON()));
 
 		return this;
 	}
@@ -80,17 +98,19 @@ var SubTreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree',
 	open: false,
-	itemTemplate: TreeItem,
+	itemView: TreeItem,
+	headerView: TreeHeader,
 	initialize: function(options) {
-		this.itemTemplate = options.itemTemplate || this.itemTemplate;
+		this.itemView = options.itemView || this.itemView;
+		this.headerView = options.headerView || this.headerView;
 	},
 	render: function() {
 		this.model.get('children').each(function(item) {
 			var li = $('<li />');
 
 			if(item instanceof Tree) {
-				var header = new TreeHeader({ model: item }).render().$el;
-				var subtree = new SubTreeView({ model: item, itemTemplate: this.itemTemplate }).render().$el;
+				var header = new this.headerView({ model: item }).render().$el;
+				var subtree = new SubTreeView({ model: item, itemView: this.itemView }).render().$el;
 
 				if(this.model.get('open')) {
 					header.addClass('expanded');
@@ -101,7 +121,7 @@ var SubTreeView = Backbone.View.extend({
 
 				this.$el.append(li);
 			} else {
-				this.$el.append(new this.itemTemplate({ model: item }).render().el);
+				this.$el.append(new this.itemView({ model: item }).render().el);
 			}
 		}, this);
 
@@ -113,12 +133,16 @@ var TreeView = Backbone.View.extend({
 	tagName: 'ul',
 	className: 'tree tree-top',
 	open: false,
-	itemTemplate: TreeItem,
+	itemView: TreeItem,
+	headerView: TreeHeader,
 	events: {
 		'click div.toggle': 'toggleTree',
 		'click a': 'triggerAction'
 	},
 	initialize: function(options) {
+		this.itemView = options.itemView || this.itemView;
+		this.headerView = options.headerView || this.headerView;
+
 		this.nodeSelect = options.nodeSelect;
 		this.open = options.open !== undefined ? options.open : this.open;
 	},
@@ -147,8 +171,8 @@ var TreeView = Backbone.View.extend({
 			var li = $('<li />');
 
 			if(item instanceof Tree) {
-				var header = new TreeHeader({ model: item }).render().$el;
-				var subtree = new SubTreeView({ model: item, itemTemplate: this.itemTemplate }).render().$el;
+				var header = new this.headerView({ model: item }).render().$el;
+				var subtree = new SubTreeView({ model: item, itemView: this.itemView }).render().$el;
 
 				if(this.model.get('open')) {
 					header.addClass('expanded');
@@ -160,13 +184,76 @@ var TreeView = Backbone.View.extend({
 
 				this.$el.append(li);
 			} else {
-				this.$el.append(new this.itemTemplate({ model: item }).render().el);
+				this.$el.append(new this.itemView({ model: item }).render().el);
 			}
 		}, this);
 
 		return this;
 	}
 });
+
+var ProcessSubTreeView = SubTreeView.extend({
+	headerView: TreeHeaderProcess,
+	itemView: TreeItemProcess,
+	render: function() {
+		this.model.get('children').each(function(item) {
+			var li = $('<li />');
+
+			if(item instanceof Tree) {
+				var header = new this.headerView({ model: item.get('process') }).render().$el;
+				var subtree = new ProcessSubTreeView({ model: item, itemView: this.itemView }).render().$el;
+
+				if(this.model.get('open')) {
+					header.addClass('expanded');
+					subtree.show();
+				}
+
+				li.html([ header, subtree ]);
+
+				this.$el.append(li);
+			} else {
+				this.$el.append(new this.itemView({ model: item }).render().el);
+			}
+		}, this);
+
+		return this;
+	}
+});
+
+var ProcessTreeView = TreeView.extend({
+	headerView: TreeHeaderProcess,
+	itemView: TreeItemProcess,
+	className: 'tree tree-top process-tree',
+	render: function() {
+		if(this.model.get('title') !== undefined) {
+			this.$el.append(new FixedTreeHeader({ model: this.model }).render().el);
+		}
+
+		this.model.get('children').each(function(item) {
+			var li = $('<li />');
+
+			if(item instanceof Tree) {
+				var header = new this.headerView({ model: item.get('process') }).render().$el;
+				var subtree = new ProcessSubTreeView({ model: item, itemView: this.itemView }).render().$el;
+
+				if(this.model.get('open')) {
+					header.addClass('expanded');
+					header.children('i').toggleClass('icon-plus icon-minus');
+					subtree.show();
+				}
+
+				li.html([ header, subtree ]);
+
+				this.$el.append(li);
+			} else {
+				this.$el.append(new this.itemView({ model: item }).render().el);
+			}
+		}, this);
+
+		return this;
+	}
+});
+
 
 /***********
  * Sandbox *

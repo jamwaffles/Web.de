@@ -185,6 +185,50 @@ $('#hardware-device').html(new TreeView({
 	} 
 }).render().el);
 
+/***********
+ * Running *
+ ***********/
+var process = new Tree([
+	new Process({ comm: 'upstart-udev-br' }),
+	new Tree({ 
+		process: new Process({ comm: 'udevd' }),
+		children: [
+			new Process({ comm: 'udevd' }),
+			new Process({ comm: 'udevd' })
+		]
+	}),
+	new Process({ comm: 'dbus-daemon' }),
+	new Process({ comm: 'rsyslogd' }),
+	new Process({ comm: 'upstart-socket' }),
+	new Tree({ 
+		process: new Process({ comm: 'sshd' }),
+		children: new Tree({
+			process: new Process({ comm: 'bash' }),
+			children: [ new Process({ comm: 'ps' }) ]
+		})
+	}),
+	new Process({ comm: 'getty' }),
+	new Process({ comm: 'getty' }),
+	new Process({ comm: 'getty' }),
+	new Process({ comm: 'getty' }),
+	new Process({ comm: 'getty' }),
+	new Process({ comm: 'acpid' }),
+	new Tree({ 
+		process: new Process({ comm: 'nginx' }),
+		children: [
+			new Process({ comm: 'nginx' }),
+			new Process({ comm: 'nginx' })
+		]
+	})
+]);
+
+var processView = new ProcessTreeView({
+	headerView: TreeHeaderProcess,
+	model: process
+});
+
+$('#device-processes').html(processView.render().el);
+
 /*************
  * Scheduled *
  *************/
