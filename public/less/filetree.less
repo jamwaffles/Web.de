@@ -162,8 +162,6 @@
 			bottom: 0;
 			z-index: 2;
 			content: "";
-
-			.pointer-events(none);
 		}
 
 		&.drag-source {
@@ -192,6 +190,11 @@
 
 			.border-radius(@baseBorderRadius);
 			.box-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+		}
+
+		input, .dropdown-toggle {
+			position: relative;
+			z-index: 3;
 		}
 	}
 }
