@@ -94,7 +94,7 @@
 		background: blue;
 		left: 0;
 		right: 10px;
-		border: 1px solid #ddd;
+		border: 1px solid rgba(0, 0, 0, 0.3);
 		background: #eee;
 		color: @textColor;
 		overflow: hidden;
@@ -104,6 +104,7 @@
 		.box-sizing(border-box);
 		.border-top-radius(@baseBorderRadius);
 		.transition(opacity 0.2s linear);
+		.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
 
 		div.action {
 			margin-bottom: 5px;

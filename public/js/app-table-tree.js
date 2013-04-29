@@ -239,14 +239,14 @@ var SpanTableTreeView = Backbone.View.extend({
 		self.toggleClass('icon-plus icon-minus');
 
 		if(row.hasClass('expanded')) {		// Show
-			var rows = row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').show();
+			var rows = row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').slideDown();
 
 			// Hide closed sub-items
 			rows.filter('.sub-collapse-header:not(.expanded)').each(function() {
-				$(this).nextUntil(':not(.sub-collapse-row)').hide();
+				$(this).nextUntil(':not(.sub-collapse-row)').slideDown();
 			});
 		} else {		// Hide
-			row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').hide();
+			row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').slideUp();
 		}
 	},
 	subToggle: function(e) {
@@ -256,7 +256,7 @@ var SpanTableTreeView = Backbone.View.extend({
 		self.toggleClass('icon-plus icon-minus');
 		row.toggleClass('expanded');
 
-		row.nextUntil(':not(.sub-collapse-row)').toggle();
+		row.nextUntil(':not(.sub-collapse-row)').slideToggle();
 	},
 	render: function() {
 		var rows = [];
