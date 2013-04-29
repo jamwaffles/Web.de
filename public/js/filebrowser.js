@@ -22,22 +22,13 @@ var FilePane = Backbone.View.extend({
 	width: 100,
 	initialize: function(options) {
 		_.extend(this, options);
-
-		this.setWidth(this.width);
 	},
 	render: function() {
 		this.$el.html(new FilePaneHeader().el);
 
-		this.$el.append(new FileTree({ model: this.model }).el)
+		this.$el.append(new FileTree({ model: this.model }).el);
 
 		this.rendered = true;
-
-		return this;
-	},
-	setWidth: function(width) {
-		this.width = width;
-
-		this.$el.css('width', this.width + '%');
 
 		return this;
 	}
@@ -231,7 +222,7 @@ var FileBrowser = Backbone.View.extend({
 
 		var self = $(e.currentTarget);
 		var pane = self.closest('.filepane');
-		var paneIndex = pane.index();
+		var paneIndex = pane.index() - 1;
 		var newPane = new FilePane({ model: this.model, className: 'filepane new removed' });
 
 		if(self.hasClass('left')) {
@@ -254,8 +245,7 @@ var FileBrowser = Backbone.View.extend({
 	removePane: function(e) {
 		var self = $(e.currentTarget);
 		var pane = self.closest('.filepane');
-		var paneIndex = pane.index();
-		var view = this;
+		var paneIndex = pane.index() - 1;
 
 		if(this.numPanes == 1) {
 			return;
@@ -263,9 +253,9 @@ var FileBrowser = Backbone.View.extend({
 
 		pane.remove();
 
-		view.panes.splice(paneIndex - 1, 1);
-		view.numPanes--;
-		view.setPaneWidths();
+		this.panes.splice(paneIndex, 1);
+		this.numPanes--;
+		this.setPaneWidths();
 	},
 	initialize: function(options) {
 		_.extend(this, options);
@@ -274,7 +264,7 @@ var FileBrowser = Backbone.View.extend({
 			this.panes.push(new FilePane({ model: this.model }));
 		}
 
-		// this.panes[0].$el.addClass('focused');
+		this.panes[0].$el.addClass('focused');
 
 		this.render();
 	},
@@ -284,8 +274,10 @@ var FileBrowser = Backbone.View.extend({
 
 		if(!this.rendered) {
 			_.each(this.panes, function(pane) {
-				this.$el.append(pane.setWidth(100 / this.numPanes).render().el);
+				this.$el.append(pane.render().el);
 			}, this);
+
+			this.setPaneWidths();
 		}
 
 		this.rendered = true;
@@ -293,8 +285,8 @@ var FileBrowser = Backbone.View.extend({
 		return this;
 	},
 	setPaneWidths: function() {
-		_.each(this.panes, function(pane) {
-			pane.setWidth(100 / this.numPanes);
-		}, this);
+		this.$el.removeClass('panes1 panes2 panes3 panes4 panes5');
+
+		this.$el.addClass('panes' + this.numPanes);
 	}
 });
