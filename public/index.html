@@ -862,11 +862,8 @@
 													</div>
 														
 													<input type="text" placeholder="Extension">
-													
 													<label class="spacer"><input type="checkbox" name=""> Disabled</label>
-													
 													<label class="spacer"><input type="checkbox"> Expires</label>
-													
 													<input type="text" class="datepicker-popup" placeholder="Expiry date">
 												</div>
 											</div>
@@ -1123,21 +1120,66 @@
 
 				<ul id="progress-menu">
 					<li>
-						<div class="action">File copying</div>
-						<div class="progress progress-striped active">
-							<div class="bar" style="width: 60%"></div>
+						<div class="action">
+							<a href="#" class="details disabled"><i class="icon-list"></i></a>
+							File copying
+							<span class="pull-right">60%</span>
+						</div>
+
+						<div class="bar">
+							<a href="#" class="pause"><i class="icon-pause"></i></a>
+							<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+
+							<div class="float-wrapper">
+								<div class="progress progress-striped active">
+									<div class="bar" style="width: 50%"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="details-container">
+							<div class="nowrap" title="/var/log/apache2/php5-fpm/webde.jamwaffles.co.uk.log">Source: /var/log/apache2/php5-fpm/webde.jamwaffles.co.uk.log</div>
+							<div class="nowrap" title="~/webde.jamwaffles.co.uk.log">Target: ~/webde.jamwaffles.co.uk.log</div>
 						</div>
 					</li>
 					<li>
-						<div class="action">CD Burning</div>
-						<div class="progress progress-striped active">
-							<div class="bar" style="width: 30%"></div>
+						<div class="action">
+							<a class="details disabled"><i class="icon-list"></i></a>
+							CD Burning
+							<span class="pull-right">30%</span>
+						</div>
+
+						<div class="bar">
+							<a href="#" class="pause"><i class="icon-pause"></i></a>
+							<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+
+							<div class="float-wrapper">
+								<div class="progress progress-striped active">
+									<div class="bar" style="width: 50%"></div>
+								</div>
+							</div>
 						</div>
 					</li>
 					<li>
-						<div class="action">Printing</div>
-						<div class="progress progress-striped active">
-							<div class="bar" style="width: 50%"></div>
+						<div class="action">
+							<a href="#" class="details"><i class="icon-list"></i></a>
+							Printing
+							<span class="pull-right">42%</span>
+						</div>
+
+						<div class="bar">
+							<a href="#" class="pause"><i class="icon-pause"></i></a>
+							<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+
+							<div class="float-wrapper">
+								<div class="progress progress-striped active">
+									<div class="bar" style="width: 50%"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="details-container">
+							StarTrekScript.doc (1.36MB)
 						</div>
 					</li>
 				</ul>
@@ -1219,6 +1261,7 @@
 		<script src="js/dln-network.js"></script>
 
 		<script src="js/app-omnibox.js"></script>
+		<script src="js/app-footerbar.js"></script>
 		<script src="js/app.js"></script>
 	</body>
 </html>

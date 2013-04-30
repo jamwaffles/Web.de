@@ -106,7 +106,7 @@
 		bottom: 40px;
 		background: blue;
 		left: 0;
-		right: 10px;
+		right: 0px;
 		border: 1px solid rgba(0, 0, 0, 0.3);
 		background: #eee;
 		color: @textColor;
@@ -140,10 +140,48 @@
 			}
 		}
 
-		.progress {
-			margin: 0;
-			height: 15px;
-			width: 100%;
+		.bar {
+			.float-wrapper {
+				float: none;
+				position: relative;
+				overflow: hidden;
+			}
+
+			a {
+				&.cancel {
+					float: right;
+				}
+				&.pause {
+					float: left;
+				}
+				&.disabled {
+					cursor: default;
+
+					i {
+						opacity: 0.6;
+					}
+				}
+			}
+
+			.progress {
+				margin: 2px 5px 0;
+				height: 15px;
+				width: auto;
+				display: block;
+			}
+		}
+
+		.details-container {
+			clear: both;
+			margin-top: 5px;
+			display: none;
+			font-size: 12px;
+
+			.nowrap {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;	
+			}
 		}
 	}
 }
