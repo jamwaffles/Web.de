@@ -95,7 +95,7 @@ var FileBrowser = Backbone.View.extend({
 				self.drag.clone
 					.css({
 						position: 'fixed',
-						width: 500
+						width: Math.min(500, self.drag.source.width())
 					})
 					.addClass('dragging')
 					.appendTo(self.drag.source.closest('.file-tree'));
@@ -155,9 +155,6 @@ var FileBrowser = Backbone.View.extend({
 				left: e.pageX - this.drag.offset.x,
 				top: e.pageY - this.drag.offset.y
 			});
-
-			// Get target under mouse
-			this.drag.over = $(document.elementFromPoint(e.pageX, e.pageY)).closest('.toggle, .file');
 		}
 	},
 	dragEnter: function(e) {

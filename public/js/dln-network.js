@@ -69,15 +69,19 @@ var xinixNetwork = new Tree({
 			children: [
 				new Tree({
 					title: 'Lumia 820',
+					uri: 'index.html',
+					newWindow: true,
 					children: [
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Pictures', comment: '' }),
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Documents', comment: 'Company phone' })
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Pictures' }),
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Documents' })
 					]
 				}),
 				new Tree({
 					title: 'Nexus 4',
+					uri: 'index.html',
+					newWindow: true,
 					children: [
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Pictures', comment: '' })
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Pictures' })
 					]
 				})
 			]
@@ -88,13 +92,13 @@ var xinixNetwork = new Tree({
 				new Tree({
 					title: 'Headphones',
 					children: [
-						new NetworkDevice({ name: 'Philips SBH9000', comment: '' })
+						new NetworkDevice({ name: 'Philips SBH9000' })
 					]
 				}),
 				new Tree({
 					title: 'Speakers',
 					children: [
-						new NetworkDevice({ name: 'Foxl G290 Speakers', comment: '' })
+						new NetworkDevice({ name: 'Foxl G290 Speakers' })
 					]
 				})
 			]
