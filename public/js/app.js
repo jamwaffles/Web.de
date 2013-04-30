@@ -30,6 +30,29 @@ $('#slideout-pairing .new-group').on('click', function(e) {
 	$(this).closest('.row-fluid').next('input').toggle();
 });
 
+// Toggle header/footer bars
+$('#statusbar .bar-toggle, #footerbar .bar-toggle').on('click', function(e) {
+	e.preventDefault();
+
+	var bar = $(this).closest('#statusbar, #footerbar');
+
+	if($(this).hasClass('left')) {
+		if(bar.hasClass('hide-right')) {
+			bar.removeClass('hide-left hide-right');
+		} else {
+			bar.addClass('hide-left');
+		}
+	} else {
+		if(bar.hasClass('hide-left')) {
+			bar.removeClass('hide-left hide-right');
+		} else {
+			bar.addClass('hide-right');
+		}
+	}
+
+	$('html').toggleClass(bar.attr('id').replace('#', '') + '-hidden');
+});
+
 /* Footer bar */
 $('#toggle-progress-menu').on('click', function(e) {
 	e.preventDefault();

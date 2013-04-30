@@ -53,6 +53,45 @@
 
 html {
 	cursor: default;
+	overflow: hidden;
+
+	&.statusbar-hidden {
+		#main {
+			top: 0;
+		}
+	}
+	&.footerbar-hidden {
+		#main {
+			bottom: 0;
+		}
+	}
+}
+body {
+	overflow: hidden;
+}
+
+.hide-left {
+	left: -98% !important;
+	right: 98% !important;
+
+	.border-radius(@baseBorderRadius);
+}
+.hide-right {
+	left: 98% !important;
+	right: -98% !important;
+
+	.border-radius(@baseBorderRadius);
+}
+.bar-toggle {
+	line-height: 40px;
+	padding: 0 10px;
+
+	&.left {
+		float: left;
+	}
+	&.right {
+		float: right;
+	}
 }
 
 .nav-pills {
@@ -746,6 +785,8 @@ dl.accordion {
 	right: 0;
 	left: 0;
 	bottom: 41px;
+
+	.transition(all 0.4s ease-in-out);
 
 	.panel {
 		background: #fff;
