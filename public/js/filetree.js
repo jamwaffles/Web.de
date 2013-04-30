@@ -69,7 +69,7 @@ var FolderTitle = Backbone.View.extend({
 	details: true,
 	rendered: false,
 	tagName: 'div',
-	className: 'toggle',
+	className: 'toggle folder',
 	template: _.template($('#template-filetree-folder').html()),
 	initialize: function(options) {
 		this.render();

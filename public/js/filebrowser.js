@@ -70,7 +70,7 @@ var FileBrowser = Backbone.View.extend({
 		'click .filepane': 'focusPane',
 		'click .toggle, .file': 'stopDrag',
 		'mouseup': 'stopDrag',
-		'mousedown .file': 'startDrag',
+		'mousedown .file, .folder': 'startDrag',
 		'mousemove': 'moveDrag',
 		'mouseenter .toggle': 'dragEnter',
 		'mouseleave .toggle': 'dragLeave'
@@ -136,7 +136,13 @@ var FileBrowser = Backbone.View.extend({
 					.children('i')
 					.toggleClass('fam-folder_open fam-folder');
 
-				this.drag.source.remove();
+				if(this.drag.clone.hasClass('folder')) {
+					drops.replaceWith(this.drag.source.parent().clone());
+
+					this.drag.source.parent().remove();
+				} else {
+					this.drag.source.remove();
+				}
 			} else {
 				this.$el.find('.was-hidden').removeClass('was-hidden').slideUp(100);
 			}
