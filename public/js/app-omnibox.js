@@ -253,7 +253,10 @@ var Omnibox = Backbone.View.extend({
 		}
 
 		// Show command
-		output.append($('<div />').addClass('command').text(this.inputString.replace(/^[$#]\s*/, '')));
+		$('<div />')
+			.addClass('command')
+			.text([ '/home/username', this.inputString.substr(0, 1), this.inputString.replace(/^[$#]\s*/, '') ].join(' '))
+			.appendTo(output);
 
 		// TODO: Send off request to execute command, add output to `output`
 		output.append('total 44 \n\

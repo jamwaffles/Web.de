@@ -141,9 +141,11 @@
 		h4:first-child {
 			margin: 0;
 			padding: 10px;
-			border-bottom: 1px solid #eee;
+			border-bottom: 1px solid #ddd;
+			background-color: #f5f5f5;
 
 			.border-top-radius(@baseBorderRadius - 1);
+			.box-shadow(inset 0 -1px 0 #FFF);
 
 			span {
 				float: right;
@@ -158,6 +160,13 @@
 			}
 		}
 
+		.footer {
+			border-top: 1px solid #eee;
+			padding: 10px;
+
+			.border-bottom-radius(@baseBorderRadius - 1);
+		}
+
 		div.body {
 			min-height: 150px;
 			padding: 10px;
@@ -166,16 +175,6 @@
 			max-height: 170px;
 			margin: 0 auto;
 			display: block;
-		}
-
-		.footer {
-			padding: 10px;
-			border-top: 1px solid #ddd;
-			background-color: #f5f5f5;
-
-			.border-bottom-radius(@baseBorderRadius - 1);
-
-			.box-shadow(inset 0 1px 0 #FFF);
 		}
 	}
 }

@@ -68,16 +68,16 @@ var xinixNetwork = new Tree({
 			title: 'Expensive phones',
 			children: [
 				new Tree({
-					title: 'Nokia',
+					title: 'Lumia 820',
 					children: [
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Lumia 820', comment: '' }),
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Lumia 900', comment: 'Company phone' })
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Pictures', comment: '' }),
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Documents', comment: 'Company phone' })
 					]
 				}),
 				new Tree({
-					title: 'Android',
+					title: 'Nexus 4',
 					children: [
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Nexus 4', comment: '' })
+						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Pictures', comment: '' })
 					]
 				})
 			]
@@ -87,20 +87,14 @@ var xinixNetwork = new Tree({
 			children: [
 				new Tree({
 					title: 'Headphones',
-					uri: 'files.html',
-					newWindow: true,
 					children: [
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Sony USB', comment: '' }),
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Philips Bluetooth', comment: '' })
+						new NetworkDevice({ name: 'Philips SBH9000', comment: '' })
 					]
 				}),
 				new Tree({
 					title: 'Speakers',
-					uri: 'files.html',
-					newWindow: true,
 					children: [
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Foxl USB', comment: '' }),
-						new NetworkDevice({ newWindow: true,  uri: 'files.html', name: 'Digimax USB soundcard', comment: '' })
+						new NetworkDevice({ name: 'Foxl G290 Speakers', comment: '' })
 					]
 				})
 			]
