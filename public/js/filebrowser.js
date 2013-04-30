@@ -103,7 +103,7 @@ var FileBrowser = Backbone.View.extend({
 				self.dragging = true;
 
 				self.drag.offset = {
-					x: Math.min(e.pageX - self.drag.source.offset().left, 400),
+					x: Math.min(e.pageX - self.drag.source.offset().left, self.drag.clone.width()),
 					y: e.pageY - self.drag.source.offset().top
 				}
 

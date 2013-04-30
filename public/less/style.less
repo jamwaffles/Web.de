@@ -666,9 +666,9 @@ dl.accordion {
 .slideout {
 	@width: 280px;
 
-	position: fixed;
-	top: 41px;
-	bottom: 41px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
 	left: -@width;
 	width: @width;
 	padding: 10px;
@@ -702,17 +702,6 @@ dl.accordion {
 		&.slideout-right {
 			left: auto;
 			right: 0;
-		}
-	}
-
-	&.slideout-static {
-		left: 0 !important;
-		opacity: 1 !important;
-
-		&.slideout-right {
-			left: auto !important;
-			right: 0 !important;
-			border-left: 1px solid #ccc;
 		}
 	}
 
@@ -809,42 +798,6 @@ dl.accordion {
 			border: none;
 			padding: 0;
 			margin: 0;
-		}
-	}
-}
-
-/* Info panel */
-#info-sidebar {
-	h4 {
-		clear: both;
-		margin-top: 0;
-		padding-top: 10px;
-	}
-
-	li {
-		@padding: 2px;
-
-		clear: both;
-		padding: 0 @padding;
-
-		span, a {
-			.pull-right;
-			.align-right;
-
-			padding: 0 @padding;
-		}
-
-		strong {
-			color: @grayLight;
-		}
-
-		ul {
-			margin-left: 5px;
-			padding-left: 5px;
-
-			& + ul {
-				margin-top: 10px;
-			}
 		}
 	}
 }
