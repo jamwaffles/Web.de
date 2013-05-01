@@ -1075,114 +1075,182 @@
 		</div>
 
 		<div id="footerbar">
-			<a class="bar-toggle left" href="#"><i class="icon-white icon-chevron-left"></i></a>
+			<div class="apps-container">
+				<a class="scroll left" href="#"><i class="icon-white icon-chevron-left"></i></a>
 
-			<a class="bar-toggle right" href="#"><i class="icon-white icon-chevron-right"></i></a>
+				<a class="scroll right" href="#"><i class="icon-white icon-chevron-right"></i></a>
 
-			<ul class="apps">
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Aim"><img src="img/taskbar/Aim.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Aol"><img src="img/taskbar/Aol.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Counter Strike"><img src="img/taskbar/CounterStrike.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="FileZilla"><img src="img/taskbar/FileZilla.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="iTunes"><img src="img/taskbar/iTunes.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Nero"><img src="img/taskbar/Nero.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Photoshop"><img src="img/taskbar/Photoshop.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Quicktime"><img src="img/taskbar/Quicktime.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Skype"><img src="img/taskbar/Skype.png"></a>
-				</li>
-				<li class="icon">
-					<a data-toggle="tooltip" data-placement="top" href="#" title="Winamp"><img src="img/taskbar/Winamp.png"></a>
-				</li>
-			</ul>
-
-			<div class="progress-container">
-				<div class="progress progress-striped active">
-					<div class="bar" style="width: 40%;"></div>
-				</div>
-				<a href="#" id="toggle-progress-menu"><i class="icon-white icon-chevron-up"></i></a>
-
-				<ul id="progress-menu">
-					<li>
-						<div class="action">
-							<a href="#" class="details disabled"><i class="icon-list"></i></a>
-							File copying
-							<span class="pull-right">60%</span>
-						</div>
-
-						<div class="bar">
-							<a href="#" class="pause"><i class="icon-pause"></i></a>
-							<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
-
-							<div class="float-wrapper">
-								<div class="progress progress-striped active">
-									<div class="bar" style="width: 50%"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="details-container">
-							<div class="nowrap" title="/var/log/apache2/php5-fpm/webde.jamwaffles.co.uk.log">Source: /var/log/apache2/php5-fpm/webde.jamwaffles.co.uk.log</div>
-							<div class="nowrap" title="~/webde.jamwaffles.co.uk.log">Target: ~/webde.jamwaffles.co.uk.log</div>
-						</div>
+				<ul class="apps">
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Aim"><img src="img/taskbar/Aim.png"></a>
 					</li>
-					<li>
-						<div class="action">
-							<a class="details disabled"><i class="icon-list"></i></a>
-							CD Burning
-							<span class="pull-right">30%</span>
-						</div>
-
-						<div class="bar">
-							<a href="#" class="pause"><i class="icon-pause"></i></a>
-							<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
-
-							<div class="float-wrapper">
-								<div class="progress progress-striped active">
-									<div class="bar" style="width: 50%"></div>
-								</div>
-							</div>
-						</div>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Aol"><img src="img/taskbar/Aol.png"></a>
 					</li>
-					<li>
-						<div class="action">
-							<a href="#" class="details"><i class="icon-list"></i></a>
-							Printing
-							<span class="pull-right">42%</span>
-						</div>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Counter Strike"><img src="img/taskbar/CounterStrike.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="FileZilla"><img src="img/taskbar/FileZilla.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="iTunes"><img src="img/taskbar/iTunes.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Nero"><img src="img/taskbar/Nero.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Photoshop"><img src="img/taskbar/Photoshop.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Quicktime"><img src="img/taskbar/Quicktime.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Skype"><img src="img/taskbar/Skype.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Winamp"><img src="img/taskbar/Winamp.png"></a>
+					</li>
 
-						<div class="bar">
-							<a href="#" class="pause"><i class="icon-pause"></i></a>
-							<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+					<!--  -->
 
-							<div class="float-wrapper">
-								<div class="progress progress-striped active">
-									<div class="bar" style="width: 50%"></div>
-								</div>
-							</div>
-						</div>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Aim"><img src="img/taskbar/Aim.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Aol"><img src="img/taskbar/Aol.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Counter Strike"><img src="img/taskbar/CounterStrike.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="FileZilla"><img src="img/taskbar/FileZilla.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="iTunes"><img src="img/taskbar/iTunes.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Nero"><img src="img/taskbar/Nero.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Photoshop"><img src="img/taskbar/Photoshop.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Quicktime"><img src="img/taskbar/Quicktime.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Skype"><img src="img/taskbar/Skype.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Winamp"><img src="img/taskbar/Winamp.png"></a>
+					</li>
 
-						<div class="details-container">
-							StarTrekScript.doc (1.36MB)
-						</div>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Aim"><img src="img/taskbar/Aim.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Aol"><img src="img/taskbar/Aol.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Counter Strike"><img src="img/taskbar/CounterStrike.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="FileZilla"><img src="img/taskbar/FileZilla.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="iTunes"><img src="img/taskbar/iTunes.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Nero"><img src="img/taskbar/Nero.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Photoshop"><img src="img/taskbar/Photoshop.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Quicktime"><img src="img/taskbar/Quicktime.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Skype"><img src="img/taskbar/Skype.png"></a>
+					</li>
+					<li class="icon">
+						<a data-toggle="tooltip" data-placement="top" href="#" title="Winamp"><img src="img/taskbar/Winamp.png"></a>
 					</li>
 				</ul>
+			</div>
+
+			<div class="progress-container">
+				<div>
+					<div class="progress progress-striped active">
+						<div class="bar" style="width: 40%;"></div>
+					</div>
+					<a href="#" id="toggle-progress-menu"><i class="icon-white icon-chevron-up"></i></a>
+
+					<ul id="progress-menu">
+						<li>
+							<div class="action">
+								<a href="#" class="details disabled"><i class="icon-list"></i></a>
+								File copying
+								<span class="pull-right">60%</span>
+							</div>
+
+							<div class="bar">
+								<a href="#" class="pause"><i class="icon-pause"></i></a>
+								<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+
+								<div class="float-wrapper">
+									<div class="progress progress-striped active">
+										<div class="bar" style="width: 50%"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="details-container">
+								<div class="nowrap" title="/var/log/apache2/php5-fpm/webde.jamwaffles.co.uk.log">Source: /var/log/apache2/php5-fpm/webde.jamwaffles.co.uk.log</div>
+								<div class="nowrap" title="~/webde.jamwaffles.co.uk.log">Target: ~/webde.jamwaffles.co.uk.log</div>
+							</div>
+						</li>
+						<li>
+							<div class="action">
+								<a class="details disabled"><i class="icon-list"></i></a>
+								CD Burning
+								<span class="pull-right">30%</span>
+							</div>
+
+							<div class="bar">
+								<a href="#" class="pause"><i class="icon-pause"></i></a>
+								<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+
+								<div class="float-wrapper">
+									<div class="progress progress-striped active">
+										<div class="bar" style="width: 50%"></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="action">
+								<a href="#" class="details"><i class="icon-list"></i></a>
+								Printing
+								<span class="pull-right">42%</span>
+							</div>
+
+							<div class="bar">
+								<a href="#" class="pause"><i class="icon-pause"></i></a>
+								<a href="#" class="cancel"><i class="icon-ban-circle"></i></a>
+
+								<div class="float-wrapper">
+									<div class="progress progress-striped active">
+										<div class="bar" style="width: 50%"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="details-container">
+								StarTrekScript.doc (1.36MB)
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 

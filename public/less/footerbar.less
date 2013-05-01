@@ -8,51 +8,100 @@
 	left: 0;
 	right: 0;
 	z-index: 100;
+	display: table-row;
 
 	#gradient > .vertical(@gradTopColour, @gradBotColour);
 	.box-shadow(0px 0px 10px rgba(0, 0, 0, 0.6));
 	.transition(all 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000));
 
-	&:before {
-		position: absolute;
-		top: 1px;
-		right: 0;
-		left: 0;
-		border-top: 1px solid rgba(255, 255, 255, 0.5);
-		content: "";
-		z-index: 1;
-	}
+	// &:before {
+	// 	position: absolute;
+	// 	top: 1px;
+	// 	right: 0;
+	// 	left: 0;
+	// 	border-top: 1px solid rgba(255, 255, 255, 0.5);
+	// 	content: "";
+	// 	z-index: 1;
+	// }
 
-	> ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		border-right: 1px solid @gradTopColour;
-		border-left: 1px solid @gradBotColour;
-		font-size: 0;
-		display: inline-block;
+	.apps-container {
+		position: relative;
+		vertical-align: top;
+		overflow-x: hidden;
+		overflow-y: visible;
+		margin-right: 296px;
 
-		li {
-			display: inline-block;
-			font-size: 14px;
-			border-left: 1px solid @gradTopColour;
-			border-right: 1px solid @gradBotColour;
+		.scroll {
+			position: absolute;
+			line-height: 40px;
+			padding: 0 10px;
+			z-index: 2;
+			top: 0;
+			background-color: transparent !important;
 
-			a {
-				line-height: 40px;
-				padding: 0 15px;
-				display: inline-block;
-
-				&:hover {
-					i {
-						opacity: 1;
-					}
-				}
+			&.disabled {
+				#gradient > .horizontal(@gray, rgba(127, 127, 127, 0)) !important;
 
 				i {
 					opacity: 0.7;
+				}
+			}
 
-					.icon-white;
+			&.left {
+				left: 0;
+
+				#gradient > .horizontal(@linkColor, rgba(0, 0, 127, 0));
+			}
+			&.right {
+				right: 0;
+
+				#gradient > .horizontal(rgba(0, 0, 127, 0), @linkColor);
+			}
+		}
+
+		ul.apps {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: inline-block;
+			position: relative;
+			padding-left: 20px;
+			font-size: 0;
+			white-space: nowrap;
+
+			.transition(e('margin 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000)'));
+
+			li {
+				display: inline-block;
+				font-size: 14px;
+				border-right: 1px solid @gradTopColour;
+				position: relative;
+
+				&:after {
+					content: "";
+					top: 0;
+					bottom: 0;
+					right: 0;
+					border-right: 1px solid @gradBotColour;
+					position: absolute;
+				}
+
+				a {
+					line-height: 40px;
+					padding: 0 15px;
+					display: inline-block;
+
+					&:hover {
+						i {
+							opacity: 1;
+						}
+					}
+
+					i {
+						opacity: 0.7;
+
+						.icon-white;
+					}
 				}
 			}
 		}
@@ -66,15 +115,21 @@
 	}
 
 	.progress-container {
-		float: right;
-		padding: 0 15px;
-		padding-right: 0;
+		padding-left: 15px;
 		line-height: 40px;
 		color: #fff;
 		border-left: 1px solid @gradBotColour;
 		position: relative;
+		position: absolute;
+		right: 0;
+		top: 0;
 
 		.text-shadow(0px 1px 0px #000);
+		#gradient > .vertical(@gradTopColour, @gradBotColour);
+
+		> div {
+			width: 280px;
+		}
 
 		&:before {
 			content: '';
@@ -106,7 +161,7 @@
 		bottom: 40px;
 		background: blue;
 		left: 0;
-		right: 0px;
+		right: 10px;
 		border: 1px solid rgba(0, 0, 0, 0.3);
 		background: #eee;
 		color: @textColor;
