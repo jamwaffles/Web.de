@@ -309,75 +309,141 @@
 		margin: 0;
 	}
 
-	&.information {
-		h2 {
-			float: right;
-			margin-right: 320px;
+	.panel-sidebar {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		bottom: 10px;
+		width: 300px;
+		z-index: 10;
+		background: #fff;
+
+		h3 {
+			border-bottom: 1px solid #eee;
+			padding: 10px;
+			margin: 0;
+			font-size: 24px;
+			line-height: 30px;
+			clear: both;
 		}
-			
-		#info-sidebar {
+
+		.mouse-scroll-container {
 			position: absolute;
+			bottom: 0;
+			width: 100%;
+			top: 0;
 			overflow: hidden;
+
+			> div {
+				padding: 10px;
+
+				h4:first-child {
+					padding-top: 0;
+				}
+			}
+		}
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			&:after {
+				content: "";
+				display: block;
+				height: 0;
+				clear: both;
+			}
+
+			strong {
+				color: @grayLight;
+			}
+
+			span {
+				float: right;
+				text-align: right;
+			}
+
+			li {
+				clear: both;
+				padding: 0 !important;
+				line-height: 25px;
+			}
+
+			ul {
+				margin-left: 10px;
+			}
+		}
+
+		&.information, &.recent {
 			border: 1px solid #ddd;
-			right: 10px;
-			top: 10px;
-			bottom: 10px;
-			width: 300px;
-			z-index: 10;
-			background: #fff;
+			overflow: hidden;
 
 			.border-radius(@baseBorderRadius);
 			.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
 
-			h3 {
-				border-bottom: 1px solid #eee;
-				padding: 10px;
-				margin: 0;
-				font-size: 24px;
-				line-height: 30px;
-				clear: both;
+			h2 {
+				float: right;
+				margin-right: 320px;
 			}
 
 			.mouse-scroll-container {
+				top: 51px;
+			}
+		}
+
+		&.recent {
+			li {
+				padding: 8px 12px !important;
+
+				&:hover {
+					background: #eee;
+
+					.border-radius(@baseBorderRadius);
+				}
+			}
+		}
+
+		&.social {
+			.tab-nav {
 				position: absolute;
 				bottom: 0;
-				width: 100%;
-				top: 51px;
-				overflow: hidden;
+				left: 0;
+				right: 0;
+				padding: 0 10px;
+				margin: 0;
+				list-style: none;
 
-				> div {
-					padding: 10px;
+				li {
+					display: inline-block;
 
-					h4:first-child {
-						padding-top: 0;
+					&.active {
+						a {
+							border-top-color: #fff;
+						}
+					}
+
+					a {
+						padding: 0 10px;
+						background: #fff;
+						border: 1px solid #ddd;
+						height: 25px;
+						display: inline-block;
 					}
 				}
 			}
 
-			ul {
-				&:after {
-					content: "";
-					display: block;
-					height: 0;
-					clear: both;
-				}
+			.tab-content {
+				position: absolute;
+				top: 0;
+				bottom: 26px;
+				left: 0;
+				right: 0;
+				background: #fff;
+				border: 1px solid #ddd;
 
-				strong {
-					color: @grayLight;
-				}
-
-				span {
-					float: right;
-					text-align: right;
-				}
-
-				li {
-					clear: both;
-				}
-
-				ul {
-					margin-left: 10px;
-				}
+				.border-radius(@baseBorderRadius);
+				.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
 			}
 		}
 	}

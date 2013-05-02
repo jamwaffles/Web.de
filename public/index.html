@@ -568,19 +568,80 @@
 				<iframe src="http://wiki.cliquesoft.org/index.php?title=XiniX"></iframe>
 			</div>
 
-			<div class="panel" data-menu="threads">
-				// Threads
+			<div class="panel social" data-menu="threads">
+				<h2>Social</h2>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<div class="panel-sidebar social" id="social-sidebar">
+					<div class="tab-content">
+						// Threads sidebar
+					</div>
+					<ul class="tab-nav">
+						<li class="active"><a href="#"><i class="icon-cog"></i></a></li>
+						<li><a href="#"><i class="icon-cog"></i></a></li>
+					</ul>
+				</div>
+
+				<ul class="nav nav-pills nav-stacked">
+					<li class="nav-header">Missed Calls</li>
+
+					<li><a href="#">Julie Riechmann</a></li>
+					<li><a href="#">07715 774 608</a></li>
+
+					<li class="nav-header">Messages</li>
+
+					<li><a href="#">Chat with James Waples (2)</a></li>
+					<li><a href="#">Matt Froggett: At the station mang, where are you?</a></li>
+					<li><a href="#">jamwaffles@gmail.com: Hi Dave, I was looking through your desi...</a></li>
+
+					<li class="nav-header">Events</li>
+
+					<li><a href="#">Feb 18th: Franks birthday</a></li>
+					<li><a href="#">Mar 29th: Bank holiday Friday</a></li>
+					<li><a href="#">Apr 1st: Bank holiday Monday</a></li>
+
+					<li class="nav-header">Alerts</li>
+
+					<li><a href="#">Disk store0 space low: 8% free</a></li>
+					<li><a href="#">Network connection eth0 disconnected</a></li>
+				</ul>
 			</div>
 
 			<div class="panel recent" data-menu="recent">
 				<h2>Recent</h2>
+
+				<div class="panel-sidebar recent" id="recent-sidebar">
+					<h3>Software</h3>
+
+					<div class="mouse-scroll-container">
+						<div>
+							<dl class="accordion accordion-small">
+								<dt>Updates</dt>
+								<dd>
+									<ul class="unstyled">
+										<li>
+											Sublime Text 2.1
+											<a class="pull-right" href="#"><i class="icon-ban-circle"></i></a>
+										</li>
+										<li>
+											SFTP 0.6.8
+											<a class="pull-right" href="#"><i class="icon-ban-circle"></i></a>
+										</li>
+									</ul>
+								</dd>
+
+								<dt>Additions</dt>
+								<dd>
+									<ul class="unstyled">
+										<li>
+											SSH 0.6
+											<a class="pull-right" href="#"><i class="icon-ban-circle"></i></a>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
 
 				<ul class="nav nav-pills nav-stacked">
 					<li class="nav-header">Files</li>
@@ -609,85 +670,92 @@
 			<div class="panel information" data-menu="info">
 				<h2>Information</h2>
 
-				<div id="info-sidebar">
+				<div class="panel-sidebar information" id="info-sidebar">
 					<h3>Device Overview</h3>
 
 					<div class="mouse-scroll-container">
 						<div>
-							<h4>System</h4>
-
-							<ul class="unstyled">
-								<li><strong>Manufacturer</strong><span>Dell</span></li>
-								<li><strong>Model</strong><span>Optiplex 8200</span></li>
-								<li><strong>Serial</strong><span>XJU1298</span></li>
-
-								<li><strong>Support</strong><span>1-800-WWW-DELL<br><a href="#">www.dell.com</a></span></li>
-
-								<li><strong>Owner</strong><span>Dan McKalister<br>Kraft Foods Inc</span></li>
-							</ul>
-
-							<h4>Software</h4>
-
-							<ul class="unstyled">
-								<li><strong>OS</strong><span>Cliquesoft XiniX 2.4.1</span></li>
-								<li><strong>Edition</strong><span>Server</span></li>
-								<li><strong>Updates</strong><a>Install (19)</a></li>
-
-								<li>
-									<strong>Compatibility</strong>
-
+							<dl class="accordion accordion-small">
+								<dt>System</dt>
+								<dd>
 									<ul class="unstyled">
-										<li><strong>Software</strong><span>Linux<br>Windows</span></li>
-										<li><strong>Network</strong><span>Linux<br>XiniX<br>Windows</span></li>
+										<li><strong>Manufacturer</strong><span>Dell</span></li>
+										<li><strong>Model</strong><span>Optiplex 8200</span></li>
+										<li><strong>Serial</strong><span>XJU1298</span></li>
+
+										<li><strong>Support</strong><span>1-800-WWW-DELL<br><a href="#">www.dell.com</a></span></li>
+
+										<li><strong>Owner</strong><span>Dan McKalister<br>Kraft Foods Inc</span></li>
 									</ul>
-								</li>
-							</ul>
+								</dd>
 
-							<h4>Hardware</h4>
-
-							<ul class="unstyled">
-								<li><strong>Type</strong><span>64 bit</span></li>
-								<li><strong>CPU</strong> <span>Intel Core i7 3770k 3.6GHz</span></li>
-								<li><strong>RAM</strong> <span>16GB DDR3 1800MHz</span></li>
-								<li>
-									<strong>NIC</strong>
-									<span>
-										Intel 10/100/1000<br>
-										DLink wireless type N
-									</span>
-								</li>
-								<li>
-									<strong>Disks</strong>
-									<span>
-										160GB 7200RPM ext3<br>
-										80GB 5400RPM ext2<br>
-										60GB 5400RPM XFS
-									</span>
-								</li>
-							</ul>
-
-							<h4>Health</h4>
-
-							<ul class="unstyled">
-								<li>
-									<strong>Temperature(s)</strong>
+								<dt>Software</dt>
+								<dd>
 									<ul class="unstyled">
-										<li><strong>Case</strong><span>68&deg;F</span></li>
-										<li><strong>CPU</strong><span>74&deg;F</span></li>
-										<li><strong>ASIC 0</strong><span>50&deg;F</span></li>
+										<li><strong>OS</strong><span>Cliquesoft XiniX 2.4.1</span></li>
+										<li><strong>Edition</strong><span>Server</span></li>
+										<li><strong>Updates</strong><a>Install (19)</a></li>
+
+										<li>
+											<strong>Compatibility</strong>
+
+											<ul class="unstyled">
+												<li><strong>Software</strong><span>Linux<br>Windows</span></li>
+												<li><strong>Network</strong><span>Linux<br>XiniX<br>Windows</span></li>
+											</ul>
+										</li>
 									</ul>
-								</li>
-								<li><strong>RAM</strong><span>1.2/16GB (86% free)</span></li>
-								<li><strong>NIC</strong><span>30% bandwidth free<br>100% bandwidth free</span></li>
-								<li>
-									<strong>Disks</strong>
+								</dd>
+
+								<dt>Hardware</dt>
+								<dd>
 									<ul class="unstyled">
-										<li><strong>160GB</strong><span>110GB used (50GB free)</span></li>
-										<li><strong>80GB</strong><span>12GB used (68GB free)</span></li>
-										<li><strong>60GB</strong><span>50GB used (10GB free)</span></li>
+										<li><strong>Type</strong><span>64 bit</span></li>
+										<li><strong>CPU</strong> <span>Intel Core i7 3770k 3.6GHz</span></li>
+										<li><strong>RAM</strong> <span>16GB DDR3 1800MHz</span></li>
+										<li>
+											<strong>NIC</strong>
+											<span>
+												Intel 10/100/1000<br>
+												DLink wireless type N
+											</span>
+										</li>
+										<li>
+											<strong>Disks</strong>
+											<span>
+												160GB 7200RPM ext3<br>
+												80GB 5400RPM ext2<br>
+												60GB 5400RPM XFS
+											</span>
+										</li>
 									</ul>
-								</li>
-							</ul>
+
+								</dd>
+
+								<dt>Health</dt>
+								<dd>
+									<ul class="unstyled">
+										<li>
+											<strong>Temperature(s)</strong>
+											<ul class="unstyled">
+												<li><strong>Case</strong><span>68&deg;F</span></li>
+												<li><strong>CPU</strong><span>74&deg;F</span></li>
+												<li><strong>ASIC 0</strong><span>50&deg;F</span></li>
+											</ul>
+										</li>
+										<li><strong>RAM</strong><span>1.2/16GB (86% free)</span></li>
+										<li><strong>NIC</strong><span>30% bandwidth free<br>100% bandwidth free</span></li>
+										<li>
+											<strong>Disks</strong>
+											<ul class="unstyled">
+												<li><strong>160GB</strong><span>110GB used (50GB free)</span></li>
+												<li><strong>80GB</strong><span>12GB used (68GB free)</span></li>
+												<li><strong>60GB</strong><span>50GB used (10GB free)</span></li>
+											</ul>
+										</li>
+									</ul>
+								</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
@@ -1113,37 +1181,6 @@
 					</li>
 
 					<!--  -->
-
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Aim"><img src="img/taskbar/Aim.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Aol"><img src="img/taskbar/Aol.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Counter Strike"><img src="img/taskbar/CounterStrike.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="FileZilla"><img src="img/taskbar/FileZilla.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="iTunes"><img src="img/taskbar/iTunes.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Nero"><img src="img/taskbar/Nero.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Photoshop"><img src="img/taskbar/Photoshop.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Quicktime"><img src="img/taskbar/Quicktime.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Skype"><img src="img/taskbar/Skype.png"></a>
-					</li>
-					<li class="icon">
-						<a data-toggle="tooltip" data-placement="top" href="#" title="Winamp"><img src="img/taskbar/Winamp.png"></a>
-					</li>
 
 					<li class="icon">
 						<a data-toggle="tooltip" data-placement="top" href="#" title="Aim"><img src="img/taskbar/Aim.png"></a>
