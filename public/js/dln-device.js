@@ -1,46 +1,16 @@
 /************
  * Accounts *
  ************/
-var deviceUsers = new Tree({
-	title: 'Device',
-	children: [
-		new User(),
-		new User(),
-		new User(),
-		new User()
-	]
-});
-
-var persons = new Tree({
-	title: 'Person',
-	children: [
-		new Tree({
-			title: 'Administrators',
-			children: [
-				new User(),
-				new User()
-			]
-		}),
-		new Tree({
-			title: 'Guests',
-			children: [
-				new User(),
-				new User()
-			]
-		})
-	]
-});
-
 var users = new Tree({
 	open: true,
 	children: [
 		new Tree({
 			title: 'Device',
 			children: [
-				new User(),
-				new User(),
-				new User(),
-				new User()
+				new User({ icon: 'hdd' }),
+				new User({ icon: 'hdd' }),
+				new User({ icon: 'hdd' }),
+				new User({ icon: 'hdd' })
 			]
 		}),
 		new Tree({
