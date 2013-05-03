@@ -11,6 +11,8 @@ $('#footerbar').on('click', 'a.pause', function(e) {
 });
 
 var apps = $('#footerbar').find('.apps');
+var leftArrow = $('#footerbar').find('.scroll.left');
+var rightArrow = $('#footerbar').find('.scroll.right');
 
 $('#footerbar').on('click', 'a.scroll', function(e) {
 	e.preventDefault();
@@ -20,6 +22,16 @@ $('#footerbar').on('click', 'a.scroll', function(e) {
 	var left = parseInt(apps.css('margin-left'), 10) + (containerWidth * direction);
 	
 	left = Math.min(Math.max(left, containerWidth - apps.width()), 0);
+	console.log(left);
+
+	leftArrow.removeClass('disabled');
+	rightArrow.removeClass('disabled');
+
+	if(left == 0) {
+		leftArrow.addClass('disabled');
+	} else if(left >= containerWidth - apps.width()) {
+		rightArrow.addClass('disabled');
+	}
 
 	apps.css('margin-left', left);
 });
