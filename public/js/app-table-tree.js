@@ -239,14 +239,15 @@ var SpanTableTreeView = Backbone.View.extend({
 		self.toggleClass('icon-plus icon-minus');
 
 		if(row.hasClass('expanded')) {		// Show
-			var rows = row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').slideDown();
+			var rows = row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').slideDown('fast');
 
 			// Hide closed sub-items
 			rows.filter('.sub-collapse-header:not(.expanded)').each(function() {
-				$(this).nextUntil(':not(.sub-collapse-row)').slideDown();
+				// $(this).nextUntil(':not(.sub-collapse-row)').slideDown();
+				$(this).nextUntil(':not(.sub-collapse-row)').stop(true, true).hide();
 			});
 		} else {		// Hide
-			row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').slideUp();
+			row.nextUntil('.collapse-header').filter('.collapse-row, .sub-collapse-header, .sub-collapse-row').slideUp('fast');
 		}
 	},
 	subToggle: function(e) {
@@ -256,7 +257,7 @@ var SpanTableTreeView = Backbone.View.extend({
 		self.toggleClass('icon-plus icon-minus');
 		row.toggleClass('expanded');
 
-		row.nextUntil(':not(.sub-collapse-row)').slideToggle();
+		row.nextUntil(':not(.sub-collapse-row)').slideToggle('fast');
 	},
 	render: function() {
 		var rows = [];
@@ -316,27 +317,37 @@ var SpanTableTreeView = Backbone.View.extend({
 
 		// Add expand/contract (or empty filler) cells, and checkboxes if enabled
 		_.each(rows, function(row) {
-			for(var i = 0; i < this.depth; i++) {
-				var cell = $('<div />').addClass('toggle-column');
+			var cell = $('<div />').addClass('toggle-column');
 
-				if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
-					$('<i />')
-						.addClass('icon-plus toggle')
-						.appendTo(cell);
-				} else if(row.hasClass('sub-collapse-header') && i == 0) {
-					$('<i />')
-						.addClass('icon-plus sub-toggle')
-						.appendTo(cell);
-				} else if(this.checkboxes) {
-					cell = $('<label />');
+			// if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
+			// 	$('<i />')
+			// 		.addClass('icon-plus toggle')
+			// 		.appendTo(cell);
+			// } else if(row.hasClass('sub-collapse-header') && i == 0) {
+			// 	$('<i />')
+			// 		.addClass('icon-plus sub-toggle')
+			// 		.appendTo(cell);
+			// } else if(this.checkboxes) {
+			// 	cell = $('<label />');
 
-					$('<input />')
-						.prop('type', 'checkbox')
-						.appendTo(cell);
-				}
+			// 	$('<input />')
+			// 		.prop('type', 'checkbox')
+			// 		.appendTo(cell);
+			// }
 
-				cell.prependTo(row.children().first());
+			if((row.hasClass('collapse-header') || row.hasClass('sub-collapse-header'))) {
+				$('<i />')
+					.addClass('icon-plus ' + (row.hasClass('collapse-header') ? 'toggle' : 'sub-toggle'))
+					.appendTo(cell);
+			} else if(this.checkboxes) {
+				cell = $('<label />');
+
+				$('<input />')
+					.prop('type', 'checkbox')
+					.appendTo(cell);
 			}
+
+			cell.prependTo(row.children().first());
 		}, this);
 
 		this.$el.html(rows);
