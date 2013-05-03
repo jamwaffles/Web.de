@@ -146,7 +146,21 @@ var DeviceTreeTable = SpanTableTreeView.extend({
 	header: false,
 	columnClasses: [ 'span4', 'span3', 'span2', 'span3' ],
 	columns: {
-		'Device': 'title',
+		'Device': function(model) {
+			if(model.get('uri')) {
+				var a = $('<a />')
+					.prop('href', model.get('uri'))
+					.html(model.get('title'));
+
+				if(model.get('newWindow')) {
+					a.prop('target', 'mew');
+				}
+
+				return a;
+			} else {
+				return model.get('title');
+			}
+		},
 		'Serial': 'serial',
 		'Device file': function(model) {
 			if(typeof model.get('mount') === 'string') {

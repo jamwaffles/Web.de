@@ -6,8 +6,8 @@ var localDevices = new Tree({
 		new Tree({
 			title: 'Audio',
 			children: [
-				new Device({ name: 'Dave\'s iPod', serial: '1094820175', mount: '/dev/sda1' }),
-				new Device({ name: 'Zune', serial: '0197-CD46-8PQR', mount: '/dev/sdb1' }),
+				new Device({ newWindow: true, uri: 'index.html', name: 'Dave\'s iPod', serial: '1094820175', mount: '/dev/sda1' }),
+				new Device({ newWindow: true, uri: 'index.html', name: 'Zune', serial: '0197-CD46-8PQR', mount: '/dev/sdb1' }),
 			]
 		}),
 		new Tree({
@@ -20,14 +20,14 @@ var localDevices = new Tree({
 		new Tree({
 			title: 'Storage',
 			children: [
-				new Device({ name: 'Seagate Lifebook 1TB', serial: 'SEAG-LB1TB', mount: '/dev/sdb1' }),
-				new Device({ name: 'Kingston DataTraveller 16GB', serial: 'KGDT-16e9', mount: '/dev/sdc1' })
+				new Device({ newWindow: true, uri: 'files.html', name: 'Seagate Lifebook 1TB', serial: 'SEAG-LB1TB', mount: '/dev/sdb1' }),
+				new Device({ newWindow: true, uri: 'files.html', name: 'Kingston DataTraveller 16GB', serial: 'KGDT-16e9', mount: '/dev/sdc1' })
 			]
 		}),
 		new Tree({
 			title: 'Video',
 			children: [
-				new Device({ name: 'Nokia Lumia 820', serial: '8C4F673A', mount: '/dev/cam0' }),
+				new Device({ newWindow: true, uri: 'index.html', name: 'Nokia Lumia 820', serial: '8C4F673A', mount: '/dev/cam0' }),
 				new Device({ name: 'Microsoft Lifecam Cinema', serial: 'MSLC-47638', mount: '/dev/video0' })
 			]
 		})

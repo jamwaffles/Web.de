@@ -68,6 +68,8 @@ var Device = BaseModel.extend({
 		serial: '5UP3R-53R14L',
 		mount: '/dev/mnt0',
 		icon: 'hdd',
+		uri: '',
+		newWindow: false,
 		properties: {
 			refresh: [ 'Refresh rate', '60Hz', [ '60Hz', '70Hz', '75Hz' ]],
 			resolution: [ 'Resolution', '3840x1080' ],
