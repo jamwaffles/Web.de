@@ -42,7 +42,12 @@ var PackageTreeTable = SpanTableTreeView.extend({
 	},
 	columns: {
 		'Package': function(model) {
-			return model.get('format') + ' ' + model.get('name');
+			var a = $('<a />')
+				.text(model.get('format') + ' ' + model.get('name'))
+				.attr('data-toggle', 'modal')
+				.prop('href', '#modal-dummy-package');
+
+			return a;
 		},
 		'Version': function(model) {
 			return $('<input />')
