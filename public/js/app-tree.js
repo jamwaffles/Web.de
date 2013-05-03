@@ -86,9 +86,17 @@ var TreeHeaderProcess = TreeHeader.extend({
 	}
 });
 var TreeItemProcess = TreeItem.extend({
+	top: false,
 	template: _.template($('#template-process').html()),
+	initialize: function(options) {
+		this.top = options.top !== undefined ? options.top : this.top;
+	},
 	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
+		if(this.top) {
+			this.$el.prepend($('<i />').addClass('icon-blank'));
+		}
+
+		this.$el.append(this.template(this.model.toJSON()));
 
 		return this;
 	}
@@ -246,7 +254,7 @@ var ProcessTreeView = TreeView.extend({
 
 				this.$el.append(li);
 			} else {
-				this.$el.append(new this.itemView({ model: item }).render().el);
+				this.$el.append(new this.itemView({ model: item, top: true }).render().el);
 			}
 		}, this);
 

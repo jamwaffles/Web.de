@@ -10,20 +10,21 @@ ul.tree {
 	i {
 		display: inline-block;
 		margin-right: 5px;
+		vertical-align: middle;
 
 		.transition(background-position 0.4s);
 
 		&.icon-plus {
-			border: 1px solid #000;
-			width: 15px;
-			height: 15px;
 			background-position: -407px -96px;
 		}
 		&.icon-minus {
+			background-position: -432px -96px;
+		}
+
+		&.icon-plus, &.icon-minus, &.icon-blank {
 			border: 1px solid #000;
 			width: 15px;
 			height: 15px;
-			background-position: -432px -96px;
 		}
 	}
 
