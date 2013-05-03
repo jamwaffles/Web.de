@@ -100,15 +100,12 @@ var PackageTable = SpanTable.extend({
 	},
 	columns: {
 		'Name': function(model) {
-			var str = '';
+			var a = $('<a />')
+				.text(model.get('format') + ' ' + model.get('name'))
+				.attr('data-toggle', 'modal')
+				.prop('href', '#modal-dummy-package');
 
-			if(model.get('format').length) {
-				str += model.get('format') + ' ';
-			}
-
-			str += model.get('name');
-
-			return str;
+			return a;
 		},
 		'Version': function(model) {
 			return $('<input />')
