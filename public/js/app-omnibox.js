@@ -93,7 +93,8 @@ var Omnibox = Backbone.View.extend({
 	inputString: '',
 	events: {
 		'keyup input': 'searchChange',
-		'click ul > li': 'searchClick'
+		'click ul > li': 'searchClick',
+		'click a.close': 'closeResults'
 	},
 	initialize: function() {
 		this.resultsView = new ResultsView;
@@ -156,20 +157,23 @@ var Omnibox = Backbone.View.extend({
 
 		this.onSelect();
 	},
+	closeResults: function() {
+		this.hideResults();
+	},
 	onSelect: function() {
 		this.setValue(this.resultsView.getSelected().get('name'));
 
 		this.hideResults();
 	},
 	render: function() {
-		this.$el.html(this.template({ list: '' }));
+		this.$el.html(this.template({ list: '<ul></ul>' }));
 
 		this.rendered = true;
 
 		return this;
 	},
 	renderSearches: function() {
-		this.$el.find('.results').html(this.resultsView.render().el);
+		this.$el.find('.results').children('ul').replaceWith(this.resultsView.render().el);
 
 		this.searchesRendered = true;
 
@@ -243,7 +247,7 @@ var Omnibox = Backbone.View.extend({
 		this.console.removeClass('open');
 	},
 	showConsole: function() {
-		var output = this.console.children();
+		var output = this.console.children('div');
 
 		this.console.addClass('open');
 
