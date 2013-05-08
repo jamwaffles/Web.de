@@ -319,32 +319,22 @@ var SpanTableTreeView = Backbone.View.extend({
 		_.each(rows, function(row) {
 			var cell = $('<div />').addClass('toggle-column');
 
-			// if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
-			// 	$('<i />')
-			// 		.addClass('icon-plus toggle')
-			// 		.appendTo(cell);
-			// } else if(row.hasClass('sub-collapse-header') && i == 0) {
-			// 	$('<i />')
-			// 		.addClass('icon-plus sub-toggle')
-			// 		.appendTo(cell);
-			// } else if(this.checkboxes) {
-			// 	cell = $('<label />');
+			for(var i = 0; i < this.depth; i++) {
+				if(row.hasClass('collapse-header') && (i == 1 || this.depth == 1)) {
+					$('<i />')
+						.addClass('icon-plus toggle')
+						.appendTo(cell);
+				} else if(row.hasClass('sub-collapse-header') && i == 0) {
+					$('<i />')
+						.addClass('icon-plus sub-toggle')
+						.appendTo(cell);
+				} else if(this.checkboxes) {
+					cell = $('<label />');
 
-			// 	$('<input />')
-			// 		.prop('type', 'checkbox')
-			// 		.appendTo(cell);
-			// }
-
-			if((row.hasClass('collapse-header') || row.hasClass('sub-collapse-header'))) {
-				$('<i />')
-					.addClass('icon-plus ' + (row.hasClass('collapse-header') ? 'toggle' : 'sub-toggle'))
-					.appendTo(cell);
-			} else if(this.checkboxes) {
-				cell = $('<label />');
-
-				$('<input />')
-					.prop('type', 'checkbox')
-					.appendTo(cell);
+					$('<input />')
+						.prop('type', 'checkbox')
+						.appendTo(cell);
+				}
 			}
 
 			cell.prependTo(row.children().first());
