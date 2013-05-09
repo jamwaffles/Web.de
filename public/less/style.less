@@ -65,6 +65,20 @@ html {
 			bottom: 0;
 		}
 	}
+
+	// "Wallpaper"
+	&:before, #wallpaper {
+		background: url('../img/cs-logo.svg');
+		background-size: cover;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		content: "";
+		opacity: 0.5;
+		z-index: -1;
+	}
 }
 
 .hide-left {
@@ -724,19 +738,6 @@ dl.accordion {
 	opacity: 0.5;
 
 	.transition(e('all 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000)'));
-
-	&:before {
-		background: url('../img/cs-logo.svg') no-repeat top left;
-		height: 50%;
-		top: 0;
-		left: 0;
-		position: absolute;
-		z-index: -1;
-		opacity: 0.3;
-		content: "";
-		width: 110%;
-		background-size: cover;
-	}
 
 	&.slideout-right {
 		right: -(@width + 20px);

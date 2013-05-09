@@ -120,8 +120,8 @@ container.on('click', '.section-toggle', function(e) {
 		return;
 	}
 	
-	thisPanel.addClass('open');
-	thisPanel.siblings().removeClass('open');
+	thisPanel.addClass('open').removeClass('closed');
+	thisPanel.siblings().removeClass('open').addClass('closed');
 
 	var prevPanels = thisPanel.prevAll();
 	var nextPanels = thisPanel.nextAll();
