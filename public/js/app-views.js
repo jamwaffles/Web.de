@@ -144,6 +144,57 @@ var PackageTable = SpanTable.extend({
 	}
 });
 
+var ServicesTable = PackageTable.extend({
+	columns: {
+		'Name': function(model) {
+			var a = $('<a />')
+				.text(model.get('format') + ' ' + model.get('name'))
+				.attr('data-toggle', 'modal')
+				.prop('href', '#modal-dummy-package');
+
+			return a;
+		},
+		'Version': function(model) {
+			return $('<input />')
+				.prop('type', 'text')
+				.addClass('input-small')
+				.val(model.get('version'));
+		},
+		'License': function(model) {
+			if(model.get('licenseURL')) {
+				return $('<a />').html(model.get('license')).prop('href', model.get('licenseURL')).prop('target', '_blank');
+			} else {
+				return model.get('license')
+			}
+		},
+		'Actions': function(model) {
+			var form = $('<div />');
+
+			var select = $('<select />').append([
+				$('<option />').val('').text('Choose action...'),
+				$('<option />').val('copy').text('Copy'),
+				$('<option />').val('install').text('Install'),
+				$('<option />').val('remove').text('Uninstall'),
+				$('<option />').val('start').text('Start'),
+				$('<option />').val('stop').text('Stop'),
+				$('<option />').val('restart').text('Restart')
+			]);
+
+			select.children().filter(function() {
+				return this.value == model.get('state');
+			}).prop('disabled', true);
+
+			select.data('id', model.cid);
+
+			select.appendTo(form);
+
+			// Progress meter container
+			return $('<div />').addClass('form-inline').html([ form, $('<div />').addClass('progress-container').hide() ]);
+		}
+	}
+});
+
+
 /* Scheduled tasks table */
 var ScheduledTasksTable = SpanTable.extend({
 	checkboxes: false,

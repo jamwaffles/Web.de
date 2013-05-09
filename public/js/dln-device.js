@@ -223,7 +223,7 @@ var deviceServices = new Backbone.Collection([
 	new Package({ format: '', name: 'FTP', version: '5.7', license: 'GPL v2' })
 ]);
 
-var servicesTable = new PackageTable({
+var servicesTable = new ServicesTable({
 	collection: deviceServices
 });
 
