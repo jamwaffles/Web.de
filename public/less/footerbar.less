@@ -1,7 +1,7 @@
-@gradTopColour: #555;
-@gradBotColour: #222;
-
 #footerbar {
+	@gradTopColour: fade(#555, 80%);
+	@gradBotColour: fade(#222, 80%);
+
 	height: 40px;
 	position: fixed;
 	bottom: 0;
@@ -10,56 +10,66 @@
 	z-index: 100;
 	display: table-row;
 
-	#gradient > .vertical(@gradTopColour, @gradBotColour);
 	.box-shadow(0px 0px 10px rgba(0, 0, 0, 0.6));
 	.transition(all 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000));
 
-	// &:before {
-	// 	position: absolute;
-	// 	top: 1px;
-	// 	right: 0;
-	// 	left: 0;
-	// 	border-top: 1px solid rgba(255, 255, 255, 0.5);
-	// 	content: "";
-	// 	z-index: 1;
-	// }
+	.bar-toggle {
+		position: relative;
+		z-index: 1;
+
+		&.left {
+			border-right: 1px solid @gradBotColour;
+		}
+
+		&.right {
+			border-left: 1px solid @gradBotColour;
+
+			#gradient > .vertical(@gradTopColour, @gradBotColour);
+
+			background-color: transparent;
+		}
+	}
 
 	.apps-container {
 		position: relative;
 		vertical-align: top;
-		margin-right: 296px;
+		margin-right: 330px;
 
-		.scroll {
-			position: absolute;
-			line-height: 40px;
-			padding: 0 10px;
-			z-index: 2;
-			top: 0;
-			background-color: transparent !important;
+		#gradient > .vertical(@gradTopColour, @gradBotColour);
 
-			&.disabled {
-				#gradient > .horizontal(@gray, rgba(127, 127, 127, 0)) !important;
+		background-color: transparent;
 
-				&.right {
-					#gradient > .horizontal(rgba(127, 127, 127, 0), @gray) !important;
-				}
+		// .scroll {
+		// 	position: absolute;
+		// 	line-height: 40px;
+		// 	padding: 0 10px;
+		// 	z-index: 2;
+		// 	top: 0;
+		// 	background-color: transparent !important;
 
-				i {
-					opacity: 0.7;
-				}
-			}
+		// 	&.disabled {
+		// 		#gradient > .horizontal(@gray, rgba(127, 127, 127, 0)) !important;
 
-			&.left {
-				left: 0;
+		// 		&.right {
+		// 			#gradient > .horizontal(rgba(127, 127, 127, 0), @gray) !important;
+		// 		}
 
-				#gradient > .horizontal(@linkColor, rgba(0, 0, 127, 0));
-			}
-			&.right {
-				right: 0;
+		// 		i {
+		// 			opacity: 0.7;
+		// 		}
+		// 	}
 
-				#gradient > .horizontal(rgba(0, 0, 127, 0), @linkColor);
-			}
-		}
+		// 	&.left {
+		// 		left: 0;
+
+		// 		#gradient > .horizontal(@linkColor, rgba(0, 0, 127, 0));
+		// 	}
+		// 	&.right {
+		// 		right: 0;
+
+		// 		#gradient > .horizontal(rgba(0, 0, 127, 0), @linkColor);
+		// 	}
+		// }
 
 		ul.apps {
 			margin: 0;
@@ -67,7 +77,6 @@
 			list-style: none;
 			display: inline-block;
 			position: relative;
-			padding-left: 20px;
 			font-size: 0;
 			white-space: nowrap;
 
@@ -123,11 +132,13 @@
 		border-left: 1px solid @gradBotColour;
 		position: relative;
 		position: absolute;
-		right: 0;
+		right: 34px;
 		top: 0;
 
 		.text-shadow(0px 1px 0px #000);
 		#gradient > .vertical(@gradTopColour, @gradBotColour);
+
+		background-color: transparent;
 
 		> div {
 			width: 280px;

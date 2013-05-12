@@ -11,10 +11,10 @@ $('#footerbar').on('click', 'a.pause', function(e) {
 });
 
 var apps = $('#footerbar').find('.apps');
-var leftArrow = $('#footerbar').find('.scroll.left');
-var rightArrow = $('#footerbar').find('.scroll.right');
+var leftArrow = $('#footerbar').find('.bar-toggle.left');
+var rightArrow = $('#footerbar').find('.bar-toggle.right');
 
-$('#footerbar').on('click', 'a.scroll', function(e) {
+$('#footerbar').on('click', 'a.bar-toggle', function(e) {
 	e.preventDefault();
 
 	var direction = $(this).hasClass('right') ? -1 : 1;
